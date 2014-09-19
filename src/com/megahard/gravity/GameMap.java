@@ -11,6 +11,7 @@ public class GameMap {
 	public GameMap(int width, int height) {
 		this.width = width;
 		this.height = height;
+		// tiles are arranged in 2D array in row major order
 		map = new int[width * height];
 	}
 
