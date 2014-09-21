@@ -8,11 +8,14 @@ public class GameMap {
 	private int height;
 	private int[] map;
 
-	public GameMap(int width, int height) {
+	public GameMap(int width, int height, int[] level) {
 		this.width = width;
 		this.height = height;
 		// tiles are arranged in 2D array in row major order
 		map = new int[width * height];
+		for (int i = 0; i < level.length; i++) {
+			map[i] = level[i];
+		}
 	}
 
 	public int getWidth(){
