@@ -7,6 +7,6 @@ public class GameObject {
 	public Vector2 position;
 	public Vector2 velocity;
 	public Vector2 size;
-	public float mass;
+	public double mass;
 	public Graphics graphics;
 }
