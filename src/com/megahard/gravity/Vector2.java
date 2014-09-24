@@ -24,13 +24,11 @@ public class Vector2 {
    }
 
    public Vector2 translate( Vector2 v1 ) {
-       Vector2 tempVector = new Vector2( this.x + v1.x, this.y + v1.y );
-       return tempVector;
+       return new Vector2( this.x + v1.x, this.y + v1.y );
    }
 
    public Vector2 scale( double scaleFactor ) {
-       Vector2 tempVector = new Vector2( this.x*scaleFactor, this.y*scaleFactor );
-       return tempVector;
+       return new Vector2( this.x*scaleFactor, this.y*scaleFactor );
    }
 
    public double dotProduct ( Vector2 v1 ) {
