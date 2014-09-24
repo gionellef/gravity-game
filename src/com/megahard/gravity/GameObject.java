@@ -19,9 +19,9 @@ public class GameObject {
 		position = position.translate(velocity); // movement due to velocity
 		velocity.y += 1; // acceleration due to gravity
 
-		// COLLISION DETECTION WITH MAP GOES HERE
+		// COLLISION DETECTION WITH THE MAP GOES HERE
 		// collision detection algorithm
-		// get tiles at corners
+		// get tiles at object's corners
 		// if solid, push out
 	}
 }
