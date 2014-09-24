@@ -12,6 +12,7 @@ public class Engine {
 	}
 
 	public void update() {
+		// update all the objects
 		for (GameObject o : objects) {
 			o.update();
 		}
