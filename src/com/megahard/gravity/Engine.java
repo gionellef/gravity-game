@@ -1,19 +1,19 @@
 package com.megahard.gravity;
 
-import java.util.LinkedList;
-import java.util.List;
-
 public class Engine {
-	public GameMap map;
-	public List<GameObject> objects;
+	private GameState state;
 
 	public Engine(String levelData) {
-		objects = new LinkedList<>();
+		state = new GameState();
+	}
+
+	public void addObject(GameObject obj) {
+		state.objects.add(obj);
 	}
 
 	public void update() {
 		// update all the objects
-		for (GameObject o : objects) {
+		for (GameObject o : state.objects) {
 			o.update();
 		}
 	}
