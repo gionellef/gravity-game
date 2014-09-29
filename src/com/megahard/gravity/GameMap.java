@@ -14,9 +14,14 @@ public class GameMap {
 			this.graphics = graphics;
 		}
 
-	}
+		public boolean getCollidable() {
+			return collidable;
+		}
 
-	public static final int TILE_SIZE = 32;
+		public String getGraphics() {
+			return graphics;
+		}
+	}
 
 	private int width;
 	private int height;
@@ -42,6 +47,14 @@ public class GameMap {
 
 	public Tile getTile(int x, int y) {
 		return map[y * width + x];
+	}
+
+	public Tile getTile(double x, double y) {
+		return getTile((int) x, (int) y);
+	}
+
+	public Tile getTile(Vector2 position) {
+		return getTile(position.x, position.y);
 	}
 
 	public void setTile(int x, int y, Tile value) {

@@ -27,6 +27,10 @@ public class Engine {
 		removeObj.add(obj);
 	}
 
+	public GameMap getMap() {
+		return state.map;
+	}
+
 	public void update() {
 		// add all objects to be added
 		state.objects.addAll(addObj);

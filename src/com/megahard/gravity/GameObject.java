@@ -16,12 +16,97 @@ public class GameObject {
 	}
 
 	public void update() {
-		position = position.translate(velocity); // movement due to velocity
-		velocity.y += 1; // acceleration due to gravity
+		GameMap map = game.getMap();
 
-		// COLLISION DETECTION WITH THE MAP GOES HERE
-		// collision detection algorithm
-		// get tiles at object's corners
-		// if solid, push out
+		// Do movement
+		position = position.add(velocity);
+		velocity.y += 0.1; // tmp
+
+		// Get object bounds
+		double left = position.x - size.x / 2;
+		double right = position.x + size.x / 2;
+		double up = position.y - size.y / 2;
+		double down = position.y + size.y / 2;
+
+		// Do Y collision
+		if (velocity.y >= 0) {
+			// Check if the bottom of the object collides with the map
+			boolean blocked = false;
+			for (double x = left; x < right; x += 1) {
+				if (map.getTile(x, down).getCollidable()) {
+					blocked = true;
+					break;
+				}
+			}
+			if (!blocked && map.getTile(right, down).getCollidable()) {
+				blocked = true;
+			}
+
+			// collision resolution
+			if (blocked) {
+				position.y = Math.floor(down) - size.y / 2;
+				velocity.y = 0;
+			}
+		} else {
+			// Check if the top of the object collides with the map
+			boolean blocked = false;
+			for (double x = left; x < right; x += 1) {
+				if (map.getTile(x, up).getCollidable()) {
+					blocked = true;
+					break;
+				}
+			}
+			if (!blocked && map.getTile(right, up).getCollidable()) {
+				blocked = true;
+			}
+
+			// collision resolution
+			if (blocked) {
+				position.y = Math.ceil(up) + size.y / 2;
+				velocity.y = 0;
+			}
+		}
+
+		up = position.y - size.y / 2;
+		down = position.y + size.y / 2;
+
+		// Do X collision
+		if (velocity.x > 0) {
+			// Check if the right of the object collides with the map
+			boolean blocked = false;
+			for (double y = up; y < down; y += 1) {
+				if (map.getTile(right, y).getCollidable()) {
+					blocked = true;
+					break;
+				}
+			}
+			if (!blocked && map.getTile(right, down).getCollidable()) {
+				blocked = true;
+			}
+
+			// collision resolution
+			if (blocked) {
+				position.x = Math.floor(right) - size.x / 2;
+				velocity.x = 0;
+			}
+		} else {
+			// Check if the left of the object collides with the map
+			boolean blocked = false;
+			for (double y = up; y < down; y += 1) {
+				if (map.getTile(left, y).getCollidable()) {
+					blocked = true;
+					break;
+				}
+			}
+			if (!blocked && map.getTile(left, down).getCollidable()) {
+				blocked = true;
+			}
+
+			// collision resolution
+			if (blocked) {
+				position.x = Math.ceil(left) + size.x / 2;
+				velocity.x = 0;
+			}
+		}
 	}
 }
