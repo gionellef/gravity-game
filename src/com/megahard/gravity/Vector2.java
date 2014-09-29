@@ -23,7 +23,7 @@ public class Vector2 {
       return Math.sqrt ( x*x + y*y );
    }
 
-   public Vector2 translate( Vector2 v1 ) {
+   public Vector2 add( Vector2 v1 ) {
        return new Vector2( this.x + v1.x, this.y + v1.y );
    }
 
@@ -31,7 +31,7 @@ public class Vector2 {
        return new Vector2( this.x*scaleFactor, this.y*scaleFactor );
    }
 
-   public double dotProduct ( Vector2 v1 ) {
+   public double dot ( Vector2 v1 ) {
         return this.x*v1.x + this.y*v1.y;
    }
 
