@@ -17,6 +17,6 @@ public class GravityApplet extends Applet {
 
 	@Override
 	public void paint(Graphics g) {
-		renderer.render(g, engine.state);
+		renderer.render(g, engine.getState());
 	}
 }

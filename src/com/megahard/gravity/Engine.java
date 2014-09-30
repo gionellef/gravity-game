@@ -6,7 +6,12 @@ import java.util.List;
 import com.megahard.gravity.GameMap.Tile;
 
 public class Engine {
-	public GameState state;
+	private GameState state;
+
+	public GameState getState() {
+		return state;
+	}
+
 	private List<GameObject> addObj;
 	private List<GameObject> removeObj;
 

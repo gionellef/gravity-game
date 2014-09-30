@@ -4,7 +4,8 @@ public class GameMap {
 
 	public enum Tile {
 		Air(false, "air.png"),
-		Floor(true, "floor.png");
+		Floor(true, "floor.png"),
+		Door(false, "door.png");
 
 		private final boolean collidable;
 		private final String graphics;
