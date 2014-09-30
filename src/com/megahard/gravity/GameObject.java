@@ -15,6 +15,10 @@ public class GameObject {
 		this.game = game;
 	}
 
+	public void collide(GameObject obj) {
+
+	}
+
 	public void update() {
 		GameMap map = game.getMap();
 

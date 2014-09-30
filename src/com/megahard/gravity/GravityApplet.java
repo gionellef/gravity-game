@@ -11,6 +11,8 @@ public class GravityApplet extends Applet {
 	public void init() {
 		engine = new Engine();
 		renderer = new Renderer();
+
+		engine.initialize("");
 	}
 
 	@Override

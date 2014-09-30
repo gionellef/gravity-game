@@ -3,6 +3,8 @@ package com.megahard.gravity;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.megahard.gravity.GameMap.Tile;
+
 public class Engine {
 	public GameState state;
 	private List<GameObject> addObj;
@@ -17,6 +19,14 @@ public class Engine {
 	public void initialize(String levelData) {
 		// populate the game state using level data
 		state = new GameState();
+		Tile F = Tile.Floor;
+		Tile A = Tile.Air;
+		state.map = new GameMap(8, 4, new Tile[] {
+			F, F, F, F, F, F, F, F,
+			F, A, A, A, A, A, A, F,
+			F, A, A, A, A, F, A, F,
+			F, F, F, F, F, F, F, F
+		});
 	}
 
 	public void addObject(GameObject obj) {
@@ -40,6 +50,8 @@ public class Engine {
 		for (GameObject o : state.objects) {
 			o.update();
 		}
+
+		// Check inter-obejct collisions
 
 		// remove all objects to be removed
 		state.objects.removeAll(removeObj);
