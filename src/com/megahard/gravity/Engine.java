@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Engine {
-	private GameState state;
+	public GameState state;
 	private List<GameObject> addObj;
 	private List<GameObject> removeObj;
 
