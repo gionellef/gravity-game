@@ -17,8 +17,8 @@ public class Engine {
 
 	public Engine() {
 		state = new GameState();
-		addObj = new LinkedList<>();
-		removeObj = new LinkedList<>();
+		addObj = new LinkedList<GameObject>();
+		removeObj = new LinkedList<GameObject>();
 	}
 
 	public void initialize(String levelData) {
@@ -56,7 +56,19 @@ public class Engine {
 			o.update();
 		}
 
-		// Check inter-obejct collisions
+		// Check inter-obejct collisions assumed rectangles with no rotations (not yet debugged)
+		for (GameObject o : state.objects) {
+			for (int i = state.objects.indexOf(o) + 1; i < state.objects.size(); i++) {
+				GameObject o2 = state.objects.get(i);
+				if (o.position.x < o2.position.x + o2.size.x
+					&& o.position.x  + o.size.x < o2.position.x
+					&& o.position.y < o2.position.y + o2.size.y
+					&& o.position.y  + o.size.y < o2.position.y) {
+					// collision detected
+					o.collide(o2);
+				}
+			}
+		}
 
 		// remove all objects to be removed
 		state.objects.removeAll(removeObj);
