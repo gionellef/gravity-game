@@ -13,7 +13,12 @@ public class GameObject {
 
 	public GameObject(Engine game) {
 		this.game = game;
+		this.position = new Vector2();
+		this.velocity = new Vector2();
+		this.size = new Vector2();
+		this.mass = 0;
 	}
+	
 
 	public void collide(GameObject obj) {
 
@@ -24,7 +29,7 @@ public class GameObject {
 
 		// Do movement
 		position = position.add(velocity);
-		velocity.y += 0.1; // tmp
+		velocity.y += 0.001; // tmp
 
 		// Get object bounds
 		double left = position.x - size.x / 2;
@@ -71,8 +76,8 @@ public class GameObject {
 			}
 		}
 
-		up = position.y - size.y / 2;
-		down = position.y + size.y / 2;
+		up = position.y - size.y / 2 + 0.01;
+		down = position.y + size.y / 2 - 0.01;
 
 		// Do X collision
 		if (velocity.x > 0) {
@@ -112,5 +117,11 @@ public class GameObject {
 				velocity.x = 0;
 			}
 		}
+		
+		// maxx velcoity`
+		if(velocity.length() > 1) {
+			velocity = velocity.scale(1/velocity.length());
+		}
+		
 	}
 }

@@ -11,12 +11,31 @@ public class GravityApplet extends Applet {
 	public void init() {
 		engine = new Engine();
 		renderer = new Renderer();
-
 		engine.initialize("");
+		
+		new Thread(){
+			public void run() {
+
+				boolean ever = true;
+				for(;ever;){
+					engine.update();
+					
+					repaint();
+					try {
+						Thread.sleep(200);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}	
+			};
+		}.start();
+		
 	}
 
 	@Override
 	public void paint(Graphics g) {
+		
 		renderer.render(g, engine.getState());
 	}
 }

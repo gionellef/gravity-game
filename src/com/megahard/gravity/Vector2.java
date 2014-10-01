@@ -34,5 +34,11 @@ public class Vector2 {
    public double dot ( Vector2 v1 ) {
         return this.x*v1.x + this.y*v1.y;
    }
+   
+   public void set(double x, double y) {
+	   this.x = x;
+	   this.y =y;
+	   
+   }
 
 }

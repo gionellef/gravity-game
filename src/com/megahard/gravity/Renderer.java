@@ -18,5 +18,11 @@ public class Renderer {
 				g.fillRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
 			}
 		}
+		
+		for (GameObject o : s.objects) {
+			g.setColor(Color.CYAN);
+			g.fillRect((int)((o.position.x - o.size.x/2) * TILE_SIZE), (int)((o.position.y - o.size.y/2) * TILE_SIZE), 
+					(int)(o.size.x * TILE_SIZE), (int)(o.size.y * TILE_SIZE));
+		}
 	}
 }
