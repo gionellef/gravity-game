@@ -33,6 +33,10 @@ public class GameMap {
 		this.height = height;
 		// tiles are arranged in 2D array in row major order
 		map = new Tile[width * height];
+		convertLevelToMap(level);
+	}
+
+	private void convertLevelToMap(Tile[] level) {
 		for (int i = 0; i < level.length; i++) {
 			map[i] = level[i];
 		}
