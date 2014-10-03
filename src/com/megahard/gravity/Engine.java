@@ -24,29 +24,36 @@ public class Engine {
 	public void initialize(String levelData) {
 		// populate the game state using level data
 		state = new GameState();
+
+		// TEST CODE
 		Tile F = Tile.Floor;
 		Tile A = Tile.Air;
 		state.map = new GameMap(8, 10, new Tile[] {
 			F, F, F, F, F, F, F, F,
 			F, A, A, A, A, A, A, F,
-			F, A, A, A, A, F, A, F,
-			F, A, A, A, A, F, A, F,
-			F, A, A, A, A, F, A, F,
-			F, A, A, A, A, F, A, F,
-			F, A, A, A, A, F, A, F,
-			F, A, A, A, A, F, A, F,
-			F, A, A, A, A, F, A, F,
+			F, A, A, A, A, A, A, F,
+			F, A, A, A, A, A, A, F,
+			F, A, A, A, A, A, A, F,
+			F, A, A, A, A, A, A, F,
+			F, A, A, A, A, A, A, F,
+			F, A, F, A, A, A, A, F,
+			F, A, A, A, A, A, A, F,
 			F, F, F, F, F, F, F, F
 		});
+
 		GameObject o = new GameObject(this);
-		o.position.set(1,9);
-		o.velocity.set(0.01, 0);
-		o.size.set(1, 1);
+		o.position.set(1.5, 1.5);
+		o.velocity.set(0.08, 0);
+		o.size.set(0.9, 0.9);
+		o.restitution = 0.9;
+		o.friction = 0.9;
 		addObject(o);
+
 		GameObject o2 = new GameObject(this);
-		o2.position.set(4,8);
-		o2.velocity.set(-0.01, 0);
-		o2.size.set(2,2);
+		o2.position.set(6, 8);
+		o2.velocity.set(-0.1, 0);
+		o2.size.set(1.9, 1.9);
+		o2.friction = 0.9;
 		addObject(o2);
 	}
 
@@ -77,20 +84,20 @@ public class Engine {
 			for (int i = state.objects.indexOf(o) + 1; i < state.objects.size(); i++) {
 				GameObject o2 = state.objects.get(i);
 //				System.out.println("x " + o.position.x + " y " + o2.position.x);
-				System.out.println((o.position.x < o2.position.x + o2.size.x) + " " 
-						+ (o.position.x  + o.size.x < o2.position.x) + " "
-						+ (o.position.y < o2.position.y + o2.size.y) + " "
-						+ (o.position.y  + o.size.y < o2.position.y));
-				
+				//				System.out.println((o.position.x < o2.position.x + o2.size.x) + " "
+				//						+ (o.position.x  + o.size.x < o2.position.x) + " "
+				//						+ (o.position.y < o2.position.y + o2.size.y) + " "
+				//						+ (o.position.y  + o.size.y < o2.position.y));
+
 				if (o.position.x - o.size.x/2 < o2.position.x + o2.size.x/2
 					&& o.position.x  + o.size.x/2 > o2.position.x - o2.size.x/2
 					&& o.position.y - o.size.y/2 < o2.position.y + o2.size.y/2
 					&& o.position.y + o.size.y/2 > o2.position.y - o2.size.y/2) {
 					// collision detected
-					System.out.println("!!!!");
+					//					System.out.println("!!!!");
 					o.collide(o2);
 				} else {
-					System.out.println("a");
+					//					System.out.println("a");
 				}
 			}
 		}

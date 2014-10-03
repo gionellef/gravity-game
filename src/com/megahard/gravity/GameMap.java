@@ -51,6 +51,9 @@ public class GameMap {
 	}
 
 	public Tile getTile(int x, int y) {
+		if (x < 0 || y < 0 || x >= width || y >= height) {
+			return Tile.Air;
+		}
 		return map[y * width + x];
 	}
 
