@@ -88,7 +88,7 @@ public class GravityApplet extends Applet {
 		}
 		
 		// Garbage collector, yea!
-		System.gc();
+		System.gc(); //noononononononono. manual gc makes things slow.
 		
 		// create the new image in the size of the panel
 		bufferImage = createImage (bufferWidth,bufferHeight);
