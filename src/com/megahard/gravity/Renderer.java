@@ -91,6 +91,4 @@ public class Renderer extends Canvas implements Runnable {
 			}
 		}
 	}
-	
-
 }
