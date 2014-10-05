@@ -1,21 +1,13 @@
 package com.megahard.gravity;
 
-import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.image.BufferStrategy;
-
-import javax.swing.JFrame;
 
 import com.megahard.gravity.GameMap.Tile;
 
 public class Renderer extends Canvas implements Runnable {
-	private int bufferWidth;
-	private int bufferHeight;
-	private Image bufferImage;
 	
 	private Engine engine;
 	public GameMap map;
@@ -86,7 +78,6 @@ public class Renderer extends Canvas implements Runnable {
 			try {
 				Thread.sleep(20);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
