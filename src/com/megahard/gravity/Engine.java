@@ -1,11 +1,13 @@
 package com.megahard.gravity;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.LinkedList;
 import java.util.List;
 
 import com.megahard.gravity.GameMap.Tile;
 
-public class Engine {
+public class Engine{
 	private GameState state;
 
 	public GameState getState() {
@@ -19,6 +21,7 @@ public class Engine {
 		state = new GameState();
 		addObj = new LinkedList<GameObject>();
 		removeObj = new LinkedList<GameObject>();
+		
 	}
 
 	public void initialize(String levelData) {
@@ -69,11 +72,13 @@ public class Engine {
 		return state.map;
 	}
 
-	public void update() {
+	public void update(String action) {
 		// add all objects to be added
 		state.objects.addAll(addObj);
 		addObj.clear();
 
+
+		
 		// update all the objects
 		for (GameObject o : state.objects) {
 			o.update();
@@ -106,4 +111,8 @@ public class Engine {
 		state.objects.removeAll(removeObj);
 		removeObj.clear();
 	}
+
+	
+
+
 }
