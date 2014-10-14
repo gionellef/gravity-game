@@ -2,7 +2,6 @@ package com.megahard.gravity;
 
 import java.applet.Applet;
 import java.awt.BorderLayout;
-import java.awt.event.KeyListener;
 
 public class GravityApplet extends Applet {
 	

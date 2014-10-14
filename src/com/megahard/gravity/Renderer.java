@@ -7,12 +7,14 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 
+import com.megahard.gravity.Vector2;
 import com.megahard.gravity.GameMap.Tile;
 
 public class Renderer extends Canvas implements Runnable, KeyListener{
 	
 	private Engine engine;
 	public GameMap map;
+	private Vector2 camera;
 	
 	public enum Action {
 		UP, DOWN, LEFT, RIGHT, JUMP, NONE;
@@ -71,12 +73,13 @@ public class Renderer extends Canvas implements Runnable, KeyListener{
 			
 			
 		g.fillRect(0, 0, getWidth(), getHeight());
-		
 		for (int y = 0; y < map.getHeight(); y++) {
 			for (int x = 0; x < map.getWidth(); x++) {
 				Tile tile = map.getTile(x, y);
 				g.setColor(tile.getCollidable() ? Color.black : Color.white);
-				g.fillRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+				g.fillRect( (int)((x * TILE_SIZE)-camera.x), 
+							(int)((y * TILE_SIZE)-camera.y),
+							TILE_SIZE, TILE_SIZE);
 			}
 		}
 		
@@ -95,6 +98,7 @@ public class Renderer extends Canvas implements Runnable, KeyListener{
 		engine.initialize("");
 		GameState s = engine.getState();
 		map = s.map;
+		camera = new Vector2();
 	}
 	
 	@Override
@@ -151,6 +155,14 @@ public class Renderer extends Canvas implements Runnable, KeyListener{
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public Vector2 getCamera() {
+		return camera;
+	}
+
+	public void setCamera(Vector2 camera) {
+		this.camera = camera;
 	}
 
 }

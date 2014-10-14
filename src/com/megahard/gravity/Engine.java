@@ -31,17 +31,31 @@ public class Engine{
 		// TEST CODE
 		Tile F = Tile.Floor;
 		Tile A = Tile.Air;
-		state.map = new GameMap(8, 10, new Tile[] {
-			F, F, F, F, F, F, F, F,
-			F, A, A, A, A, A, A, F,
-			F, A, A, A, A, A, A, F,
-			F, A, A, A, A, A, A, F,
-			F, A, A, A, A, A, A, F,
-			F, A, A, A, A, A, A, F,
-			F, A, A, A, A, A, A, F,
-			F, A, F, A, A, A, A, F,
-			F, A, A, A, A, A, A, F,
-			F, F, F, F, F, F, F, F
+		state.map = new GameMap(32, 24, new Tile[] {
+			F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F,
+			F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F,
+			F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F,
+			F, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, F,
+			F, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, F,
+			F, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, F,
+			F, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, F,
+			F, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, F,
+			F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F,
+			F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F,
+			F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F,
+			F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F,
+			F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F,
+			F, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, F,
+			F, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, F,
+			F, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, F,
+			F, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, F,
+			F, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, F,
+			F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F,
+			F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F,
+			F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F,
+			F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F,
+			F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F,
+			F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F  
 		});
 
 		GameObject o = new GameObject(this);
