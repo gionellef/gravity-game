@@ -52,7 +52,13 @@ public class Engine{
 		o.friction = 0.9;
 		addObject(o);
 
-		GameObject o2 = new GameObject(this);
+		GameObject o2 = new GameObject(this){
+			@Override
+			public void collide(GameObject obj) {
+				// TEST, DISAPPEAR ON TOUCH
+				removeObject(this);
+			}
+		};
 		o2.position.set(6, 8);
 		o2.velocity.set(-0.1, 0);
 		o2.size.set(1.9, 1.9);
@@ -94,7 +100,7 @@ public class Engine{
 					&& o.position.y - o.size.y/2 < o2.position.y + o2.size.y/2
 					&& o.position.y + o.size.y/2 > o2.position.y - o2.size.y/2) {
 					o.collide(o2);
-					// o2.collide(o) ???
+					o2.collide(o);
 				}
 			}
 		}
