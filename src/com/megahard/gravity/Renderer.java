@@ -7,13 +7,15 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 
-import com.megahard.gravity.Vector2;
 import com.megahard.gravity.GameMap.Tile;
 
-public class Renderer extends Canvas implements Runnable, KeyListener{
+public class Renderer extends Canvas implements KeyListener{
 	
-	private Engine engine;
-	public GameMap map;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private Vector2 camera;
 	
 	public enum Action {
@@ -39,22 +41,14 @@ public class Renderer extends Canvas implements Runnable, KeyListener{
 		}
 	}
 	
-	private boolean running = false;
-	
 	public Action action;
 	
 	private static final int TILE_SIZE = 16;
 	
-	
-	public void start() {
-		running = true;
-		new Thread(this).start();
-		addKeyListener(this);
+	public Renderer() {
+		camera = new Vector2();
 		action = Action.NONE;
-	}
-	
-	public void stop() {
-		running = false;
+		addKeyListener(this);
 	}
 	
 	public void render(GameState s) {
@@ -67,14 +61,12 @@ public class Renderer extends Canvas implements Runnable, KeyListener{
 			return;
 		}
 		
-		if (bs.getDrawGraphics() == null)
-			running = false;
 		Graphics g = bs.getDrawGraphics();
 			
 		g.fillRect(0, 0, getWidth(), getHeight());
-		for (int y = 0; y < map.getHeight(); y++) {
-			for (int x = 0; x < map.getWidth(); x++) {
-				Tile tile = map.getTile(x, y);
+		for (int y = 0; y < s.map.getHeight(); y++) {
+			for (int x = 0; x < s.map.getWidth(); x++) {
+				Tile tile = s.map.getTile(x, y);
 				g.setColor(tile.getCollidable() ? Color.black : Color.white);
 				g.fillRect( (int)((x * TILE_SIZE)-camera.x), 
 							(int)((y * TILE_SIZE)-camera.y),
@@ -92,30 +84,6 @@ public class Renderer extends Canvas implements Runnable, KeyListener{
 		bs.show();
 	}
 
-	private void init() {
-		engine = new Engine();
-		engine.initialize("");
-		GameState s = engine.getState();
-		map = s.map;
-		camera = new Vector2();
-	}
-	
-	@Override
-	public void run() {
-		init();
-		while(running){
-			engine.update(action.value());
-			render(engine.getState());
-
-			try {
-				Thread.sleep(20);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-	
-	
 	@Override
 	public void keyPressed(KeyEvent e) {
 		 switch (e.getKeyCode()) {

@@ -1,7 +1,5 @@
 package com.megahard.gravity;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -105,7 +103,7 @@ public class Engine{
 		return state.map;
 	}
 
-	public void update(String action) {
+	public void update(Renderer.Action action) {
 		// add all objects to be added
 		state.objects.addAll(addObj);
 		addObj.clear();
