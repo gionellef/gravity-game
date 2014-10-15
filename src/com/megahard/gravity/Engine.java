@@ -6,6 +6,12 @@ import java.util.List;
 import com.megahard.gravity.GameMap.Tile;
 
 public class Engine{
+	private Renderer renderer;
+	
+	public Renderer getRenderer(){
+		return renderer;
+	}
+	
 	private GameState state;
 
 	public GameState getState() {
@@ -19,7 +25,7 @@ public class Engine{
 		state = new GameState();
 		addObj = new LinkedList<GameObject>();
 		removeObj = new LinkedList<GameObject>();
-		
+		renderer = new Renderer();
 	}
 
 	public void initialize(String levelData) {
@@ -76,6 +82,8 @@ public class Engine{
 		o.restitution = 0.9;
 		o.friction = 0.9;
 		addObject(o);
+		
+		renderer.setCamera(o.position);
 
 		GameObject o2 = new GameObject(this){
 			@Override
@@ -103,13 +111,11 @@ public class Engine{
 		return state.map;
 	}
 
-	public void update(Renderer.Action action) {
+	public void update() {
 		// add all objects to be added
 		state.objects.addAll(addObj);
 		addObj.clear();
 
-
-		
 		// update all the objects
 		for (GameObject o : state.objects) {
 			o.update();

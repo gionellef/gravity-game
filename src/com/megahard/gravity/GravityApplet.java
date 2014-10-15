@@ -13,17 +13,15 @@ public class GravityApplet extends Applet implements Runnable {
 	private boolean running = true;
 
 	private Engine engine;
-	private Renderer renderer;
 
 	@Override
 	public void init() {
 		engine = new Engine();
-		renderer = new Renderer();
 
 		engine.initialize("");
 
 		setLayout(new BorderLayout());
-		add(renderer, BorderLayout.CENTER);
+		add(engine.getRenderer(), BorderLayout.CENTER);
 	}
 
 	public void start() {
@@ -35,8 +33,8 @@ public class GravityApplet extends Applet implements Runnable {
 		running = true;
 		try {
 			while (running) {
-				engine.update(renderer.action);
-				renderer.render(engine.getState());
+				engine.update();
+				engine.getRenderer().render(engine.getState());
 
 				Thread.sleep(25);
 			}
