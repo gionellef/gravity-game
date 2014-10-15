@@ -56,7 +56,7 @@ public class Renderer extends Canvas implements KeyListener {
 		BufferStrategy bs = getBufferStrategy();
 
 		if (bs == null) {
-			createBufferStrategy(2);
+			createBufferStrategy(3);
 			requestFocus();
 			return;
 		}
@@ -111,14 +111,13 @@ public class Renderer extends Canvas implements KeyListener {
 			action = Action.RIGHT;
 			break;
 		default:
-			action = Action.NONE;
 		}
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-
+		// TEST CODE
+		action = Action.NONE;
 	}
 
 	@Override

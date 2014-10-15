@@ -31,7 +31,7 @@ public class GameObject {
 	public void update() {
 		GameMap map = game.getMap();
 
-		velocity.y += 0.001; // tmp
+		velocity.y += 0.01; // tmp
 
 		// Get object bounds
 		final double E = 1e-10;

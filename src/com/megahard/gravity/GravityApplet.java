@@ -20,6 +20,7 @@ public class GravityApplet extends Applet implements Runnable {
 
 		engine.initialize("");
 
+		setSize(600, 400);
 		setLayout(new BorderLayout());
 		add(engine.getRenderer(), BorderLayout.CENTER);
 	}

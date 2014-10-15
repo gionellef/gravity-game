@@ -6,6 +6,9 @@ import java.util.List;
 import com.megahard.gravity.GameMap.Tile;
 
 public class Engine{
+	// TEST CODE
+	private GameObject player;
+	
 	private Renderer renderer;
 	
 	public Renderer getRenderer(){
@@ -57,7 +60,7 @@ public class Engine{
 			F, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, F,
 			F, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, F,
 			F, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, F,
-			F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F,
+			F, F, F, F, F, F, F, F, F, F, F, A, A, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F,
 			F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F,
 			F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F,
 			F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F,
@@ -79,11 +82,9 @@ public class Engine{
 		o.position.set(1.5, 1.5);
 		o.velocity.set(0.08, 0);
 		o.size.set(0.9, 0.9);
-		o.restitution = 0.9;
+		o.restitution = 0.2;
 		o.friction = 0.9;
 		addObject(o);
-		
-		renderer.setCamera(o.position);
 
 		GameObject o2 = new GameObject(this){
 			@Override
@@ -97,6 +98,9 @@ public class Engine{
 		o2.size.set(1.9, 1.9);
 		o2.friction = 0.9;
 		addObject(o2);
+		
+		player = o;
+		renderer.setCamera(player.position);
 	}
 
 	public void addObject(GameObject obj) {
@@ -112,6 +116,20 @@ public class Engine{
 	}
 
 	public void update() {
+		// TEST CODE 
+		if(renderer.action == Renderer.Action.UP){
+			player.velocity.y -= 0.05;
+		} 
+		if(renderer.action == Renderer.Action.DOWN){
+			player.velocity.y += 0.05;
+		} 
+		if(renderer.action == Renderer.Action.LEFT){
+			player.velocity.x -= 0.05;
+		} 
+		if(renderer.action == Renderer.Action.RIGHT){
+			player.velocity.x += 0.05;
+		}
+		
 		// add all objects to be added
 		state.objects.addAll(addObj);
 		addObj.clear();
