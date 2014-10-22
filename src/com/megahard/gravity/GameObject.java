@@ -1,6 +1,6 @@
 package com.megahard.gravity;
 
-import java.awt.Graphics;
+import java.awt.Color;
 
 public class GameObject {
 	private final Engine game;
@@ -11,7 +11,7 @@ public class GameObject {
 	public double mass;
 	public double restitution;
 	public double friction;
-	public Graphics graphics;
+	public Color color;
 
 	public GameObject(Engine game) {
 		this.game = game;
@@ -21,6 +21,7 @@ public class GameObject {
 		this.mass = 1;
 		restitution = 0;
 		friction = 1;
+		color = Color.red;
 	}
 
 
