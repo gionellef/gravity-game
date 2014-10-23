@@ -37,56 +37,26 @@ public class Engine {
 		state = new GameState();
 
 		// TEST CODE
-		Tile F = Tile.Floor;
-		Tile A = Tile.Air;
-		new GameMap(8, 10, new Tile[] { F, F, F, F, F, F, F, F, F, A, A, A, A,
-				A, A, F, F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F, F, A,
-				A, A, A, A, A, F, F, A, A, A, A, A, A, F, F, A, A, A, A, A, A,
-				F, F, A, F, A, A, A, A, F, F, A, A, A, A, A, A, F, F, F, F, F,
-				F, F, F, F });
-
-		state.map = new GameMap(32, 24, new Tile[] { F, F, F, F, F, F, F, F, F,
-				F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F,
-				F, F, F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F, F, A, A,
-				A, A, A, A, F, F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F,
-				F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F, F, A, A, A, A,
-				A, A, F, F, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A,
-				A, A, A, A, A, A, A, A, A, A, A, A, A, F, F, A, A, A, A, A, A,
-				A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A,
-				A, A, A, F, F, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A,
-				A, A, A, A, A, A, A, A, A, A, A, A, A, A, F, F, A, A, A, A, A,
-				A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A,
-				A, A, A, A, F, F, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A,
-				A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, F, F, F, F, F, F,
-				F, F, F, F, F, F, A, A, F, F, F, F, F, F, F, F, F, F, F, F, F,
-				F, F, F, F, F, F, F, A, A, A, A, A, A, F, F, A, A, A, A, A, A,
-				F, F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F, F, A, A, A,
-				A, A, A, F, F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F, F,
-				A, A, A, A, A, A, F, F, A, A, A, A, A, A, F, F, A, A, A, A, A,
-				A, F, F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F, F, A, A,
-				A, A, A, A, F, F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F,
-				F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, A, A, A, A, A, A,
-				A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, F, F, A,
-				A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A,
-				A, A, A, A, A, A, A, A, F, F, A, A, A, A, A, A, A, A, A, A, A,
-				A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, F, F,
-				A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A,
-				A, A, A, A, A, A, A, A, A, F, F, A, A, A, A, A, A, A, A, A, A,
-				A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, F,
-				F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F, F, A, A, A, A,
-				A, A, F, F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F, F, A,
-				A, A, A, A, A, F, F, A, A, A, A, A, A, F, F, A, A, A, A, A, A,
-				F, F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F, F, A, A, A,
-				A, A, A, F, F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F, F,
-				A, A, A, A, A, A, F, F, A, A, A, A, A, A, F, F, A, A, A, A, A,
-				A, F, F, A, A, A, A, A, A, F, F, A, A, A, A, A, A, F, F, A, A,
-				A, A, A, A, F, F, A, A, A, A, A, A, F, F, F, F, F, F, F, F, F,
-				F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F,
-				F, F, F });
+		int w = 32;
+		int h = 24;
+		Tile[] map = new Tile[w * h];
+		for(int i=0; i<h; i++){
+			for(int j=0; j<w; j++){
+				map[i * w + j] = Tile.Air;
+			}
+		}
+		for(int i=0; i<w; i++){
+			map[i] = Tile.Floor;
+			map[(h - 1) * w + i] = Tile.Floor;
+		}
+		for(int i=0; i<h; i++){
+			map[i * w] = Tile.Floor;
+			map[i * w + w - 1] = Tile.Floor;
+		}
+		state.map = new GameMap(w, h, map);
 
 		GameObject o = new GameObject(this);
 		o.position.set(1.5, 1.5);
-		o.velocity.set(0.08, 0);
 		o.size.set(0.9, 0.9);
 		o.restitution = 0.2;
 		o.friction = 0.9;
@@ -95,15 +65,14 @@ public class Engine {
 
 		GameObject o2 = new GameObject(this);
 		o2.position.set(30, 15);
-		o2.velocity.set(-0.1, 0);
 		o2.size.set(1.9, 1.9);
 		o2.friction = 0.9;
 		addObject(o2);
 
 		GameObject o3 = new GameObject(this);
-		o3.position.set(2, 12);
-		o3.velocity.set(0.1, 0);
+		o3.position.set(10, 8);
 		o3.size.set(1.2, 1.2);
+		o3.velocity.set(0,0.5);
 		o3.restitution = 1;
 		o3.friction = 0.5;
 		addObject(o3);
@@ -112,21 +81,25 @@ public class Engine {
 			public void update() {
 				super.update();
 
+				position.set(20, 10);
+				velocity.set(0, 0);
+				
 				List<GameObject> objects = state.objects;
 				for (GameObject other : objects) {
 					if (other != this) {
 						Vector2 dir = position.add(other.position.scale(-1));
 						double d = dir.length();
-						other.velocity = other.velocity.add(dir.scale(0.08 / (d*d)));
+						if(d > 1){
+							other.velocity = other.velocity.add(dir.scale(0.1 / (d*d)));
+						}else{
+							other.velocity = other.velocity.scale(0.8).add(dir.scale(0.2));
+						}
 					}
 				}
-				
-				position.set(20, 10);
 			};
 			@Override
 			public void collide(GameObject obj) {
-				// TEST, DISAPPEAR ON TOUCH
-				removeObject(obj);
+				//removeObject(obj);
 			}
 		};
 		gro.size.set(0.5,0.5);
