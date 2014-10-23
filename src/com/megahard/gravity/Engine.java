@@ -100,6 +100,7 @@ public class Engine {
 			@Override
 			public void collide(GameObject obj) {
 				//removeObject(obj);
+				Sound.boing.play();
 			}
 		};
 		gro.size.set(0.5,0.5);

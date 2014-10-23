@@ -16,6 +16,8 @@ public class GravityApplet extends Applet implements Runnable {
 
 	@Override
 	public void init() {
+		Sound.touch();
+		
 		engine = new Engine();
 
 		engine.initialize("");
