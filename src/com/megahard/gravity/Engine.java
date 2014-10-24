@@ -1,8 +1,13 @@
 package com.megahard.gravity;
 
 import java.awt.Color;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
+
+import javax.imageio.ImageIO;
 
 import com.megahard.gravity.GameMap.Tile;
 
@@ -37,23 +42,24 @@ public class Engine {
 		state = new GameState();
 
 		// TEST CODE
-		int w = 32;
-		int h = 24;
-		Tile[] map = new Tile[w * h];
-		for(int i=0; i<h; i++){
-			for(int j=0; j<w; j++){
-				map[i * w + j] = Tile.Air;
-			}
-		}
-		for(int i=0; i<w; i++){
-			map[i] = Tile.Floor;
-			map[(h - 1) * w + i] = Tile.Floor;
-		}
-		for(int i=0; i<h; i++){
-			map[i * w] = Tile.Floor;
-			map[i * w + w - 1] = Tile.Floor;
-		}
-		state.map = new GameMap(w, h, map);
+//		int w = 32;
+//		int h = 24;
+		
+//		Tile[] map = new Tile[w * h];
+//		for(int i=0; i<h; i++){
+//			for(int j=0; j<w; j++){
+//				map[i * w + j] = Tile.Air;
+//			}
+//		}
+//		for(int i=0; i<w; i++){
+//			map[i] = Tile.Floor;
+//			map[(h - 1) * w + i] = Tile.Floor;
+//		}
+//		for(int i=0; i<h; i++){
+//			map[i * w] = Tile.Floor;
+//			map[i * w + w - 1] = Tile.Floor;
+//		}
+		state.map = loadMap("map2");
 
 		GameObject o = new GameObject(this);
 		o.position.set(1.5, 1.5);
@@ -121,6 +127,73 @@ public class Engine {
 
 	public GameMap getMap() {
 		return state.map;
+	}
+	
+	public GameMap loadMap(String mapName) {
+		BufferedImage mapImg = null;
+		System.out.println("/res/img/" + mapName + ".jpg");
+		try {
+		    mapImg = ImageIO.read(this.getClass().getResource("/img/" + mapName + ".jpg"));
+		} catch (IOException e) {
+			System.out.println("haha");
+		}
+		
+		System.out.println("lol " +mapImg.getHeight());
+		
+
+	      final byte[] pixels = ((DataBufferByte) mapImg.getRaster().getDataBuffer()).getData();
+	      final int w = mapImg.getWidth();
+	      final int h = mapImg.getHeight();
+	      final boolean hasAlphaChannel = mapImg.getAlphaRaster() != null;
+	      
+
+	      Tile[] tiles = new Tile[w * h];
+	      if (hasAlphaChannel) {
+	         final int pixelLength = 4;
+	         for (int pixel = 0, index = 0; pixel < pixels.length; pixel += pixelLength, index++) {
+	            int argb = 0;
+	            argb += (((int) pixels[pixel] & 0xff) << 24); // alpha
+	            argb += ((int) pixels[pixel + 1] & 0xff); // blue
+	            argb += (((int) pixels[pixel + 2] & 0xff) << 8); // green
+	            argb += (((int) pixels[pixel + 3] & 0xff) << 16); // red
+	            
+	            Color color = new Color(argb);
+//	            System.out.println("R: " + color.getRed() + " G: " + color.getGreen() + " B: " + color.getBlue());
+	            
+	            if (color.getRed() < 30 && color.getGreen() < 30 && color.getBlue() < 30) {
+	            	tiles[index] = Tile.Floor;
+	            } else if (color.getRed() > 225 && color.getGreen() > 225 && color.getBlue() > 225) {
+	            	tiles[index] = Tile.Air;
+	            } else {
+	            	tiles[index] = Tile.Door;
+	            }
+	            
+	         }
+	      } else {
+	         final int pixelLength = 3;
+	         for (int pixel = 0, index = 0; pixel < pixels.length; pixel += pixelLength, index++) {
+	            int argb = 0;
+	            argb += -16777216; // 255 alpha
+	            argb += ((int) pixels[pixel] & 0xff); // blue
+	            argb += (((int) pixels[pixel + 1] & 0xff) << 8); // green
+	            argb += (((int) pixels[pixel + 2] & 0xff) << 16); // red
+	            
+	            Color color = new Color(argb);
+//	            System.out.println("R: " + color.getRed() + " G: " + color.getGreen() + " B: " + color.getBlue());
+	            
+	            if (color.getRed() < 30 && color.getGreen() < 30 && color.getBlue() < 30) {
+	            	tiles[index] = Tile.Floor;
+	            } else if (color.getRed() > 225 && color.getGreen() > 225 && color.getBlue() > 225) {
+	            	tiles[index] = Tile.Air;
+	            } else {
+	            	tiles[index] = Tile.Door;
+	            }
+	         }
+	      }
+	      
+	      GameMap map = new GameMap(w, h, tiles);
+	      return map;
+		
 	}
 
 	public void update() {
