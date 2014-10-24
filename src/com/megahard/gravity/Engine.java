@@ -61,7 +61,7 @@ public class Engine {
 //		}
 		state.map = loadMap("map2");
 
-		GameObject o = new GameObject(this);
+		GameObject o = new GameObject(this, "/img/obj/playa.bmp");
 		o.position.set(1.5, 1.5);
 		o.size.set(0.9, 0.9);
 		o.restitution = 0.2;
@@ -69,13 +69,13 @@ public class Engine {
 		o.color = Color.yellow;
 		addObject(o);
 
-		GameObject o2 = new GameObject(this);
+		GameObject o2 = new GameObject(this, "");
 		o2.position.set(30, 15);
 		o2.size.set(1.9, 1.9);
 		o2.friction = 0.9;
 		addObject(o2);
 
-		GameObject o3 = new GameObject(this);
+		GameObject o3 = new GameObject(this, "");
 		o3.position.set(10, 8);
 		o3.size.set(1.2, 1.2);
 		o3.velocity.set(0,0.5);
@@ -83,7 +83,7 @@ public class Engine {
 		o3.friction = 0.5;
 		addObject(o3);
 
-		GameObject gro = new GameObject(this) {
+		GameObject gro = new GameObject(this, "") {
 			public void update() {
 				super.update();
 
@@ -138,7 +138,7 @@ public class Engine {
 			System.out.println("haha");
 		}
 		
-		System.out.println("lol " +mapImg.getHeight());
+		System.out.println("lol height" +mapImg.getHeight());
 		
 
 	      final byte[] pixels = ((DataBufferByte) mapImg.getRaster().getDataBuffer()).getData();

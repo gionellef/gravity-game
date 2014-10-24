@@ -79,6 +79,10 @@ public class Renderer extends Canvas implements KeyListener {
 		}
 
 		for (GameObject o : s.objects) {
+			if (o.sprite!= null) {
+				o.sprite.draw(g, 0,0);
+			}
+			
 			g.setColor(o.color);
 			g.fillRect((int) ((o.position.x - o.size.x / 2 - camera.x)
 					* TILE_SIZE + getWidth() / 2), (int) ((o.position.y
@@ -91,6 +95,7 @@ public class Renderer extends Canvas implements KeyListener {
 					- o.size.y / 2 - camera.y)
 					* TILE_SIZE + getHeight() / 2),
 					(int) (o.size.x * TILE_SIZE), (int) (o.size.y * TILE_SIZE));
+		
 		}
 
 		g.dispose();

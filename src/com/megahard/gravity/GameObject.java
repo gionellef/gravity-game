@@ -12,16 +12,23 @@ public class GameObject {
 	public double restitution;
 	public double friction;
 	public Color color;
+	public String spritePath;
+	public Sprite sprite;
 
-	public GameObject(Engine game) {
+	public GameObject(Engine game, String spritePath) {
 		this.game = game;
 		this.position = new Vector2();
 		this.velocity = new Vector2();
 		this.size = new Vector2();
 		this.mass = 1;
+		this.spritePath = spritePath;
 		restitution = 0;
 		friction = 1;
 		color = Color.red;
+		
+		if (spritePath != ""){
+			this.sprite = SpriteStore.get().getSprite(spritePath);
+		}
 	}
 
 
@@ -29,6 +36,10 @@ public class GameObject {
 
 	}
 
+	public void setSprite(String spritePath) {
+		this.sprite = SpriteStore.get().getSprite(spritePath);
+	}
+	
 	public void update() {
 		GameMap map = game.getMap();
 
