@@ -80,22 +80,26 @@ public class Renderer extends Canvas implements KeyListener {
 
 		for (GameObject o : s.objects) {
 			if (o.sprite!= null) {
-				o.sprite.draw(g, 0,0);
+				o.sprite.draw(g, (int) ((o.position.x - camera.x) * TILE_SIZE
+						+ getWidth() / 2 - o.sprite.getWidth() / 2),
+						(int) ((o.position.y - camera.y) * TILE_SIZE
+								+ getHeight() / 2 - o.sprite.getHeight() / 2));
+			} else {
+				g.setColor(o.color);
+				g.fillRect((int) ((o.position.x - o.size.x / 2 - camera.x)
+						* TILE_SIZE + getWidth() / 2), (int) ((o.position.y
+						- o.size.y / 2 - camera.y)
+						* TILE_SIZE + getHeight() / 2),
+						(int) (o.size.x * TILE_SIZE),
+						(int) (o.size.y * TILE_SIZE));
+				g.setColor(Color.black);
+				g.drawRect((int) ((o.position.x - o.size.x / 2 - camera.x)
+						* TILE_SIZE + getWidth() / 2), (int) ((o.position.y
+						- o.size.y / 2 - camera.y)
+						* TILE_SIZE + getHeight() / 2),
+						(int) (o.size.x * TILE_SIZE),
+						(int) (o.size.y * TILE_SIZE));
 			}
-			
-			g.setColor(o.color);
-			g.fillRect((int) ((o.position.x - o.size.x / 2 - camera.x)
-					* TILE_SIZE + getWidth() / 2), (int) ((o.position.y
-					- o.size.y / 2 - camera.y)
-					* TILE_SIZE + getHeight() / 2),
-					(int) (o.size.x * TILE_SIZE), (int) (o.size.y * TILE_SIZE));
-			g.setColor(Color.black);
-			g.drawRect((int) ((o.position.x - o.size.x / 2 - camera.x)
-					* TILE_SIZE + getWidth() / 2), (int) ((o.position.y
-					- o.size.y / 2 - camera.y)
-					* TILE_SIZE + getHeight() / 2),
-					(int) (o.size.x * TILE_SIZE), (int) (o.size.y * TILE_SIZE));
-		
 		}
 
 		g.dispose();
