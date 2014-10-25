@@ -116,6 +116,7 @@ public class Engine {
 
 			@Override
 			public void collide(GameObject obj) {
+				
 				// removeObject(obj);
 				Sound.boing.play();
 			}
