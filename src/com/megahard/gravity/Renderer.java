@@ -106,23 +106,23 @@ public class Renderer extends Canvas implements KeyListener {
 	public void keyPressed(KeyEvent e) {
 		switch (e.getKeyCode()) {
 		case KeyEvent.VK_W:
-			System.out.println("up");
+//			System.out.println("up");
 			action = Action.UP;
 			break;
 		case KeyEvent.VK_A:
-			System.out.println("left");
+//			System.out.println("left");
 			action = Action.LEFT;
 			break;
 		case KeyEvent.VK_S:
-			System.out.println("down");
+//			System.out.println("down");
 			action = Action.DOWN;
 			break;
 		case KeyEvent.VK_D:
-			System.out.println("right");
+//			System.out.println("right");
 			action = Action.RIGHT;
 			break;
 		case KeyEvent.VK_SPACE:
-			System.out.println("jump");
+//			System.out.println("jump");
 			action = Action.RIGHT;
 			break;
 		default:
