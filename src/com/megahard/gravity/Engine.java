@@ -1,14 +1,21 @@
 package com.megahard.gravity;
 
 import java.awt.Color;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -17,10 +24,14 @@ import javax.imageio.ImageIO;
 
 import com.megahard.gravity.GameMap.Tile;
 
-public class Engine {
+public class Engine implements KeyListener, MouseListener{
 	// TEST CODE
 	private GameObject player;
 
+	private enum KeyState{
+		UP, PRESS, DOWN, RELEASE;
+	}
+	private Map<Integer, KeyState> keyStates;
 	private Renderer renderer;
 
 	public Renderer getRenderer() {
@@ -40,6 +51,8 @@ public class Engine {
 		state = new GameState();
 		addObj = new LinkedList<GameObject>();
 		removeObj = new LinkedList<GameObject>();
+		
+		keyStates = new HashMap<>();
 		renderer = new Renderer();
 	}
 
@@ -331,20 +344,6 @@ public class Engine {
 	}
 
 	public void update() {
-		// TEST CODE
-		if (renderer.action == Renderer.Action.UP) {
-			player.velocity.y -= 0.05;
-		}
-		if (renderer.action == Renderer.Action.DOWN) {
-			player.velocity.y += 0.05;
-		}
-		if (renderer.action == Renderer.Action.LEFT) {
-			player.velocity.x -= 0.05;
-		}
-		if (renderer.action == Renderer.Action.RIGHT) {
-			player.velocity.x += 0.05;
-		}
-
 		// add all objects to be added
 		state.objects.addAll(addObj);
 		addObj.clear();
@@ -354,8 +353,7 @@ public class Engine {
 			o.update();
 		}
 
-		// Check inter-obejct collisions assumed rectangles with no rotations
-		// (not yet debugged)
+		// Check inter-object collisions
 		for (GameObject o : state.objects) {
 			for (int i = state.objects.indexOf(o) + 1; i < state.objects.size(); i++) {
 				GameObject o2 = state.objects.get(i);
@@ -376,6 +374,60 @@ public class Engine {
 		// remove all objects to be removed
 		state.objects.removeAll(removeObj);
 		removeObj.clear();
+		
+		// update key states
+		for(Entry<Integer, KeyState> e : keyStates.entrySet()){
+			if(e.getValue() == KeyState.PRESS){
+				e.setValue(KeyState.DOWN);
+			}else if(e.getValue() == KeyState.RELEASE){
+				e.setValue(KeyState.UP);
+			}
+		}
 	}
 
+	@Override
+	public void keyPressed(KeyEvent e) {
+		keyStates.put(e.getKeyCode(), KeyState.PRESS);
+	}
+	@Override
+	public void keyReleased(KeyEvent e) {
+		keyStates.put(e.getKeyCode(), KeyState.RELEASE);
+	}
+	@Override
+	public void keyTyped(KeyEvent e) {
+	}
+
+	public boolean keyIsDown(int keyCode){
+		KeyState state = keyStates.get(keyCode);
+		return state == KeyState.PRESS || state == KeyState.DOWN;
+	}
+	public boolean keyIsJustPressed(int keyCode){
+		KeyState state = keyStates.get(keyCode);
+		return state == KeyState.PRESS;
+	}
+	public boolean keyIsUp(int keyCode){
+		KeyState state = keyStates.get(keyCode);
+		return state == KeyState.RELEASE || state == KeyState.UP;
+	}
+	public boolean keyIsJustReleased(int keyCode){
+		KeyState state = keyStates.get(keyCode);
+		return state == KeyState.RELEASE;
+	}
+	
+	
+	@Override
+	public void mouseClicked(MouseEvent e) {
+	}
+	@Override
+	public void mouseEntered(MouseEvent e) {
+	}
+	@Override
+	public void mouseExited(MouseEvent e) {
+	}
+	@Override
+	public void mousePressed(MouseEvent e) {
+	}
+	@Override
+	public void mouseReleased(MouseEvent e) {
+	}
 }
