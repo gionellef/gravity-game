@@ -27,6 +27,10 @@ public class Vector2 {
        return new Vector2( this.x + v1.x, this.y + v1.y );
    }
 
+   public Vector2 sub(Vector2 v){
+	   return new Vector2(x - v.x, y - v.y);
+   }
+   
    public Vector2 scale( double scaleFactor ) {
        return new Vector2( this.x*scaleFactor, this.y*scaleFactor );
    }
