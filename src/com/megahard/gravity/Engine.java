@@ -5,6 +5,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.io.BufferedReader;
@@ -24,7 +25,7 @@ import javax.imageio.ImageIO;
 
 import com.megahard.gravity.GameMap.Tile;
 
-public class Engine implements KeyListener, MouseListener{
+public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 	// TEST CODE
 	private GameObject player;
 
@@ -495,5 +496,27 @@ public class Engine implements KeyListener, MouseListener{
 	}
 	public boolean mouseRightIsJustReleased(){
 		return mouseRightState == KeyState.RELEASE;
+	}
+	
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		mouseX = e.getX();
+		mouseY = e.getY();
+	}
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		mouseX = e.getX();
+		mouseY = e.getY();
+	}
+	
+	public Vector2 getMouseGamePosition(){
+		return new Vector2((double)(mouseX - renderer.getWidth()/2) / Renderer.TILE_SIZE + renderer.getCamera().x,
+				(double)(mouseY - renderer.getHeight()/2) / Renderer.TILE_SIZE + renderer.getCamera().y);
+	}
+	public int getMouseScreenX(){
+		return mouseX;
+	}
+	public int getMouseScreenY(){
+		return mouseY;
 	}
 }

@@ -13,7 +13,7 @@ public class Renderer extends Canvas {
 
 	private Vector2 camera;
 
-	private static final int TILE_SIZE = 16;
+	public static final int TILE_SIZE = 16;
 
 	public Renderer() {
 		camera = new Vector2();
