@@ -4,6 +4,12 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
+import javax.imageio.ImageIO;
 
 import com.megahard.gravity.GameMap.Tile;
 
@@ -30,19 +36,36 @@ public class Renderer extends Canvas {
 		}
 
 		Graphics g = bs.getDrawGraphics();
+		BufferedImage sprite = null;
+		try {
+			sprite = ImageIO.read(this.getClass().getResource("/img/wall.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		g.fillRect(0, 0, getWidth(), getHeight());
-		for (int y = 0; y < s.map.getHeight(); y++) {
-			for (int x = 0; x < s.map.getWidth(); x++) {
+		int mapHeight = s.map.getHeight();
+		int mapWidth = s.map.getWidth();
+		int columns = s.map.getImgheight() / TILE_SIZE;
+		for (int y = 0; y < mapHeight; y++) {
+			for (int x = 0; x < mapWidth; x++) {
 				Tile tile = s.map.getTile(x, y);
-				g.setColor(tile.getCollidable() ? Color.black : Color.white);
-				g.fillRect((int) ((x - camera.x) * TILE_SIZE + getWidth() / 2),
+				int frame = tile.getTileIndex() - 1;
+				int frameX = (frame % columns) * TILE_SIZE;
+			    int frameY = (frame / columns) * TILE_SIZE;
+				BufferedImage imgFrame = sprite.getSubimage(frameX, frameY, TILE_SIZE, TILE_SIZE);
+				g.drawImage(imgFrame, (int) ((x - camera.x) * TILE_SIZE + getWidth() / 2),
 						(int) ((y - camera.y) * TILE_SIZE + getHeight() / 2),
-						TILE_SIZE, TILE_SIZE);
-				g.setColor(Color.gray);
-				g.drawRect((int) ((x - camera.x) * TILE_SIZE + getWidth() / 2),
-						(int) ((y - camera.y) * TILE_SIZE + getHeight() / 2),
-						TILE_SIZE, TILE_SIZE);
+						TILE_SIZE, TILE_SIZE, null);
+//				g.setColor(tile.getCollidable() ? Color.black : Color.white);
+//				g.fillRect((int) ((x - camera.x) * TILE_SIZE + getWidth() / 2),
+//						(int) ((y - camera.y) * TILE_SIZE + getHeight() / 2),
+//						TILE_SIZE, TILE_SIZE);
+//				g.setColor(Color.gray);
+//				g.drawRect((int) ((x - camera.x) * TILE_SIZE + getWidth() / 2),
+//						(int) ((y - camera.y) * TILE_SIZE + getHeight() / 2),
+//						TILE_SIZE, TILE_SIZE);
 			}
 		}
 

@@ -23,6 +23,7 @@ import java.util.regex.Pattern;
 
 import javax.imageio.ImageIO;
 
+import com.google.gson.Gson;
 import com.megahard.gravity.GameMap.Tile;
 
 public class Engine implements KeyListener, MouseListener, MouseMotionListener{
@@ -74,7 +75,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 	public void initialize(String levelData) {
 		// populate the game state using level data
 		state = new GameState();
-		state.map = loadMap("map2");
+		state.map = loadMap("2");
 		loadObjects();
 	}
 
@@ -206,78 +207,90 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 	public GameMap getMap() {
 		return state.map;
 	}
+	
 
+	
 	public GameMap loadMap(String mapName) {
-		BufferedImage mapImg = null;
-		try {
-			mapImg = ImageIO.read(this.getClass().getResource(
-					"/img/" + mapName + ".png"));
-		} catch (IOException e) {
-			System.out.println("haha");
-		}
-
-		System.out.println("lol height" + mapImg.getHeight());
-
-		final byte[] pixels = ((DataBufferByte) mapImg.getRaster()
-				.getDataBuffer()).getData();
-		final int w = mapImg.getWidth();
-		final int h = mapImg.getHeight();
-		final boolean hasAlphaChannel = mapImg.getAlphaRaster() != null;
-
-		Tile[] tiles = new Tile[w * h];
-		if (hasAlphaChannel) {
-			final int pixelLength = 4;
-			for (int pixel = 0, index = 0; pixel < pixels.length; pixel += pixelLength, index++) {
-				int argb = 0;
-				argb += (((int) pixels[pixel] & 0xff) << 24); // alpha
-				argb += ((int) pixels[pixel + 1] & 0xff); // blue
-				argb += (((int) pixels[pixel + 2] & 0xff) << 8); // green
-				argb += (((int) pixels[pixel + 3] & 0xff) << 16); // red
-
-				Color color = new Color(argb);
-				// System.out.println("R: " + color.getRed() + " G: " +
-				// color.getGreen() + " B: " + color.getBlue());
-
-				if (color.getRed() < 30 && color.getGreen() < 30
-						&& color.getBlue() < 30) {
-					tiles[index] = Tile.Floor;
-				} else if (color.getRed() > 225 && color.getGreen() > 225
-						&& color.getBlue() > 225) {
-					tiles[index] = Tile.Air;
-				} else {
-					tiles[index] = Tile.Door;
-				}
-
-			}
-		} else {
-			final int pixelLength = 3;
-			for (int pixel = 0, index = 0; pixel < pixels.length; pixel += pixelLength, index++) {
-				int argb = 0;
-				argb += -16777216; // 255 alpha
-				argb += ((int) pixels[pixel] & 0xff); // blue
-				argb += (((int) pixels[pixel + 1] & 0xff) << 8); // green
-				argb += (((int) pixels[pixel + 2] & 0xff) << 16); // red
-
-				Color color = new Color(argb);
-				// System.out.println("R: " + color.getRed() + " G: " +
-				// color.getGreen() + " B: " + color.getBlue());
-
-				if (color.getRed() < 30 && color.getGreen() < 30
-						&& color.getBlue() < 30) {
-					tiles[index] = Tile.Floor;
-				} else if (color.getRed() > 225 && color.getGreen() > 225
-						&& color.getBlue() > 225) {
-					tiles[index] = Tile.Air;
-				} else {
-					tiles[index] = Tile.Door;
-				}
-			}
-		}
-
-		GameMap map = new GameMap(w, h, tiles);
+		InputStream in = getClass().getResourceAsStream("/map/" + mapName + ".json");
+		BufferedReader input = new BufferedReader(new InputStreamReader(in));
+		Gson gson = new Gson();
+		GameMap map = gson.fromJson(input, GameMap.class);
+		map.initializeMap();
 		return map;
-
 	}
+
+//	public GameMap loadMap(String mapName) {
+//
+//		BufferedImage mapImg = null;
+//		try {
+//			mapImg = ImageIO.read(this.getClass().getResource(
+//					"/img/" + mapName + ".png"));
+//		} catch (IOException e) {
+//			System.out.println("haha");
+//		}
+//
+//		System.out.println("lol height" + mapImg.getHeight());
+//
+//		final byte[] pixels = ((DataBufferByte) mapImg.getRaster()
+//				.getDataBuffer()).getData();
+//		final int w = mapImg.getWidth();
+//		final int h = mapImg.getHeight();
+//		final boolean hasAlphaChannel = mapImg.getAlphaRaster() != null;
+//
+//		Tile[] tiles = new Tile[w * h];
+//		if (hasAlphaChannel) {
+//			final int pixelLength = 4;
+//			for (int pixel = 0, index = 0; pixel < pixels.length; pixel += pixelLength, index++) {
+//				int argb = 0;
+//				argb += (((int) pixels[pixel] & 0xff) << 24); // alpha
+//				argb += ((int) pixels[pixel + 1] & 0xff); // blue
+//				argb += (((int) pixels[pixel + 2] & 0xff) << 8); // green
+//				argb += (((int) pixels[pixel + 3] & 0xff) << 16); // red
+//
+//				Color color = new Color(argb);
+//				// System.out.println("R: " + color.getRed() + " G: " +
+//				// color.getGreen() + " B: " + color.getBlue());
+//
+//				if (color.getRed() < 30 && color.getGreen() < 30
+//						&& color.getBlue() < 30) {
+//					tiles[index] = Tile.Floor;
+//				} else if (color.getRed() > 225 && color.getGreen() > 225
+//						&& color.getBlue() > 225) {
+//					tiles[index] = Tile.Air;
+//				} else {
+//					tiles[index] = Tile.Door;
+//				}
+//
+//			}
+//		} else {
+//			final int pixelLength = 3;
+//			for (int pixel = 0, index = 0; pixel < pixels.length; pixel += pixelLength, index++) {
+//				int argb = 0;
+//				argb += -16777216; // 255 alpha
+//				argb += ((int) pixels[pixel] & 0xff); // blue
+//				argb += (((int) pixels[pixel + 1] & 0xff) << 8); // green
+//				argb += (((int) pixels[pixel + 2] & 0xff) << 16); // red
+//
+//				Color color = new Color(argb);
+//				// System.out.println("R: " + color.getRed() + " G: " +
+//				// color.getGreen() + " B: " + color.getBlue());
+//
+//				if (color.getRed() < 30 && color.getGreen() < 30
+//						&& color.getBlue() < 30) {
+//					tiles[index] = Tile.Floor;
+//				} else if (color.getRed() > 225 && color.getGreen() > 225
+//						&& color.getBlue() > 225) {
+//					tiles[index] = Tile.Air;
+//				} else {
+//					tiles[index] = Tile.Door;
+//				}
+//			}
+//		}
+//
+//		GameMap map = new GameMap(w, h, tiles);
+//		return map;
+//
+//	}
 
 	public void update() {
 		// add all objects to be added
