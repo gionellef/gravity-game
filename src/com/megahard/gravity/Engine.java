@@ -24,6 +24,8 @@ import java.util.regex.Pattern;
 import javax.imageio.ImageIO;
 
 import com.google.gson.Gson;
+import com.megahard.gravity.GameMap.Layers;
+import com.megahard.gravity.GameMap.Layers.GameObjects;
 import com.megahard.gravity.GameMap.Tile;
 
 public class Engine implements KeyListener, MouseListener, MouseMotionListener{
@@ -75,8 +77,8 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 	public void initialize(String levelData) {
 		// populate the game state using level data
 		state = new GameState();
-		state.map = loadMap("2");
-		loadObjects();
+		state.map = loadMapAndObjects("3");
+//		loadObjects();
 	}
 
 	public void addObject(GameObject obj) {
@@ -87,122 +89,122 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 		removeObj.add(obj);
 	}
 
-	public void loadObjects() {
-		InputStream in = getClass().getResourceAsStream("/objects.txt");
-		BufferedReader input = new BufferedReader(new InputStreamReader(in));
-		StringBuffer sb = new StringBuffer();
-		String line;
-		try {
-			while ((line = input.readLine()) != null) {
-				sb.append(line);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		try {
-			input.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		String content = sb.toString();
-
-		Matcher m;
-
-		// variables
-		
-		//spritePath="<insert path here>"
-		Pattern path = Pattern.compile("(.*?)spritePath=\"(.*?)\"(.*?)");
-		
-		//position=(<x value>,<y value>)
-		Pattern position = Pattern
-				.compile("(.*?)position=\\((\\d+(?:\\.\\d*)?|\\.\\d+),(\\d+(?:\\.\\d*)?|\\.\\d+)\\)(.*?)");
-		
-		//size=(<x value>,<y value>)
-		Pattern size = Pattern
-				.compile("(.*?)size=\\((\\d+(?:\\.\\d*)?|\\.\\d+),(\\d+(?:\\.\\d*)?|\\.\\d+)\\)(.*?)");
-		
-		//velocity=(<x value>,<y value>)
-		Pattern velocity = Pattern
-				.compile("(.*?)velocity=\\((\\d+(?:\\.\\d*)?|\\.\\d+),(\\d+(?:\\.\\d*)?|\\.\\d+)\\)(.*?)");
-		
-		//restitution=<value here>
-		Pattern restitution = Pattern
-				.compile("(.*?)restitution=(\\d+(?:\\.\\d*)?|\\.\\d+)(.*?)");
-		
-		//friction=<value here>
-		Pattern friction = Pattern
-				.compile("(.*?)friction=(\\d+(?:\\.\\d*)?|\\.\\d+)(.*?)");
-		
-		// insert the word "player" if the object is the player
-		Pattern hasPlayer = Pattern
-				.compile("(.*?)player(.*?)");
-		
-		StringTokenizer st = new StringTokenizer(content, "#");
-		while (st.hasMoreTokens()) {
-			
-			String objects = st.nextToken().replaceAll("\\s", "");
-			String pathName = "";
-
-			m = path.matcher(objects);
-			if (m.matches()) {
-//				System.out.println("path : " + m.group(2));
-				pathName = m.group(2);
-			}
-			
-			GameObject o2;
-			if (pathName.equals("")) {
-				o2 = new GameObject(this, "");
-			} else {
-				o2 = new GameObject(this, pathName);
-			}
-			
-			
-
-
-			
-			m = position.matcher(objects);
-			if (m.matches()) {
-				o2.position.set(Double.valueOf(m.group(2)), Double.valueOf(m.group(3)));
-//				System.out.println("pos: " + Double.valueOf(m.group(2)) + " " + Double.valueOf(m.group(3)));
-			}
-			m = size.matcher(objects);
-			if (m.matches()) {
-				o2.size.set(Double.valueOf(m.group(2)), Double.valueOf(m.group(3)));
-//				System.out.println("size: " + Double.valueOf(m.group(2)) + " " + Double.valueOf(m.group(3)));
-			}
-
-			m = velocity.matcher(objects);
-			if (m.matches()) {
-//				System.out.println("X : " + m.group(2));
-//				System.out.println("Y : " + m.group(3));
-				o2.velocity.set(Double.valueOf(m.group(2)), Double.valueOf(m.group(3)));
-//				System.out.println("velocity: " + Double.valueOf(m.group(2)) + " " + Double.valueOf(m.group(3)));
-			}
-			m = restitution.matcher(objects);
-			if (m.matches()) {
-				System.out.println("res : " + m.group(2));
-				o2.restitution = Double.valueOf(m.group(2));
-			}
-			m = friction.matcher(objects);
-			if (m.matches()) {
-				System.out.println("f : " + m.group(2));
-				o2.friction = Double.valueOf(m.group(2));
-			}
-			
-			
-			
-			addObject(o2);
-			
-			m = hasPlayer.matcher(objects);
-			if (m.matches()) {
-				player = o2;
-				renderer.setCamera(player.position);
-			}
-			
-
-		}
-
-	}
+//	public void loadObjects() {
+//		InputStream in = getClass().getResourceAsStream("/objects.txt");
+//		BufferedReader input = new BufferedReader(new InputStreamReader(in));
+//		StringBuffer sb = new StringBuffer();
+//		String line;
+//		try {
+//			while ((line = input.readLine()) != null) {
+//				sb.append(line);
+//			}
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		try {
+//			input.close();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		String content = sb.toString();
+//
+//		Matcher m;
+//
+//		// variables
+//		
+//		//spritePath="<insert path here>"
+//		Pattern path = Pattern.compile("(.*?)spritePath=\"(.*?)\"(.*?)");
+//		
+//		//position=(<x value>,<y value>)
+//		Pattern position = Pattern
+//				.compile("(.*?)position=\\((\\d+(?:\\.\\d*)?|\\.\\d+),(\\d+(?:\\.\\d*)?|\\.\\d+)\\)(.*?)");
+//		
+//		//size=(<x value>,<y value>)
+//		Pattern size = Pattern
+//				.compile("(.*?)size=\\((\\d+(?:\\.\\d*)?|\\.\\d+),(\\d+(?:\\.\\d*)?|\\.\\d+)\\)(.*?)");
+//		
+//		//velocity=(<x value>,<y value>)
+//		Pattern velocity = Pattern
+//				.compile("(.*?)velocity=\\((\\d+(?:\\.\\d*)?|\\.\\d+),(\\d+(?:\\.\\d*)?|\\.\\d+)\\)(.*?)");
+//		
+//		//restitution=<value here>
+//		Pattern restitution = Pattern
+//				.compile("(.*?)restitution=(\\d+(?:\\.\\d*)?|\\.\\d+)(.*?)");
+//		
+//		//friction=<value here>
+//		Pattern friction = Pattern
+//				.compile("(.*?)friction=(\\d+(?:\\.\\d*)?|\\.\\d+)(.*?)");
+//		
+//		// insert the word "player" if the object is the player
+//		Pattern hasPlayer = Pattern
+//				.compile("(.*?)player(.*?)");
+//		
+//		StringTokenizer st = new StringTokenizer(content, "#");
+//		while (st.hasMoreTokens()) {
+//			
+//			String objects = st.nextToken().replaceAll("\\s", "");
+//			String pathName = "";
+//
+//			m = path.matcher(objects);
+//			if (m.matches()) {
+////				System.out.println("path : " + m.group(2));
+//				pathName = m.group(2);
+//			}
+//			
+//			GameObject o2;
+//			if (pathName.equals("")) {
+//				o2 = new GameObject(this, "");
+//			} else {
+//				o2 = new GameObject(this, pathName);
+//			}
+//			
+//			
+//
+//
+//			
+//			m = position.matcher(objects);
+//			if (m.matches()) {
+//				o2.position.set(Double.valueOf(m.group(2)), Double.valueOf(m.group(3)));
+////				System.out.println("pos: " + Double.valueOf(m.group(2)) + " " + Double.valueOf(m.group(3)));
+//			}
+//			m = size.matcher(objects);
+//			if (m.matches()) {
+//				o2.size.set(Double.valueOf(m.group(2)), Double.valueOf(m.group(3)));
+////				System.out.println("size: " + Double.valueOf(m.group(2)) + " " + Double.valueOf(m.group(3)));
+//			}
+//
+//			m = velocity.matcher(objects);
+//			if (m.matches()) {
+////				System.out.println("X : " + m.group(2));
+////				System.out.println("Y : " + m.group(3));
+//				o2.velocity.set(Double.valueOf(m.group(2)), Double.valueOf(m.group(3)));
+////				System.out.println("velocity: " + Double.valueOf(m.group(2)) + " " + Double.valueOf(m.group(3)));
+//			}
+//			m = restitution.matcher(objects);
+//			if (m.matches()) {
+//				System.out.println("res : " + m.group(2));
+//				o2.restitution = Double.valueOf(m.group(2));
+//			}
+//			m = friction.matcher(objects);
+//			if (m.matches()) {
+//				System.out.println("f : " + m.group(2));
+//				o2.friction = Double.valueOf(m.group(2));
+//			}
+//			
+//			
+//			
+//			addObject(o2);
+//			
+//			m = hasPlayer.matcher(objects);
+//			if (m.matches()) {
+//				player = o2;
+//				renderer.setCamera(player.position);
+//			}
+//			
+//
+//		}
+//
+//	}
 
 	public GameMap getMap() {
 		return state.map;
@@ -210,12 +212,38 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 	
 
 	
-	public GameMap loadMap(String mapName) {
+	public GameMap loadMapAndObjects(String mapName) {
 		InputStream in = getClass().getResourceAsStream("/map/" + mapName + ".json");
 		BufferedReader input = new BufferedReader(new InputStreamReader(in));
 		Gson gson = new Gson();
 		GameMap map = gson.fromJson(input, GameMap.class);
 		map.initializeMap();
+		
+		Layers[] layer = map.getLayers();
+		GameObjects[] objects = layer[1].getObjects();
+		for (int i = 0; i < objects.length; i++) {
+			if (objects[i] != null) {
+				GameObjects object = objects[i];
+				GameObject o2;
+				String path = object.getProperties().getSpritePath();
+				if (path.equals("")) {
+					o2 = new GameObject(this, "");
+				} else {
+					o2 = new GameObject(this, path);
+				}
+				o2.position.set(object.getX(), object.getY());
+				o2.size.set(object.getWidth(), object.getHeight());
+				o2.velocity.set(object.getProperties().getVelocityX(), object
+						.getProperties().getVelocityY());
+				o2.restitution = object.getProperties().getRestitution();
+				o2.friction = object.getProperties().getFriction();
+				addObject(o2);
+				if (object.getType().equals("player")) {
+					player = o2;
+					renderer.setCamera(player.position);
+				}
+			}
+		}
 		return map;
 	}
 

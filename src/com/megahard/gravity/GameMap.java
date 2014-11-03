@@ -40,8 +40,9 @@ public class GameMap {
 	private int imgheight;
 	public Tile[] map;
 	private Tilesets[] tilesets;
-	private Layers[] layers;
-	public String hah;
+	public Layers[] layers;
+
+	
 
 	public GameMap(int width, int height, Tile[] level) {
 		this.width = width;
@@ -119,12 +120,100 @@ public class GameMap {
 	public int getImgheight() {
 		return imgheight;
 	}
+	
+	
 
-	private class Layers {
+	public Layers[] getLayers() {
+		return layers;
+	}
+
+
+
+
+	public class Layers {
 		private int[] data;
+		private GameObjects[] objects;
 
 		public int[] getData() {
 			return data;
+		}
+		
+		public GameObjects[] getObjects() {
+			return objects;
+		}
+		
+		public class GameObjects {
+			private double height;
+			private double width;
+			private String type;
+			private String name;
+			private double x;
+			private double y;
+			private Properties properties;
+			
+			public class Properties {
+	            private String friction;
+	            private String restitution;
+	            private String spritePath = "";
+	            private String velocityX;
+	            private String velocityY;
+				public double getFriction() {
+					if (friction.isEmpty()) {
+						return 0;
+					}
+					return Double.valueOf(friction);
+				}
+				public double getRestitution() {
+					if (restitution.isEmpty()) {
+						return 0;
+					}
+					return Double.valueOf(restitution);
+				}
+				public String getSpritePath() {
+//					if (restitution.isEmpty()) {
+//						return "";
+//					}
+					return spritePath;
+				}
+				public double getVelocityX() {
+					if (velocityX.isEmpty()) {
+						return 0;
+					}
+					return Double.valueOf(velocityX);
+				}
+				public double getVelocityY() {
+					if (velocityY.isEmpty()) {
+						return 0;
+					}
+					return Double.valueOf(velocityY);
+				}
+
+			} // end class Properties
+
+			public double getHeight() {
+				return height;
+			}
+			public double getWidth() {
+				return width;
+			}
+			public String getType() {
+				return type;
+			}
+			public String getName() {
+				return name;
+			}
+
+			public double getX() {
+				return x;
+			}
+			public double getY() {
+				return y;
+			}
+			public Properties getProperties() {
+				return properties;
+			}
+
+
 		}
 	}
 	
