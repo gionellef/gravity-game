@@ -71,6 +71,7 @@ public class Renderer extends Canvas {
 
 		for (GameObject o : s.objects) {
 			if (o.sprite!= null) {
+				o.sprite.setIndex(1,1);
 				o.sprite.draw(g, (int) ((o.position.x - camera.x) * TILE_SIZE
 						+ getWidth() / 2 - o.sprite.getWidth() / 2),
 						(int) ((o.position.y - camera.y) * TILE_SIZE

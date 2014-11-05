@@ -17,6 +17,8 @@ import javax.imageio.ImageIO;
 public class SpriteStore {
 	
 	private static SpriteStore single = new SpriteStore();
+	private BufferedImage sourceImage;
+	
 	
 	private HashMap<String, Sprite> sprites = new HashMap<String, Sprite>();
 	
@@ -39,7 +41,7 @@ public class SpriteStore {
 			return (Sprite) sprites.get(ref);
 		}
 		
-		BufferedImage sourceImage = null;
+		sourceImage = null;
 		System.out.println(ref);
 		try {
 			sourceImage = ImageIO.read(this.getClass().getResource(ref));
