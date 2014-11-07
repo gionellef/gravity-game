@@ -1,38 +1,39 @@
 package com.megahard.gravity;
 
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
 
 public class Sprite {
 	private Image image;
-	private int indexX;
-	private int indexY;
-	private Rectangle rec;
+	private Rectangle region;
 	
-	public Sprite(Image image) {
+	public Sprite(Image image,int width, int height) {
 		this.image = image;
+		region = new Rectangle(0, 0, width, height);
 	}
 	
 	public int getWidth() {
-		return image.getWidth(null);
+		return region.width;
 	}
 	
 	public int getHeight() {
-		return image.getHeight(null);
+		return region.height;
 	}
 	
-	public void setIndex(int x, int y) {
-		indexX = x;
-		indexY = y;
+	public void setFrame(int x, int y) {
+		region.x = region.width * x;
+		region.y = region.height * y;
 	}
 	
 	/*
 	 * Draws the sprite in the g
 	 */
-	public void draw(Graphics g, int x, int y) {
-		g.drawImage(image, x, y, rec.width, rec.height, indexX, indexY, rec.width, rec.height, null);
+	public void draw(Graphics2D g, int x, int y) {
+		g.drawImage(image,
+			x, y, x + region.width, y + region.height,
+			region.x, region.y, region.x + region.width, region.y + region.height,
+			null);
 	}
 	
 }
