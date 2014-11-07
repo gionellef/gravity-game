@@ -6,7 +6,6 @@ import java.awt.Image;
 import java.awt.Transparency;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashMap;
@@ -21,9 +20,9 @@ public class SpriteStore {
 	
 	public static class SpriteAction {
 		public String name;
-		public int frameXStart;
-		public int frameYStart;
-		public int framesNumber;
+		public int x;
+		public int y;
+		public int frames;
 	}
 
 	static public class SpriteData{
@@ -66,7 +65,7 @@ public class SpriteStore {
 	}
 
 	private SpriteData loadData(String name) {
-		String dataPath = "/res/" + name + "/data.json";
+		String dataPath = "/objects/" + name + "/data.json";
 		InputStream in = getClass().getResourceAsStream(dataPath);
 		BufferedReader input = new BufferedReader(new InputStreamReader(in));
 		SpriteData data = J.gson.fromJson(input, SpriteData.class);
@@ -74,11 +73,11 @@ public class SpriteStore {
 	}
 
 	private Image loadImage(String name) {
-		String imagePath = "/res/" + name + "/graphics.png";
+		String imagePath = "/objects/" + name + "/graphics.png";
 		BufferedImage sourceImage = null;
 		try {
 			sourceImage = ImageIO.read(this.getClass().getResource(imagePath));
-		} catch (IOException e) {
+		} catch (Exception e) {
 			System.out.println("Failed to load: " + imagePath);
 		}
 		

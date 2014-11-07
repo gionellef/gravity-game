@@ -154,7 +154,7 @@ public class GameMap {
 			public class Properties {
 	            private String friction;
 	            private String restitution;
-	            private String spritePath = "";
+	            private String sprite = "";
 	            private String velocityX;
 	            private String velocityY;
 				public double getFriction() {
@@ -169,11 +169,11 @@ public class GameMap {
 					}
 					return Double.valueOf(restitution);
 				}
-				public String getSpritePath() {
+				public String getSprite() {
 //					if (restitution.isEmpty()) {
 //						return "";
 //					}
-					return spritePath;
+					return sprite;
 				}
 				public double getVelocityX() {
 					if (velocityX.isEmpty()) {

@@ -8,12 +8,11 @@ import com.megahard.gravity.GameObject;
 public class Player extends GameObject {
 
 	public Player(Engine game) {
-		super(game, ""); //TODO insert sprite path
+		super(game, "person");
 		size.set(0.9, 1.6);
 		mass = 3;
 		restitution = 0.05;
 		friction = 0.6;
-		//setSprite() //TODO baka pwede wala na sa constructor yung sprite path
 	}
 	
 	@Override

@@ -213,7 +213,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 			if (objects[i] != null) {
 				GameObjects object = objects[i];
 				GameObject o2;
-				String path = object.getProperties().getSpritePath();
+				String path = object.getProperties().getSprite();
 				if (path.equals("")) {
 					o2 = new GameObject(this, "");
 				} else {
