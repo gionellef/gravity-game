@@ -12,26 +12,13 @@ import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 
+import com.megahard.gravity.Sprite.SpriteData;
+
 /*
  * Singleton
  * Sprite resource manager
  */
 public class SpriteStore {
-	
-	public static class SpriteAction {
-		public String name;
-		public int x;
-		public int y;
-		public int frames;
-	}
-
-	static public class SpriteData{
-		public int sheetWidth;
-		public int width;
-		public int height;
-		public SpriteAction[] actions; 
-	}
-	
 	private static SpriteStore single = new SpriteStore();
 	private HashMap<String, Image> images = new HashMap<>();
 	

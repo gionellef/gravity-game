@@ -7,7 +7,8 @@
 			name: "default",
 			x: 0,
 			y: 0,
-			frames: 8
+			frames: 8,
+			delay: 2
 		}
 	]
 }

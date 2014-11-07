@@ -4,16 +4,31 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
 
-import com.megahard.gravity.SpriteStore.SpriteAction;
-import com.megahard.gravity.SpriteStore.SpriteData;
-
 public class Sprite {
+	
+	public static class SpriteAction {
+		public String name;
+		public int x;
+		public int y;
+		public int frames;
+		public int delay;
+	}
+
+	static public class SpriteData{
+		public int sheetWidth;
+		public int width;
+		public int height;
+		public SpriteAction[] actions; 
+	}
+	
+	
 	private Image image;
 	private Rectangle region;
 	private SpriteData data;
 	
 	private SpriteAction currentAction = null;
 	private int currentFrame = 0;
+	private int delayCount = 0;
 	
 	public Sprite(Image image, SpriteData data) {
 		this.image = image;
@@ -42,6 +57,7 @@ public class Sprite {
 			currentAction = act;
 			setFrame(currentAction.x, currentAction.y);
 			currentFrame = 0;
+			delayCount = 0;
 		}
 	}
 	
@@ -56,17 +72,22 @@ public class Sprite {
 	
 	public void update(){
 		if(currentAction != null){
-			currentFrame++;
-			if(currentFrame >= currentAction.frames){
-				currentFrame = 0;
+			if(delayCount >= currentAction.delay){
+				delayCount = 0;
+				currentFrame++;
+				if(currentFrame >= currentAction.frames){
+					currentFrame = 0;
+				}
+				int curX = currentAction.x + currentFrame;
+				int curY = currentAction.y;
+				while(curX >= data.sheetWidth){
+					curX -= data.sheetWidth;
+					curY++;
+				}
+				setFrame(curX, curY);
+			}else{
+				delayCount++;
 			}
-			int curX = currentAction.x + currentFrame;
-			int curY = currentAction.y;
-			while(curX >= data.sheetWidth){
-				curX -= data.sheetWidth;
-				curY++;
-			}
-			setFrame(curX, curY);
 		}
 	}
 
