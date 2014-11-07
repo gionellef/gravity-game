@@ -55,6 +55,9 @@ public class Sprite {
 	public void update(){
 		if(currentAction != null){
 			currentFrame++;
+			if(currentFrame >= currentAction.frames){
+				currentFrame = 0;
+			}
 			int curX = currentAction.x + currentFrame;
 			int curY = currentAction.y;
 			while(curX >= data.sheetWidth){
