@@ -1,6 +1,5 @@
 package com.megahard.gravity;
 
-import java.awt.Color;
 
 public class GameObject {
 	private final Engine game;
@@ -12,7 +11,6 @@ public class GameObject {
 	public double mass;
 	public double restitution;
 	public double friction;
-	public Color color;
 	public String spritePath;
 	public Sprite sprite;
 
@@ -25,7 +23,6 @@ public class GameObject {
 		this.spritePath = spritePath;
 		restitution = 0;
 		friction = 1;
-		color = Color.red;
 		
 		if (spritePath != ""){
 			this.sprite = SpriteStore.get().getSprite(spritePath);
