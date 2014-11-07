@@ -7,7 +7,7 @@ import com.megahard.gravity.Vector2;
 public class GravWell extends GameObject {
 
 	public GravWell(Engine game) {
-		super(game, "person"); // TODO insert sprite path
+		super(game, "person"); // TODO insert gravwell sprite path
 		fixed = true;
 	}
 

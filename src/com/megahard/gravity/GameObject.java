@@ -21,6 +21,7 @@ public class GameObject {
 		this.mass = 1;
 		restitution = 0;
 		friction = 1;
+		fixed = false;
 		
 		if (spriteName != null && spriteName != ""){
 			this.sprite = SpriteStore.get().getSprite(spriteName);
@@ -39,7 +40,7 @@ public class GameObject {
 		if(!fixed){
 			GameMap map = game.getMap();
 			
-			velocity.y += 0.01; // tmp
+			velocity.y += 0.05; // tmp
 	
 			// Get object bounds
 			final double E = 1e-10;
