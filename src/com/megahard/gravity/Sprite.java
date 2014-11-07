@@ -19,6 +19,8 @@ public class Sprite {
 		this.image = image;
 		this.data = data;
 		region = new Rectangle(0, 0, data.width, data.height);
+		
+		setAction("default");
 	}
 	
 	public int getWidth() {
