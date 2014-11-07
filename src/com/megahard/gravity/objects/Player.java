@@ -13,6 +13,8 @@ public class Player extends GameObject {
 		mass = 3;
 		restitution = 0.05;
 		friction = 0.6;
+		
+		sprite.setAction("run");
 	}
 	
 	@Override

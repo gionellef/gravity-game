@@ -26,6 +26,7 @@ public class SpriteStore {
 	}
 
 	static public class SpriteData{
+		public int sheetWidth;
 		public int width;
 		public int height;
 		public SpriteAction[] actions; 

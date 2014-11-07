@@ -155,6 +155,9 @@ public class GameObject {
 			}
 		}
 
+		if(sprite != null){
+			sprite.update();
+		}
 	}
 
 	protected Engine getGame(){
