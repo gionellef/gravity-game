@@ -21,9 +21,6 @@
                  "name":"2",
                  "properties":
                     {
-                     "friction":"0.9",
-                     "restitution":"0.2",
-                     "sprite":"person",
                      "velocityX":"",
                      "velocityY":""
                     },
@@ -33,6 +30,21 @@
                  "width":0.9,
                  "x":1.5,
                  "y":1.5
+                },
+                {
+                 "height":2,
+                 "name":"2",
+                 "properties":
+                    {
+                     "velocityX":"",
+                     "velocityY":""
+                    },
+                 "rotation":0,
+                 "type":"GravWell",
+                 "visible":true,
+                 "width":2,
+                 "x":5,
+                 "y":5
                 }],
          "opacity":1,
          "type":"objectgroup",

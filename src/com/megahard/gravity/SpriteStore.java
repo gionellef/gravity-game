@@ -33,7 +33,7 @@ public class SpriteStore {
 	}
 	
 	private static SpriteStore single = new SpriteStore();
-	private HashMap<String, Sprite> sprites = new HashMap<String, Sprite>();
+	private HashMap<String, Image> images = new HashMap<>();
 	
 	/*
 	 * returns the single instance of this class
@@ -48,19 +48,10 @@ public class SpriteStore {
 	 * @return sprite instance containing an image of the reference
 	 */
 	public Sprite getSprite(String name) {
-		
-		// If sprite is already in cache (hashmap)
-		if (sprites.get(name) != null) {
-			return (Sprite) sprites.get(name);
-		}
-		
 		// Create new sprite
 		Image image = loadImage(name);
 		SpriteData data = loadData(name);
-		
-		// create a sprite, add it the cache then return it
 		Sprite sprite = new Sprite(image, data);
-		sprites.put(name,sprite);
 		
 		return sprite;
 	}
@@ -74,6 +65,10 @@ public class SpriteStore {
 	}
 
 	private Image loadImage(String name) {
+		if (images.get(name) != null) {
+			return images.get(name);
+		}
+		
 		String imagePath = "/objects/" + name + "/graphics.png";
 		BufferedImage sourceImage = null;
 		try {
@@ -88,6 +83,9 @@ public class SpriteStore {
 		
 		// draw our source image into the accelerated image
 		image.getGraphics().drawImage(sourceImage,0,0,null);
+
+		images.put(name, image);
+		
 		return image;
 	}
 	
