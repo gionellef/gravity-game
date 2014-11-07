@@ -8,6 +8,8 @@ import java.awt.event.MouseMotionListener;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -212,21 +214,34 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 		for (int i = 0; i < objects.length; i++) {
 			if (objects[i] != null) {
 				GameObjects object = objects[i];
-				GameObject o2;
-				String path = object.getProperties().getSprite();
-				if (path.equals("")) {
-					o2 = new GameObject(this, "");
-				} else {
-					o2 = new GameObject(this, path);
+				
+				String type = object.getType();
+				Class<GameObject> subclass = null;
+				try {
+					subclass = (Class<GameObject>) Class.forName("com.megahard.gravity.objects." + type);
+				} catch (ClassNotFoundException e1) {
+					e1.printStackTrace();
 				}
+				Constructor<GameObject> constructor = null;
+				try {
+					constructor = subclass.getConstructor(Engine.class);
+				} catch (NoSuchMethodException | SecurityException e1) {
+					e1.printStackTrace();
+				}
+				GameObject o2 = null;
+				try {
+					o2 = constructor.newInstance(this);
+				} catch (InstantiationException | IllegalAccessException
+						| IllegalArgumentException | InvocationTargetException e) {
+					e.printStackTrace();
+				}
+				
 				o2.position.set(object.getX(), object.getY());
-				o2.size.set(object.getWidth(), object.getHeight());
 				o2.velocity.set(object.getProperties().getVelocityX(), object
 						.getProperties().getVelocityY());
-				o2.restitution = object.getProperties().getRestitution();
-				o2.friction = object.getProperties().getFriction();
 				addObject(o2);
-				if (object.getType().equals("player")) {
+				
+				if (object.getType().equals("Player")) {
 					player = o2;
 					renderer.setCamera(player.position);
 				}

@@ -28,7 +28,7 @@
                      "velocityY":""
                     },
                  "rotation":0,
-                 "type":"player",
+                 "type":"Player",
                  "visible":true,
                  "width":0.9,
                  "x":1.5,
