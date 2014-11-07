@@ -5,7 +5,10 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.Transparency;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 
 import javax.imageio.ImageIO;
@@ -16,10 +19,20 @@ import javax.imageio.ImageIO;
  */
 public class SpriteStore {
 	
+	public static class SpriteAction {
+		public String name;
+		public int frameXStart;
+		public int frameYStart;
+		public int framesNumber;
+	}
+
+	static public class SpriteData{
+		public int width;
+		public int height;
+		public SpriteAction[] actions; 
+	}
+	
 	private static SpriteStore single = new SpriteStore();
-	private BufferedImage sourceImage;
-	
-	
 	private HashMap<String, Sprite> sprites = new HashMap<String, Sprite>();
 	
 	/*
@@ -34,19 +47,39 @@ public class SpriteStore {
 	 * @param ref reference to the image
 	 * @return sprite instance containing an image of the reference
 	 */
-	public Sprite getSprite(String ref) {
+	public Sprite getSprite(String name) {
 		
 		// If sprite is already in cache (hashmap)
-		if (sprites.get(ref) != null) {
-			return (Sprite) sprites.get(ref);
+		if (sprites.get(name) != null) {
+			return (Sprite) sprites.get(name);
 		}
 		
-		sourceImage = null;
-		System.out.println(ref);
+		// Create new sprite
+		Image image = loadImage(name);
+		SpriteData data = loadData(name);
+		
+		// create a sprite, add it the cache then return it
+		Sprite sprite = new Sprite(image, data);
+		sprites.put(name,sprite);
+		
+		return sprite;
+	}
+
+	private SpriteData loadData(String name) {
+		String dataPath = "/res/" + name + "/data.json";
+		InputStream in = getClass().getResourceAsStream(dataPath);
+		BufferedReader input = new BufferedReader(new InputStreamReader(in));
+		SpriteData data = J.gson.fromJson(input, SpriteData.class);
+		return data;
+	}
+
+	private Image loadImage(String name) {
+		String imagePath = "/res/" + name + "/graphics.png";
+		BufferedImage sourceImage = null;
 		try {
-			sourceImage = ImageIO.read(this.getClass().getResource(ref));
+			sourceImage = ImageIO.read(this.getClass().getResource(imagePath));
 		} catch (IOException e) {
-			System.out.println("Failed to load: " + ref);
+			System.out.println("Failed to load: " + imagePath);
 		}
 		
 		// create an accelerated image of the right size to store our sprite in
@@ -55,12 +88,7 @@ public class SpriteStore {
 		
 		// draw our source image into the accelerated image
 		image.getGraphics().drawImage(sourceImage,0,0,null);
-		
-		// create a sprite, add it the cache then return it
-		Sprite sprite = new Sprite(image, 16, 16);
-		sprites.put(ref,sprite);
-		
-		return sprite;
+		return image;
 	}
 	
 

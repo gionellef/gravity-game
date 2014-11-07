@@ -4,13 +4,15 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
 
+import com.megahard.gravity.SpriteStore.SpriteData;
+
 public class Sprite {
 	private Image image;
 	private Rectangle region;
 	
-	public Sprite(Image image,int width, int height) {
+	public Sprite(Image image, SpriteData data) {
 		this.image = image;
-		region = new Rectangle(0, 0, width, height);
+		region = new Rectangle(0, 0, data.width, data.height);
 	}
 	
 	public int getWidth() {

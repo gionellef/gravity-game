@@ -11,21 +11,19 @@ public class GameObject {
 	public double mass;
 	public double restitution;
 	public double friction;
-	public String spritePath;
 	public Sprite sprite;
 
-	public GameObject(Engine game, String spritePath) {
+	public GameObject(Engine game, String spriteName) {
 		this.game = game;
 		this.position = new Vector2();
 		this.velocity = new Vector2();
 		this.size = new Vector2();
 		this.mass = 1;
-		this.spritePath = spritePath;
 		restitution = 0;
 		friction = 1;
 		
-		if (spritePath != ""){
-			this.sprite = SpriteStore.get().getSprite(spritePath);
+		if (spriteName != null && spriteName != ""){
+			this.sprite = SpriteStore.get().getSprite(spriteName);
 		}
 	}
 
@@ -33,8 +31,8 @@ public class GameObject {
 
 	}
 
-	public void setSprite(String spritePath) {
-		this.sprite = SpriteStore.get().getSprite(spritePath);
+	public void setSprite(String spriteName) {
+		this.sprite = SpriteStore.get().getSprite(spriteName);
 	}
 	
 	public void update() {

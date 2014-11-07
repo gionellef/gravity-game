@@ -1,15 +1,11 @@
 package com.megahard.gravity;
 
-import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferByte;
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashMap;
@@ -17,16 +13,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.StringTokenizer;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-import javax.imageio.ImageIO;
-
-import com.google.gson.Gson;
 import com.megahard.gravity.GameMap.Layers;
 import com.megahard.gravity.GameMap.Layers.GameObjects;
-import com.megahard.gravity.GameMap.Tile;
 
 public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 	// TEST CODE
@@ -215,8 +204,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 	public GameMap loadMapAndObjects(String mapName) {
 		InputStream in = getClass().getResourceAsStream("/map/" + mapName + ".json");
 		BufferedReader input = new BufferedReader(new InputStreamReader(in));
-		Gson gson = new Gson();
-		GameMap map = gson.fromJson(input, GameMap.class);
+		GameMap map = J.gson.fromJson(input, GameMap.class);
 		map.initializeMap();
 		
 		Layers[] layer = map.getLayers();
