@@ -16,7 +16,7 @@ public class GravWell extends GameObject {
 		super.update();
 		
 		for(GameObject o : getGame().getState().objects){
-			Vector2 diff = o.position.sub(position);
+			Vector2 diff = position.sub(o.position);
 			double d = diff.length();
 			o.velocity = o.velocity.add(diff.scale(0.1f / (d * d)));
 		}
