@@ -12,6 +12,7 @@ public class Sprite {
 		public int y;
 		public int frames;
 		public int delay;
+		public String next;
 	}
 
 	static public class SpriteData{
@@ -52,9 +53,12 @@ public class Sprite {
 	}
 	
 	public void setAction(String action){
-		SpriteAction act = getActionData(action);
-		if(act != null){
-			currentAction = act;
+		setAction(getActionData(action));
+	}
+	
+	public void setAction(SpriteAction action){
+		if(action != null){
+			currentAction = action;
 			setFrame(currentAction.x, currentAction.y);
 			currentFrame = 0;
 			delayCount = 0;
@@ -62,6 +66,9 @@ public class Sprite {
 	}
 	
 	private SpriteAction getActionData(String action) {
+		if(action == null){
+			return null;
+		}
 		for(SpriteAction a : data.actions){
 			if(action.equals(a.name)){
 				return a;
@@ -73,11 +80,6 @@ public class Sprite {
 	public void update(){
 		if(currentAction != null){
 			if(delayCount >= currentAction.delay){
-				delayCount = 0;
-				currentFrame++;
-				if(currentFrame >= currentAction.frames){
-					currentFrame = 0;
-				}
 				int curX = currentAction.x + currentFrame;
 				int curY = currentAction.y;
 				while(curX >= data.sheetWidth){
@@ -85,6 +87,18 @@ public class Sprite {
 					curY++;
 				}
 				setFrame(curX, curY);
+				
+				currentFrame++;
+				if(currentFrame >= currentAction.frames){
+					SpriteAction next = getActionData(currentAction.next);
+					if(next != null){
+						setAction(next);
+					}else{
+						currentFrame = 0;
+					}
+				}
+				
+				delayCount = 0;
 			}else{
 				delayCount++;
 			}

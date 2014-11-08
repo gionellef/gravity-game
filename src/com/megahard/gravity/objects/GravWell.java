@@ -9,6 +9,7 @@ public class GravWell extends GameObject {
 	public GravWell(Engine game) {
 		super(game, "gravwell"); // TODO insert gravwell sprite path
 		fixed = true;
+		sprite.setAction("create");
 	}
 
 	@Override
