@@ -43,6 +43,12 @@ public class GameObject {
 			GameMap map = game.getMap();
 			
 			velocity.y += 0.05; // tmp
+			standing = false;
+	
+			// max velocity
+			if(velocity.length() > 1) {
+				velocity = velocity.scale(1/velocity.length());
+			}
 	
 			// Get object bounds
 			final double E = 1e-10;
@@ -77,7 +83,6 @@ public class GameObject {
 					}
 				} else {
 					position.y += velocity.y;
-					standing = false;
 				}
 			} else {
 				double nextUp = up + velocity.y;
@@ -102,7 +107,6 @@ public class GameObject {
 				} else {
 					position.y += velocity.y;
 				}
-				standing = false;
 			}
 	
 			up = position.y - size.y / 2;
@@ -155,11 +159,6 @@ public class GameObject {
 				} else {
 					position.x += velocity.x;
 				}
-			}
-	
-			// max velocity
-			if(velocity.length() > 1) {
-				velocity = velocity.scale(1/velocity.length());
 			}
 		}
 
