@@ -19,7 +19,11 @@ public class GravWell extends GameObject {
 		for(GameObject o : getGame().getState().objects){
 			Vector2 diff = position.sub(o.position);
 			double d = diff.length();
-			o.velocity = o.velocity.add(diff.scale(0.1f / (d * d)));
+			if(d > 0){
+				o.velocity = o.velocity.add(diff.scale(0.1f / (d * d)));
+			}else{
+				
+			}
 		}
 	}
 	

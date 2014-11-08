@@ -467,7 +467,6 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 	public void mouseMoved(MouseEvent e) {
 		mouseX = e.getX();
 		mouseY = e.getY();
-		System.out.println(mouseX + "," + mouseY);
 	}
 	@Override
 	public void mouseDragged(MouseEvent e) {
