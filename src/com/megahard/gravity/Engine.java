@@ -25,7 +25,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 
 	// Keys
 	private enum KeyState{
-		UP, PRESS, DOWN, RELEASE;
+		UP, PRESS, DOWN, RELEASE, CLICK;
 	}
 	private Map<Integer, KeyState> keyStates;
 	
@@ -357,20 +357,21 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 		
 		// update key states
 		for(Entry<Integer, KeyState> e : keyStates.entrySet()){
-			if(e.getValue() == KeyState.PRESS){
+			KeyState value = e.getValue();
+			if(value == KeyState.PRESS){
 				e.setValue(KeyState.DOWN);
-			}else if(e.getValue() == KeyState.RELEASE){
+			}else if(value == KeyState.RELEASE || value == KeyState.CLICK){
 				e.setValue(KeyState.UP);
 			}
 		}
 		if(mouseLeftState == KeyState.PRESS){
 			mouseLeftState = KeyState.DOWN;
-		}else if(mouseLeftState == KeyState.RELEASE){
+		}else if(mouseLeftState == KeyState.RELEASE || mouseLeftState == KeyState.CLICK){
 			mouseLeftState = KeyState.UP;
 		}
 		if(mouseRightState == KeyState.PRESS){
 			mouseRightState = KeyState.DOWN;
-		}else if(mouseRightState == KeyState.RELEASE){
+		}else if(mouseRightState == KeyState.RELEASE || mouseRightState == KeyState.CLICK){
 			mouseRightState = KeyState.UP;
 		}
 	}
@@ -381,7 +382,9 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 	}
 	@Override
 	public void keyReleased(KeyEvent e) {
-		keyStates.put(e.getKeyCode(), KeyState.RELEASE);
+		int keyCode = e.getKeyCode();
+		KeyState prev = keyStates.get(keyCode);
+		keyStates.put(keyCode, prev == KeyState.PRESS ? KeyState.CLICK : KeyState.RELEASE);
 	}
 	@Override
 	public void keyTyped(KeyEvent e) {
@@ -389,11 +392,11 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 
 	public boolean keyIsDown(int keyCode){
 		KeyState state = keyStates.get(keyCode);
-		return state == KeyState.PRESS || state == KeyState.DOWN;
+		return state == KeyState.PRESS || state == KeyState.CLICK || state == KeyState.DOWN;
 	}
 	public boolean keyIsJustPressed(int keyCode){
 		KeyState state = keyStates.get(keyCode);
-		return state == KeyState.PRESS;
+		return state == KeyState.PRESS || state == KeyState.CLICK;
 	}
 	public boolean keyIsUp(int keyCode){
 		KeyState state = keyStates.get(keyCode);
@@ -401,7 +404,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 	}
 	public boolean keyIsJustReleased(int keyCode){
 		KeyState state = keyStates.get(keyCode);
-		return state == KeyState.RELEASE;
+		return state == KeyState.RELEASE || state == KeyState.CLICK;
 	}
 	
 	@Override
@@ -430,10 +433,10 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 	public void mouseReleased(MouseEvent e) {
 		switch(e.getButton()){
 		case MouseEvent.BUTTON1:
-			mouseLeftState = KeyState.RELEASE;
+			mouseLeftState = mouseLeftState == KeyState.PRESS ? KeyState.CLICK : KeyState.RELEASE;
 			break;
 		case MouseEvent.BUTTON3:
-			mouseRightState = KeyState.RELEASE;
+			mouseRightState = mouseRightState == KeyState.PRESS ? KeyState.CLICK : KeyState.RELEASE;
 			break;
 		}
 	}
@@ -442,25 +445,25 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 		return mouseLeftState == KeyState.PRESS || mouseLeftState == KeyState.DOWN;
 	}
 	public boolean mouseLeftIsJustPressed(){
-		return mouseLeftState == KeyState.PRESS;
+		return mouseLeftState == KeyState.PRESS || mouseLeftState == KeyState.CLICK;
 	}
 	public boolean mouseLeftIsUp(){
 		return mouseLeftState == KeyState.RELEASE || mouseLeftState == KeyState.UP;
 	}
 	public boolean mouseLeftIsJustReleased(){
-		return mouseLeftState == KeyState.RELEASE;
+		return mouseLeftState == KeyState.RELEASE || mouseLeftState == KeyState.CLICK;
 	}
 	public boolean mouseRightIsDown(){
 		return mouseRightState == KeyState.PRESS || mouseRightState == KeyState.DOWN;
 	}
 	public boolean mouseRightIsJustPressed(){
-		return mouseRightState == KeyState.PRESS;
+		return mouseRightState == KeyState.PRESS || mouseRightState == KeyState.CLICK;
 	}
 	public boolean mouseRightIsUp(){
 		return mouseRightState == KeyState.RELEASE || mouseRightState == KeyState.UP;
 	}
 	public boolean mouseRightIsJustReleased(){
-		return mouseRightState == KeyState.RELEASE;
+		return mouseRightState == KeyState.RELEASE || mouseRightState == KeyState.CLICK;
 	}
 	
 	@Override
