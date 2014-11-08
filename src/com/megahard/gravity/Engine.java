@@ -69,7 +69,6 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 		// populate the game state using level data
 		state = new GameState();
 		state.map = loadMapAndObjects("3");
-//		loadObjects();
 	}
 
 	public void addObject(GameObject obj) {
@@ -80,128 +79,9 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 		removeObj.add(obj);
 	}
 
-//	public void loadObjects() {
-//		InputStream in = getClass().getResourceAsStream("/objects.txt");
-//		BufferedReader input = new BufferedReader(new InputStreamReader(in));
-//		StringBuffer sb = new StringBuffer();
-//		String line;
-//		try {
-//			while ((line = input.readLine()) != null) {
-//				sb.append(line);
-//			}
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//		try {
-//			input.close();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//		String content = sb.toString();
-//
-//		Matcher m;
-//
-//		// variables
-//		
-//		//spritePath="<insert path here>"
-//		Pattern path = Pattern.compile("(.*?)spritePath=\"(.*?)\"(.*?)");
-//		
-//		//position=(<x value>,<y value>)
-//		Pattern position = Pattern
-//				.compile("(.*?)position=\\((\\d+(?:\\.\\d*)?|\\.\\d+),(\\d+(?:\\.\\d*)?|\\.\\d+)\\)(.*?)");
-//		
-//		//size=(<x value>,<y value>)
-//		Pattern size = Pattern
-//				.compile("(.*?)size=\\((\\d+(?:\\.\\d*)?|\\.\\d+),(\\d+(?:\\.\\d*)?|\\.\\d+)\\)(.*?)");
-//		
-//		//velocity=(<x value>,<y value>)
-//		Pattern velocity = Pattern
-//				.compile("(.*?)velocity=\\((\\d+(?:\\.\\d*)?|\\.\\d+),(\\d+(?:\\.\\d*)?|\\.\\d+)\\)(.*?)");
-//		
-//		//restitution=<value here>
-//		Pattern restitution = Pattern
-//				.compile("(.*?)restitution=(\\d+(?:\\.\\d*)?|\\.\\d+)(.*?)");
-//		
-//		//friction=<value here>
-//		Pattern friction = Pattern
-//				.compile("(.*?)friction=(\\d+(?:\\.\\d*)?|\\.\\d+)(.*?)");
-//		
-//		// insert the word "player" if the object is the player
-//		Pattern hasPlayer = Pattern
-//				.compile("(.*?)player(.*?)");
-//		
-//		StringTokenizer st = new StringTokenizer(content, "#");
-//		while (st.hasMoreTokens()) {
-//			
-//			String objects = st.nextToken().replaceAll("\\s", "");
-//			String pathName = "";
-//
-//			m = path.matcher(objects);
-//			if (m.matches()) {
-////				System.out.println("path : " + m.group(2));
-//				pathName = m.group(2);
-//			}
-//			
-//			GameObject o2;
-//			if (pathName.equals("")) {
-//				o2 = new GameObject(this, "");
-//			} else {
-//				o2 = new GameObject(this, pathName);
-//			}
-//			
-//			
-//
-//
-//			
-//			m = position.matcher(objects);
-//			if (m.matches()) {
-//				o2.position.set(Double.valueOf(m.group(2)), Double.valueOf(m.group(3)));
-////				System.out.println("pos: " + Double.valueOf(m.group(2)) + " " + Double.valueOf(m.group(3)));
-//			}
-//			m = size.matcher(objects);
-//			if (m.matches()) {
-//				o2.size.set(Double.valueOf(m.group(2)), Double.valueOf(m.group(3)));
-////				System.out.println("size: " + Double.valueOf(m.group(2)) + " " + Double.valueOf(m.group(3)));
-//			}
-//
-//			m = velocity.matcher(objects);
-//			if (m.matches()) {
-////				System.out.println("X : " + m.group(2));
-////				System.out.println("Y : " + m.group(3));
-//				o2.velocity.set(Double.valueOf(m.group(2)), Double.valueOf(m.group(3)));
-////				System.out.println("velocity: " + Double.valueOf(m.group(2)) + " " + Double.valueOf(m.group(3)));
-//			}
-//			m = restitution.matcher(objects);
-//			if (m.matches()) {
-//				System.out.println("res : " + m.group(2));
-//				o2.restitution = Double.valueOf(m.group(2));
-//			}
-//			m = friction.matcher(objects);
-//			if (m.matches()) {
-//				System.out.println("f : " + m.group(2));
-//				o2.friction = Double.valueOf(m.group(2));
-//			}
-//			
-//			
-//			
-//			addObject(o2);
-//			
-//			m = hasPlayer.matcher(objects);
-//			if (m.matches()) {
-//				player = o2;
-//				renderer.setCamera(player.position);
-//			}
-//			
-//
-//		}
-//
-//	}
-
 	public GameMap getMap() {
 		return state.map;
 	}
-	
-
 	
 	public GameMap loadMapAndObjects(String mapName) {
 		InputStream in = getClass().getResourceAsStream("/map/" + mapName + ".json");
@@ -249,79 +129,6 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 		}
 		return map;
 	}
-
-//	public GameMap loadMap(String mapName) {
-//
-//		BufferedImage mapImg = null;
-//		try {
-//			mapImg = ImageIO.read(this.getClass().getResource(
-//					"/img/" + mapName + ".png"));
-//		} catch (IOException e) {
-//			System.out.println("haha");
-//		}
-//
-//		System.out.println("lol height" + mapImg.getHeight());
-//
-//		final byte[] pixels = ((DataBufferByte) mapImg.getRaster()
-//				.getDataBuffer()).getData();
-//		final int w = mapImg.getWidth();
-//		final int h = mapImg.getHeight();
-//		final boolean hasAlphaChannel = mapImg.getAlphaRaster() != null;
-//
-//		Tile[] tiles = new Tile[w * h];
-//		if (hasAlphaChannel) {
-//			final int pixelLength = 4;
-//			for (int pixel = 0, index = 0; pixel < pixels.length; pixel += pixelLength, index++) {
-//				int argb = 0;
-//				argb += (((int) pixels[pixel] & 0xff) << 24); // alpha
-//				argb += ((int) pixels[pixel + 1] & 0xff); // blue
-//				argb += (((int) pixels[pixel + 2] & 0xff) << 8); // green
-//				argb += (((int) pixels[pixel + 3] & 0xff) << 16); // red
-//
-//				Color color = new Color(argb);
-//				// System.out.println("R: " + color.getRed() + " G: " +
-//				// color.getGreen() + " B: " + color.getBlue());
-//
-//				if (color.getRed() < 30 && color.getGreen() < 30
-//						&& color.getBlue() < 30) {
-//					tiles[index] = Tile.Floor;
-//				} else if (color.getRed() > 225 && color.getGreen() > 225
-//						&& color.getBlue() > 225) {
-//					tiles[index] = Tile.Air;
-//				} else {
-//					tiles[index] = Tile.Door;
-//				}
-//
-//			}
-//		} else {
-//			final int pixelLength = 3;
-//			for (int pixel = 0, index = 0; pixel < pixels.length; pixel += pixelLength, index++) {
-//				int argb = 0;
-//				argb += -16777216; // 255 alpha
-//				argb += ((int) pixels[pixel] & 0xff); // blue
-//				argb += (((int) pixels[pixel + 1] & 0xff) << 8); // green
-//				argb += (((int) pixels[pixel + 2] & 0xff) << 16); // red
-//
-//				Color color = new Color(argb);
-//				// System.out.println("R: " + color.getRed() + " G: " +
-//				// color.getGreen() + " B: " + color.getBlue());
-//
-//				if (color.getRed() < 30 && color.getGreen() < 30
-//						&& color.getBlue() < 30) {
-//					tiles[index] = Tile.Floor;
-//				} else if (color.getRed() > 225 && color.getGreen() > 225
-//						&& color.getBlue() > 225) {
-//					tiles[index] = Tile.Air;
-//				} else {
-//					tiles[index] = Tile.Door;
-//				}
-//			}
-//		}
-//
-//		GameMap map = new GameMap(w, h, tiles);
-//		return map;
-//
-//	}
 
 	public void update() {
 		// add all objects to be added
@@ -415,8 +222,6 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 	}
 	@Override
 	public void mouseExited(MouseEvent e) {
-//		mouseLeftState = KeyState.UP;
-//		mouseRightState = KeyState.UP;
 	}
 	@Override
 	public void mousePressed(MouseEvent e) {

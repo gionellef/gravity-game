@@ -5,13 +5,8 @@ import java.util.Map;
 public class GameMap {
 
 	public class Tile {
-//		Air(false, "air.png"),
-//		Floor(true, "floor.png"),
-//		Door(false, "door.png");
-
 		private boolean collidable;
 		private int tileIndex;
-//		private final String graphics;
 
 		public Tile(boolean collidable, int tileIndex) {
 			this.collidable = collidable;
@@ -26,10 +21,6 @@ public class GameMap {
 		public int getTileIndex() {
 			return tileIndex;
 		}
-
-//		public String getGraphics() {
-//			return graphics;
-//		}
 	}
 
 	private int width;

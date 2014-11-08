@@ -132,7 +132,6 @@ public class GameObject {
 				if (blocked) {
 					position.x = Math.ceil(right) - size.x / 2;
 					velocity.x *= -restitution;
-//					velocity.y *= friction;
 				} else {
 					position.x += velocity.x;
 				}
@@ -155,7 +154,6 @@ public class GameObject {
 				if (blocked) {
 					position.x = Math.floor(left) + size.x / 2;
 					velocity.x *= -restitution;
-//					velocity.y *= friction;
 				} else {
 					position.x += velocity.x;
 				}
