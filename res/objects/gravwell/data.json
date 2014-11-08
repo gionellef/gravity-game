@@ -8,14 +8,14 @@
 			x: 0,
 			y: 0,
 			frames: 6,
-			delay: 2
+			delay: 1
 		},
 		{
 			name: "create",
 			x: 0,
 			y: 1,
 			frames: 6,
-			delay: 2,
+			delay: 1,
 			next: "default"
 		},
 		{
@@ -23,7 +23,7 @@
 			x: 0,
 			y: 0,
 			frames: 6,
-			delay: 2
+			delay: 1
 		}	
 	]
 }
