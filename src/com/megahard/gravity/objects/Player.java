@@ -22,9 +22,24 @@ public class Player extends GameObject {
 		super.update();
 
 		if(getGame().keyIsJustPressed(KeyEvent.VK_W)){
-			// jump 
+			if(standing){
+				velocity.y -= 0.6;
+			}
 		}
-		// TODO if etc
+		if(getGame().keyIsDown(KeyEvent.VK_A)){
+			if(standing){
+				velocity.x -= 0.2;
+			}else{
+				velocity.x -= 0.04;
+			}
+		}
+		if(getGame().keyIsDown(KeyEvent.VK_D)){
+			if(standing){
+				velocity.x += 0.2;
+			}else{
+				velocity.x += 0.04;
+			}
+		}
 	}
 
 }

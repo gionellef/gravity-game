@@ -11,17 +11,19 @@ public class GameObject {
 	public double mass;
 	public double restitution;
 	public double friction;
+	public boolean standing;
 	public Sprite sprite;
 
 	public GameObject(Engine game, String spriteName) {
 		this.game = game;
+		fixed = false;
 		this.position = new Vector2();
 		this.velocity = new Vector2();
 		this.size = new Vector2();
 		this.mass = 1;
 		restitution = 0;
 		friction = 1;
-		fixed = false;
+		standing = false;
 		
 		if (spriteName != null && spriteName != ""){
 			this.sprite = SpriteStore.get().getSprite(spriteName);
@@ -70,8 +72,12 @@ public class GameObject {
 					position.y = Math.ceil(down) - size.y / 2;
 					velocity.x *= friction;
 					velocity.y *= -restitution;
+					if(Math.abs(velocity.y) < 0.02){
+						standing = true;
+					}
 				} else {
 					position.y += velocity.y;
+					standing = false;
 				}
 			} else {
 				double nextUp = up + velocity.y;
@@ -96,6 +102,7 @@ public class GameObject {
 				} else {
 					position.y += velocity.y;
 				}
+				standing = false;
 			}
 	
 			up = position.y - size.y / 2;
