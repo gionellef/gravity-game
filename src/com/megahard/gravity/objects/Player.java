@@ -6,6 +6,8 @@ import com.megahard.gravity.Engine;
 import com.megahard.gravity.GameObject;
 
 public class Player extends GameObject {
+	
+	private GravWell well = null;
 
 	public Player(Engine game) {
 		super(game, "person");
@@ -39,6 +41,15 @@ public class Player extends GameObject {
 			}else{
 				velocity.x += 0.04;
 			}
+		}
+		
+		if(getGame().mouseLeftIsJustPressed()){
+			if(well != null){
+				getGame().removeObject(well);
+			}
+			well = new GravWell(getGame());
+			well.position = getGame().getMouseGamePosition();
+			getGame().addObject(well);
 		}
 	}
 

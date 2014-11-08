@@ -80,14 +80,6 @@ public class Sprite {
 	public void update(){
 		if(currentAction != null){
 			if(delayCount >= currentAction.delay){
-				int curX = currentAction.x + currentFrame;
-				int curY = currentAction.y;
-				while(curX >= data.sheetWidth){
-					curX -= data.sheetWidth;
-					curY++;
-				}
-				setFrame(curX, curY);
-				
 				currentFrame++;
 				if(currentFrame >= currentAction.frames){
 					SpriteAction next = getActionData(currentAction.next);
@@ -98,6 +90,14 @@ public class Sprite {
 					}
 				}
 				
+				int curX = currentAction.x + currentFrame;
+				int curY = currentAction.y;
+				while(curX >= data.sheetWidth){
+					curX -= data.sheetWidth;
+					curY++;
+				}
+				setFrame(curX, curY);
+								
 				delayCount = 0;
 			}else{
 				delayCount++;

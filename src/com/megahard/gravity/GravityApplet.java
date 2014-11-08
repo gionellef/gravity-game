@@ -23,6 +23,7 @@ public class GravityApplet extends Applet implements Runnable {
 		engine.initialize("");
 		engine.getRenderer().addKeyListener(engine);
 		engine.getRenderer().addMouseListener(engine);
+		engine.getRenderer().addMouseMotionListener(engine);
 
 		setSize(600, 400);
 		setLayout(new BorderLayout());
