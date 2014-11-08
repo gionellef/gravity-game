@@ -83,6 +83,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 		return state.map;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public GameMap loadMapAndObjects(String mapName) {
 		InputStream in = getClass().getResourceAsStream("/map/" + mapName + ".json");
 		BufferedReader input = new BufferedReader(new InputStreamReader(in));
