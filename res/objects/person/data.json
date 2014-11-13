@@ -4,11 +4,34 @@
 	height: 40,
 	actions: [
 		{
-			name: "run",
+			name: "default",
 			x: 0,
 			y: 0,
-			frames: 8,
+			frames: 10,
 			delay: 4
+		},
+		{
+			name: "jump",
+			x: 0,
+			y: 1,
+			frames: 5,
+			delay: 2,
+			next: "fall"
+		},
+		{
+			name: "fall",
+			x: 5,
+			y: 1,
+			frames: 4,
+			delay: 4
+		},
+		{
+			name: "land",
+			x: 0,
+			y: 2,
+			frames: 4,
+			delay: 6,
+			next: "default"
 		}
 	]
 }
