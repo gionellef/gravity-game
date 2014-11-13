@@ -114,5 +114,9 @@ public class Sprite {
 			region.x, region.y, region.x + region.width, region.y + region.height,
 			null);
 	}
+
+	public String getAction() {
+		return currentAction == null ? null : currentAction.name;
+	}
 	
 }

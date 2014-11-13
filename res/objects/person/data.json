@@ -30,7 +30,7 @@
 			x: 0,
 			y: 2,
 			frames: 4,
-			delay: 6,
+			delay: 2,
 			next: "default"
 		}
 	]
