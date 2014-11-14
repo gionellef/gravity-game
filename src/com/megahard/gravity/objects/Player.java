@@ -9,7 +9,8 @@ import com.megahard.gravity.Vector2;
 public class Player extends GameObject {
 	
 	private GravWell well = null;
-	private boolean isFalling = true; 
+	private boolean isFalling = true;
+	private int jumpsLeft = 0;
 
 	public Player(Engine game) {
 		super(game, "person");
@@ -87,6 +88,10 @@ public class Player extends GameObject {
 
 	private void jump() {
 		if(standing){
+			jumpsLeft = 2;
+		}
+		if(jumpsLeft > 0){
+			jumpsLeft--;
 			velocity.y -= 0.6;
 			sprite.setAction("jump");
 		}
