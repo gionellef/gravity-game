@@ -14,6 +14,9 @@ public class GravityApplet extends Applet implements Runnable {
 
 	private Engine engine;
 
+	public static final int WIDTH = 800;
+	public static final int HEIGHT = 600;
+	
 	@Override
 	public void init() {
 		Sound.touch();
@@ -25,7 +28,7 @@ public class GravityApplet extends Applet implements Runnable {
 		engine.getRenderer().addMouseListener(engine);
 		engine.getRenderer().addMouseMotionListener(engine);
 
-		setSize(600, 400);
+		setSize(WIDTH, HEIGHT);
 		setLayout(new BorderLayout());
 		add(engine.getRenderer(), BorderLayout.CENTER);
 	}

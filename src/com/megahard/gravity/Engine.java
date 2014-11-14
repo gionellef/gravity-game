@@ -283,9 +283,13 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 		mouseY = e.getY();
 	}
 	
-	public Vector2 getMouseGamePosition(){
-		return new Vector2((double)(mouseX - renderer.getWidth()/2) / Renderer.TILE_SIZE + renderer.getCamera().x,
-				(double)(mouseY - renderer.getHeight()/2) / Renderer.TILE_SIZE + renderer.getCamera().y);
+	public Vector2 getMouseGamePosition() {
+		return new Vector2((double) (mouseX - renderer.getWidth() / 2)
+				/ Renderer.SCALE_FACTOR / Renderer.TILE_SIZE
+				+ renderer.getCamera().x,
+				(double) (mouseY - renderer.getHeight() / 2)
+						/ Renderer.SCALE_FACTOR / Renderer.TILE_SIZE
+						+ renderer.getCamera().y);
 	}
 	public int getMouseScreenX(){
 		return mouseX;
