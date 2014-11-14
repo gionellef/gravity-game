@@ -47,9 +47,16 @@ public class Sprite {
 		return region.height;
 	}
 	
-	public void setFrame(int x, int y) {
+	public void setIndex(int x, int y) {
 		region.x = region.width * x;
 		region.y = region.height * y;
+	}
+	
+	public void setFrame(int i){
+		if(currentAction != null){
+			currentFrame = i % currentAction.frames;
+			updateIndexForFrame();
+		}
 	}
 	
 	public void setAction(String action){
@@ -59,7 +66,7 @@ public class Sprite {
 	public void setAction(SpriteAction action){
 		if(action != null){
 			currentAction = action;
-			setFrame(currentAction.x, currentAction.y);
+			setIndex(currentAction.x, currentAction.y);
 			currentFrame = 0;
 			delayCount = 0;
 		}
@@ -90,19 +97,23 @@ public class Sprite {
 					}
 				}
 				
-				int curX = currentAction.x + currentFrame;
-				int curY = currentAction.y;
-				while(curX >= data.sheetWidth){
-					curX -= data.sheetWidth;
-					curY++;
-				}
-				setFrame(curX, curY);
+				updateIndexForFrame();
 								
 				delayCount = 0;
 			}else{
 				delayCount++;
 			}
 		}
+	}
+
+	private void updateIndexForFrame() {
+		int curX = currentAction.x + currentFrame;
+		int curY = currentAction.y;
+		while(curX >= data.sheetWidth){
+			curX -= data.sheetWidth;
+			curY++;
+		}
+		setIndex(curX, curY);
 	}
 
 	/*

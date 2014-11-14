@@ -9,6 +9,7 @@ import com.megahard.gravity.Vector2;
 public class Player extends GameObject {
 	
 	private GravWell well = null;
+	private boolean isRunning = true;
 	private boolean isFalling = true;
 	private int jumpsLeft = 0;
 
@@ -29,9 +30,8 @@ public class Player extends GameObject {
 			if (isFalling) {
 				isFalling = false;
 				sprite.setAction("land");
-			} else {
+			} else if(!isRunning){
 				switch (sprite.getAction()) {
-				case "run":
 				case "land":
 				case "default":
 					break;
@@ -51,6 +51,11 @@ public class Player extends GameObject {
 				break;
 			}
 		}
+
+		if(standing){
+			jumpsLeft = 1;
+		}
+		isRunning = false;
 		
 		// Controls
 		if(getGame().keyIsJustPressed(KeyEvent.VK_W)){
@@ -78,21 +83,38 @@ public class Player extends GameObject {
 	}
 
 	private void run(boolean left) {
+		double runStrength = 0.2;
+		double airStrength = 0.06;
+		double airMaxSpeed = 0.2;
 		double sign = left ? -1 : 1;
-		if(standing){
-			velocity.x += 0.2 * sign;
+		String action = sprite.getAction();
+		
+		if(standing && !action.equals("land")){
+			isRunning = true;
+			velocity.x += runStrength * sign;
+			switch (action) {
+			case "run":
+				break;
+			default:
+				sprite.setAction("run");
+				break;
+			}
 		}else{
-			velocity.x += 0.08 * sign;
+			if(velocity.x * sign < airMaxSpeed){
+				velocity.x += airStrength * sign;
+			}
 		}
 	}
 
 	private void jump() {
+		double jumpStrength = 0.5;
+		
 		if(standing){
-			jumpsLeft = 2;
+			jumpsLeft++;
 		}
-		if(jumpsLeft > 0){
+		if(jumpsLeft > 0 && velocity.y < jumpStrength){
 			jumpsLeft--;
-			velocity.y -= 0.6;
+			velocity.y = Math.min(velocity.y, -jumpStrength);
 			sprite.setAction("jump");
 		}
 	}
