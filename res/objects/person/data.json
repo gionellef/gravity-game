@@ -1,5 +1,5 @@
 {
-	sheetWidth: 10,
+	sheetWidth: 12,
 	width: 24,
 	height: 40,
 	actions: [
@@ -11,9 +11,16 @@
 			delay: 4
 		},
 		{
-			name: "jump",
+			name: "run",
 			x: 0,
 			y: 1,
+			frames: 12,
+			delay: 2
+		},
+		{
+			name: "jump",
+			x: 0,
+			y: 2,
 			frames: 5,
 			delay: 2,
 			next: "fall"
@@ -21,14 +28,14 @@
 		{
 			name: "fall",
 			x: 5,
-			y: 1,
+			y: 2,
 			frames: 4,
 			delay: 4
 		},
 		{
 			name: "land",
 			x: 0,
-			y: 2,
+			y: 3,
 			frames: 4,
 			delay: 2,
 			next: "default"
