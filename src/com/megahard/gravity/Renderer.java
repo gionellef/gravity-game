@@ -15,26 +15,29 @@ public class Renderer extends Canvas {
 
 	private static final long serialVersionUID = 1L;
 
+	public static final int TILE_SIZE = 16;
+	public static final int SCALE_FACTOR = 2;
+
 	private Vector2 camera;
 	private BufferedImage buffer;
 
-	public static final int TILE_SIZE = 16;
-	public static final int SCALE_FACTOR = 2;
+	private BufferedImage wallSpriteSheet;
 
 	public Renderer() {
 		camera = new Vector2();
 		buffer = new BufferedImage(GravityApplet.WIDTH/SCALE_FACTOR, GravityApplet.HEIGHT/SCALE_FACTOR, BufferedImage.TYPE_INT_RGB);
-	}
 
-	public void render(GameState s) {
-
-		Graphics2D g = (Graphics2D) buffer.getGraphics();
-		BufferedImage wallSpriteSheet = null;
+		wallSpriteSheet = null;
 		try {
 			wallSpriteSheet = ImageIO.read(this.getClass().getResource("/tileset.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void render(GameState s) {
+
+		Graphics2D g = (Graphics2D) buffer.getGraphics();
 
 		g.fillRect(0, 0, buffer.getWidth(), buffer.getHeight());
 		int mapHeight = s.map.getHeight();
