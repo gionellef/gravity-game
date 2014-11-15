@@ -117,7 +117,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 					e.printStackTrace();
 				}
 				
-				o2.position.set(object.getX(), object.getY());
+				o2.position.set(object.getX()/16, object.getY()/16);
 				addObject(o2);
 				
 				if (object.getType().equals("Player")) {
