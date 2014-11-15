@@ -68,7 +68,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 	public void initialize(String levelData) {
 		// populate the game state using level data
 		state = new GameState();
-		state.map = loadMapAndObjects("3");
+		state.map = loadMapAndObjects("template map");
 	}
 
 	public void addObject(GameObject obj) {
