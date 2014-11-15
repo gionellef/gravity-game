@@ -12,7 +12,7 @@ public class Player extends GameObject {
 	private boolean isRunning = true;
 	private boolean isFalling = true;
 	private boolean isFacingLeft = false;
-	private int gravsLeft = 0;
+	private int gravsLeft = 3;
 	private int jumpsLeft = 0;
 
 	public Player(Engine game) {
