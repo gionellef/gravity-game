@@ -40,6 +40,7 @@ public class Player extends GameObject {
 			setSpriteAction("fall", new String[]{"jump", "fall"});
 		}
 
+		// State tracking
 		if(standing){
 			jumpsLeft = 1;
 		}
@@ -55,7 +56,6 @@ public class Player extends GameObject {
 		if(getGame().keyIsJustPressed(KeyEvent.VK_W)){
 			jump();
 		}
-
 		if(getGame().keyIsJustPressed(KeyEvent.VK_E)){
 			if(well != null){
 				well.destroy();
@@ -64,6 +64,14 @@ public class Player extends GameObject {
 		}
 		if(getGame().mouseLeftIsJustPressed()){
 			conjureGrav(getGame().getMouseGamePosition());
+		}
+		
+		// Door
+		if(standing){
+			ExitDoor door = getGame().findObject(ExitDoor.class, position.x - 8, position.y - 16, 16, 32);
+			if(door != null){
+				System.out.println("YOU WIN!");
+			}
 		}
 	}
 
