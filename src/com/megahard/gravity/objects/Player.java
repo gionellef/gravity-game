@@ -10,9 +10,8 @@ public class Player extends GameObject {
 	
 	private GravWell well = null;
 	private boolean isRunning = true;
-	private boolean isFalling = true;
 	private boolean isFacingLeft = false;
-	private int gravsLeft = 3;
+	private int gravsLeft = 99;
 	private int jumpsLeft = 0;
 
 	public Player(Engine game) {
@@ -29,14 +28,10 @@ public class Player extends GameObject {
 		
 		// Animations
 		if(standing){
-			if (isFalling) {
-				isFalling = false;
-				setSpriteAction("land");
-			} else if(!isRunning){
+			if(!isRunning){
 				setSpriteAction("default", new String[]{"land", "conjure", "default"});
 			}
 		} else {
-			isFalling = true;
 			if(!sprite.getAction().startsWith("fall")){
 				setSpriteAction("fall", new String[]{"jump"});
 			}
@@ -76,8 +71,19 @@ public class Player extends GameObject {
 			}
 		}
 	}
+	
+	@Override
+	public void onHitBottom() {
+		setSpriteAction("land");
+		double p = 1 - Math.min(1, velocity.y);
+		int f = (int) (p * sprite.getTotalFrames());
+		sprite.setFrame(f);
+	}
 
 	private void conjureGrav(Vector2 pos) {
+		if(getGame().getMap().getTile(pos).getCollidable()){
+			return;
+		}
 		if(gravsLeft > 0){
 			gravsLeft--;
 			

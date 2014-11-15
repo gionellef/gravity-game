@@ -165,8 +165,8 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 								+ o2.size.y / 2
 						&& o.position.y + o.size.y / 2 > o2.position.y
 								- o2.size.y / 2) {
-					o.collide(o2);
-					o2.collide(o);
+					o.onCollide(o2);
+					o2.onCollide(o);
 				}
 			}
 		}

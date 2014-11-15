@@ -41,10 +41,6 @@ public class GameObject {
 		}
 	}
 
-	public void collide(GameObject obj) {
-
-	}
-
 	public void setSprite(String spriteName) {
 		this.sprite = SpriteStore.get().getSprite(spriteName);
 	}
@@ -57,7 +53,8 @@ public class GameObject {
 		if(!fixed){
 			GameMap map = game.getMap();
 			
-			velocity.y += 0.05; // tmp
+			double gravity = 0.05;
+			velocity.y += gravity;
 			standing = false;
 	
 			// max velocity
@@ -90,10 +87,12 @@ public class GameObject {
 	
 				// collision resolution
 				if (blocked) {
-					position.y = Math.ceil(down) - size.y / 2;
+					double targetY = Math.ceil(down) - size.y / 2;
+					if(position.y + E < targetY) onHitBottom();
+					position.y = targetY;
 					velocity.x *= friction;
 					velocity.y *= -restitution;
-					if(Math.abs(velocity.y) < 0.02){
+					if(velocity.y < E){
 						standing = true;
 					}
 				} else {
@@ -182,6 +181,14 @@ public class GameObject {
 		if(sprite != null){
 			sprite.update();
 		}
+	}
+
+	public void onHitBottom(){
+		
+	}
+
+	public void onCollide(GameObject obj) {
+
 	}
 
 	public void onStartAction(String action) {
