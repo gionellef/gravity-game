@@ -5,18 +5,19 @@
   <terrain name="solid" tile="41"/>
   <terrain name="background" tile="443"/>
  </terraintypes>
- <tile id="0" terrain=",,,0"/>
- <tile id="1" terrain=",,0,0"/>
- <tile id="2" terrain=",,0,"/>
- <tile id="40" terrain=",0,,0"/>
+ <tile id="0" terrain="1,1,1,0"/>
+ <tile id="1" terrain="1,1,0,0"/>
+ <tile id="2" terrain="1,1,0,1"/>
+ <tile id="40" terrain="1,0,1,0"/>
  <tile id="41" terrain="0,0,0,0"/>
- <tile id="42" terrain="0,,0,"/>
- <tile id="80" terrain=",0,,"/>
- <tile id="81" terrain="0,0,,"/>
- <tile id="82" terrain="0,,,"/>
- <tile id="120" terrain="0,0,0,"/>
- <tile id="121" terrain="0,0,,0"/>
- <tile id="160" terrain="0,,0,0"/>
- <tile id="161" terrain=",0,0,0"/>
+ <tile id="42" terrain="0,1,0,1"/>
+ <tile id="80" terrain="1,0,1,1"/>
+ <tile id="81" terrain="0,0,1,1"/>
+ <tile id="82" terrain="0,1,1,1"/>
+ <tile id="120" terrain="0,0,0,1"/>
+ <tile id="121" terrain="0,0,1,0"/>
+ <tile id="160" terrain="0,1,0,0"/>
+ <tile id="161" terrain="1,0,0,0"/>
+ <tile id="212" terrain=",1,,"/>
  <tile id="443" terrain="1,1,1,1"/>
 </tileset>
