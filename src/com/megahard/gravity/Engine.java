@@ -186,7 +186,10 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		keyStates.put(e.getKeyCode(), KeyState.PRESS);
+		int keyCode = e.getKeyCode();
+		if(keyStates.get(keyCode) != KeyState.DOWN){
+			keyStates.put(keyCode, KeyState.PRESS);
+		}
 	}
 	@Override
 	public void keyReleased(KeyEvent e) {
