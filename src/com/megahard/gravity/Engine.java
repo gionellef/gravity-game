@@ -118,8 +118,6 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 				}
 				
 				o2.position.set(object.getX(), object.getY());
-//				o2.velocity.set(object.getProperties().getVelocityX(), object
-//						.getProperties().getVelocityY());
 				addObject(o2);
 				
 				if (object.getType().equals("Player")) {
@@ -133,7 +131,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 
 	public void update() {
 		// add all objects to be added
-		state.objects.addAll(addObj);
+		state.objects.addAll(0, addObj);
 		addObj.clear();
 
 		// update all the objects
