@@ -11,34 +11,71 @@
 			delay: 4
 		},
 		{
-			name: "run",
+			name: "default-left",
 			x: 0,
 			y: 1,
+			frames: 10,
+			delay: 4
+		},
+		{
+			name: "run",
+			x: 0,
+			y: 2,
+			frames: 12,
+			delay: 2
+		},
+		{
+			name: "run-left",
+			x: 0,
+			y: 3,
 			frames: 12,
 			delay: 2
 		},
 		{
 			name: "jump",
 			x: 0,
-			y: 2,
+			y: 4,
 			frames: 5,
 			delay: 2,
 			next: "fall"
 		},
 		{
+			name: "jump-left",
+			x: 0,
+			y: 5,
+			frames: 5,
+			delay: 2,
+			next: "fall-left"
+		},
+		{
 			name: "fall",
 			x: 5,
-			y: 2,
+			y: 4,
+			frames: 4,
+			delay: 4
+		},
+		{
+			name: "fall-left",
+			x: 5,
+			y: 5,
 			frames: 4,
 			delay: 4
 		},
 		{
 			name: "land",
 			x: 0,
-			y: 3,
+			y: 6,
 			frames: 4,
 			delay: 2,
 			next: "default"
+		},
+		{
+			name: "land-left",
+			x: 0,
+			y: 7,
+			frames: 4,
+			delay: 2,
+			next: "default-left"
 		}
 	]
 }

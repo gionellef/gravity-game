@@ -11,6 +11,7 @@ public class Player extends GameObject {
 	private GravWell well = null;
 	private boolean isRunning = true;
 	private boolean isFalling = true;
+	private boolean isFacingLeft = false;
 	private int jumpsLeft = 0;
 
 	public Player(Engine game) {
@@ -29,27 +30,13 @@ public class Player extends GameObject {
 		if(standing){
 			if (isFalling) {
 				isFalling = false;
-				sprite.setAction("land");
+				setSpriteAction("land");
 			} else if(!isRunning){
-				switch (sprite.getAction()) {
-				case "land":
-				case "default":
-					break;
-				default:
-					sprite.setAction("default");
-					break;
-				}
+				setSpriteAction("default", new String[]{"land", "default"});
 			}
 		} else {
 			isFalling = true;
-			switch (sprite.getAction()) {
-			case "jump":
-			case "fall":
-				break;
-			default:
-				sprite.setAction("fall");
-				break;
-			}
+			setSpriteAction("fall", new String[]{"jump", "fall"});
 		}
 
 		if(standing){
@@ -91,18 +78,11 @@ public class Player extends GameObject {
 		double airStrength = 0.06;
 		double airMaxSpeed = 0.2;
 		double sign = left ? -1 : 1;
-		String action = sprite.getAction();
-		
-		if(standing && !action.equals("land")){
+		isFacingLeft = left;
+		if(standing && !sprite.getAction().startsWith("land")){
 			isRunning = true;
 			velocity.x += runStrength * sign;
-			switch (action) {
-			case "run":
-				break;
-			default:
-				sprite.setAction("run");
-				break;
-			}
+			setSpriteAction("run", new String[]{"run"});
 		}else{
 			if(velocity.x * sign < airMaxSpeed){
 				velocity.x += airStrength * sign;
@@ -119,8 +99,37 @@ public class Player extends GameObject {
 		if(jumpsLeft > 0 && velocity.y < jumpStrength){
 			jumpsLeft--;
 			velocity.y = Math.min(velocity.y, -jumpStrength);
-			sprite.setAction("jump");
+			setSpriteAction("jump");
 		}
 	}
+	
+	private void setSpriteAction(String action){
+		setSpriteAction(action, null);
+	}
 
+	private void setSpriteAction(String action, String[] inhibit){
+		if(inhibit != null){
+			boolean cont = false;
+			String current = sprite.getAction();
+			if(current.endsWith("-left")){
+				current = current.substring(0, current.length() - 5);
+				if(!isFacingLeft && action.equals(current)){
+					cont = true;
+				}
+			}else{
+				if(isFacingLeft && action.equals(current)){
+					cont = true;
+				}
+			}
+			if(!cont)
+				for(String i : inhibit)
+					if(i.equals(current)) return;
+		}
+		
+		if(isFacingLeft){
+			action += "-left";
+		}
+		sprite.setAction(action);
+	}
+	
 }
