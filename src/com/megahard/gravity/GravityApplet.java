@@ -2,16 +2,22 @@ package com.megahard.gravity;
 
 import java.applet.Applet;
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class GravityApplet extends Applet implements Runnable {
+public class GravityApplet extends Applet implements Runnable, ActionListener {
 
 	/**
 	 * 
 	 */
+	
+	public static TitleScreen ts;
+	
 	private static final long serialVersionUID = 1L;
 
 	private boolean running = true;
-
+	
 	private Engine engine;
 
 	public static final int WIDTH = 800;
@@ -21,30 +27,24 @@ public class GravityApplet extends Applet implements Runnable {
 	public void init() {
 		Sound.touch();
 		
-		engine = new Engine();
-
-		engine.initialize("");
-		engine.getRenderer().addKeyListener(engine);
-		engine.getRenderer().addMouseListener(engine);
-		engine.getRenderer().addMouseMotionListener(engine);
-
+		ts = new TitleScreen(this);
+		add(ts);
+		this.setBackground(Color.black);
+		
 		setSize(WIDTH, HEIGHT);
 		setLayout(new BorderLayout());
-		add(engine.getRenderer(), BorderLayout.CENTER);
 	}
 
-	public void start() {
-		new Thread(this).start();
-	}
-
+	
 	@Override
 	public void run() {
 		running = true;
 		try {
 			while (running) {
-				engine.update();
-				engine.getRenderer().render(engine.getState());
 
+				engine.update();
+				engine.getRenderer().render(engine.getState());	
+				
 				Thread.sleep(25);
 			}
 		} catch (InterruptedException e) {
@@ -55,4 +55,33 @@ public class GravityApplet extends Applet implements Runnable {
 	public void stop() {
 		running = false;
 	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		Object a = e.getSource();
+		
+		if (a.equals(ts.getStartButton())) {
+			System.out.println("uhm");
+			
+			
+			engine = new Engine();
+			engine.initialize("");
+			engine.getRenderer().addKeyListener(engine);
+			engine.getRenderer().addMouseListener(engine);
+			engine.getRenderer().addMouseMotionListener(engine);
+			
+			add(engine.getRenderer(), BorderLayout.CENTER);
+			
+			new Thread(this).start();
+			
+			remove(ts);
+			validate();
+		}
+		
+		if (a.equals(ts.getExitButton())) {
+			running = false;
+			System.exit(1);
+		}
+	}	
+	
 }
