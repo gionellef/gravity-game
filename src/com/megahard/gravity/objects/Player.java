@@ -37,7 +37,9 @@ public class Player extends GameObject {
 			}
 		} else {
 			isFalling = true;
-			setSpriteAction("fall", new String[]{"jump", "fall"});
+			if(!sprite.getAction().startsWith("fall")){
+				setSpriteAction("fall", new String[]{"jump"});
+			}
 		}
 
 		// State tracking

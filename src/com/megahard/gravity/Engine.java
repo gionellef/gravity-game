@@ -133,7 +133,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 
 	public void update() {
 		// add all objects to be added
-		state.objects.addAll(addObj);
+		state.objects.addAll(0, addObj);
 		addObj.clear();
 
 		// update all the objects
