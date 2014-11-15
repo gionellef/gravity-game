@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="60" height="20" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" source="main.tsx"/>
+ <tileset firstgid="801" source="objects.tsx"/>
+ <layer name="Tile Layer 1" width="60" height="20">
+  <data encoding="base64" compression="zlib">
+   eJztltENgCAMBatOI06jTqPb4BwOZz80aSolQS0BJPF+StLHpaAaABiQvSmbHh3NSfUtj+pbNtW3bKqvHvhAi3Rwr2lC82L69o4cmq+FlJeK74JMgawZ+z7Zh++cxPa97uj2E1++l9x8r3nxd5/EyO7aDPIaX+d5Uq6rjy8vxDf2N/urM0Bx9ZDmKPmGzj01X8krtJ6qr2V3ZCP97Yv6W2jfr/pr/+OkxgEfB4sz
+  </data>
+ </layer>
+ <objectgroup name="Object Layer 1">
+  <object type="Player" gid="801" x="18" y="294"/>
+  <object type="GravWell" gid="802" x="79" y="239"/>
+ </objectgroup>
+</map>
