@@ -58,14 +58,14 @@ public class Player extends GameObject {
 		isRunning = false;
 		
 		// Controls
-		if(getGame().keyIsJustPressed(KeyEvent.VK_W)){
-			jump();
-		}
 		if(getGame().keyIsDown(KeyEvent.VK_A)){
 			run(true);
 		}
 		if(getGame().keyIsDown(KeyEvent.VK_D)){
 			run(false);
+		}
+		if(getGame().keyIsJustPressed(KeyEvent.VK_W)){
+			jump();
 		}
 		
 		if(getGame().mouseLeftIsJustPressed()){
@@ -75,7 +75,7 @@ public class Player extends GameObject {
 
 	private void conjureGrav(Vector2 pos) {
 		if(well != null){
-			getGame().removeObject(well);
+			well.destroy();
 		}
 		well = new GravWell(getGame());
 		well.position = pos;

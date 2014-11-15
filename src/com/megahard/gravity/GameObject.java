@@ -27,6 +27,7 @@ public class GameObject {
 		
 		if (spriteName != null && spriteName != ""){
 			this.sprite = SpriteStore.get().getSprite(spriteName);
+			sprite.setListener(this);
 		}
 	}
 
@@ -163,6 +164,12 @@ public class GameObject {
 		if(sprite != null){
 			sprite.update();
 		}
+	}
+
+	public void onStartAction(String action) {
+	}
+
+	public void onEndAction(String action) {
 	}
 
 	protected Engine getGame(){

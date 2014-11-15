@@ -27,6 +27,8 @@ public class Sprite {
 	private Rectangle region;
 	private SpriteData data;
 	
+	private GameObject obj = null;
+	
 	private SpriteAction currentAction = null;
 	private int currentFrame = 0;
 	private int delayCount = 0;
@@ -37,6 +39,10 @@ public class Sprite {
 		region = new Rectangle(0, 0, data.width, data.height);
 		
 		setAction("default");
+	}
+	
+	public void setListener(GameObject obj){
+		this.obj = obj;
 	}
 	
 	public int getWidth() {
@@ -87,6 +93,10 @@ public class Sprite {
 	public void update(){
 		if(currentAction != null){
 			if(delayCount >= currentAction.delay){
+				if(obj != null && currentFrame == 0){
+					obj.onStartAction(currentAction.name);
+				}
+				
 				currentFrame++;
 				if(currentFrame >= currentAction.frames){
 					SpriteAction next = getActionData(currentAction.next);
@@ -95,6 +105,8 @@ public class Sprite {
 					}else{
 						currentFrame = 0;
 					}
+					
+					if(obj != null) obj.onEndAction(currentAction.name);
 				}
 				
 				updateIndexForFrame();
@@ -128,6 +140,14 @@ public class Sprite {
 
 	public String getAction() {
 		return currentAction == null ? null : currentAction.name;
+	}
+
+	public int getFrame() {
+		return currentFrame;
+	}
+
+	public int getTotalFrames() {
+		return currentAction == null ? 0 : currentAction.frames;
 	}
 	
 }

@@ -6,6 +6,8 @@ import com.megahard.gravity.Vector2;
 
 public class GravWell extends GameObject {
 
+	private boolean active = true;
+	
 	public GravWell(Engine game) {
 		super(game, "gravwell"); // TODO insert gravwell sprite path
 		fixed = true;
@@ -16,15 +18,32 @@ public class GravWell extends GameObject {
 	public void update() {
 		super.update();
 		
-		for(GameObject o : getGame().getState().objects){
-			Vector2 diff = position.sub(o.position);
-			double d = diff.length();
-			if(d > 1){
-				o.velocity = o.velocity.add(diff.scale(0.1f / (d * d)));
-			}else{
-				o.velocity = o.velocity.add(diff.sub(o.velocity).scale(0.2f));
+		if(active){
+			for(GameObject o : getGame().getState().objects){
+				Vector2 diff = position.sub(o.position);
+				double d = diff.length();
+				if(d > 1){
+					o.velocity = o.velocity.add(diff.scale(0.1f / (d * d)));
+				}else{
+					o.velocity = o.velocity.add(diff.sub(o.velocity).scale(0.2f));
+				}
 			}
 		}
+	}
+	
+	@Override
+	public void onEndAction(String action) {
+		if(action.equals("destroy")){
+			getGame().removeObject(this);
+		}else if(action.equals("default")){
+			if(!active){
+				sprite.setAction("destroy");
+			}
+		}
+	}
+
+	public void destroy() {
+		active = false;
 	}
 	
 }
