@@ -9,7 +9,7 @@ public class GravWell extends GameObject {
 	private boolean active = true;
 	
 	public GravWell(Engine game) {
-		super(game, "gravwell"); // TODO insert gravwell sprite path
+		super(game, "gravwell");
 		fixed = true;
 		sprite.setAction("create");
 	}
