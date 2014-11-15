@@ -53,7 +53,7 @@ public class Player extends GameObject {
 		if(getGame().keyIsDown(KeyEvent.VK_D)){
 			run(false);
 		}
-		if(getGame().keyIsJustPressed(KeyEvent.VK_W)){
+		if(getGame().keyIsJustPressed(KeyEvent.VK_SPACE)){
 			jump();
 		}
 		if(getGame().keyIsJustPressed(KeyEvent.VK_E)){
