@@ -6,7 +6,8 @@ import com.megahard.gravity.Vector2;
 
 public class GravWell extends GameObject {
 
-	private boolean active = true;
+	private boolean online = true;
+	private int time = 0;
 	
 	public GravWell(Engine game) {
 		super(game, "gravwell");
@@ -18,12 +19,15 @@ public class GravWell extends GameObject {
 	public void update() {
 		super.update();
 		
-		if(active){
+		time++;
+		
+		if(online){
 			for(GameObject o : getGame().getState().objects){
 				Vector2 diff = position.sub(o.position);
 				double d = diff.length();
 				if(d > 1){
-					o.velocity = o.velocity.add(diff.scale(0.1f / (d * d)));
+					double a = 0.1 + 1f/time;
+					o.velocity = o.velocity.add(diff.scale(a / (d * d)));
 				}else{
 					o.velocity = o.velocity.add(diff.sub(o.velocity).scale(0.1f));
 				}
@@ -36,14 +40,14 @@ public class GravWell extends GameObject {
 		if(action.equals("destroy")){
 			getGame().removeObject(this);
 		}else if(action.equals("default")){
-			if(!active){
+			if(!online){
 				sprite.setAction("destroy");
 			}
 		}
 	}
 
 	public void destroy() {
-		active = false;
+		online = false;
 	}
 	
 }

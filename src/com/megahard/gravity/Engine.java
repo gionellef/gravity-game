@@ -323,10 +323,22 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 	public <T> T findObject(Class<T> type, double x, double y,
 			double w, double h) {
 		for(GameObject o : state.objects){
-			if(o.getClass().equals(type)){
-				return (T)o;
+			if(o.position.x >= x && o.position.y >= y && o.position.x < x + w && o.position.y < y + h){
+				if(o.getClass().equals(type)){
+					return (T)o;
+				}
 			}
 		}
 		return null;
+	}
+	
+	public List<GameObject> findObjects(double x, double y, double w, double h){
+		List<GameObject> list = new LinkedList<GameObject>();
+		for(GameObject o : state.objects){
+			if(o.position.x >= x && o.position.y >= y && o.position.x < x + w && o.position.y < y + h){
+				list.add(o);
+			}
+		}
+		return list;
 	}
 }
