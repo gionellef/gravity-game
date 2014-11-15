@@ -300,4 +300,15 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 	public int getMouseScreenY(){
 		return mouseY;
 	}
+
+	@SuppressWarnings("unchecked")
+	public <T> T findObject(Class<T> type, double x, double y,
+			double w, double h) {
+		for(GameObject o : state.objects){
+			if(o.getClass().equals(type)){
+				return (T)o;
+			}
+		}
+		return null;
+	}
 }
