@@ -34,7 +34,7 @@ public class Sound {
             if (p>=count) p = 0;
         }
     }
-    public static Clips boing = load("/boing.wav", 4);
+    //public static Clips boing = load("/boing.wav", 4);
 
     private static Clips load(String name, int count) {
         try {
