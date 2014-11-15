@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tileset name="main" tilewidth="16" tileheight="16">
- <image source="res/tileset.png" width="640" height="320"/>
+ <image source="../res/tileset.png" width="640" height="320"/>
  <terraintypes>
   <terrain name="solid" tile="41"/>
   <terrain name="background" tile="443"/>
