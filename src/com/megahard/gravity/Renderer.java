@@ -31,7 +31,7 @@ public class Renderer extends Canvas {
 		Graphics2D g = (Graphics2D) buffer.getGraphics();
 		BufferedImage wallSpriteSheet = null;
 		try {
-			wallSpriteSheet = ImageIO.read(this.getClass().getResource("/img/wall.png"));
+			wallSpriteSheet = ImageIO.read(this.getClass().getResource("/tileset.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
