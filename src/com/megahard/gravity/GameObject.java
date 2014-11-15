@@ -5,25 +5,35 @@ public class GameObject {
 	private final Engine game;
 
 	public boolean fixed;
+	
 	public Vector2 position;
 	public Vector2 velocity;
 	public Vector2 size;
+	
 	public double mass;
 	public double restitution;
 	public double friction;
+	
 	public boolean standing;
+	public boolean active;
+	
 	public Sprite sprite;
 
 	public GameObject(Engine game, String spriteName) {
 		this.game = game;
+		
 		fixed = false;
-		this.position = new Vector2();
-		this.velocity = new Vector2();
-		this.size = new Vector2();
-		this.mass = 1;
+		
+		position = new Vector2();
+		velocity = new Vector2();
+		size = new Vector2();
+		
+		mass = 1;
 		restitution = 0;
 		friction = 1;
+		
 		standing = false;
+		active = false;
 		
 		if (spriteName != null && spriteName != ""){
 			this.sprite = SpriteStore.get().getSprite(spriteName);
@@ -40,6 +50,10 @@ public class GameObject {
 	}
 	
 	public void update() {
+		if(!active){
+			throw new RuntimeException("NO! WHY INACTIVE OBJECT STILL IN UPDATE LOOP");
+		}
+		
 		if(!fixed){
 			GameMap map = game.getMap();
 			

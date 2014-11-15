@@ -6,7 +6,7 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class GravityApplet extends Applet implements Runnable, ActionListener {
+public class GravityApplet extends Applet implements Runnable, ActionListener, EngineFinishListener {
 
 	/**
 	 * 
@@ -28,11 +28,16 @@ public class GravityApplet extends Applet implements Runnable, ActionListener {
 		Sound.touch();
 		
 		ts = new TitleScreen(this);
-		add(ts);
-		this.setBackground(Color.black);
+		showTitleScreen();
 		
 		setSize(WIDTH, HEIGHT);
 		setLayout(new BorderLayout());
+	}
+
+
+	private void showTitleScreen() {
+		add(ts);
+		this.setBackground(Color.black);
 	}
 
 	
@@ -50,10 +55,19 @@ public class GravityApplet extends Applet implements Runnable, ActionListener {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+
+		remove(engine.getRenderer());
+		engine = null;
 	}
 
 	public void stop() {
 		running = false;
+	}
+	
+	@Override
+	public void onFinish(int score, int time, String message) {
+		stop();
+		showTitleScreen();
 	}
 
 	@Override
@@ -63,7 +77,6 @@ public class GravityApplet extends Applet implements Runnable, ActionListener {
 		if (a.equals(ts.getStartButton())) {
 			System.out.println("uhm");
 			
-			
 			engine = new Engine();
 			engine.initialize("");
 			engine.getRenderer().addKeyListener(engine);
@@ -72,6 +85,8 @@ public class GravityApplet extends Applet implements Runnable, ActionListener {
 			
 			add(engine.getRenderer(), BorderLayout.CENTER);
 			
+			engine.setFinishListener(this);
+			
 			new Thread(this).start();
 			
 			remove(ts);
@@ -79,7 +94,7 @@ public class GravityApplet extends Applet implements Runnable, ActionListener {
 		}
 		
 		if (a.equals(ts.getExitButton())) {
-			running = false;
+			stop();
 			System.exit(1);
 		}
 	}	

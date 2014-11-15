@@ -50,6 +50,8 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 	private List<GameObject> addObj;
 	private List<GameObject> removeObj;
 
+	private EngineFinishListener finishListener;
+
 	public Engine() {
 		state = new GameState();
 		addObj = new LinkedList<GameObject>();
@@ -63,6 +65,8 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 		mouseRightState = KeyState.UP;
 		
 		renderer = new Renderer();
+		
+		finishListener = null;
 	}
 
 	public void initialize(String levelData) {
@@ -73,10 +77,20 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 
 	public void addObject(GameObject obj) {
 		addObj.add(obj);
+		obj.active = true;
 	}
 
 	public void removeObject(GameObject obj) {
 		removeObj.add(obj);
+		obj.active = false;
+	}
+	
+	public void finish(){
+		finishListener.onFinish(0, 0, "YOU WON or lost. I don't know.");
+	}
+	
+	public void setFinishListener(EngineFinishListener efl){
+		finishListener  = efl;
 	}
 
 	public GameMap getMap() {
@@ -180,6 +194,12 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 		}else if(mouseRightState == KeyState.RELEASE || mouseRightState == KeyState.CLICK){
 			mouseRightState = KeyState.UP;
 		}
+		
+		// Game over
+		if(!player.active){
+			finish();
+		}
+		//if( reach door) finish();
 	}
 
 	@Override
