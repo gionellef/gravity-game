@@ -66,7 +66,7 @@ public class Renderer extends Canvas {
 								+ buffer.getHeight() / 2 - o.sprite.getHeight() / 2));
 			} else {
 				g.setColor(Color.red);
-				g.fillRect((int) ((o.position.x - o.size.x / 2 - camera.x)
+				g.drawRect((int) ((o.position.x - o.size.x / 2 - camera.x)
 						* TILE_SIZE + buffer.getWidth() / 2), (int) ((o.position.y
 						- o.size.y / 2 - camera.y)
 						* TILE_SIZE + buffer.getHeight() / 2),

@@ -17,7 +17,7 @@ public class Player extends GameObject {
 
 	public Player(Engine game) {
 		super(game, "person");
-		size.set(0.9, 1.6);
+		size.set(0.95, 1.95);
 		mass = 3;
 		restitution = 0.05;
 		friction = 0.6;
