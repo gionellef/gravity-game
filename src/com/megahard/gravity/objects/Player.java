@@ -32,7 +32,7 @@ public class Player extends GameObject {
 				isFalling = false;
 				setSpriteAction("land");
 			} else if(!isRunning){
-				setSpriteAction("default", new String[]{"land", "default"});
+				setSpriteAction("default", new String[]{"land", "conjure", "default"});
 			}
 		} else {
 			isFalling = true;
@@ -71,6 +71,9 @@ public class Player extends GameObject {
 		well = new GravWell(getGame());
 		well.position = pos;
 		getGame().addObject(well);
+		if(sprite.getAction().startsWith("default")){
+			setSpriteAction("conjure");
+		}
 	}
 
 	private void run(boolean left) {
