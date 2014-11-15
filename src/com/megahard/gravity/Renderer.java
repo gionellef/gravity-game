@@ -42,8 +42,8 @@ public class Renderer extends Canvas {
 		g.fillRect(0, 0, buffer.getWidth(), buffer.getHeight());
 		int mapHeight = s.map.getHeight();
 		int mapWidth = s.map.getWidth();
-		int columns = s.map.getWidth();
-		System.out.println(s.map.getWidth());
+		int columns = s.map.getImgwidth() / TILE_SIZE;
+		System.out.println(columns);
 		for (int y = 0; y < mapHeight; y++) {
 			for (int x = 0; x < mapWidth; x++) {
 				Tile tile = s.map.getTile(x, y);
