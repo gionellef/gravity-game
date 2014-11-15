@@ -46,6 +46,7 @@ public class GameMap {
 	
 
 	public void initializeMap() {
+		System.out.println(width);
 		map = new Tile[width * height];
 		int[] contents = layers[0].getData();
 		for (int i = 0; i < contents.length; i++) {

@@ -68,7 +68,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 	public void initialize(String levelData) {
 		// populate the game state using level data
 		state = new GameState();
-		state.map = loadMapAndObjects("3");
+		state.map = loadMapAndObjects("template map");
 	}
 
 	public void addObject(GameObject obj) {
@@ -118,8 +118,8 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 				}
 				
 				o2.position.set(object.getX(), object.getY());
-				o2.velocity.set(object.getProperties().getVelocityX(), object
-						.getProperties().getVelocityY());
+//				o2.velocity.set(object.getProperties().getVelocityX(), object
+//						.getProperties().getVelocityY());
 				addObject(o2);
 				
 				if (object.getType().equals("Player")) {
