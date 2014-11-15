@@ -12,6 +12,7 @@ public class Player extends GameObject {
 	private boolean isRunning = true;
 	private boolean isFalling = true;
 	private boolean isFacingLeft = false;
+	private int gravsLeft = 0;
 	private int jumpsLeft = 0;
 
 	public Player(Engine game) {
@@ -67,12 +68,18 @@ public class Player extends GameObject {
 	}
 
 	private void conjureGrav(Vector2 pos) {
-		if(well != null) well.destroy();
-		well = new GravWell(getGame());
-		well.position = pos;
-		getGame().addObject(well);
-		if(sprite.getAction().startsWith("default")){
-			setSpriteAction("conjure");
+		if(gravsLeft > 0){
+			gravsLeft--;
+			
+			if(well != null) well.destroy();
+			
+			well = new GravWell(getGame());
+			well.position = pos;
+			getGame().addObject(well);
+			
+			if(sprite.getAction().startsWith("default")){
+				setSpriteAction("conjure");
+			}
 		}
 	}
 
