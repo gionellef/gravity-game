@@ -67,16 +67,20 @@ public class Player extends GameObject {
 		if(getGame().keyIsJustPressed(KeyEvent.VK_W)){
 			jump();
 		}
-		
+
+		if(getGame().keyIsJustPressed(KeyEvent.VK_E)){
+			if(well != null){
+				well.destroy();
+				well = null;
+			}
+		}
 		if(getGame().mouseLeftIsJustPressed()){
 			conjureGrav(getGame().getMouseGamePosition());
 		}
 	}
 
 	private void conjureGrav(Vector2 pos) {
-		if(well != null){
-			well.destroy();
-		}
+		if(well != null) well.destroy();
 		well = new GravWell(getGame());
 		well.position = pos;
 		getGame().addObject(well);
