@@ -22,14 +22,14 @@
 			x: 0,
 			y: 2,
 			frames: 12,
-			delay: 2
+			delay: 1
 		},
 		{
 			name: "run-left",
 			x: 0,
 			y: 3,
 			frames: 12,
-			delay: 2
+			delay: 1
 		},
 		{
 			name: "jump",

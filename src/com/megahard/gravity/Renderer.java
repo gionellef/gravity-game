@@ -21,15 +21,15 @@ public class Renderer extends Canvas {
 	private Vector2 camera;
 	private BufferedImage buffer;
 
-	private BufferedImage wallSpriteSheet;
+	private BufferedImage tileset;
 
 	public Renderer() {
 		camera = new Vector2();
 		buffer = new BufferedImage(GravityApplet.WIDTH/SCALE_FACTOR, GravityApplet.HEIGHT/SCALE_FACTOR, BufferedImage.TYPE_INT_RGB);
 
-		wallSpriteSheet = null;
+		tileset = null;
 		try {
-			wallSpriteSheet = ImageIO.read(this.getClass().getResource("/tileset.png"));
+			tileset = ImageIO.read(this.getClass().getResource("/tileset.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -51,7 +51,7 @@ public class Renderer extends Canvas {
 			    int frameY = (frame / columns) * TILE_SIZE;
 			    int dx = (int) ((x - camera.x) * TILE_SIZE + buffer.getWidth() / 2);
 			    int dy = (int) ((y - camera.y) * TILE_SIZE + buffer.getHeight() / 2);
-			    g.drawImage(wallSpriteSheet,
+			    g.drawImage(tileset,
 			    	dx, dy, dx + TILE_SIZE, dy + TILE_SIZE,
 			    	frameX, frameY, frameX + TILE_SIZE, frameY + TILE_SIZE,
 			    	null);
