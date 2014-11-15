@@ -159,6 +159,10 @@ public class GameObject {
 					position.x += velocity.x;
 				}
 			}
+			
+			if(position.y > getGame().getMap().getHeight()){
+				getGame().removeObject(this);
+			}
 		}
 
 		if(sprite != null){
