@@ -4,11 +4,10 @@
  <tileset firstgid="801" source="objects.tsx"/>
  <layer name="Tile Layer 1" width="60" height="20">
   <data encoding="base64" compression="zlib">
-   eJztltENgCAMBatOI06jTqPb4BwOZz80aSolQS0BJPF+StLHpaAaABiQvSmbHh3NSfUtj+pbNtW3bKqvHvhAi3Rwr2lC82L69o4cmq+FlJeK74JMgawZ+z7Zh++cxPa97uj2E1++l9x8r3nxd5/EyO7aDPIaX+d5Uq6rjy8vxDf2N/urM0Bx9ZDmKPmGzj01X8krtJ6qr2V3ZCP97Yv6W2jfr/pr/+OkxgEfB4sz
+   eJztlssNgCAMQFGnEadRp9FtZA6Hk4MmldBq5afI4V0kKX22QKUQotOsVd602lHuFN/8+LPvoqkRGvAvKuZ3c922lsKXAtYe64mrXmmJtRS+k2ZAGEGOPfP7W31D51F8z2c+FPC+SO179/5wgXPHpPCl7hGM+cO+T/Kg+iS273FG1U98zVy+5nvU6+6sBN9l6s3G3m64H7avLQ61H8c39sztqwcgthhYHTFfbt3f5sudk0PVPZTvYpwR5eBrxnIB5uErvo8ZJcas5IsNY/JumA==
   </data>
  </layer>
  <objectgroup name="Object Layer 1">
-  <object type="Player" gid="801" x="18" y="294"/>
-  <object type="GravWell" gid="802" x="79" y="239"/>
+  <object type="Player" gid="801" x="9" y="302"/>
  </objectgroup>
 </map>
