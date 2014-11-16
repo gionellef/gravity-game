@@ -26,8 +26,12 @@ public class Sound {
 						.getAudioInputStream(new ByteArrayInputStream(buffer)));
 			}
 		}
+		
+		public void play(){
+			play(1);
+		}
 
-		public void play() {
+		public void play(float gain) {
 			if (clips == null)
 				return;
 
@@ -35,6 +39,12 @@ public class Sound {
 			if (p >= count)
 				p = 0;
 			clips[p].stop();
+			
+			FloatControl gainControl = (FloatControl) clips[p].getControl(FloatControl.Type.MASTER_GAIN);
+			if(gain > gainControl.getMaximum()) gain = gainControl.getMaximum();
+			else if(gain < gainControl.getMinimum()) gain = gainControl.getMinimum();
+			gainControl.setValue(gain);
+			
 			clips[p].setFramePosition(0);
 			clips[p].start();
 		}
@@ -45,7 +55,7 @@ public class Sound {
 	}
 
 	public static Clips gravwell_start = load("gravwell-start.wav", 4);
-	public static Clips gravwell = load("gravwell.wav", 4);
+	public static Clips gravwell = load("gravwell.wav", 2);
 	public static Clips step_cloth1 = load("step_cloth1.wav", 2);
 	public static Clips step_cloth2 = load("step_cloth2.wav", 2);
 	public static Clips step_cloth3 = load("step_cloth3.wav", 2);
@@ -63,7 +73,7 @@ public class Sound {
 		try {
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
 			DataInputStream dis = new DataInputStream(
-					Sound.class.getResourceAsStream("sound/" + name));
+					Sound.class.getResourceAsStream("/sound/" + name));
 			byte[] buffer = new byte[1024];
 			int read = 0;
 			while ((read = dis.read(buffer)) >= 0) {

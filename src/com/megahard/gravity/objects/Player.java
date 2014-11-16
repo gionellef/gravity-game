@@ -1,13 +1,29 @@
 package com.megahard.gravity.objects;
 
 import java.awt.event.KeyEvent;
+import java.util.Random;
 
 import com.megahard.gravity.Engine;
 import com.megahard.gravity.GameMap;
 import com.megahard.gravity.GameObject;
+import com.megahard.gravity.Sound;
+import com.megahard.gravity.Sound.Clips;
 import com.megahard.gravity.Vector2;
 
 public class Player extends GameObject {
+	private static final Clips[] STEP_SOUNDS = new Clips[]{
+		Sound.step_cloth1,
+		Sound.step_cloth2,
+		Sound.step_cloth3,
+		Sound.step_cloth4,	
+	};
+	private static final Clips[] JUMP_SOUNDS = new Clips[]{
+		Sound.step_lth1,
+		Sound.step_lth2,
+		Sound.step_lth3,
+		Sound.step_lth4,	
+	};
+	private static final Random RAND = new Random();
 	
 	private GravWell well = null;
 	private boolean isRunning = true;
@@ -26,6 +42,14 @@ public class Player extends GameObject {
 	@Override
 	public void update() {
 		super.update();
+		
+		// Footsteps
+		if(sprite.getAction().startsWith("run")){
+			if(sprite.getFrame() == 3 || sprite.getFrame() == 9){
+				Clips sound = STEP_SOUNDS[RAND.nextInt(STEP_SOUNDS.length)];
+				getGame().playSoundAtLocation(sound, position.x, position.y, 0); 
+			}
+		}
 		
 		// Animations
 		if(standing){
@@ -89,9 +113,12 @@ public class Player extends GameObject {
 	@Override
 	public void onHitBottom() {
 		setSpriteAction("land");
-		double p = 1 - Math.min(1, velocity.y);
-		int f = (int) (p * sprite.getTotalFrames());
+		double p = Math.min(1, velocity.y);
+		int f = (int) ((1 - p) * sprite.getTotalFrames());
 		sprite.setFrame(f);
+
+		Clips sound = JUMP_SOUNDS[RAND.nextInt(JUMP_SOUNDS.length)];
+		getGame().playSoundAtLocation(sound, position.x, position.y, p * 20 - 10); 
 	}
 
 	private void conjureGrav(Vector2 pos) {
@@ -163,7 +190,12 @@ public class Player extends GameObject {
 		if(jumpsLeft > 0 && velocity.y < jumpStrength){
 			jumpsLeft--;
 			velocity.y = Math.min(velocity.y, -jumpStrength);
+			
 			setSpriteAction("jump");
+			if(standing){
+				Clips sound = JUMP_SOUNDS[RAND.nextInt(JUMP_SOUNDS.length)];
+				getGame().playSoundAtLocation(sound, position.x, position.y, 0); 
+			}
 		}
 	}
 	

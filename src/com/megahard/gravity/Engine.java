@@ -18,6 +18,7 @@ import java.util.Map.Entry;
 
 import com.megahard.gravity.GameMap.Layers;
 import com.megahard.gravity.GameMap.Layers.GameObjects;
+import com.megahard.gravity.Sound.Clips;
 
 public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 	// TEST CODE
@@ -91,6 +92,10 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 	
 	public void setFinishListener(EngineFinishListener efl){
 		finishListener  = efl;
+	}
+	
+	public void playSoundAtLocation(Clips sound, double x, double y, double gain){
+		sound.play((float)gain);
 	}
 
 	public GameMap getMap() {

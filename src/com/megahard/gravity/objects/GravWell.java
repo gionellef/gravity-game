@@ -2,6 +2,7 @@ package com.megahard.gravity.objects;
 
 import com.megahard.gravity.Engine;
 import com.megahard.gravity.GameObject;
+import com.megahard.gravity.Sound;
 import com.megahard.gravity.Vector2;
 
 public class GravWell extends GameObject {
@@ -12,7 +13,9 @@ public class GravWell extends GameObject {
 	public GravWell(Engine game) {
 		super(game, "gravwell");
 		fixed = true;
+		
 		sprite.setAction("create");
+		getGame().playSoundAtLocation(Sound.gravwell_start, position.x, position.y, 0);
 	}
 
 	@Override
@@ -22,6 +25,7 @@ public class GravWell extends GameObject {
 		time++;
 		
 		if(online){
+			getGame().playSoundAtLocation(Sound.gravwell, position.x, position.y, Math.random() * 2 - 1);
 			for(GameObject o : getGame().getState().objects){
 				Vector2 diff = position.sub(o.position);
 				double d = diff.length();
@@ -33,6 +37,19 @@ public class GravWell extends GameObject {
 					}
 				}else{
 					o.velocity = o.velocity.add(diff.sub(o.velocity).scale(0.1f));
+				}
+			}
+			
+			if(Math.random() < 1){
+				double a = Math.random() * Math.PI * 2;
+				double r = Math.random() * 2;
+				double x = position.x + Math.cos(a) * r;
+				double y = position.y + Math.sin(a) * r;
+				if(!getGame().getMap().getTile(x, y).getCollidable()){
+					VioletSpark s = new VioletSpark(getGame());
+					s.position.set(x, y);
+					s.velocity.set(Math.cos(a - Math.PI/3) * -r/3, Math.sin(a - Math.PI/3) * -r/3 - 0.2);
+					getGame().addObject(s);
 				}
 			}
 		}
