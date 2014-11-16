@@ -1,0 +1,14 @@
+{
+	sheetWidth: 6,
+	width: 16,
+	height: 16,
+	actions: [
+		{
+			name: "default",
+			x: 0,
+			y: 0,
+			frames: 6,
+			delay: 1
+		}
+	]
+}
