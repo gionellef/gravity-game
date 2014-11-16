@@ -85,8 +85,8 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 		obj.active = false;
 	}
 	
-	public void finish(){
-		finishListener.onFinish(0, 0, "YOU WON or lost. I don't know.");
+	public void finish(boolean win){
+		finishListener.onFinish(0, 0, win);
 	}
 	
 	public void setFinishListener(EngineFinishListener efl){
@@ -197,11 +197,11 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 			mouseRightState = KeyState.UP;
 		}
 		
-		// Game over
+		// dead player
 		if(!player.active){
-			finish();
+			// Game over
+			finish(false);
 		}
-		//if( reach door) finish();
 	}
 
 	@Override

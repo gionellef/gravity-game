@@ -70,7 +70,7 @@ public class Player extends GameObject {
 		if(standing){
 			ExitDoor door = getGame().findObject(ExitDoor.class, position.x - 0.5, position.y - 1, 1, 2, false);
 			if(door != null){
-				// TODO do something on win
+				getGame().finish(true);
 				System.out.println("YOU WIN!");
 			}
 		}

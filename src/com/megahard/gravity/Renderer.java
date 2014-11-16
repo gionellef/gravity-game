@@ -43,6 +43,7 @@ public class Renderer extends Canvas {
 		
 		double cx = camera.x;
 		double cy = camera.y;
+		// prevent "camera overflow"
 //		if(cx + buffer.getWidth()/2/TILE_SIZE >= mapWidth){
 //			cx = mapWidth - buffer.getWidth()/2/TILE_SIZE;
 //		}else if(cx - buffer.getWidth()/2/TILE_SIZE < 0){
