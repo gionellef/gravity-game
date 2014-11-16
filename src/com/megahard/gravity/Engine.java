@@ -110,7 +110,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 			if (objects[i] != null) {
 				GameObjects object = objects[i];
 				
-				String type = object.getType();
+				String type = map.getObjectType(object.getGID());
 				Class<GameObject> subclass = null;
 				try {
 					subclass = (Class<GameObject>) Class
@@ -124,7 +124,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 							object.getY() / 16 - 2);
 					addObject(o2);
 
-					if (object.getType().equals("Player")) {
+					if (type.equals("Player")) {
 						player = o2;
 						renderer.setCamera(player.position);
 					}
@@ -139,6 +139,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 					System.err.println("Invalid constructor for object type " + type);
 					e.printStackTrace();
 				}
+
 			}
 		}
 		return map;
