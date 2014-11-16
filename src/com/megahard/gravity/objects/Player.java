@@ -3,6 +3,7 @@ package com.megahard.gravity.objects;
 import java.awt.event.KeyEvent;
 
 import com.megahard.gravity.Engine;
+import com.megahard.gravity.GameMap;
 import com.megahard.gravity.GameObject;
 import com.megahard.gravity.Vector2;
 
@@ -94,8 +95,18 @@ public class Player extends GameObject {
 	}
 
 	private void conjureGrav(Vector2 pos) {
-		if(getGame().getMap().getTile(pos).getCollidable()){
-			return;
+		if(!isAreaClear(pos)){
+			Vector2 pro = new Vector2();
+			out: for(double r = 1; r < 4; r += 0.5){
+				for(double a = 0; a < 2*Math.PI; a += Math.PI/2){
+					pro.set(pos.x + r * Math.cos(a), pos.y + r * Math.sin(a));
+					if(isAreaClear(pro)){
+						pos = pro;
+						break out;
+					}
+				}
+			}
+			if(pos != pro) return;
 		}
 		if(gravsLeft > 0){
 			gravsLeft--;
@@ -110,6 +121,20 @@ public class Player extends GameObject {
 				setSpriteAction("conjure");
 			}
 		}
+	}
+	
+	private boolean isAreaClear(Vector2 pos){
+		Vector2 se = new Vector2(pos.x + 1, pos.y + 1);
+		Vector2 ne = new Vector2(pos.x + 1, pos.y - 1);
+		Vector2 nw = new Vector2(pos.x - 1, pos.y - 1);
+		Vector2 sw = new Vector2(pos.x - 1, pos.y + 1);
+		GameMap map = getGame().getMap();
+		return
+			!map.getTile(pos).getCollidable()
+			&& !map.getTile(se).getCollidable()
+			&& !map.getTile(ne).getCollidable()
+			&& !map.getTile(nw).getCollidable()
+			&& !map.getTile(sw).getCollidable();
 	}
 
 	private void run(boolean left) {
