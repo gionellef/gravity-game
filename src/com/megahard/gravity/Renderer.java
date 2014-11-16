@@ -36,12 +36,26 @@ public class Renderer extends Canvas {
 	}
 
 	public void render(GameState s) {
-
 		Graphics2D g = (Graphics2D) buffer.getGraphics();
-
-		g.fillRect(0, 0, buffer.getWidth(), buffer.getHeight());
+		
 		int mapHeight = s.map.getHeight();
 		int mapWidth = s.map.getWidth();
+		
+		double cx = camera.x;
+		double cy = camera.y;
+//		if(cx + buffer.getWidth()/2/TILE_SIZE >= mapWidth){
+//			cx = mapWidth - buffer.getWidth()/2/TILE_SIZE;
+//		}else if(cx - buffer.getWidth()/2/TILE_SIZE < 0){
+//			cx = buffer.getWidth()/2/TILE_SIZE;
+//		}
+//		if(cy + buffer.getHeight()/2/TILE_SIZE >= mapHeight){
+//			cy = mapHeight - buffer.getHeight()/2/TILE_SIZE;
+//		}else if(cy - buffer.getHeight()/2/TILE_SIZE < 0){
+//			cy = buffer.getHeight()/2/TILE_SIZE;
+//		}
+
+		g.setColor(Color.black);
+		g.fillRect(0, 0, buffer.getWidth(), buffer.getHeight());
 		int columns = s.map.getImgwidth() / TILE_SIZE;
 		for (int y = 0; y < mapHeight; y++) {
 			for (int x = 0; x < mapWidth; x++) {
@@ -49,8 +63,8 @@ public class Renderer extends Canvas {
 				int frame = tile.getTileIndex() - 1;
 				int frameX = (frame % columns) * TILE_SIZE;
 			    int frameY = (frame / columns) * TILE_SIZE;
-			    int dx = (int) ((x - camera.x) * TILE_SIZE + buffer.getWidth() / 2);
-			    int dy = (int) ((y - camera.y) * TILE_SIZE + buffer.getHeight() / 2);
+			    int dx = (int) ((x - cx) * TILE_SIZE + buffer.getWidth() / 2);
+			    int dy = (int) ((y - cy) * TILE_SIZE + buffer.getHeight() / 2);
 			    g.drawImage(tileset,
 			    	dx, dy, dx + TILE_SIZE, dy + TILE_SIZE,
 			    	frameX, frameY, frameX + TILE_SIZE, frameY + TILE_SIZE,
@@ -60,15 +74,15 @@ public class Renderer extends Canvas {
 
 		for (GameObject o : s.objects) {
 			if (o.sprite!= null) {
-				o.sprite.draw(g, (int) ((o.position.x - camera.x) * TILE_SIZE
+				o.sprite.draw(g, (int) ((o.position.x - cx) * TILE_SIZE
 						+ buffer.getWidth() / 2 - o.sprite.getWidth() / 2),
-						(int) ((o.position.y - camera.y) * TILE_SIZE
+						(int) ((o.position.y - cy) * TILE_SIZE
 								+ buffer.getHeight() / 2 - o.sprite.getHeight() / 2));
 			} else {
 				g.setColor(Color.red);
-				g.drawRect((int) ((o.position.x - o.size.x / 2 - camera.x)
+				g.drawRect((int) ((o.position.x - o.size.x / 2 - cx)
 						* TILE_SIZE + buffer.getWidth() / 2), (int) ((o.position.y
-						- o.size.y / 2 - camera.y)
+						- o.size.y / 2 - cy)
 						* TILE_SIZE + buffer.getHeight() / 2),
 						(int) (o.size.x * TILE_SIZE),
 						(int) (o.size.y * TILE_SIZE));
