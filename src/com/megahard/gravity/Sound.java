@@ -80,21 +80,24 @@ public class Sound {
 	public static Clips airjump = load("airjump.wav", 2);
 	public static Clips gravwell = load("gravwell.wav", 2);
 	public static Clips gravwell_start = load("gravwell-start.wav", 4);
+	public static Clips jump1 = load("jump1.wav", 2);
+	public static Clips jump2 = load("jump2.wav", 2);
+	public static Clips jump3 = load("jump3.wav", 2);
+	public static Clips jump4 = load("jump4.wav", 2);
+	public static Clips land1 = load("land1.wav", 2);
+	public static Clips land2 = load("land2.wav", 2);
+	public static Clips land3 = load("land3.wav", 2);
+	public static Clips land4 = load("land4.wav", 2);
 	public static Clips plasma = load("plasma.wav", 4);
 	public static Clips power = load("power.wav", 2);
 	public static Clips spark = load("spark.wav", 4);
-	public static Clips step_cloth1 = load("step_cloth1.wav", 2);
-	public static Clips step_cloth2 = load("step_cloth2.wav", 2);
-	public static Clips step_cloth3 = load("step_cloth3.wav", 2);
-	public static Clips step_cloth4 = load("step_cloth4.wav", 2);
-	public static Clips step_lth1 = load("step_lth1.wav", 2);
-	public static Clips step_lth2 = load("step_lth2.wav", 2);
-	public static Clips step_lth3 = load("step_lth3.wav", 2);
-	public static Clips step_lth4 = load("step_lth4.wav", 2);
-	public static Clips step_metal1 = load("step_metal1.wav", 2);
-	public static Clips step_metal2 = load("step_metal2.wav", 2);
-	public static Clips step_metal3 = load("step_metal3.wav", 2);
-	public static Clips step_metal4 = load("step_metal4.wav", 2);
+	public static Clips step1 = load("step1.wav", 2);
+	public static Clips step2 = load("step2.wav", 2);
+	public static Clips step3 = load("step3.wav", 2);
+	public static Clips step4 = load("step4.wav", 2);
+	public static Clips step5 = load("step5.wav", 2);
+	public static Clips step6 = load("step6.wav", 2);
+	public static Clips step7 = load("step7.wav", 2);
 
 	private static Clips load(String name, int count) {
 		try {

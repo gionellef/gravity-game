@@ -12,16 +12,25 @@ import com.megahard.gravity.Vector2;
 
 public class Player extends GameObject {
 	private static final Clips[] STEP_SOUNDS = new Clips[]{
-		Sound.step_cloth1,
-		Sound.step_cloth2,
-		Sound.step_cloth3,
-		Sound.step_cloth4,	
+		Sound.step1,
+		Sound.step2,
+		Sound.step3,
+		Sound.step4,
+		Sound.step5,
+		Sound.step6,
+		Sound.step7,
 	};
 	private static final Clips[] JUMP_SOUNDS = new Clips[]{
-		Sound.step_lth1,
-		Sound.step_lth2,
-		Sound.step_lth3,
-		Sound.step_lth4,	
+		Sound.jump1,
+		Sound.jump2,
+		Sound.jump3,
+		Sound.jump4,	
+	};
+	private static final Clips[] LAND_SOUNDS = new Clips[]{
+		Sound.land1,
+		Sound.land2,
+		Sound.land3,
+		Sound.land4,	
 	};
 	private static final Random RAND = new Random();
 	
@@ -120,7 +129,7 @@ public class Player extends GameObject {
 		int f = (int) (Math.pow(1 - p, 0.3) * sprite.getTotalFrames());
 		sprite.setFrame(f);
 
-		Clips sound = JUMP_SOUNDS[RAND.nextInt(JUMP_SOUNDS.length)];
+		Clips sound = LAND_SOUNDS[RAND.nextInt(LAND_SOUNDS.length)];
 		getGame().playSoundAtLocation(sound, position, 0.5 + p * 0.5); 
 	}
 
