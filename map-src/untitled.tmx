@@ -10,5 +10,6 @@
  <objectgroup name="Object Layer 1">
   <object type="Player" gid="501" x="249" y="462"/>
   <object type="DeadlyObj" gid="503" x="416.5" y="400.5"/>
+  <object gid="504" x="1109.83" y="408"/>
  </objectgroup>
 </map>
