@@ -63,8 +63,9 @@ public class GravityApplet extends Applet implements Runnable, ActionListener, E
 	}
 	
 	@Override
-	public void onFinish(int score, int time, String message) {
+	public void onFinish(int score, int time, boolean win) {
 		stop();
+		System.out.println("win = " + win);
 		showTitleScreen();
 	}
 
