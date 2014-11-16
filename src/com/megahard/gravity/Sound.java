@@ -39,7 +39,9 @@ public class Sound {
 			if (p >= count)
 				p = 0;
 			clips[p].stop();
-			
+			clips[p].setFramePosition(0);
+			clips[p].start();
+
 			try{
 				FloatControl gainControl = (FloatControl) clips[p].getControl(FloatControl.Type.MASTER_GAIN);
 				float max = gainControl.getMaximum();
@@ -47,20 +49,17 @@ public class Sound {
 				float g = min + (max - min) * (float) Math.pow(volume, 0.5);
 				gainControl.setValue(Math.max(min, Math.min(g, max)));
 			}catch(IllegalArgumentException e){
-				System.out.println("Can't set gain for " + this);
 			}
 			
 			try{
 				FloatControl panControl = (FloatControl) clips[p].getControl(FloatControl.Type.PAN);
 				float max = panControl.getMaximum();
 				float min = panControl.getMinimum();
+				System.out.println(min + ", " + pan + ", " + max);
 				panControl.setValue(Math.max(min, Math.min(pan, max)));
 			}catch(IllegalArgumentException e){
-				System.out.println("Can't set pan for " + this);
 			}
 			
-			clips[p].setFramePosition(0);
-			clips[p].start();
 		}
 
 		public void stop() {

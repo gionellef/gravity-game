@@ -199,10 +199,9 @@ public class Player extends GameObject {
 			velocity.y = Math.min(velocity.y, -jumpStrength);
 			
 			setSpriteAction("jump");
-			if(standing){
-				Clips sound = JUMP_SOUNDS[RAND.nextInt(JUMP_SOUNDS.length)];
-				getGame().playSoundAtLocation(sound, position, 1); 
-			}
+			
+			Clips sound = standing ? JUMP_SOUNDS[RAND.nextInt(JUMP_SOUNDS.length)] : Sound.airjump;
+			getGame().playSoundAtLocation(sound, position, 0.8); 
 		}
 	}
 	
