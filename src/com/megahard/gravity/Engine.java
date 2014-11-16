@@ -110,7 +110,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 			if (objects[i] != null) {
 				GameObjects object = objects[i];
 				
-				String type = object.getType();
+				String type = map.getObjectType(object.getGID());
 				Class<GameObject> subclass = null;
 				try {
 					subclass = (Class<GameObject>) Class.forName("com.megahard.gravity.objects." + type);
@@ -134,7 +134,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 				o2.position.set(object.getX()/16 + 2, object.getY()/16 - 2);
 				addObject(o2);
 				
-				if (object.getType().equals("Player")) {
+				if (type.equals("Player")) {
 					player = o2;
 					renderer.setCamera(player.position);
 				}

@@ -119,6 +119,12 @@ public class GameMap {
 		return layers;
 	}
 
+	
+	public String getObjectType(int gid) {
+		int offset = (tilesets[0].getImagewidth() / tilesets[0].getTileWidth()) * (tilesets[0].getImageheight() / tilesets[0].getTileHeight());
+		System.out.println(offset);
+		return tilesets[1].tileproperties.get(String.valueOf(gid - offset - 1)).getType();
+	}
 
 
 
@@ -137,50 +143,17 @@ public class GameMap {
 		public class GameObjects {
 			private double height;
 			private double width;
-			private String type;
-			private String name;
+//			private String type;
+			private int gid;
+//			private String name;
 			private double x;
 			private double y;
-			private Properties properties;
-			
-			public class Properties {
-	            private String friction;
-	            private String restitution;
-	            private String sprite = "";
-	            private String velocityX;
-	            private String velocityY;
-				public double getFriction() {
-					if (friction.isEmpty()) {
-						return 0;
-					}
-					return Double.valueOf(friction);
-				}
-				public double getRestitution() {
-					if (restitution.isEmpty()) {
-						return 0;
-					}
-					return Double.valueOf(restitution);
-				}
-				public String getSprite() {
-//					if (restitution.isEmpty()) {
-//						return "";
-//					}
-					return sprite;
-				}
-				public double getVelocityX() {
-					if (velocityX.isEmpty()) {
-						return 0;
-					}
-					return Double.valueOf(velocityX);
-				}
-				public double getVelocityY() {
-					if (velocityY.isEmpty()) {
-						return 0;
-					}
-					return Double.valueOf(velocityY);
-				}
-
-			} // end class Properties
+//			private Properties properties;
+//			
+//			public class Properties {
+//
+//
+//			} // end class Properties
 
 			public double getHeight() {
 				return height;
@@ -188,12 +161,14 @@ public class GameMap {
 			public double getWidth() {
 				return width;
 			}
-			public String getType() {
-				return type;
-			}
-			public String getName() {
-				return name;
-			}
+//			public String getType() {
+//				int offset = (tilesets[0].getImagewidth() / tilesets[0].getTileWidth()) * (tilesets[0].getImageheight() / tilesets[0].getTileHeight());
+//				System.out.println(offset);
+//				return tilesets[1].tileproperties.get(String.valueOf(gid - offset - 1)).getType();
+//			}
+//			public String getName() {
+//				return name;
+//			}
 
 			public double getX() {
 				return x;
@@ -201,22 +176,28 @@ public class GameMap {
 			public double getY() {
 				return y;
 			}
-			public Properties getProperties() {
-				return properties;
+			
+			public int getGID() {
+				return gid;
 			}
+//			public Properties getProperties() {
+//				return properties;
+//			}
 
 
 		}
 	}
 	
-	private class Tilesets {
+	public class Tilesets {
 		private Map<String, TileProperties> tileproperties;
 		private int imageheight;
 		private int imagewidth;
+		private int tileheight;
+		private int tilewidth;
 
 		private class TileProperties {
 			private int collidable;
-
+			private String type;
 			public boolean getCollidable() {
 				if (collidable == 0) {
 					return true;
@@ -224,6 +205,10 @@ public class GameMap {
 					return false;
 				}
 			}
+			public String getType() {
+				return type;
+			}
+
 
 		}
 
@@ -233,6 +218,14 @@ public class GameMap {
 
 		public int getImagewidth() {
 			return imagewidth;
+		}
+		
+		public int getTileHeight() {
+			return tileheight;
+		}
+
+		public int getTileWidth() {
+			return tilewidth;
 		}
 
 
