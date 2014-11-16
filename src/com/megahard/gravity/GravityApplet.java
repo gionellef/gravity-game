@@ -35,7 +35,7 @@ public class GravityApplet extends Applet implements Runnable, ActionListener, E
 
 	private void showTitleScreen() {
 		add(ts);
-		this.setBackground(Color.black);
+		this.setBackground(new Color (10,10,10));
 	}
 
 	
@@ -101,23 +101,21 @@ public class GravityApplet extends Applet implements Runnable, ActionListener, E
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		if(e.getSource() == ts.getStartButton()) {
-			ts.getStartButton().setBackground(new Color(42,98,61));
+			ts.getStartButton().setBackground(new Color(14,26,64));
 		}
 		if(e.getSource() == ts.getExitButton()) {
-			ts.getExitButton().setBackground(new Color(42,98,61));
+			ts.getExitButton().setBackground(new Color(14,26,64));
 		}
-		
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
 		if(e.getSource() == ts.getStartButton()) {
-			ts.getStartButton().setBackground(new Color(26,71,42));
+			ts.getStartButton().setBackground(new Color(34,47,91));
 		}
 		if(e.getSource() == ts.getExitButton()) {
-			ts.getExitButton().setBackground(new Color(26,71,42));
+			ts.getExitButton().setBackground(new Color(34,47,91));
 		}
-		
 	}
 
 	@Override

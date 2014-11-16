@@ -23,8 +23,8 @@ public class TitleScreen extends JPanel{
 		startButton = new JButton("New Game");
 		startButton.setPreferredSize(new Dimension(200,75));
 		startButton.setBounds(0,150,800,75);
-		startButton.setBackground(new Color(26,71,42));
-		startButton.setForeground(new Color(170,170,170));
+		startButton.setBackground(new Color(34,47,91));
+		startButton.setForeground(Color.white);
 		startButton.setFocusPainted(false);
 		startButton.addMouseListener(app);
 		startButton.addActionListener(app);
@@ -32,8 +32,8 @@ public class TitleScreen extends JPanel{
 		exitButton = new JButton("Quit");
 		exitButton.setPreferredSize(new Dimension(200,75));
 		exitButton.setBounds(0, 225, 800, 75);
-		exitButton.setBackground(new Color(26,71,42));
-		exitButton.setForeground(new Color(170,170,170));
+		exitButton.setBackground(new Color(34,47,91));
+		exitButton.setForeground(Color.white);
 		exitButton.setFocusPainted(false);
 		exitButton.addMouseListener(app);
 		exitButton.addActionListener(app);
@@ -53,8 +53,8 @@ public class TitleScreen extends JPanel{
 	
 	public void paintComponent(Graphics g) {
 		g.setFont(new Font(name, 10,50));
-		g.setColor(new Color(192,192,192));
-		g.drawString(name, 75, 75);
+		g.setColor(new Color(240,240,240));
+		g.drawString(name, 75, 100);
 	}
 
 	public JButton getStartButton() {
