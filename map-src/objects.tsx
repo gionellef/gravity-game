@@ -11,4 +11,9 @@
    <property name="type" value="GravWell"/>
   </properties>
  </tile>
+ <tile id="2">
+  <properties>
+   <property name="type" value="DeadlyObj"/>
+  </properties>
+ </tile>
 </tileset>
