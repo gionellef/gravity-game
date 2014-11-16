@@ -39,8 +39,6 @@ public class Sound {
 			if (p >= count)
 				p = 0;
 			clips[p].stop();
-			clips[p].setFramePosition(0);
-			clips[p].start();
 
 			try{
 				FloatControl gainControl = (FloatControl) clips[p].getControl(FloatControl.Type.MASTER_GAIN);
@@ -49,17 +47,29 @@ public class Sound {
 				float g = min + (max - min) * (float) Math.pow(volume, 0.5);
 				gainControl.setValue(Math.max(min, Math.min(g, max)));
 			}catch(IllegalArgumentException e){
+				System.out.println("Can't control gain");
 			}
 			
 			try{
 				FloatControl panControl = (FloatControl) clips[p].getControl(FloatControl.Type.PAN);
 				float max = panControl.getMaximum();
 				float min = panControl.getMinimum();
-				System.out.println(min + ", " + pan + ", " + max);
 				panControl.setValue(Math.max(min, Math.min(pan, max)));
 			}catch(IllegalArgumentException e){
+				System.out.println("Can't control pan");
+				System.out.println("Trying balance...");
+				try{
+					FloatControl balanceControl = (FloatControl) clips[p].getControl(FloatControl.Type.BALANCE);
+					float max = balanceControl.getMaximum();
+					float min = balanceControl.getMinimum();
+					balanceControl.setValue(Math.max(min, Math.min(pan, max)));
+				}catch(IllegalArgumentException e2){
+					System.out.println("Can't control balance");
+				}
 			}
-			
+
+			clips[p].setFramePosition(0);
+			clips[p].start();
 		}
 
 		public void stop() {
@@ -70,9 +80,9 @@ public class Sound {
 	public static Clips airjump = load("airjump.wav", 2);
 	public static Clips gravwell = load("gravwell.wav", 2);
 	public static Clips gravwell_start = load("gravwell-start.wav", 4);
-	public static Clips plasma = load("plasma.wav", 8);
+	public static Clips plasma = load("plasma.wav", 4);
 	public static Clips power = load("power.wav", 2);
-	public static Clips spark = load("spark.wav", 8);
+	public static Clips spark = load("spark.wav", 4);
 	public static Clips step_cloth1 = load("step_cloth1.wav", 2);
 	public static Clips step_cloth2 = load("step_cloth2.wav", 2);
 	public static Clips step_cloth3 = load("step_cloth3.wav", 2);

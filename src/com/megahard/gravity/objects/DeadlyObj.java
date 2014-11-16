@@ -23,7 +23,7 @@ public class DeadlyObj extends GameObject {
 		
 		if(Math.random() < 0.05){
 			getGame().playSoundAtLocation(Sound.spark, position, 0.4);
-			for(int i = 1 + (int) (Math.random() * 4); i >= 0; i--){
+			for(int i = 1 + (int) (Math.random() * 8); i > 0; i--){
 				RedSpark s = new RedSpark(getGame());
 				s.position.set(position.x, position.y);
 				double a = Math.random() * Math.PI * 2;

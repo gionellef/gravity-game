@@ -79,7 +79,6 @@ public class Player extends GameObject {
 			else if(getGame().keyIsDown(KeyEvent.VK_D)){
 				run (false);
 			}
-			
 		}
 		if(getGame().mouseLeftIsJustPressed()){
 			conjureGrav(getGame().getMouseGamePosition());
@@ -92,29 +91,26 @@ public class Player extends GameObject {
 		}
 		
 		// Door
-		if(standing){
+		if(standing && velocity.length() < 0.05){
 			ExitDoor door = getGame().findObject(ExitDoor.class, position.x - 0.5, position.y - 1, 1, 2, false);
 			if(door != null){
 				getGame().finish(true);
 				System.out.println("YOU WIN!");
 			}
 		}
-
-		// Power up
-		PowerItem pow = getGame().findObject(PowerItem.class, position.x - 0.5, position.y - 1, 1, 2, true);
-		if(pow != null){
-			gravsLeft++;
-			getGame().removeObject(pow);
-			getGame().playSoundAtLocation(Sound.power, position, 1);
-		}
-		
-		// Deadly object
-		DeadlyObj deadlyObj = getGame().findObject(DeadlyObj.class, position.x - 0.5, position.y - 1, 1, 2, true);
-		if(deadlyObj != null){
+	}
+	
+	@Override
+	public void onCollide(GameObject obj) {
+		Class<? extends GameObject> objClass = obj.getClass();
+		if(objClass.equals(DeadlyObj.class)){
 			getGame().removeObject(this);
 			System.out.println("Game Over noob!");
+		}else if(objClass.equals(PowerItem.class)){
+			gravsLeft++;
+			getGame().removeObject(obj);
+			getGame().playSoundAtLocation(Sound.power, position, 1);
 		}
-
 	}
 	
 	@Override
