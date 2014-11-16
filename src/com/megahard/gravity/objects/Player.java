@@ -44,7 +44,8 @@ public class Player extends GameObject {
 		isRunning = false;
 		
 		// Controls
-		if(getGame().keyIsJustPressed(KeyEvent.VK_SPACE)){
+		if(getGame().keyIsJustPressed(KeyEvent.VK_SPACE) 
+				|| getGame().keyIsJustPressed(KeyEvent.VK_W)){
 			jump();
 		}else{
 			if(getGame().keyIsDown(KeyEvent.VK_A)){
