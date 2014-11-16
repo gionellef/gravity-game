@@ -30,6 +30,21 @@
                  "width":0,
                  "x":9,
                  "y":302
+                }, 
+                {
+                 "gid":803,
+                 "height":0,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":176.5,
+                 "y":240.5
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -3398,6 +3413,10 @@
              "1":
                 {
                  "type":"GravWell"
+                },
+             "2":
+                {
+                 "type":"DeadlyObj"
                 }
             },
          "tilewidth":64
