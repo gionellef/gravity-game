@@ -56,14 +56,14 @@ public class Player extends GameObject {
 			}
 			
 		}
-		if(getGame().keyIsJustPressed(KeyEvent.VK_E)){
+		if(getGame().mouseLeftIsJustPressed()){
+			conjureGrav(getGame().getMouseGamePosition());
+		}
+		if(getGame().mouseLeftIsUp()){
 			if(well != null){
 				well.destroy();
 				well = null;
 			}
-		}
-		if(getGame().mouseLeftIsJustPressed()){
-			conjureGrav(getGame().getMouseGamePosition());
 		}
 		
 		// Door
