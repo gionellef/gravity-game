@@ -321,9 +321,15 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 
 	@SuppressWarnings("unchecked")
 	public <T> T findObject(Class<T> type, double x, double y,
-			double w, double h) {
+			double w, double h, boolean edgeNotCenter) {
 		for(GameObject o : state.objects){
-			if(o.position.x >= x && o.position.y >= y && o.position.x < x + w && o.position.y < y + h){
+			if(!edgeNotCenter && o.position.x >= x && o.position.y >= y && o.position.x < x + w && o.position.y < y + h){
+				if(o.getClass().equals(type)){
+					return (T)o;
+				}
+			}
+			if(edgeNotCenter && o.position.x - o.size.x / 2 < x + w && o.position.x + o.size.x / 2 > x
+				&& o.position.y - o.size.y / 2 < y + h && o.position.y + o.size.y / 2 > y) {
 				if(o.getClass().equals(type)){
 					return (T)o;
 				}
@@ -331,6 +337,8 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 		}
 		return null;
 	}
+	
+	
 	
 	public List<GameObject> findObjects(double x, double y, double w, double h){
 		List<GameObject> list = new LinkedList<GameObject>();

@@ -68,9 +68,18 @@ public class Player extends GameObject {
 		
 		// Door
 		if(standing){
-			ExitDoor door = getGame().findObject(ExitDoor.class, position.x - 8, position.y - 16, 16, 32);
+			ExitDoor door = getGame().findObject(ExitDoor.class, position.x - 8, position.y - 16, 16, 32, false);
 			if(door != null){
 				System.out.println("YOU WIN!");
+			}
+		}
+		
+		// Deadly object
+		if(active){
+			DeadlyObj deadlyObj = getGame().findObject(DeadlyObj.class, position.x - 8, position.y - 16, 16, 32, true);
+			if(deadlyObj != null){
+				getGame().removeObject(this);
+				System.out.println("Game Over noob!");
 			}
 		}
 	}
