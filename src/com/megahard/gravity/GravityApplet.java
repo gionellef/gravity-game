@@ -5,15 +5,15 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.JApplet;
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
-public class GravityApplet extends JApplet implements Runnable, ActionListener, EngineFinishListener, MouseListener {
+public class GravityApplet extends JApplet implements Runnable, ActionListener, EngineFinishListener {
 
 	public static TitleScreen ts;
+	public static LevelMenu lm;
 	
 	private static final long serialVersionUID = 1L;
 
@@ -50,9 +50,11 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 
 	private void showTitleScreen() {
 		add(ts);
-		this.setBackground(new Color (10,10,10));
 	}
 
+	private void showLevelMenu() {
+		add(lm);
+	}
 	
 	@Override
 	public void run() {
@@ -89,10 +91,22 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 		Object a = e.getSource();
 		
 		if (a.equals(ts.getStartButton())) {
-			System.out.println("uhm");
+			lm = new LevelMenu(this);
+			showLevelMenu();
 			
+        	remove(ts);
+			validate();
+			repaint();
+		}
+		
+		if (a.equals(ts.getExitButton())) {
+			stop();
+			System.exit(1);
+		}
+		
+		if (a.equals(lm.getPlayButton())) {
 			engine = new Engine();
-			engine.initialize("");
+			engine.initialize(lm.getLevelLabel());
 			engine.getRenderer().addKeyListener(engine);
 			engine.getRenderer().addMouseListener(engine);
 			engine.getRenderer().addMouseMotionListener(engine);
@@ -103,45 +117,9 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 			
 			new Thread(this).start();
 			
-			remove(ts);
+			remove(lm);
 			validate();
 		}
-		
-		if (a.equals(ts.getExitButton())) {
-			stop();
-			System.exit(1);
-		}
 	}
-
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		if(e.getSource() == ts.getStartButton()) {
-			ts.getStartButton().setBackground(new Color(14,26,64));
-		}
-		if(e.getSource() == ts.getExitButton()) {
-			ts.getExitButton().setBackground(new Color(14,26,64));
-		}
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		if(e.getSource() == ts.getStartButton()) {
-			ts.getStartButton().setBackground(new Color(34,47,91));
-		}
-		if(e.getSource() == ts.getExitButton()) {
-			ts.getExitButton().setBackground(new Color(34,47,91));
-		}
-	}
-
-	@Override
-	public void mouseClicked(MouseEvent e) {}
-
-
-	@Override
-	public void mousePressed(MouseEvent e) {}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {}	
 	
 }
