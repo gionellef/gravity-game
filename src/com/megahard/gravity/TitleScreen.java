@@ -5,9 +5,6 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.*;
 
 public class TitleScreen extends JPanel{
@@ -24,13 +21,21 @@ public class TitleScreen extends JPanel{
 		menuscreen = new JFrame ("Gravity Menu");
 		
 		startButton = new JButton("New Game");
-		getStartButton().setPreferredSize(new Dimension(200,75));
-		getStartButton().setBounds(120,150,200,75);
-		getStartButton().addActionListener(app);
+		startButton.setPreferredSize(new Dimension(200,75));
+		startButton.setBounds(0,150,800,75);
+		startButton.setBackground(new Color(26,71,42));
+		startButton.setForeground(new Color(170,170,170));
+		startButton.setFocusPainted(false);
+		startButton.addMouseListener(app);
+		startButton.addActionListener(app);
 		
-		exitButton = new JButton("Give up");
+		exitButton = new JButton("Quit");
 		exitButton.setPreferredSize(new Dimension(200,75));
-		exitButton.setBounds(120, 225, 200, 75);
+		exitButton.setBounds(0, 225, 800, 75);
+		exitButton.setBackground(new Color(26,71,42));
+		exitButton.setForeground(new Color(170,170,170));
+		exitButton.setFocusPainted(false);
+		exitButton.addMouseListener(app);
 		exitButton.addActionListener(app);
 		
 		menuscreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -48,7 +53,7 @@ public class TitleScreen extends JPanel{
 	
 	public void paintComponent(Graphics g) {
 		g.setFont(new Font(name, 10,50));
-		g.setColor(Color.pink);
+		g.setColor(new Color(192,192,192));
 		g.drawString(name, 75, 75);
 	}
 
