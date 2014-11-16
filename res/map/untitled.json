@@ -28,8 +28,8 @@
                  "type":"Player",
                  "visible":true,
                  "width":0,
-                 "x":249,
-                 "y":462
+                 "x":267.25,
+                 "y":461
                 }, 
                 {
                  "gid":503,
@@ -58,7 +58,7 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":1109.83333333333,
+                 "x":1109.83,
                  "y":408
                 }, 
                 {
@@ -105,6 +105,81 @@
                  "width":0,
                  "x":1013,
                  "y":409.5
+                }, 
+                {
+                 "gid":505,
+                 "height":0,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":352.583,
+                 "y":470.917
+                }, 
+                {
+                 "gid":505,
+                 "height":0,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":304.75,
+                 "y":471
+                }, 
+                {
+                 "gid":505,
+                 "height":0,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":662.833,
+                 "y":295
+                }, 
+                {
+                 "gid":505,
+                 "height":0,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":680.667,
+                 "y":295.333
+                }, 
+                {
+                 "gid":505,
+                 "height":0,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":248.333,
+                 "y":213.667
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -2251,7 +2326,7 @@
          "firstgid":501,
          "image":"..\/..\/map-src\/objects.png",
          "imageheight":64,
-         "imagewidth":256,
+         "imagewidth":320,
          "margin":0,
          "name":"objects",
          "properties":
@@ -2277,6 +2352,10 @@
              "3":
                 {
                  "type":"ExitDoor"
+                },
+             "4":
+                {
+                 "type":"PowerItem"
                 }
             },
          "tilewidth":64

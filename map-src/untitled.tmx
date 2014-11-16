@@ -8,11 +8,16 @@
   </data>
  </layer>
  <objectgroup name="Object Layer 1">
-  <object type="Player" gid="501" x="249" y="462"/>
+  <object type="Player" gid="501" x="267.25" y="461"/>
   <object type="DeadlyObj" gid="503" x="416.5" y="400.5"/>
   <object gid="504" x="1109.83" y="408"/>
   <object gid="503" x="544" y="286.5"/>
   <object gid="503" x="640" y="286.5"/>
   <object gid="503" x="1013" y="409.5"/>
+  <object gid="505" x="352.583" y="470.917"/>
+  <object gid="505" x="304.75" y="471"/>
+  <object gid="505" x="662.833" y="295"/>
+  <object gid="505" x="680.667" y="295.333"/>
+  <object gid="505" x="248.333" y="213.667"/>
  </objectgroup>
 </map>

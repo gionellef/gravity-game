@@ -28,7 +28,7 @@ public class Player extends GameObject {
 	private GravWell well = null;
 	private boolean isRunning = true;
 	private boolean isFacingLeft = false;
-	private int gravsLeft = 99;
+	private int gravsLeft = 0;
 	private int jumpsLeft = 0;
 
 	public Player(Engine game) {
@@ -99,15 +99,21 @@ public class Player extends GameObject {
 				System.out.println("YOU WIN!");
 			}
 		}
+
+		// Power up
+		PowerItem pow = getGame().findObject(PowerItem.class, position.x - 0.5, position.y - 1, 1, 2, true);
+		if(pow != null){
+			gravsLeft++;
+			getGame().removeObject(pow);
+		}
 		
 		// Deadly object
-		if(active){
-			DeadlyObj deadlyObj = getGame().findObject(DeadlyObj.class, position.x - 0.5, position.y - 1, 1, 2, true);
-			if(deadlyObj != null){
-				getGame().removeObject(this);
-				System.out.println("Game Over noob!");
-			}
+		DeadlyObj deadlyObj = getGame().findObject(DeadlyObj.class, position.x - 0.5, position.y - 1, 1, 2, true);
+		if(deadlyObj != null){
+			getGame().removeObject(this);
+			System.out.println("Game Over noob!");
 		}
+
 	}
 	
 	@Override

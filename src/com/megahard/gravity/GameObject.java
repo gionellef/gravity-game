@@ -47,7 +47,7 @@ public class GameObject {
 	
 	public void update() {
 		if(!active){
-			throw new RuntimeException("NO! WHY INACTIVE OBJECT STILL IN UPDATE LOOP");
+			return;
 		}
 		
 		if(!fixed){
