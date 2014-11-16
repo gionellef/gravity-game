@@ -40,7 +40,7 @@ public class GravWell extends GameObject {
 				}
 			}
 			
-			if(Math.random() < 1){
+			if(Math.random() < 0.4){
 				double a = Math.random() * Math.PI * 2;
 				double r = Math.random() * 2;
 				double x = position.x + Math.cos(a) * r;
