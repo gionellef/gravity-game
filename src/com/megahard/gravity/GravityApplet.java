@@ -8,7 +8,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class GravityApplet extends Applet implements Runnable, ActionListener, EngineFinishListener, MouseListener {
+import javax.swing.JApplet;
+import javax.swing.JFrame;
+
+public class GravityApplet extends JApplet implements Runnable, ActionListener, EngineFinishListener, MouseListener {
 
 	public static TitleScreen ts;
 	
@@ -32,6 +35,18 @@ public class GravityApplet extends Applet implements Runnable, ActionListener, E
 		setLayout(new BorderLayout());
 	}
 
+	// application mode
+	public static void main(String args[]) {
+		GravityApplet applet = new GravityApplet();
+
+		JFrame frame = new JFrame("Gravity");
+		frame.getContentPane().add(applet);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(WIDTH, HEIGHT);
+		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
+		applet.init();
+	}
 
 	private void showTitleScreen() {
 		add(ts);
