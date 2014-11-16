@@ -113,30 +113,31 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 				String type = object.getType();
 				Class<GameObject> subclass = null;
 				try {
-					subclass = (Class<GameObject>) Class.forName("com.megahard.gravity.objects." + type);
-				} catch (ClassNotFoundException e1) {
-					e1.printStackTrace();
-				}
-				Constructor<GameObject> constructor = null;
-				try {
+					subclass = (Class<GameObject>) Class
+							.forName("com.megahard.gravity.objects." + type);
+					Constructor<GameObject> constructor = null;
 					constructor = subclass.getConstructor(Engine.class);
-				} catch (NoSuchMethodException | SecurityException e1) {
-					e1.printStackTrace();
-				}
-				GameObject o2 = null;
-				try {
+					GameObject o2 = null;
 					o2 = constructor.newInstance(this);
+
+					o2.position.set(object.getX() / 16 + 2,
+							object.getY() / 16 - 2);
+					addObject(o2);
+
+					if (object.getType().equals("Player")) {
+						player = o2;
+						renderer.setCamera(player.position);
+					}
+				} catch (ClassNotFoundException e1) {
+					System.err.println("Object type " + type + " not found!");
+					e1.printStackTrace();
+				} catch (NoSuchMethodException | SecurityException e1) {
+					System.err.println("Invalid constructor for object type " + type);
+					e1.printStackTrace();
 				} catch (InstantiationException | IllegalAccessException
 						| IllegalArgumentException | InvocationTargetException e) {
+					System.err.println("Invalid constructor for object type " + type);
 					e.printStackTrace();
-				}
-				
-				o2.position.set(object.getX()/16 + 2, object.getY()/16 - 2);
-				addObject(o2);
-				
-				if (object.getType().equals("Player")) {
-					player = o2;
-					renderer.setCamera(player.position);
 				}
 			}
 		}
