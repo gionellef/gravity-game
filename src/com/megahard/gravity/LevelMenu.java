@@ -41,7 +41,7 @@ public class LevelMenu extends JPanel{
 		right.setPreferredSize(new Dimension(50,50));
 		right.setBounds(475,150,50,50);
 		
-		levelLabel = new JLabel ("Untitled");
+		levelLabel = new JLabel ("untitled");
 		levelLabel.setPreferredSize(new Dimension(200, 75));
 		levelLabel.setBounds(325, 150, 200, 75);
 		levelLabel.setForeground(Color.red);
