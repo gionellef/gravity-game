@@ -14,6 +14,6 @@ Action	|	Control
 --------|--------------
 Move left | `A`
 Move right | `D`
-Jump | `space`
-Conjure gravity well | `mouse1`
-Dispel gravity well | `E`
+Jump | `space` or `W`
+Conjure gravity well | `hold mouse1`
+Dispel gravity well | `release mouse1`

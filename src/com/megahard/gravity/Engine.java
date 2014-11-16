@@ -113,31 +113,33 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 				String type = map.getObjectType(object.getGID());
 				Class<GameObject> subclass = null;
 				try {
-					subclass = (Class<GameObject>) Class.forName("com.megahard.gravity.objects." + type);
-				} catch (ClassNotFoundException e1) {
-					e1.printStackTrace();
-				}
-				Constructor<GameObject> constructor = null;
-				try {
+					subclass = (Class<GameObject>) Class
+							.forName("com.megahard.gravity.objects." + type);
+					Constructor<GameObject> constructor = null;
 					constructor = subclass.getConstructor(Engine.class);
-				} catch (NoSuchMethodException | SecurityException e1) {
-					e1.printStackTrace();
-				}
-				GameObject o2 = null;
-				try {
+					GameObject o2 = null;
 					o2 = constructor.newInstance(this);
+
+					o2.position.set(object.getX() / 16 + 2,
+							object.getY() / 16 - 2);
+					addObject(o2);
+
+					if (type.equals("Player")) {
+						player = o2;
+						renderer.setCamera(player.position);
+					}
+				} catch (ClassNotFoundException e1) {
+					System.err.println("Object type " + type + " not found!");
+					e1.printStackTrace();
+				} catch (NoSuchMethodException | SecurityException e1) {
+					System.err.println("Invalid constructor for object type " + type);
+					e1.printStackTrace();
 				} catch (InstantiationException | IllegalAccessException
 						| IllegalArgumentException | InvocationTargetException e) {
+					System.err.println("Invalid constructor for object type " + type);
 					e.printStackTrace();
 				}
-				
-				o2.position.set(object.getX()/16 + 2, object.getY()/16 - 2);
-				addObject(o2);
-				
-				if (type.equals("Player")) {
-					player = o2;
-					renderer.setCamera(player.position);
-				}
+
 			}
 		}
 		return map;
@@ -320,30 +322,39 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 	}
 
 	@SuppressWarnings("unchecked")
-	public <T> T findObject(Class<T> type, double x, double y,
-			double w, double h, boolean edgeNotCenter) {
-		for(GameObject o : state.objects){
-			if(!edgeNotCenter && o.position.x >= x && o.position.y >= y && o.position.x < x + w && o.position.y < y + h){
-				if(o.getClass().equals(type)){
-					return (T)o;
+	public <T> T findObject(Class<T> type, double x, double y, double w,
+			double h, boolean edgeNotCenter) {
+		for (GameObject o : state.objects) {
+			if (!edgeNotCenter) {
+				if (o.position.x >= x
+				&& o.position.y >= y
+				&& o.position.x < x + w
+				&& o.position.y < y + h) {
+					if (o.getClass().equals(type)) {
+						return (T) o;
+					}
 				}
-			}
-			if(edgeNotCenter && o.position.x - o.size.x / 2 < x + w && o.position.x + o.size.x / 2 > x
-				&& o.position.y - o.size.y / 2 < y + h && o.position.y + o.size.y / 2 > y) {
-				if(o.getClass().equals(type)){
-					return (T)o;
+			} else {
+				if (o.position.x - o.size.x / 2 < x + w
+				&& o.position.x + o.size.x / 2 >= x
+				&& o.position.y - o.size.y / 2 < y + h
+				&& o.position.y + o.size.y / 2 >= y) {
+					if (o.getClass().equals(type)) {
+						return (T) o;
+					}
 				}
 			}
 		}
 		return null;
 	}
 	
-	
-	
 	public List<GameObject> findObjects(double x, double y, double w, double h){
 		List<GameObject> list = new LinkedList<GameObject>();
 		for(GameObject o : state.objects){
-			if(o.position.x >= x && o.position.y >= y && o.position.x < x + w && o.position.y < y + h){
+			if(o.position.x >= x
+			&& o.position.y >= y
+			&& o.position.x < x + w
+			&& o.position.y < y + h){
 				list.add(o);
 			}
 		}

@@ -26,8 +26,11 @@ public class GravWell extends GameObject {
 				Vector2 diff = position.sub(o.position);
 				double d = diff.length();
 				if(d > 1){
-					double a = 0.1 + 1f/time;
-					o.velocity = o.velocity.add(diff.scale(a / (d * d)));
+					double str = 0.1 + 1f/time;
+					double accel = str / (d * d);
+					if(accel > 0.01){
+						o.velocity = o.velocity.add(diff.scale(accel));
+					}
 				}else{
 					o.velocity = o.velocity.add(diff.sub(o.velocity).scale(0.1f));
 				}
