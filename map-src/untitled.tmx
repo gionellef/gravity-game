@@ -1,29 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="90" height="40" tilewidth="16" tileheight="16">
  <tileset firstgid="1" source="main.tsx"/>
- <tileset firstgid="501" name="objects" tilewidth="64" tileheight="64">
-  <image source="objects.png" width="256" height="64"/>
-  <tile id="0">
-   <properties>
-    <property name="type" value="Player"/>
-   </properties>
-  </tile>
-  <tile id="1">
-   <properties>
-    <property name="type" value="GravWell"/>
-   </properties>
-  </tile>
-  <tile id="2">
-   <properties>
-    <property name="type" value="DeadlyObj"/>
-   </properties>
-  </tile>
-  <tile id="3">
-   <properties>
-    <property name="type" value="ExitDoor"/>
-   </properties>
-  </tile>
- </tileset>
+ <tileset firstgid="501" source="objects.tsx"/>
  <layer name="Tile Layer 1" width="90" height="40">
   <data encoding="base64" compression="zlib">
    eJzt2LtzTFEcwPG9MUwapAhmhIRRCAWFR2JHQQpSCBMKhgKFMCaKdOi8Hx3pkESiQ4ckEv8DeiUVOo+K8T2zZ2d+7tzjnt3cjN9mfjP5zH1k7+u799zdpK1UKrUZY4wxxhhjzAJyANsXuD4FndfgfhJnGFdwFdcaaH51A3Z+gId41EDzWjqPYyKit+v8Ai/xqoHmtXSewSxWJf/mOn9oQBo6n0FThEWlSue890IjDZ1rue+1dO7DQRyKXNbQOfZ73Y556HwRl4TLkdsN4CzORS5r6Ozu05hru5dUOrdiRUrinytyWT5vQq9z+7wuDGfsO20LOrAO6/255S1r6vyZ6Rd8DSxXO/dmtN7m73e5LMdB6HVunyNCzHhxx+/GLpT9urxlLZ3l+x+al517I8d3zBiZFOT9fDKwzX704zCO+HV5y1o6y/c/NJ/XOT1WQ+ukp3gmPC/o/UvT0lm+/6H5vM7psRpal/UcKHKMON+4pu/4gZ8lPZ1r+RwMNUmP1ax1HznWp9TxVgb2uRbtdfZdyvwyLEeLovvZnaP7bHPPxH04lVQ+12vpHOMXx/qd6rw1sM+d6Kqz70avE5uUda5eZ3ra6pvz89d3taLGeBHPjXRfZw/2okdR5zucy13cwm0xvYGbvkH1XJv9NiMYxdgcmxfRWd4DWQaUdJ7gRJ/gMcbFdBRjSeUZ6jrvxqDfZhJTmFbQ2Z3bYiwJXGOLks6znOsbvMaMmE5hOqk8Q921XMB5v81bvMN7uBsqidQ0T53b0SGuqxPH/HyPgs6x/69zY69c4zah//vJvyVPF9S5C904KvoO4ThOYPMcFdm8Oef3g37ajw11HiPre2QRneUx0vfvkLLO5cjf573uf3cuoqt1zu+snXW2ztbZOltnnayzdbbO1tk6F+cP8NJIjg==
@@ -33,5 +11,8 @@
   <object type="Player" gid="501" x="249" y="462"/>
   <object type="DeadlyObj" gid="503" x="416.5" y="400.5"/>
   <object gid="504" x="1109.83" y="408"/>
+  <object gid="503" x="544" y="286.5"/>
+  <object gid="503" x="640" y="286.5"/>
+  <object gid="503" x="1013" y="409.5"/>
  </objectgroup>
 </map>
