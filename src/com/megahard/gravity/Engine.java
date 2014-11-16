@@ -94,8 +94,13 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 		finishListener  = efl;
 	}
 	
-	public void playSoundAtLocation(Clips sound, double x, double y, double gain){
-		sound.play((float)gain);
+	public void playSoundAtLocation(Clips sound, double x, double y, double volume){
+		playSoundAtLocation(sound, new Vector2(x, y), volume);
+	}
+	
+	public void playSoundAtLocation(Clips sound, Vector2 position, double volume){
+		double distance = player.position.sub(position).length();
+		sound.play((float) ((volume * 15) / (15 + distance)));
 	}
 
 	public GameMap getMap() {
@@ -152,7 +157,10 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 
 	public void update() {
 		// add all objects to be added
-		state.objects.addAll(0, addObj);
+		for(GameObject o : addObj){
+			o.init();
+			state.objects.add(0, o);
+		}
 		addObj.clear();
 
 		// update all the objects

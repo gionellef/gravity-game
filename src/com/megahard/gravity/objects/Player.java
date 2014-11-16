@@ -47,7 +47,7 @@ public class Player extends GameObject {
 		if(sprite.getAction().startsWith("run")){
 			if(sprite.getFrame() == 3 || sprite.getFrame() == 9){
 				Clips sound = STEP_SOUNDS[RAND.nextInt(STEP_SOUNDS.length)];
-				getGame().playSoundAtLocation(sound, position.x, position.y, 0); 
+				getGame().playSoundAtLocation(sound, position, 0.9); 
 			}
 		}
 		
@@ -105,6 +105,7 @@ public class Player extends GameObject {
 		if(pow != null){
 			gravsLeft++;
 			getGame().removeObject(pow);
+			getGame().playSoundAtLocation(Sound.power, position, 1);
 		}
 		
 		// Deadly object
@@ -120,11 +121,11 @@ public class Player extends GameObject {
 	public void onHitBottom() {
 		setSpriteAction("land");
 		double p = Math.min(1, velocity.y);
-		int f = (int) ((1 - p) * sprite.getTotalFrames());
+		int f = (int) (Math.pow(1 - p, 0.3) * sprite.getTotalFrames());
 		sprite.setFrame(f);
 
 		Clips sound = JUMP_SOUNDS[RAND.nextInt(JUMP_SOUNDS.length)];
-		getGame().playSoundAtLocation(sound, position.x, position.y, p * 20 - 10); 
+		getGame().playSoundAtLocation(sound, position, 0.7 + p * 0.3); 
 	}
 
 	private void conjureGrav(Vector2 pos) {
@@ -200,7 +201,7 @@ public class Player extends GameObject {
 			setSpriteAction("jump");
 			if(standing){
 				Clips sound = JUMP_SOUNDS[RAND.nextInt(JUMP_SOUNDS.length)];
-				getGame().playSoundAtLocation(sound, position.x, position.y, 0); 
+				getGame().playSoundAtLocation(sound, position, 1); 
 			}
 		}
 	}

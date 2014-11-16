@@ -183,21 +183,24 @@ public class GameObject {
 		}
 	}
 
+	protected Engine getGame(){
+		return game;
+	}
+
+	// Overiddables
+	
+	public void init(){
+	}
+
 	public void onHitBottom(){
-		
 	}
 
 	public void onCollide(GameObject obj) {
-
 	}
 
 	public void onStartAction(String action) {
 	}
 
 	public void onEndAction(String action) {
-	}
-
-	protected Engine getGame(){
-		return game;
 	}
 }

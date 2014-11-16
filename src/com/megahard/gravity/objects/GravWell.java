@@ -13,9 +13,11 @@ public class GravWell extends GameObject {
 	public GravWell(Engine game) {
 		super(game, "gravwell");
 		fixed = true;
-		
+	}
+	
+	public void init(){
 		sprite.setAction("create");
-		getGame().playSoundAtLocation(Sound.gravwell_start, position.x, position.y, 0);
+		getGame().playSoundAtLocation(Sound.gravwell_start, position, 1);
 	}
 
 	@Override
@@ -25,12 +27,13 @@ public class GravWell extends GameObject {
 		time++;
 		
 		if(online){
-			getGame().playSoundAtLocation(Sound.gravwell, position.x, position.y, Math.random() * 2 - 1);
+			getGame().playSoundAtLocation(Sound.gravwell, position, 1);
+			
 			for(GameObject o : getGame().getState().objects){
 				Vector2 diff = position.sub(o.position);
 				double d = diff.length();
 				if(d > 1){
-					double str = 0.1 + 0.5f/time;
+					double str = 0.1 + 0.7f/time;
 					double accel = str / (d * d);
 					if(accel > 0.01){
 						o.velocity = o.velocity.add(diff.scale(accel));
@@ -39,18 +42,18 @@ public class GravWell extends GameObject {
 					o.velocity = o.velocity.add(diff.sub(o.velocity).scale(0.1f));
 				}
 			}
-			
-			if(Math.random() < 0.4){
-				double a = Math.random() * Math.PI * 2;
-				double r = Math.random() * 2;
-				double x = position.x + Math.cos(a) * r;
-				double y = position.y + Math.sin(a) * r;
-				if(!getGame().getMap().getTile(x, y).getCollidable()){
-					VioletSpark s = new VioletSpark(getGame());
-					s.position.set(x, y);
-					s.velocity.set(Math.cos(a - Math.PI/3) * -r/3, Math.sin(a - Math.PI/3) * -r/3 - 0.2);
-					getGame().addObject(s);
-				}
+		}
+
+		if(Math.random() < 0.4){
+			double a = Math.random() * Math.PI * 2;
+			double r = Math.random() * 2;
+			double x = position.x + Math.cos(a) * r;
+			double y = position.y + Math.sin(a) * r;
+			if(!getGame().getMap().getTile(x, y).getCollidable()){
+				VioletSpark s = new VioletSpark(getGame());
+				s.position.set(x, y);
+				s.velocity.set(Math.cos(a - Math.PI/3) * -r/3, Math.sin(a - Math.PI/3) * -r/3 - 0.2);
+				getGame().addObject(s);
 			}
 		}
 	}

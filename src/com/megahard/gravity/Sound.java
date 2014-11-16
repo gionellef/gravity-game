@@ -31,7 +31,7 @@ public class Sound {
 			play(1);
 		}
 
-		public void play(float gain) {
+		public void play(float volume) {
 			if (clips == null)
 				return;
 
@@ -40,10 +40,15 @@ public class Sound {
 				p = 0;
 			clips[p].stop();
 			
-			FloatControl gainControl = (FloatControl) clips[p].getControl(FloatControl.Type.MASTER_GAIN);
-			if(gain > gainControl.getMaximum()) gain = gainControl.getMaximum();
-			else if(gain < gainControl.getMinimum()) gain = gainControl.getMinimum();
-			gainControl.setValue(gain);
+			try{
+				FloatControl gainControl = (FloatControl) clips[p].getControl(FloatControl.Type.MASTER_GAIN);
+				float max = gainControl.getMaximum();
+				float min = gainControl.getMinimum();
+				float g = min + (max - min) * (float) Math.pow(volume, 0.5);
+				gainControl.setValue(Math.max(min, Math.min(g, max)));
+			}catch(IllegalArgumentException e){
+				System.out.println("Can't set gain for " + this);
+			}
 			
 			clips[p].setFramePosition(0);
 			clips[p].start();
@@ -68,6 +73,9 @@ public class Sound {
 	public static Clips step_metal2 = load("step_metal2.wav", 2);
 	public static Clips step_metal3 = load("step_metal3.wav", 2);
 	public static Clips step_metal4 = load("step_metal4.wav", 2);
+	public static Clips power = load("power.wav", 4);
+	public static Clips plasma = load("plasma.wav", 8);
+	public static Clips spark = load("spark.wav", 8);
 
 	private static Clips load(String name, int count) {
 		try {
