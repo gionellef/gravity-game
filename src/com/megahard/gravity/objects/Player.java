@@ -46,6 +46,7 @@ public class Player extends GameObject {
 		mass = 3;
 		restitution = 0.05;
 		friction = 0.6;
+		staticFriction = 0.3;
 	}
 	
 	@Override
@@ -74,6 +75,9 @@ public class Player extends GameObject {
 		// State tracking
 		if(standing){
 			jumpsLeft = 1;
+			staticFriction = 0.3;
+		}else{
+			staticFriction = 0;
 		}
 		isRunning = false;
 		
@@ -177,14 +181,15 @@ public class Player extends GameObject {
 	}
 
 	private void run(boolean left) {
-		double runStrength = 0.2;
+		double runStrength = 0.12;
 		double airStrength = 0.06;
 		double airMaxSpeed = 0.2;
 		double sign = left ? -1 : 1;
 		isFacingLeft = left;
 		if(standing && !sprite.getAction().startsWith("land")){
 			isRunning = true;
-			velocity.x += runStrength * sign;
+			velocity.x += runStrength * sign / friction;
+			staticFriction = runStrength;
 			setSpriteAction("run", new String[]{"run"});
 		}else{
 			if(velocity.x * sign < airMaxSpeed){
@@ -205,8 +210,9 @@ public class Player extends GameObject {
 			
 			setSpriteAction("jump");
 			
-			Clips sound = standing ? JUMP_SOUNDS[RAND.nextInt(JUMP_SOUNDS.length)] : Sound.airjump;
+			Clips sound = JUMP_SOUNDS[RAND.nextInt(JUMP_SOUNDS.length)];
 			getGame().playSoundAtLocation(sound, position, 0.8); 
+			getGame().playSoundAtLocation(Sound.airjump, position, standing ? 0.4 : 0.8);
 		}
 	}
 	
