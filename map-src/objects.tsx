@@ -16,4 +16,9 @@
    <property name="type" value="DeadlyObj"/>
   </properties>
  </tile>
+ <tile id="3">
+  <properties>
+   <property name="type" value="ExitDoor"/>
+  </properties>
+ </tile>
 </tileset>

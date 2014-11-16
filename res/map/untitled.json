@@ -2228,6 +2228,10 @@
              "2":
                 {
                  "type":"DeadlyObj"
+                },
+             "3":
+                {
+                 "type":"ExitDoor"
                 }
             },
          "tilewidth":64
