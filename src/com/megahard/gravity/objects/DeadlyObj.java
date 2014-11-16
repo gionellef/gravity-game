@@ -13,6 +13,7 @@ public class DeadlyObj extends GameObject {
 	}
 	
 	public void init(){
+		sprite.setAction("default");
 		sprite.setFrame((int)(Math.random() * sprite.getTotalFrames()));
 	}
 	

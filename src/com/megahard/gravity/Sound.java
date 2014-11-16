@@ -68,8 +68,12 @@ public class Sound {
 		}
 	}
 
-	public static Clips gravwell_start = load("gravwell-start.wav", 4);
+	public static Clips airjump = load("airjump.wav", 2);
 	public static Clips gravwell = load("gravwell.wav", 2);
+	public static Clips gravwell_start = load("gravwell-start.wav", 4);
+	public static Clips plasma = load("plasma.wav", 8);
+	public static Clips power = load("power.wav", 2);
+	public static Clips spark = load("spark.wav", 8);
 	public static Clips step_cloth1 = load("step_cloth1.wav", 2);
 	public static Clips step_cloth2 = load("step_cloth2.wav", 2);
 	public static Clips step_cloth3 = load("step_cloth3.wav", 2);
@@ -82,9 +86,6 @@ public class Sound {
 	public static Clips step_metal2 = load("step_metal2.wav", 2);
 	public static Clips step_metal3 = load("step_metal3.wav", 2);
 	public static Clips step_metal4 = load("step_metal4.wav", 2);
-	public static Clips power = load("power.wav", 4);
-	public static Clips plasma = load("plasma.wav", 8);
-	public static Clips spark = load("spark.wav", 8);
 
 	private static Clips load(String name, int count) {
 		try {
