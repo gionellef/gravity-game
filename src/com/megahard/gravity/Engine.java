@@ -100,7 +100,9 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 	
 	public void playSoundAtLocation(Clips sound, Vector2 position, double volume){
 		double distance = player.position.sub(position).length();
-		sound.play((float) ((volume * 15) / (15 + distance)));
+		float v  =(float) ((volume * 15) / (15 + distance));
+		float p = (float) (1 - Math.atan2(8, position.x - player.position.x)*2/Math.PI);
+		sound.play(v, p);
 	}
 
 	public GameMap getMap() {

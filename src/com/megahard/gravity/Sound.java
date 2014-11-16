@@ -28,10 +28,10 @@ public class Sound {
 		}
 		
 		public void play(){
-			play(1);
+			play(1, 0);
 		}
 
-		public void play(float volume) {
+		public void play(float volume, float pan) {
 			if (clips == null)
 				return;
 
@@ -48,6 +48,15 @@ public class Sound {
 				gainControl.setValue(Math.max(min, Math.min(g, max)));
 			}catch(IllegalArgumentException e){
 				System.out.println("Can't set gain for " + this);
+			}
+			
+			try{
+				FloatControl panControl = (FloatControl) clips[p].getControl(FloatControl.Type.PAN);
+				float max = panControl.getMaximum();
+				float min = panControl.getMinimum();
+				panControl.setValue(Math.max(min, Math.min(pan, max)));
+			}catch(IllegalArgumentException e){
+				System.out.println("Can't set pan for " + this);
 			}
 			
 			clips[p].setFramePosition(0);
