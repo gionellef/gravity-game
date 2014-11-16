@@ -13,6 +13,7 @@ public class GameObject {
 	public double mass;
 	public double restitution;
 	public double friction;
+	public double staticFriction;
 	
 	public boolean standing;
 	public boolean active;
@@ -31,6 +32,7 @@ public class GameObject {
 		mass = 1;
 		restitution = 0;
 		friction = 1;
+		staticFriction = 0;
 		
 		standing = false;
 		active = false;
@@ -88,9 +90,10 @@ public class GameObject {
 				// collision resolution
 				if (blocked) {
 					double targetY = Math.ceil(down) - size.y / 2;
-					if(position.y < targetY) onHitBottom();
+					if(velocity.y > gravity + E || position.y < targetY) onHitBottom();
 					position.y = targetY;
-					velocity.x *= friction;
+					if(Math.abs(velocity.x) < staticFriction) velocity.x = 0;
+					else velocity.x *= friction;
 					velocity.y *= -restitution;
 					if(velocity.y < E){
 						standing = true;
@@ -116,7 +119,8 @@ public class GameObject {
 				// collision resolution
 				if (blocked) {
 					position.y = Math.floor(up) + size.y / 2;
-					velocity.x *= friction;
+					if(Math.abs(velocity.x) < staticFriction) velocity.x = 0;
+					else velocity.x *= friction;
 					velocity.y *= -restitution;
 				} else {
 					position.y += velocity.y;
