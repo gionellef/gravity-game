@@ -33,6 +33,9 @@ public class Sprite {
 	private int currentFrame = 0;
 	private int delayCount = 0;
 	
+	public int offsetX = 0;
+	public int offsetY = 0;
+	
 	public Sprite(Image image, SpriteData data) {
 		this.image = image;
 		this.data = data;
@@ -132,6 +135,8 @@ public class Sprite {
 	 * Draws the sprite in the g
 	 */
 	public void draw(Graphics2D g, int x, int y) {
+		x += offsetX;
+		y += offsetY;
 		g.drawImage(image,
 			x, y, x + region.width, y + region.height,
 			region.x, region.y, region.x + region.width, region.y + region.height,

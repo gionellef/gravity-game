@@ -2,6 +2,8 @@ package com.megahard.gravity;
 
 import java.awt.Canvas;
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
@@ -23,6 +25,9 @@ public class Renderer extends Canvas {
 
 	private BufferedImage back;
 	private BufferedImage tileset;
+	
+	public boolean debug = false;
+	private Font debugFont = new Font(Font.SANS_SERIF, 0, 8);
 
 	public Renderer() {
 		camera = new Vector2();
@@ -36,10 +41,12 @@ public class Renderer extends Canvas {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
 	}
 
 	public void render(GameState s) {
 		Graphics2D g = (Graphics2D) buffer.getGraphics();
+		
 		int bufferWidth = buffer.getWidth();
 		int bufferHeight = buffer.getHeight();
 		int halfBufWidth = bufferWidth / 2;
@@ -70,27 +77,31 @@ public class Renderer extends Canvas {
 		for (int y = 0; y < mapHeight; y++) {
 			for (int x = 0; x < mapWidth; x++) {
 				Tile tile = s.map.getTile(x, y);
-				int frame = tile.getTileIndex() - 1;
+				int frame = tile.getTileIndex();
 				int frameX = (frame % columns) * TILE_SIZE;
 			    int frameY = (frame / columns) * TILE_SIZE;
 			    int dx = (int) ((x - cx) * TILE_SIZE + halfBufWidth);
 			    int dy = (int) ((y - cy) * TILE_SIZE + halfBufHeight);
-			    g.drawImage(tileset,
-			    	dx, dy, dx + TILE_SIZE, dy + TILE_SIZE,
-			    	frameX, frameY, frameX + TILE_SIZE, frameY + TILE_SIZE,
-			    	null);
+			    if(dx >= -TILE_SIZE && dy >= - TILE_SIZE && dx < bufferWidth && dy < bufferHeight){
+			    	g.drawImage(tileset,
+				    	dx, dy, dx + TILE_SIZE, dy + TILE_SIZE,
+				    	frameX, frameY, frameX + TILE_SIZE, frameY + TILE_SIZE,
+				    	null);
+				}
 			}
 		}
 
 		for (GameObject o : s.objects) {
-			if (o.sprite!= null) {
-				o.sprite.draw(g, (int) ((o.position.x - cx) * TILE_SIZE
-						+ halfBufWidth - o.sprite.getWidth() / 2),
-						(int) ((o.position.y - cy) * TILE_SIZE
-								+ halfBufHeight - o.sprite.getHeight() / 2));
-			} else {
-				g.setColor(Color.red);
-				g.drawRect((int) ((o.position.x - o.size.x / 2 - cx)
+			if (o.sprite != null) {
+				int dx = (int) ((o.position.x - cx) * TILE_SIZE
+						+ halfBufWidth - o.sprite.getWidth() / 2);
+				int dy = (int) ((o.position.y - cy) * TILE_SIZE
+						+ halfBufHeight - o.sprite.getHeight() / 2);
+				if(dx >= -o.sprite.getWidth() && dy >= -o.sprite.getHeight() && dx < bufferWidth && dy < bufferHeight){
+					o.sprite.draw(g, dx, dy);
+				}
+			}else{
+				g.fillRect((int) ((o.position.x - o.size.x / 2 - cx)
 						* TILE_SIZE + halfBufWidth), (int) ((o.position.y
 						- o.size.y / 2 - cy)
 						* TILE_SIZE + halfBufHeight),
@@ -111,6 +122,33 @@ public class Renderer extends Canvas {
 		bs.getDrawGraphics().drawImage(buffer, 0, 0, GravityApplet.WIDTH,
 				GravityApplet.HEIGHT, 0, 0, bufferWidth,
 				bufferHeight, null);
+		
+		if(debug){
+			Graphics bg = bs.getDrawGraphics();
+        	bg.setColor(Color.red);
+    		bg.setFont(debugFont);
+			for (int y = 0; y < mapHeight; y++) {
+				for (int x = 0; x < mapWidth; x++) {
+					Tile tile = s.map.getTile(x, y);
+				    int dx = (int) ((x - cx) * TILE_SIZE + halfBufWidth);
+				    int dy = (int) ((y - cy) * TILE_SIZE + halfBufHeight);
+				    if(dx >= -TILE_SIZE && dy >= - TILE_SIZE && dx < bufferWidth && dy < bufferWidth){
+				    	bg.drawString(Integer.toHexString(tile.getTileIndex()).toUpperCase(), dx * SCALE_FACTOR + 1, dy * SCALE_FACTOR + 9);
+				    }
+				}
+			}
+
+			for (GameObject o : s.objects) {
+				bg.drawRect(
+						(int) ((o.position.x - o.size.x / 2 - cx) * TILE_SIZE + halfBufWidth)
+								* SCALE_FACTOR,
+						(int) ((o.position.y - o.size.y / 2 - cy) * TILE_SIZE + halfBufHeight)
+								* SCALE_FACTOR, (int) (o.size.x * TILE_SIZE)
+								* SCALE_FACTOR, (int) (o.size.y * TILE_SIZE)
+								* SCALE_FACTOR);
+			}
+		}
+		
 		bs.show();
 	}
 
