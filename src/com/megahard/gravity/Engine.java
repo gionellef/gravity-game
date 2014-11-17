@@ -10,6 +10,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -171,22 +172,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 		}
 
 		// Check inter-object collisions
-		for (GameObject o : state.objects) {
-			for (int i = state.objects.indexOf(o) + 1; i < state.objects.size(); i++) {
-				GameObject o2 = state.objects.get(i);
-
-				if (o.position.x - o.size.x / 2 < o2.position.x + o2.size.x / 2
-						&& o.position.x + o.size.x / 2 > o2.position.x
-								- o2.size.x / 2
-						&& o.position.y - o.size.y / 2 < o2.position.y
-								+ o2.size.y / 2
-						&& o.position.y + o.size.y / 2 > o2.position.y
-								- o2.size.y / 2) {
-					o.onCollide(o2);
-					o2.onCollide(o);
-				}
-			}
-		}
+		checkCollisions();
 
 		// remove all objects to be removed
 		state.objects.removeAll(removeObj);
@@ -221,6 +207,51 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 		if(!playerObject.active){
 			// Game over
 			finish(false);
+		}
+	}
+
+	private void checkCollisions() {
+		// Using the sweep and prune algorithm
+		
+		ArrayList<GameObject> objects = state.objects;
+		int n = objects.size();
+		
+		if(n < 2) return;
+		
+		// insertion sort objects
+		for(int i = 1; i < n; i++){
+			GameObject current = objects.get(i);
+			int j = i - 1;
+			while(j >= 0 && current.position.x - current.size.x/2 < objects.get(j).position.x - current.size.x/2){
+				objects.set(j + 1, objects.get(j));
+				j--;
+			}
+			objects.set(j + 1, current);
+		}
+
+		double[][] spans = new double[n][4]; // {xmin, xmax, ymin, ymax}
+		for(int i = 0; i < n; i++){
+			GameObject obj = objects.get(i);
+			spans[i][0] = obj.position.x - obj.size.x/2;
+			spans[i][1] = obj.position.x + obj.size.x/2;
+			spans[i][2] = obj.position.y - obj.size.y/2;
+			spans[i][3] = obj.position.y + obj.size.y/2;
+		}
+		
+		for(int i = 0; i < n; i++){
+			GameObject current = objects.get(i);
+			for(int j = i + 1; j < n; j++){
+				GameObject other = objects.get(j);
+				
+				if(spans[j][0] > spans[i][1])
+					break;
+				if(spans[i][2] > spans[j][3]
+				|| spans[i][3] < spans[j][2])
+					continue;
+				
+				current.onCollide(other);
+				other.onCollide(current);
+			}
 		}
 	}
 

@@ -1,14 +1,13 @@
 package com.megahard.gravity;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.ArrayList;
 
 public class GameState {
 	public GameMap map;
-	public List<GameObject> objects;
+	public ArrayList<GameObject> objects;
 
 	public GameState() {
 		map = null;
-		objects = new LinkedList<GameObject>();
+		objects = new ArrayList<GameObject>();
 	}
 }
