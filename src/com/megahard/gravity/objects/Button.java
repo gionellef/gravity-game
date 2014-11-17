@@ -3,6 +3,7 @@ package com.megahard.gravity.objects;
 import com.megahard.gravity.Engine;
 import com.megahard.gravity.GameMap;
 import com.megahard.gravity.GameObject;
+import com.megahard.gravity.Sound;
 
 public class Button extends GameObject {
 
@@ -108,7 +109,13 @@ public class Button extends GameObject {
 			powerWire(outputX, outputY, outputInverted ? !pressed : pressed);
 		}
 		
-		sprite.setAction(pressed ? "pressed" : "default");	
+		sprite.setAction(pressed ? "pressed" : "default");
+		
+		if(pressed)
+			getGame().playSoundAtLocation(Sound.button_press, position, 0.6);
+		else
+			getGame().playSoundAtLocation(Sound.button_release, position, 0.5);
+			
 	}
 	
 	private void powerWire(int x, int y, boolean on){
