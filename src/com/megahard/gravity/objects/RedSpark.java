@@ -8,7 +8,7 @@ public class RedSpark extends GameObject {
 	public RedSpark(Engine game) {
 		super(game, "red-spark");
 		size.set(0.01, 0.01);
-		mass = 0.01;
+		mass = 0.001;
 		restitution = 1;
 	}
 	

@@ -8,7 +8,7 @@ public class VioletSpark extends GameObject {
 	public VioletSpark(Engine game) {
 		super(game, "violet-spark");
 		size.set(0.01, 0.01);
-		mass = 0.01;
+		mass = 0.001;
 		restitution = 1;
 	}
 
