@@ -196,7 +196,7 @@ public class Button extends GameObject {
 	@Override
 	public void onCollide(GameObject obj) {
 		if(!obj.fixed && obj.mass > 10){
-			pressCounter = 6;
+			pressCounter = 1;
 		}
 	}
 

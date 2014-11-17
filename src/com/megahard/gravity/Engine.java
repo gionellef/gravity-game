@@ -64,6 +64,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 	private List<GameObject> removeObj;
 
 	private EngineFinishListener finishListener;
+	private boolean finished = false;
 
 	public Engine() {
 		state = new GameState();
@@ -101,6 +102,9 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 	}
 	
 	public void finish(boolean win){
+		if(finished)
+			return;
+		finished = true;
 		Sound.stopAll();
 		finishListener.onFinish(0, 0, win);
 	}
@@ -187,10 +191,6 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 		for (GameObject o : state.objects) {
 			o.update();
 		}
-		
-		// update key states
-		updateKeyStates();
-
 		// Check inter-object collisions
 		checkCollisions();
 
@@ -198,21 +198,25 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 		state.objects.removeAll(removeObj);
 		removeObj.clear();
 		
-		//debug rendering
-		if(keyIsJustReleased(KeyEvent.VK_F8)){
-			renderer.debug = !renderer.debug;
-		}
-		
 		// dead player
 		if(!playerObject.active){
 			// Game over
 			finish(false);
 		}
 		
+		//debug rendering
+		if(keyIsJustReleased(KeyEvent.VK_F8)){
+			renderer.debug = !renderer.debug;
+		}
+		
 		// give up
 		if(keyIsJustReleased(KeyEvent.VK_ESCAPE)){
 			finish(false);
 		}
+		
+		// update key states
+		updateKeyStates();
+
 	}
 
 	private void updateInputEvents() {
