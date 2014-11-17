@@ -12,6 +12,7 @@ public class GravWell extends GameObject {
 	
 	public GravWell(Engine game) {
 		super(game, "gravwell");
+		mass = 0;
 		fixed = true;
 	}
 	

@@ -8,7 +8,8 @@ public class DeadlyObj extends GameObject {
 
 	public DeadlyObj(Engine game) {
 		super(game, "deadlyobj");
-		size.set(0.95, 0.95);
+		size.set(0.2, 0.2);
+		mass = 0.5;
 		fixed = true;
 	}
 	
@@ -18,12 +19,20 @@ public class DeadlyObj extends GameObject {
 	}
 	
 	@Override
+	public void onCollide(GameObject obj) {
+		if(obj.getClass().equals(Player.class)){
+			getGame().removeObject(obj);
+		}
+	}
+	
+	@Override
 	public void update() {
 		super.update();
 		
-		if(Math.random() < 0.05){
-			getGame().playSoundAtLocation(Sound.spark, position, 1);
-			for(int i = 1 + (int) (Math.random() * 8); i > 0; i--){
+		if(Math.random() < 0.02){
+			int n = 1 + (int) (Math.random() * 8);
+			getGame().playSoundAtLocation(Sound.spark, position, 0.5 + n/16.0);
+			for(int i = n; i > 0; i--){
 				RedSpark s = new RedSpark(getGame());
 				s.position.set(position.x, position.y);
 				double a = Math.random() * Math.PI * 2;

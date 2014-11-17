@@ -7,6 +7,7 @@ public class ExitDoor extends GameObject {
 
 	public ExitDoor(Engine game) {
 		super(game, "door");
+		mass = 90;
 		fixed = true;
 	}
 

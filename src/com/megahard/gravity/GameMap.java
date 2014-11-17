@@ -1,5 +1,6 @@
 package com.megahard.gravity;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class GameMap {
@@ -11,7 +12,6 @@ public class GameMap {
 		public Tile(boolean collidable, int tileIndex) {
 			this.collidable = collidable;
 			this.tileIndex = tileIndex;
-			
 		}
 
 		public boolean getCollidable() {
@@ -33,6 +33,8 @@ public class GameMap {
 	private Tilesets[] tilesets;
 	public Layers[] layers;
 
+	private Map<Integer, Tile> tileMap;
+
 	
 
 	public GameMap(int width, int height, Tile[] level) {
@@ -46,16 +48,23 @@ public class GameMap {
 	
 
 	public void initializeMap() {
-		System.out.println(width);
+		tileMap = new HashMap<>(); 
 		map = new Tile[width * height];
-		int[] contents = layers[0].getData();
-		for (int i = 0; i < contents.length; i++) {
-			map[i] = new Tile(tilesets[0].tileproperties.get(String.valueOf(contents[i] - 1)).getCollidable(), contents[i]);
-
+		for (int i = 0; i < layers[0].getData().length; i++) {
+			int tileIndex = layers[0].getData()[i] - tilesets[0].firstgid;
+			Tile tile = createOrGetTileFromIndex(tileIndex);
+			map[i] = tile;
 		}
 		
 		imgheight = tilesets[0].getImageheight();
 		imgwidth = tilesets[0].getImagewidth();
+	}
+
+	private Tile createOrGetTileFromIndex(int tileIndex) {
+		Tile tile = tileMap.get(tileIndex);
+		if(tile == null)
+			tile = new Tile(tilesets[0].tileproperties.get(String.valueOf(tileIndex)).getCollidable(), tileIndex);
+		return tile;
 	}
 
 	private void convertLevelToMap(Tile[] level) {
@@ -74,7 +83,8 @@ public class GameMap {
 
 	public Tile getTile(int x, int y) {
 		if (x < 0 || y < 0 || x >= width || y >= height) {
-			return new  Tile(false, 0);
+			// dummy tile
+			return new Tile(false, 0);
 		}
 		return map[y * width + x];
 	}
@@ -87,8 +97,9 @@ public class GameMap {
 		return getTile(position.x, position.y);
 	}
 
-	public void setTile(int x, int y, Tile value) {
-		map[y + width + x] = value;
+	public void setTile(int x, int y, int index) {
+		Tile tile = createOrGetTileFromIndex(index);
+		map[y * width + x] = tile;
 	}
 
 	public int getTilewidth() {
@@ -189,6 +200,7 @@ public class GameMap {
 	}
 	
 	public class Tilesets {
+		private int firstgid;
 		private Map<String, TileProperties> tileproperties;
 		private int imageheight;
 		private int imagewidth;

@@ -43,7 +43,7 @@ public class Player extends GameObject {
 	public Player(Engine game) {
 		super(game, "person");
 		size.set(0.95, 1.95);
-		mass = 3;
+		mass = 50;
 		restitution = 0.05;
 		friction = 0.6;
 		staticFriction = 0.3;
@@ -57,7 +57,7 @@ public class Player extends GameObject {
 		if(sprite.getAction().startsWith("run")){
 			if(sprite.getFrame() == 3 || sprite.getFrame() == 9){
 				Clips sound = STEP_SOUNDS[RAND.nextInt(STEP_SOUNDS.length)];
-				getGame().playSoundAtLocation(sound, position, 0.6); 
+				getGame().playSoundAtLocation(sound, position, 0.5); 
 			}
 		}
 		
@@ -116,10 +116,7 @@ public class Player extends GameObject {
 	@Override
 	public void onCollide(GameObject obj) {
 		Class<? extends GameObject> objClass = obj.getClass();
-		if(objClass.equals(DeadlyObj.class)){
-			getGame().removeObject(this);
-			System.out.println("Game Over noob!");
-		}else if(objClass.equals(PowerItem.class)){
+		if(objClass.equals(PowerItem.class)){
 			gravsLeft++;
 			getGame().removeObject(obj);
 			getGame().playSoundAtLocation(Sound.power, position, 1);
@@ -134,7 +131,7 @@ public class Player extends GameObject {
 		sprite.setFrame(f);
 
 		Clips sound = LAND_SOUNDS[RAND.nextInt(LAND_SOUNDS.length)];
-		getGame().playSoundAtLocation(sound, position, 0.5 + p * 0.5); 
+		getGame().playSoundAtLocation(sound, position, 0.4 + p * 0.6); 
 	}
 
 	private void conjureGrav(Vector2 pos) {
