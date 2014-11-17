@@ -7,6 +7,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JApplet;
 import javax.swing.JFrame;
 
+import com.megahard.gravity.menus.LevelMenu;
+import com.megahard.gravity.menus.TitleScreen;
+
 public class GravityApplet extends JApplet implements Runnable, ActionListener, EngineFinishListener {
 
 	public static TitleScreen ts;

@@ -1,17 +1,21 @@
-package com.megahard.gravity;
+package com.megahard.gravity.menus;
 
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+
 import javax.swing.*;
+
+import com.megahard.gravity.CustomButton;
+import com.megahard.gravity.GravityApplet;
 
 public class TitleScreen extends JPanel{
 
 	private static final long serialVersionUID = 1L;
 
-	public String name = "Gravity omg";
+	public String name = "Gravity Ermegherd";
 	
 	public Container c;
 	private JFrame menuscreen;
