@@ -47,7 +47,6 @@ public class Sound {
 				float g = min + (max - min) * (float) Math.pow(volume, 0.5);
 				gainControl.setValue(Math.max(min, Math.min(g, max)));
 			}catch(IllegalArgumentException e){
-				System.out.println("Can't control gain");
 			}
 			
 			try{
@@ -56,15 +55,12 @@ public class Sound {
 				float min = panControl.getMinimum();
 				panControl.setValue(Math.max(min, Math.min(pan, max)));
 			}catch(IllegalArgumentException e){
-				System.out.println("Can't control pan");
-				System.out.println("Trying balance...");
 				try{
 					FloatControl balanceControl = (FloatControl) clips[p].getControl(FloatControl.Type.BALANCE);
 					float max = balanceControl.getMaximum();
 					float min = balanceControl.getMinimum();
 					balanceControl.setValue(Math.max(min, Math.min(pan, max)));
 				}catch(IllegalArgumentException e2){
-					System.out.println("Can't control balance");
 				}
 			}
 
