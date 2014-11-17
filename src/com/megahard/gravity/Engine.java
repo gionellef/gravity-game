@@ -16,6 +16,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 import com.megahard.gravity.GameMap.Layers;
 import com.megahard.gravity.GameMap.Layers.GameObjects;
@@ -30,12 +31,22 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 		UP, PRESS, DOWN, RELEASE, CLICK;
 	}
 	private Map<Integer, KeyState> keyStates;
+	private class KeyEvent2{
+		public int keyCode;
+		public KeyState state;
+	}
 	
 	// Mouse
 	private int mouseX;
 	private int mouseY;
-	private KeyState mouseLeftState;
-	private KeyState mouseRightState;
+	private Map<Integer, KeyState> mouseStates;
+	private class MouseKeyEvent{
+		public int button;
+		public KeyState state;
+	}
+
+	private ConcurrentLinkedQueue<KeyEvent2> keyEvents;
+	private ConcurrentLinkedQueue<MouseKeyEvent> mouseKeyEvents;
 	
 	private Renderer renderer;
 
@@ -60,11 +71,13 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 		removeObj = new LinkedList<GameObject>();
 		
 		keyStates = new HashMap<>();
+		mouseStates = new HashMap<>();
+		
+		keyEvents = new ConcurrentLinkedQueue<>();
+		mouseKeyEvents = new ConcurrentLinkedQueue<>();
 		
 		mouseX = 0;
 		mouseY = 0;
-		mouseLeftState = KeyState.UP;
-		mouseRightState = KeyState.UP;
 		
 		renderer = new Renderer(this);
 		
@@ -166,11 +179,17 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 			state.objects.add(0, o);
 		}
 		addObj.clear();
+		
+		// process input events
+		updateInputEvents();
 
 		// update all the objects
 		for (GameObject o : state.objects) {
 			o.update();
 		}
+		
+		// update key states
+		updateKeyStates();
 
 		// Check inter-object collisions
 		checkCollisions();
@@ -184,7 +203,48 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 			renderer.debug = !renderer.debug;
 		}
 		
-		// update key states
+		// dead player
+		if(!playerObject.active){
+			// Game over
+			finish(false);
+		}
+	}
+
+	private void updateInputEvents() {
+		while(true){
+			KeyEvent2 ke = keyEvents.poll();
+			if(ke == null) break;
+
+			int keyCode = ke.keyCode;
+			KeyState prev = keyStates.get(keyCode);
+			
+			if(ke.state == KeyState.PRESS){
+				if(keyStates.get(keyCode) != KeyState.DOWN){
+					keyStates.put(keyCode, KeyState.PRESS);
+				}
+			}
+			else if(ke.state == KeyState.RELEASE)
+				keyStates.put(keyCode, prev == KeyState.PRESS ? KeyState.CLICK : KeyState.RELEASE);
+		}
+		
+		while(true){
+			MouseKeyEvent ke = mouseKeyEvents.poll();
+			if(ke == null) break;
+
+			int button = ke.button;
+			KeyState prev = mouseStates.get(button);
+			
+			if(ke.state == KeyState.PRESS){
+				if(mouseStates.get(button) != KeyState.DOWN){
+					mouseStates.put(button, KeyState.PRESS);
+				}
+			}
+			else if(ke.state == KeyState.RELEASE)
+				mouseStates.put(button, prev == KeyState.PRESS ? KeyState.CLICK : KeyState.RELEASE);
+		}		
+	}
+
+	private void updateKeyStates() {
 		for(Entry<Integer, KeyState> e : keyStates.entrySet()){
 			KeyState value = e.getValue();
 			if(value == KeyState.PRESS){
@@ -193,21 +253,13 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 				e.setValue(KeyState.UP);
 			}
 		}
-		if(mouseLeftState == KeyState.PRESS){
-			mouseLeftState = KeyState.DOWN;
-		}else if(mouseLeftState == KeyState.RELEASE || mouseLeftState == KeyState.CLICK){
-			mouseLeftState = KeyState.UP;
-		}
-		if(mouseRightState == KeyState.PRESS){
-			mouseRightState = KeyState.DOWN;
-		}else if(mouseRightState == KeyState.RELEASE || mouseRightState == KeyState.CLICK){
-			mouseRightState = KeyState.UP;
-		}
-		
-		// dead player
-		if(!playerObject.active){
-			// Game over
-			finish(false);
+		for(Entry<Integer, KeyState> e : mouseStates.entrySet()){
+			KeyState value = e.getValue();
+			if(value == KeyState.PRESS){
+				e.setValue(KeyState.DOWN);
+			}else if(value == KeyState.RELEASE || value == KeyState.CLICK){
+				e.setValue(KeyState.UP);
+			}
 		}
 	}
 
@@ -258,16 +310,17 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		int keyCode = e.getKeyCode();
-		if(keyStates.get(keyCode) != KeyState.DOWN){
-			keyStates.put(keyCode, KeyState.PRESS);
-		}
+		KeyEvent2 ke = new KeyEvent2();
+		ke.keyCode = e.getKeyCode();
+		ke.state = KeyState.PRESS;
+		keyEvents.add(ke);
 	}
 	@Override
 	public void keyReleased(KeyEvent e) {
-		int keyCode = e.getKeyCode();
-		KeyState prev = keyStates.get(keyCode);
-		keyStates.put(keyCode, prev == KeyState.PRESS ? KeyState.CLICK : KeyState.RELEASE);
+		KeyEvent2 ke = new KeyEvent2();
+		ke.keyCode = e.getKeyCode();
+		ke.state = KeyState.RELEASE;
+		keyEvents.add(ke);
 	}
 	@Override
 	public void keyTyped(KeyEvent e) {
@@ -301,50 +354,34 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 	}
 	@Override
 	public void mousePressed(MouseEvent e) {
-		switch(e.getButton()){
-		case MouseEvent.BUTTON1:
-			mouseLeftState = KeyState.PRESS;
-			break;
-		case MouseEvent.BUTTON3:
-			mouseRightState = KeyState.PRESS;
-			break;
-		}
+		MouseKeyEvent ke = new MouseKeyEvent();
+		ke.button = e.getButton();
+		ke.state = KeyState.PRESS;
+		mouseKeyEvents.add(ke);
 	}
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		switch(e.getButton()){
-		case MouseEvent.BUTTON1:
-			mouseLeftState = mouseLeftState == KeyState.PRESS ? KeyState.CLICK : KeyState.RELEASE;
-			break;
-		case MouseEvent.BUTTON3:
-			mouseRightState = mouseRightState == KeyState.PRESS ? KeyState.CLICK : KeyState.RELEASE;
-			break;
-		}
+		MouseKeyEvent ke = new MouseKeyEvent();
+		ke.button = e.getButton();
+		ke.state = KeyState.RELEASE;
+		mouseKeyEvents.add(ke);
 	}
 
-	public boolean mouseLeftIsDown(){
-		return mouseLeftState == KeyState.PRESS || mouseLeftState == KeyState.DOWN;
+	public boolean mouseIsDown(int button){
+		KeyState state = mouseStates.get(button);
+		return state == KeyState.PRESS || state == KeyState.CLICK || state == KeyState.DOWN;
 	}
-	public boolean mouseLeftIsJustPressed(){
-		return mouseLeftState == KeyState.PRESS || mouseLeftState == KeyState.CLICK;
+	public boolean mouseIsJustPressed(int button){
+		KeyState state = mouseStates.get(button);
+		return state == KeyState.PRESS || state == KeyState.CLICK;
 	}
-	public boolean mouseLeftIsUp(){
-		return mouseLeftState == KeyState.RELEASE || mouseLeftState == KeyState.UP;
+	public boolean mouseIsUp(int button){
+		KeyState state = mouseStates.get(button);
+		return state == null || state == KeyState.RELEASE || state == KeyState.UP;
 	}
-	public boolean mouseLeftIsJustReleased(){
-		return mouseLeftState == KeyState.RELEASE || mouseLeftState == KeyState.CLICK;
-	}
-	public boolean mouseRightIsDown(){
-		return mouseRightState == KeyState.PRESS || mouseRightState == KeyState.DOWN;
-	}
-	public boolean mouseRightIsJustPressed(){
-		return mouseRightState == KeyState.PRESS || mouseRightState == KeyState.CLICK;
-	}
-	public boolean mouseRightIsUp(){
-		return mouseRightState == KeyState.RELEASE || mouseRightState == KeyState.UP;
-	}
-	public boolean mouseRightIsJustReleased(){
-		return mouseRightState == KeyState.RELEASE || mouseRightState == KeyState.CLICK;
+	public boolean mouseIsJustReleased(int button){
+		KeyState state = mouseStates.get(button);
+		return state == KeyState.RELEASE || state == KeyState.CLICK;
 	}
 	
 	@Override

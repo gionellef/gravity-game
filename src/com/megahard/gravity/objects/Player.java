@@ -1,6 +1,7 @@
 package com.megahard.gravity.objects;
 
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 import java.util.Random;
 
 import com.megahard.gravity.Engine;
@@ -93,10 +94,10 @@ public class Player extends GameObject {
 				run (false);
 			}
 		}
-		if(getGame().mouseLeftIsJustPressed()){
+		if(getGame().mouseIsJustPressed(MouseEvent.BUTTON1)){
 			conjureGrav(getGame().getMouseGamePosition());
 		}
-		if(getGame().mouseLeftIsUp()){
+		if(getGame().mouseIsUp(MouseEvent.BUTTON1)){
 			if(well != null){
 				well.destroy();
 				well = null;
