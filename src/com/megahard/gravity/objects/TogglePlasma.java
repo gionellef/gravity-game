@@ -38,14 +38,18 @@ public class TogglePlasma extends GameObject {
 		findSource();
 	}
 	
-	public void setOnline(boolean o){
-		online = o;
-		if(online){
+	public void setOnline(boolean o, boolean spark){
+		setOnline(o);
+		if(online && spark){
 			getGame().playSoundAtLocation(Sound.spark, position, 1);
 			for(int i=0; i<10; i++){
 				castSpark(1);
 			}
 		}
+	}
+
+	public void setOnline(boolean o){
+		online = o;
 		sprite.setAction(online ? "default" : "off");
 	}
 	
@@ -91,6 +95,15 @@ public class TogglePlasma extends GameObject {
 				}
 			}
 		}
+
+		if(sourceX != -1 && sourceY != -1){
+			for(int index : SOURCE_ON){
+				if(map.getTile(sourceX, sourceY).getTileIndex() == index){
+					setOnline(true);
+					break;
+				}
+			}
+		}
 	}
 	
 	@Override
@@ -117,11 +130,11 @@ public class TogglePlasma extends GameObject {
 			if(sourceX != -1 && sourceY != -1){
 				for(int index : SOURCE_ON){
 					if(sourceTileIndex == index){
-						setOnline(true);
+						setOnline(true, true);
 						break;
 					}
 				}
-			}			
+			}
 		}
 		
 		if(n > 0){
