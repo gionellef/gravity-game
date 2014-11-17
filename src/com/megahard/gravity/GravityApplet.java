@@ -21,7 +21,7 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 	
 	private Engine engine;
 	
-	private static final int FPS = 25;
+	private static final int FPS = 30;
 
 	public static final int WIDTH = 800;
 	public static final int HEIGHT = 600;
@@ -61,27 +61,31 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 	@Override
 	public void run() {
 		running = true;
-		long nspf = 1000000000/FPS;
-		long threshold = nspf * 4;
+		long mspf = 1000/FPS;
+		long threshold = mspf * 4;
 		long start;
 		long error = 0;
 		try {
 			while (running) {
-				start = System.nanoTime();
+				start = System.currentTimeMillis();
 
 				// processing
 				if(error > threshold) error = 0;
 				engine.update();
-				while(error > nspf){
-					error -= nspf;
+				while(error > mspf){
+					error -= mspf;
 					engine.update();
 				}
-				if(error <= 0) engine.getRenderer().render(engine.getState());
+				if(error <= 0){
+					engine.getRenderer().render(engine.getState());
+				}
+					
+				Thread.sleep(1);
 
 				// delay
-				error += System.nanoTime() - start - nspf;
+				error += System.currentTimeMillis() - start - mspf;
 				if(error < 0){
-					Thread.sleep(-error/1000000);
+					Thread.sleep(-error);
 					error = 0;
 				}
 			}
