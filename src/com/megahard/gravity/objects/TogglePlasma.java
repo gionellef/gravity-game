@@ -7,12 +7,22 @@ import com.megahard.gravity.Sound;
 
 public class TogglePlasma extends GameObject {
 
-	private boolean online = true;
+	private boolean online = false;
 	private int sourceX = -1;
 	private int sourceY = -1;
 
-	private static final int SOURCE_ON_TILE_INDEX = 0x3C;
-	private static final int SOURCE_OFF_TILE_INDEX = 0x3C;
+	private static final int[] SOURCE_ON = {
+		59,
+		78,
+		110,
+		133,
+	};
+	private static final int[] SOURCE_OFF = {
+		59 + 8,
+		78 + 8,
+		110 + 8,
+		133 + 8,
+	};
 
 	private int n = 0;
 	
@@ -24,14 +34,19 @@ public class TogglePlasma extends GameObject {
 	}
 	
 	public void init(){
-		sprite.setAction("default");
-		sprite.setFrame((int)(Math.random() * sprite.getTotalFrames()));
-		
+		sprite.setAction("off");
 		findSource();
 	}
 	
 	public void setOnline(boolean o){
 		online = o;
+		if(online){
+			getGame().playSoundAtLocation(Sound.spark, position, 1);
+			for(int i=0; i<10; i++){
+				castSpark(1);
+			}
+		}
+		sprite.setAction(online ? "default" : "off");
 	}
 	
 	@Override
@@ -44,20 +59,35 @@ public class TogglePlasma extends GameObject {
 	}
 	
 	private void findSource(){
+		GameMap map = getGame().getMap();
+		
+		int maxRadius = 12;
+		
 		int x = (int) position.x;
 		int y = (int) position.y;
-		for(int r=1; r<10; r++){
+		
+		out: for(int r=1; r<maxRadius; r++){
 			for(int i=r; i>=0; i--){
-				GameMap map = getGame().getMap();
-				if(map.getTile(x + i, y - i).getTileIndex() == SOURCE_ON_TILE_INDEX){
-					sourceX = x + i;
-					sourceY = y - i;
-					break;
-				}
-				if(map.getTile(x - i, y + i).getTileIndex() == SOURCE_ON_TILE_INDEX){
-					sourceX = x - i;
-					sourceY = y + i;
-					break;
+				for(int sx=-1; sx<=1; sx += 2){
+					for(int sy=-1; sy<=1; sy += 2){
+						int rsx = (r - i) * sx;
+						int rsy = i * sy;
+						int tileIndex = map.getTile(x + rsx, y + rsy).getTileIndex();
+						for(int index : SOURCE_ON){
+							if(tileIndex == index){
+								sourceX = x + rsx;
+								sourceY = y + rsy;
+								break out;
+							}
+						}
+						for(int index : SOURCE_OFF){
+							if(tileIndex == index){
+								sourceX = x + rsx;
+								sourceY = y + rsy;
+								break out;
+							}
+						}
+					}
 				}
 			}
 		}
@@ -67,21 +97,45 @@ public class TogglePlasma extends GameObject {
 	public void update() {
 		super.update();
 		
+		GameMap map = getGame().getMap();
+		
+		int sourceTileIndex = map.getTile(sourceX, sourceY).getTileIndex();
 		if(online){
 			if(Math.random() < 0.1 && n < 20){
 				n += 3;
 				getGame().playSoundAtLocation(Sound.spark, position, n/20.0);
-				RedSpark s = new RedSpark(getGame());
-				s.position.set(position.x, position.y);
-				double a = Math.random() * Math.PI * 2;
-				double r = Math.random() * 0.5;
-				s.velocity.set(Math.cos(a) * r, Math.sin(a) * r - 0.2);
-				getGame().addObject(s);
+				castSpark(0.5);
 			}
+
+			for(int index : SOURCE_OFF){
+				if(sourceTileIndex == index){
+					setOnline(false);
+					break;
+				}
+			}
+		}else{
+			if(sourceX != -1 && sourceY != -1){
+				for(int index : SOURCE_ON){
+					if(sourceTileIndex == index){
+						setOnline(true);
+						break;
+					}
+				}
+			}			
 		}
+		
 		if(n > 0){
 			n--;
 		}
+	}
+
+	private void castSpark(double range) {
+		RedSpark s = new RedSpark(getGame());
+		s.position.set(position.x, position.y);
+		double a = Math.random() * Math.PI * 2;
+		double r = Math.random() * range;
+		s.velocity.set(Math.cos(a) * r, Math.sin(a) * r - 0.2);
+		getGame().addObject(s);
 	}
 	
 	@Override
