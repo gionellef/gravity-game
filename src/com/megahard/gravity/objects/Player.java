@@ -58,7 +58,7 @@ public class Player extends GameObject {
 		if(sprite.getAction().startsWith("run")){
 			if(sprite.getFrame() == 3 || sprite.getFrame() == 9){
 				Clips sound = STEP_SOUNDS[RAND.nextInt(STEP_SOUNDS.length)];
-				getGame().playSoundAtLocation(sound, position, 0.5); 
+				getGame().playSoundAtLocation(sound, position, 0.4); 
 			}
 		}
 		
@@ -132,7 +132,7 @@ public class Player extends GameObject {
 		sprite.setFrame(f);
 
 		Clips sound = LAND_SOUNDS[RAND.nextInt(LAND_SOUNDS.length)];
-		getGame().playSoundAtLocation(sound, position, 0.4 + p * 0.6); 
+		getGame().playSoundAtLocation(sound, position, 0.3 + p * 0.7); 
 	}
 
 	private void conjureGrav(Vector2 pos) {
@@ -209,7 +209,7 @@ public class Player extends GameObject {
 			setSpriteAction("jump");
 			
 			Clips sound = JUMP_SOUNDS[RAND.nextInt(JUMP_SOUNDS.length)];
-			getGame().playSoundAtLocation(sound, position, 0.8); 
+			getGame().playSoundAtLocation(sound, position, 0.4); 
 			getGame().playSoundAtLocation(Sound.airjump, position, standing ? 0.4 : 0.8);
 		}
 	}
