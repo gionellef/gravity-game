@@ -4,6 +4,8 @@ package com.megahard.gravity;
 // Ⓒ Markus Persson
 
 import java.io.*;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.sound.sampled.*;
 
@@ -71,7 +73,21 @@ public class Sound {
 		public void stop() {
 			clips[p].stop();
 		}
+		
+		public void stopAll(){
+			for(Clip c : clips){
+				c.stop();
+			}
+		}
 	}
+	
+	public static void stopAll(){
+		for(Clips c : allClipses){
+			c.stopAll();
+		}
+	}
+	
+	private static List<Clips> allClipses = new LinkedList<>();
 
 	public static Clips airjump = load("airjump.wav", 2);
 	public static Clips button_press = load("button-press.wav", 2);
@@ -110,7 +126,9 @@ public class Sound {
 			dis.close();
 
 			byte[] data = baos.toByteArray();
-			return new Clips(data, count);
+			Clips clips = new Clips(data, count);
+			allClipses.add(clips);
+			return clips;
 		} catch (Exception e) {
 			e.printStackTrace();
 			try {

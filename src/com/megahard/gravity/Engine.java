@@ -88,6 +88,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 	}
 	
 	public void finish(boolean win){
+		Sound.stopAll();
 		finishListener.onFinish(0, 0, win);
 	}
 	
