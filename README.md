@@ -17,5 +17,6 @@ Move right | `D`
 Jump | `space` or `W`
 Conjure gravity well | `hold mouse1`
 Dispel gravity well | `release mouse1`
+Exit | `Esc`
 Debug mode | `F8`
 Use Cheat | `Enter`

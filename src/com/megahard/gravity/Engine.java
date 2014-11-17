@@ -208,6 +208,11 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 			// Game over
 			finish(false);
 		}
+		
+		// give up
+		if(keyIsJustReleased(KeyEvent.VK_ESCAPE)){
+			finish(false);
+		}
 	}
 
 	private void updateInputEvents() {
