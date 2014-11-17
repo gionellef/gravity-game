@@ -420,6 +420,8 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 			double h, boolean edgeNotCenter) {
 		for (GameObject o : state.objects) {
 			if (!edgeNotCenter) {
+				if(o.position.x < x) continue;
+				if(o.position.x > x + w) break;
 				if (o.position.x >= x
 				&& o.position.y >= y
 				&& o.position.x < x + w
@@ -429,6 +431,8 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 					}
 				}
 			} else {
+				if(o.position.x + o.size.x / 2 < x) continue;
+				if(o.position.x - o.size.x / 2 > x + w) break;
 				if (o.position.x - o.size.x / 2 < x + w
 				&& o.position.x + o.size.x / 2 >= x
 				&& o.position.y - o.size.y / 2 < y + h
