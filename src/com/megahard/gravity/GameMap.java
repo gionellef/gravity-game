@@ -133,7 +133,6 @@ public class GameMap {
 	
 	public String getObjectType(int gid) {
 		int offset = (tilesets[0].getImagewidth() / tilesets[0].getTileWidth()) * (tilesets[0].getImageheight() / tilesets[0].getTileHeight());
-		System.out.println(offset);
 		return tilesets[1].tileproperties.get(String.valueOf(gid - offset - 1)).getType();
 	}
 

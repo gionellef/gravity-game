@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="160" height="63" tilewidth="16" tileheight="16">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="93" height="50" tilewidth="16" tileheight="16">
  <tileset firstgid="1" name="main" tilewidth="16" tileheight="16">
   <image source="../res/tileset.png" width="400" height="320"/>
   <terraintypes>
@@ -2509,74 +2509,91 @@
    </properties>
   </tile>
  </tileset>
- <tileset firstgid="501" source="objects.tsx"/>
- <layer name="Tile Layer 1" width="160" height="63">
+ <tileset firstgid="501" name="objects" tilewidth="64" tileheight="64">
+  <image source="objects.png" width="320" height="128"/>
+  <tile id="0">
+   <properties>
+    <property name="type" value="Player"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="type" value="GravWell"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="type" value="DeadlyObj"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="type" value="ExitDoor"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="type" value="PowerItem"/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="type" value="Box"/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="type" value="Button"/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="type" value="TogglePlasma"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="Tile Layer 1" width="93" height="50">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <objectgroup name="Object Layer 1">
-  <object gid="501" x="348" y="717"/>
-  <object gid="505" x="404" y="716"/>
-  <object gid="505" x="423" y="716"/>
-  <object gid="505" x="593" y="599"/>
-  <object gid="505" x="751" y="601"/>
-  <object gid="505" x="911" y="599"/>
-  <object gid="505" x="1071" y="601"/>
-  <object gid="505" x="1230" y="599"/>
-  <object gid="505" x="1391" y="599"/>
-  <object gid="505" x="1551" y="600"/>
-  <object gid="505" x="1715" y="601"/>
-  <object gid="505" x="1889" y="601"/>
-  <object gid="504" x="2218" y="504"/>
-  <object gid="503" x="509" y="788"/>
-  <object gid="503" x="759" y="866"/>
-  <object gid="503" x="885" y="811"/>
-  <object gid="503" x="978" y="830"/>
-  <object gid="503" x="1134" y="786"/>
-  <object gid="503" x="1185" y="849"/>
-  <object gid="503" x="2002" y="845"/>
-  <object gid="503" x="1861" y="811"/>
-  <object gid="503" x="1701" y="839"/>
-  <object gid="503" x="1638" y="758"/>
-  <object gid="503" x="1450" y="866"/>
-  <object gid="503" x="1501" y="760"/>
-  <object gid="503" x="1790" y="752"/>
-  <object gid="503" x="1270" y="773"/>
-  <object gid="503" x="658" y="868"/>
-  <object gid="503" x="1119" y="869"/>
-  <object gid="503" x="970" y="749"/>
-  <object gid="503" x="796" y="758"/>
-  <object gid="503" x="609" y="730"/>
-  <object gid="503" x="1596" y="852"/>
-  <object gid="503" x="1296" y="868"/>
-  <object gid="503" x="1969" y="793"/>
-  <object gid="503" x="1913" y="869"/>
-  <object gid="503" x="1413" y="741"/>
-  <object gid="505" x="712" y="863"/>
-  <object gid="505" x="879" y="863"/>
-  <object gid="505" x="1051" y="854"/>
-  <object gid="505" x="1237" y="853"/>
-  <object gid="505" x="1797" y="865"/>
-  <object gid="505" x="1534" y="850"/>
-  <object gid="505" x="1637" y="868"/>
-  <object gid="505" x="1359" y="855"/>
-  <object gid="505" x="591" y="861"/>
-  <object gid="505" x="1968" y="858"/>
-  <object gid="503" x="590" y="488"/>
-  <object gid="503" x="752" y="487"/>
-  <object gid="503" x="911" y="487"/>
-  <object gid="503" x="1069" y="487"/>
-  <object gid="503" x="1225" y="488"/>
-  <object gid="503" x="1388" y="491"/>
-  <object gid="503" x="1551" y="489"/>
-  <object gid="503" x="1722" y="488"/>
-  <object gid="503" x="1887" y="489"/>
-  <object gid="503" x="2087" y="314"/>
-  <object gid="503" x="2112" y="495"/>
-  <object gid="503" x="1918" y="706"/>
-  <object gid="503" x="1063" y="705"/>
-  <object gid="503" x="1468" y="853"/>
-  <object gid="503" x="977" y="869"/>
+  <object gid="507" x="537.333" y="247.667"/>
+  <object gid="506" x="480" y="148"/>
+  <object gid="503" x="410.667" y="643.667"/>
+  <object gid="503" x="422.5" y="622.667"/>
+  <object gid="503" x="438.667" y="640.667"/>
+  <object gid="503" x="458.667" y="624.833"/>
+  <object gid="503" x="470.667" y="645.833"/>
+  <object gid="503" x="483.833" y="623.667"/>
+  <object gid="508" x="569.5" y="321.167"/>
+  <object gid="508" x="588.833" y="320.667"/>
+  <object gid="508" x="611.5" y="321.5"/>
+  <object gid="508" x="633" y="321.5"/>
+  <object gid="508" x="654" y="321"/>
+  <object gid="505" x="298" y="640"/>
+  <object gid="501" x="204" y="638"/>
+  <object gid="505" x="388" y="486"/>
+  <object gid="505" x="363" y="485"/>
+  <object gid="505" x="456" y="373"/>
+  <object gid="504" x="1204" y="633"/>
+  <object gid="503" x="583" y="642"/>
+  <object gid="503" x="610" y="630"/>
+  <object gid="503" x="640" y="614"/>
+  <object gid="503" x="676" y="597"/>
+  <object gid="503" x="633" y="642"/>
+  <object gid="503" x="664" y="640"/>
+  <object gid="503" x="699" y="637"/>
+  <object gid="503" x="717" y="602"/>
+  <object gid="503" x="740" y="630"/>
+  <object gid="503" x="759" y="643"/>
+  <object gid="503" x="789" y="641"/>
+  <object gid="505" x="374" y="484"/>
+  <object gid="503" x="187" y="628"/>
+  <object gid="505" x="517" y="241"/>
+  <object gid="505" x="505.333" y="240.667"/>
+  <object gid="503" x="816" y="642"/>
+  <object gid="503" x="850" y="641"/>
+  <object gid="503" x="879" y="641"/>
  </objectgroup>
 </map>
