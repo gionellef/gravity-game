@@ -152,8 +152,8 @@ public class TogglePlasma extends GameObject {
 	}
 	
 	@Override
-	public void onEndAction(String action) {
-		if(action == "default")
+	public void onStartAction(String action) {
+		if(online)
 			getGame().playSoundAtLocation(Sound.plasma, position, 0.8);
 	}
 

@@ -44,7 +44,7 @@ public class DeadlyObj extends GameObject {
 	}
 	
 	@Override
-	public void onEndAction(String action) {
+	public void onStartAction(String action) {
 		getGame().playSoundAtLocation(Sound.plasma, position, 0.8);
 	}
 
