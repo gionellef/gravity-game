@@ -4,12 +4,11 @@
  <tileset firstgid="501" source="objects.tsx"/>
  <layer name="Tile Layer 1" width="90" height="40">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <objectgroup name="Object Layer 1">
   <object type="Player" gid="501" x="267.25" y="461"/>
-  <object type="DeadlyObj" gid="503" x="416.5" y="400.5"/>
   <object gid="504" x="1109.83" y="408"/>
   <object gid="503" x="544" y="286.5"/>
   <object gid="503" x="640" y="286.5"/>
@@ -19,5 +18,8 @@
   <object gid="505" x="662.833" y="295"/>
   <object gid="505" x="680.667" y="295.333"/>
   <object gid="505" x="248.333" y="213.667"/>
+  <object gid="506" x="511" y="466"/>
+  <object gid="507" x="629.5" y="472"/>
+  <object gid="508" x="423.667" y="407"/>
  </objectgroup>
 </map>

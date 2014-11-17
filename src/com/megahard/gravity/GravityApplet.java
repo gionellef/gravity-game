@@ -1,14 +1,11 @@
 package com.megahard.gravity;
 
-import java.applet.Applet;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JApplet;
 import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
 
 public class GravityApplet extends JApplet implements Runnable, ActionListener, EngineFinishListener {
 
@@ -21,7 +18,7 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 	
 	private Engine engine;
 	
-	private static final int FPS = 30;
+	private static final int FPS = 25;
 
 	public static final int WIDTH = 800;
 	public static final int HEIGHT = 600;
@@ -61,26 +58,25 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 	@Override
 	public void run() {
 		running = true;
-		long mspf = 1000/FPS;
-		long start = 0;
+		long nspf = 1000000000/FPS;
+		long start;
 		long error = 0;
 		try {
 			while (running) {
-				start = System.currentTimeMillis();
+				start = System.nanoTime();
 
-				// processing; don't render if too slow
-				do{
+				// processing
+				engine.update();
+				while(error > nspf){
+					error -= nspf;
 					engine.update();
-					error -= mspf;
-				}while(error > mspf);
-				if(error < 0)
-					engine.getRenderer().render(engine.getState());
+				}
+				if(error <= 0) engine.getRenderer().render(engine.getState());
 
-				// delay if too fast
-				error += System.currentTimeMillis() - start;
+				// delay
+				error += System.nanoTime() - start - nspf;
 				if(error < 0){
-					System.out.println(error);
-					Thread.sleep(-error);
+					Thread.sleep(-error/1000000);
 					error = 0;
 				}
 			}

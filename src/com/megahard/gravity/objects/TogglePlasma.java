@@ -4,10 +4,13 @@ import com.megahard.gravity.Engine;
 import com.megahard.gravity.GameObject;
 import com.megahard.gravity.Sound;
 
-public class DeadlyObj extends GameObject {
+public class TogglePlasma extends GameObject {
 
-	public DeadlyObj(Engine game) {
-		super(game, "deadlyobj");
+	private boolean online = true;
+	private int n = 0;
+	
+	public TogglePlasma(Engine game) {
+		super(game, "toggle-plasma");
 		size.set(0.2, 0.2);
 		mass = 0.5;
 		fixed = true;
@@ -18,10 +21,16 @@ public class DeadlyObj extends GameObject {
 		sprite.setFrame((int)(Math.random() * sprite.getTotalFrames()));
 	}
 	
+	public void setOnline(boolean o){
+		online = o;
+	}
+	
 	@Override
 	public void onCollide(GameObject obj) {
-		if(obj.getClass().equals(Player.class)){
-			getGame().removeObject(obj);
+		if(online){
+			if(obj.getClass().equals(Player.class)){
+				getGame().removeObject(obj);
+			}
 		}
 	}
 	
@@ -29,10 +38,10 @@ public class DeadlyObj extends GameObject {
 	public void update() {
 		super.update();
 		
-		if(Math.random() < 0.02){
-			int n = 1 + (int) (Math.random() * 8);
-			getGame().playSoundAtLocation(Sound.spark, position, 0.5 + n/16.0);
-			for(int i = n; i > 0; i--){
+		if(online){
+			if(Math.random() < 0.1 && n < 20){
+				n += 3;
+				getGame().playSoundAtLocation(Sound.spark, position, n/20.0);
 				RedSpark s = new RedSpark(getGame());
 				s.position.set(position.x, position.y);
 				double a = Math.random() * Math.PI * 2;
@@ -41,11 +50,15 @@ public class DeadlyObj extends GameObject {
 				getGame().addObject(s);
 			}
 		}
+		if(n > 0){
+			n--;
+		}
 	}
 	
 	@Override
 	public void onEndAction(String action) {
-		getGame().playSoundAtLocation(Sound.plasma, position, 0.8);
+		if(action == "default")
+			getGame().playSoundAtLocation(Sound.plasma, position, 0.8);
 	}
 
 }

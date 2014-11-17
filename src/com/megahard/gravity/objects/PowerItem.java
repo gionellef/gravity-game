@@ -8,6 +8,7 @@ public class PowerItem extends GameObject {
 	public PowerItem(Engine game) {
 		super(game, "power-item");
 		size.set(0.65, 0.65);
+		mass = 1;
 		friction = 0.2;
 	}
 
