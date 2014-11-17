@@ -74,6 +74,8 @@ public class Sound {
 	}
 
 	public static Clips airjump = load("airjump.wav", 2);
+	public static Clips button_press = load("button-press.wav", 2);
+	public static Clips button_release = load("button-release.wav", 2);
 	public static Clips gravwell = load("gravwell.wav", 2);
 	public static Clips gravwell_start = load("gravwell-start.wav", 4);
 	public static Clips jump1 = load("jump1.wav", 2);

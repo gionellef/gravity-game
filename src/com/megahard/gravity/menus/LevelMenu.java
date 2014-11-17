@@ -1,4 +1,4 @@
-package com.megahard.gravity;
+package com.megahard.gravity.menus;
 
 import java.awt.Color;
 import java.awt.Container;
@@ -11,6 +11,9 @@ import java.util.Scanner;
 
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicArrowButton;
+
+import com.megahard.gravity.CustomButton;
+import com.megahard.gravity.GravityApplet;
 
 public class LevelMenu extends JPanel{
 
@@ -105,8 +108,8 @@ public class LevelMenu extends JPanel{
 		
 		while(scanner.hasNextLine()){
 			String[] values = scanner.nextLine().split(",");
-			String mapName = values[0];
-			String fileName = values[1];
+			//String mapName = values[0];
+			//String fileName = values[1];
 			maps.add(values);
 		}
 		

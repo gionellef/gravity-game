@@ -3,6 +3,7 @@ package com.megahard.gravity.objects;
 import com.megahard.gravity.Engine;
 import com.megahard.gravity.GameMap;
 import com.megahard.gravity.GameObject;
+import com.megahard.gravity.Sound;
 
 public class Button extends GameObject {
 
@@ -50,6 +51,9 @@ public class Button extends GameObject {
 		{78,	78+8,	0b0001},
 		{110,	110+8,	0b0010},
 		{133,	133+8,	0b1000},
+		{18,	19, 	0b1100},
+		{68,	69, 	0b1100},
+		{237,	44, 	0b1100},
 	};
 	
 	public Button(Engine game) {
@@ -108,7 +112,13 @@ public class Button extends GameObject {
 			powerWire(outputX, outputY, outputInverted ? !pressed : pressed);
 		}
 		
-		sprite.setAction(pressed ? "pressed" : "default");	
+		sprite.setAction(pressed ? "pressed" : "default");
+		
+		if(pressed)
+			getGame().playSoundAtLocation(Sound.button_press, position, 0.6);
+		else
+			getGame().playSoundAtLocation(Sound.button_release, position, 0.5);
+			
 	}
 	
 	private void powerWire(int x, int y, boolean on){
@@ -118,6 +128,9 @@ public class Button extends GameObject {
 			return;
 		
 		int tileIndex = map.getTile(x, y).getTileIndex();
+		
+		if(!isWire(tileIndex))
+			return;
 		
 		if(wirePower(tileIndex) == on)
 			return;
@@ -136,6 +149,13 @@ public class Button extends GameObject {
 		if((conn & 0b0001) != 0){
 			powerWire(x + 1, y, on);
 		}
+	}
+	
+	private boolean isWire(int tileIndex){
+		for(int[] row : WIRES){
+			if(row[0] == tileIndex || row[1] == tileIndex) return true;
+		}
+		return false;
 	}
 	
 	private boolean wirePower(int tileIndex){
