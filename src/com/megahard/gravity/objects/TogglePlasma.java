@@ -7,6 +7,9 @@ import com.megahard.gravity.Sound;
 public class TogglePlasma extends GameObject {
 
 	private boolean online = true;
+	private int sourceX = -1;
+	private int sourceY = -1;
+
 	private int n = 0;
 	
 	public TogglePlasma(Engine game) {
@@ -19,6 +22,8 @@ public class TogglePlasma extends GameObject {
 	public void init(){
 		sprite.setAction("default");
 		sprite.setFrame((int)(Math.random() * sprite.getTotalFrames()));
+		
+		findSource();
 	}
 	
 	public void setOnline(boolean o){
@@ -32,6 +37,10 @@ public class TogglePlasma extends GameObject {
 				getGame().removeObject(obj);
 			}
 		}
+	}
+	
+	private void findSource(){
+		
 	}
 	
 	@Override
