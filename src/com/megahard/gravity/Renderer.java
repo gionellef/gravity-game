@@ -77,7 +77,7 @@ public class Renderer extends Canvas {
 		for (int y = 0; y < mapHeight; y++) {
 			for (int x = 0; x < mapWidth; x++) {
 				Tile tile = s.map.getTile(x, y);
-				int frame = tile.getTileIndex() - 1;
+				int frame = tile.getTileIndex();
 				int frameX = (frame % columns) * TILE_SIZE;
 			    int frameY = (frame / columns) * TILE_SIZE;
 			    int dx = (int) ((x - cx) * TILE_SIZE + halfBufWidth);

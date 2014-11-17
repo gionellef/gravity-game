@@ -11,7 +11,6 @@ public class GameMap {
 		public Tile(boolean collidable, int tileIndex) {
 			this.collidable = collidable;
 			this.tileIndex = tileIndex;
-			
 		}
 
 		public boolean getCollidable() {
@@ -50,8 +49,7 @@ public class GameMap {
 		map = new Tile[width * height];
 		int[] contents = layers[0].getData();
 		for (int i = 0; i < contents.length; i++) {
-			map[i] = new Tile(tilesets[0].tileproperties.get(String.valueOf(contents[i] - 1)).getCollidable(), contents[i]);
-
+			map[i] = new Tile(tilesets[0].tileproperties.get(String.valueOf(contents[i] - 1)).getCollidable(), contents[i] - tilesets[0].firstgid);
 		}
 		
 		imgheight = tilesets[0].getImageheight();
@@ -189,6 +187,7 @@ public class GameMap {
 	}
 	
 	public class Tilesets {
+		private int firstgid;
 		private Map<String, TileProperties> tileproperties;
 		private int imageheight;
 		private int imagewidth;

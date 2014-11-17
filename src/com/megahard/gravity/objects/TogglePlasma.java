@@ -1,6 +1,7 @@
 package com.megahard.gravity.objects;
 
 import com.megahard.gravity.Engine;
+import com.megahard.gravity.GameMap;
 import com.megahard.gravity.GameObject;
 import com.megahard.gravity.Sound;
 
@@ -9,6 +10,9 @@ public class TogglePlasma extends GameObject {
 	private boolean online = true;
 	private int sourceX = -1;
 	private int sourceY = -1;
+
+	private static final int SOURCE_ON_TILE_INDEX = 0x3C;
+	private static final int SOURCE_OFF_TILE_INDEX = 0x3C;
 
 	private int n = 0;
 	
@@ -40,7 +44,23 @@ public class TogglePlasma extends GameObject {
 	}
 	
 	private void findSource(){
-		
+		int x = (int) position.x;
+		int y = (int) position.y;
+		for(int r=1; r<10; r++){
+			for(int i=r; i>=0; i--){
+				GameMap map = getGame().getMap();
+				if(map.getTile(x + i, y - i).getTileIndex() == SOURCE_ON_TILE_INDEX){
+					sourceX = x + i;
+					sourceY = y - i;
+					break;
+				}
+				if(map.getTile(x - i, y + i).getTileIndex() == SOURCE_ON_TILE_INDEX){
+					sourceX = x - i;
+					sourceY = y + i;
+					break;
+				}
+			}
+		}
 	}
 	
 	@Override
