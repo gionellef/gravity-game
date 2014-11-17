@@ -5,8 +5,12 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicArrowButton;
@@ -101,20 +105,18 @@ public class LevelMenu extends JPanel{
 	public void storeMaps() {
 //		Pattern pattern = Pattern.compile(".json");
 		maps = new ArrayList<String>();
+
+		InputStream in = getClass().getResourceAsStream("/map/maps.txt");
+		Scanner scanner = new Scanner(in);
 		
-		
-		File folder = new File ("map/");
-		File[] mapFiles = folder.listFiles();
-		
-		for (File mapFile : mapFiles) {
-			String fileName = mapFile.getName();
-			System.out.println(fileName);
-			
-//			boolean accept = pattern.matcher(fileName).matches();
-//			if (accept) {
-				maps.add(fileName.substring(0, fileName.length() - 5));
-//			}
+		while(scanner.hasNextLine()){
+			String[] values = scanner.nextLine().split(",");
+			String mapName = values[0];
+			String fileName = values[1];
+			maps.add(fileName);
 		}
+		
+		scanner.close();
 	}
 
 }
