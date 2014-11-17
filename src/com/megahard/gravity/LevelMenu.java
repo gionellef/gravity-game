@@ -5,10 +5,7 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.io.BufferedReader;
-import java.io.File;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -28,13 +25,11 @@ public class LevelMenu extends JPanel{
 	private BasicArrowButton right;
 	private JLabel levelLabel;
 	
-	public int lastMap;
+	public static int lastMap = 0;
 	public ArrayList<String[]> maps;
 	
 	public LevelMenu (GravityApplet app) {
 		levelScreen = new JFrame ("Select Level Menu");
-		
-		lastMap = 0;
 		
 		storeMaps();
 		

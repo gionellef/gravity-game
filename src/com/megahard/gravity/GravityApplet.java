@@ -118,8 +118,9 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 		}
 		
 		if (a.equals(lm.getPlayButton())) {
+			
 			engine = new Engine();
-			engine.initialize(lm.maps.get(lm.lastMap)[1]);
+			engine.initialize(lm.maps.get(LevelMenu.lastMap)[1]);
 			engine.getRenderer().addKeyListener(engine);
 			engine.getRenderer().addMouseListener(engine);
 			engine.getRenderer().addMouseMotionListener(engine);
@@ -135,15 +136,19 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 		}
 		
 		if (a.equals(lm.getLeft())) {
-			System.out.println("Map: " + lm.lastMap);
-			if (lm.lastMap > 0)
-				lm.setLevelLabel(lm.maps.get(--lm.lastMap)[0]);
+			
+			if (LevelMenu.lastMap > 0)
+				lm.setLevelLabel(lm.maps.get(--LevelMenu.lastMap)[0]);
+			
+			System.out.println("Map: " + LevelMenu.lastMap);
 		}
 		
 		if (a.equals(lm.getRight())) {
-			System.out.println("Map: " + lm.lastMap);
-			if (lm.lastMap < lm.maps.size()-1)
-				lm.setLevelLabel(lm.maps.get(++lm.lastMap)[0]);
+			
+			if (LevelMenu.lastMap < lm.maps.size()-1)
+				lm.setLevelLabel(lm.maps.get(++LevelMenu.lastMap)[0]);
+			
+			System.out.println("Map: " + LevelMenu.lastMap);
 		}
 	}
 	
