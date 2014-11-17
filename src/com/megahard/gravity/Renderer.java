@@ -21,14 +21,17 @@ public class Renderer extends Canvas {
 	private Vector2 camera;
 	private BufferedImage buffer;
 
+	private BufferedImage back;
 	private BufferedImage tileset;
 
 	public Renderer() {
 		camera = new Vector2();
 		buffer = new BufferedImage(GravityApplet.WIDTH/SCALE_FACTOR, GravityApplet.HEIGHT/SCALE_FACTOR, BufferedImage.TYPE_INT_RGB);
 
+		back = null;
 		tileset = null;
 		try {
+			back = ImageIO.read(this.getClass().getResource("/back.png"));
 			tileset = ImageIO.read(this.getClass().getResource("/tileset.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -55,8 +58,9 @@ public class Renderer extends Canvas {
 //			cy = buffer.getHeight()/2/TILE_SIZE;
 //		}
 
-		g.setColor(Color.black);
-		g.fillRect(0, 0, buffer.getWidth(), buffer.getHeight());
+//		g.setColor(Color.black);
+//		g.fillRect(0, 0, buffer.getWidth(), buffer.getHeight());
+		g.drawImage(back, (int)(-cx*16)/2, (int)(-cy*16)/2, null);
 		int columns = s.map.getImgwidth() / TILE_SIZE;
 		for (int y = 0; y < mapHeight; y++) {
 			for (int x = 0; x < mapWidth; x++) {

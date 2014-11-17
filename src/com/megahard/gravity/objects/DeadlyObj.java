@@ -22,7 +22,7 @@ public class DeadlyObj extends GameObject {
 		super.update();
 		
 		if(Math.random() < 0.05){
-			getGame().playSoundAtLocation(Sound.spark, position, 0.4);
+			getGame().playSoundAtLocation(Sound.spark, position, 1);
 			for(int i = 1 + (int) (Math.random() * 8); i > 0; i--){
 				RedSpark s = new RedSpark(getGame());
 				s.position.set(position.x, position.y);
@@ -36,7 +36,7 @@ public class DeadlyObj extends GameObject {
 	
 	@Override
 	public void onEndAction(String action) {
-		getGame().playSoundAtLocation(Sound.plasma, position, 0.5);
+		getGame().playSoundAtLocation(Sound.plasma, position, 0.8);
 	}
 
 }

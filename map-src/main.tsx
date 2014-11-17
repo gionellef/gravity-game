@@ -5,6 +5,7 @@
   <terrain name="solid" tile="0"/>
   <terrain name="background" tile="278"/>
   <terrain name="platform" tile="156"/>
+  <terrain name="window" tile="247"/>
  </terraintypes>
  <tile id="0" terrain="1,1,1,0">
   <properties>
@@ -1241,17 +1242,17 @@
    <property name="collidable" value="1"/>
   </properties>
  </tile>
- <tile id="247">
+ <tile id="247" terrain="1,1,1,3">
   <properties>
    <property name="collidable" value="1"/>
   </properties>
  </tile>
- <tile id="248">
+ <tile id="248" terrain="1,1,3,3">
   <properties>
    <property name="collidable" value="1"/>
   </properties>
  </tile>
- <tile id="249">
+ <tile id="249" terrain="1,1,3,1">
   <properties>
    <property name="collidable" value="1"/>
   </properties>
@@ -1366,17 +1367,17 @@
    <property name="collidable" value="1"/>
   </properties>
  </tile>
- <tile id="272">
+ <tile id="272" terrain="1,3,1,3">
   <properties>
    <property name="collidable" value="1"/>
   </properties>
  </tile>
- <tile id="273">
+ <tile id="273" terrain="3,3,3,3">
   <properties>
    <property name="collidable" value="1"/>
   </properties>
  </tile>
- <tile id="274">
+ <tile id="274" terrain="3,1,3,1">
   <properties>
    <property name="collidable" value="1"/>
   </properties>
@@ -1491,17 +1492,17 @@
    <property name="collidable" value="1"/>
   </properties>
  </tile>
- <tile id="297">
+ <tile id="297" terrain="1,3,1,1">
   <properties>
    <property name="collidable" value="1"/>
   </properties>
  </tile>
- <tile id="298">
+ <tile id="298" terrain="3,3,1,1">
   <properties>
    <property name="collidable" value="1"/>
   </properties>
  </tile>
- <tile id="299">
+ <tile id="299" terrain="3,1,1,1">
   <properties>
    <property name="collidable" value="1"/>
   </properties>
@@ -1621,12 +1622,12 @@
    <property name="collidable" value="1"/>
   </properties>
  </tile>
- <tile id="323">
+ <tile id="323" terrain="3,3,3,1">
   <properties>
    <property name="collidable" value="1"/>
   </properties>
  </tile>
- <tile id="324">
+ <tile id="324" terrain="3,3,1,3">
   <properties>
    <property name="collidable" value="1"/>
   </properties>
@@ -1746,12 +1747,12 @@
    <property name="collidable" value="1"/>
   </properties>
  </tile>
- <tile id="348">
+ <tile id="348" terrain="3,1,3,3">
   <properties>
    <property name="collidable" value="1"/>
   </properties>
  </tile>
- <tile id="349">
+ <tile id="349" terrain="1,3,3,3">
   <properties>
    <property name="collidable" value="1"/>
   </properties>

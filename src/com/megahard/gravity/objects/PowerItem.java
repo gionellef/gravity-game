@@ -14,7 +14,7 @@ public class PowerItem extends GameObject {
 	@Override
 	public void onCollide(GameObject obj) {
 		if(obj.getClass().equals(PowerItem.class)){
-			velocity = velocity.add(position.sub(obj.position).normalize()).scale(0.01f);
+			velocity = velocity.add(position.sub(obj.position).normalize().scale(0.01f));
 		}
 	}
 }
