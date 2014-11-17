@@ -29,7 +29,7 @@ public class LevelMenu extends JPanel{
 	private JLabel levelLabel;
 	
 	public int lastMap;
-	public ArrayList<String> maps;
+	public ArrayList<String[]> maps;
 	
 	public LevelMenu (GravityApplet app) {
 		levelScreen = new JFrame ("Select Level Menu");
@@ -53,7 +53,7 @@ public class LevelMenu extends JPanel{
 		right.setBounds(475,150,50,50);
 		right.addActionListener(app);
 		
-		levelLabel = new JLabel (maps.get(lastMap));
+		levelLabel = new JLabel (maps.get(lastMap)[0]);
 		levelLabel.setPreferredSize(new Dimension(200, 75));
 		levelLabel.setBounds(325, 150, 200, 75);
 		levelLabel.setForeground(Color.red);
@@ -103,8 +103,7 @@ public class LevelMenu extends JPanel{
 	}
 	
 	public void storeMaps() {
-//		Pattern pattern = Pattern.compile(".json");
-		maps = new ArrayList<String>();
+		maps = new ArrayList<String[]>();
 
 		InputStream in = getClass().getResourceAsStream("/map/maps.txt");
 		Scanner scanner = new Scanner(in);
@@ -113,7 +112,7 @@ public class LevelMenu extends JPanel{
 			String[] values = scanner.nextLine().split(",");
 			String mapName = values[0];
 			String fileName = values[1];
-			maps.add(fileName);
+			maps.add(values);
 		}
 		
 		scanner.close();
