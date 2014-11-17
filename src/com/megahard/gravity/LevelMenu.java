@@ -5,7 +5,6 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.io.File;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -24,15 +23,10 @@ public class LevelMenu extends JPanel{
 	private BasicArrowButton right;
 	private JLabel levelLabel;
 	
-	public int lastMap;
 	public ArrayList<String> maps;
 	
 	public LevelMenu (GravityApplet app) {
 		levelScreen = new JFrame ("Select Level Menu");
-		
-		lastMap = 0;
-		
-		storeMaps();
 		
 		playButton = new CustomButton("PLAY", new Color(34,47,91), new Color(14,26,64));
 		playButton.setPreferredSize(new Dimension(200,75));
@@ -42,14 +36,12 @@ public class LevelMenu extends JPanel{
 		left = new BasicArrowButton(BasicArrowButton.WEST);
 		left.setPreferredSize(new Dimension(50,50));
 		left.setBounds(275,150,50,50);
-		left.addActionListener(app);
 		
 		right = new BasicArrowButton(BasicArrowButton.EAST);
 		right.setPreferredSize(new Dimension(50,50));
 		right.setBounds(475,150,50,50);
-		right.addActionListener(app);
 		
-		levelLabel = new JLabel (maps.get(lastMap));
+		levelLabel = new JLabel ("untitled");
 		levelLabel.setPreferredSize(new Dimension(200, 75));
 		levelLabel.setBounds(325, 150, 200, 75);
 		levelLabel.setForeground(Color.red);
@@ -76,11 +68,6 @@ public class LevelMenu extends JPanel{
 		g.setColor(new Color(240,240,240));
 		g.drawString(name, 75, 100);
 	}
-	
-	public void setLevelLabel(String newstring) {
-		this.levelLabel.setText(newstring);
-		repaint();
-	}
 
 	public String getLevelLabel() {	
 		return levelLabel.getText();
@@ -89,32 +76,9 @@ public class LevelMenu extends JPanel{
 	public JButton getPlayButton() {
 		return playButton;
 	}
-	
-	public BasicArrowButton getLeft() {
-		return left;
-	}
-	
-	public BasicArrowButton getRight() {
-		return right;
-	}
-	
+
 	public void storeMaps() {
-//		Pattern pattern = Pattern.compile(".json");
-		maps = new ArrayList<String>();
 		
-		
-		File folder = new File ("map/");
-		File[] mapFiles = folder.listFiles();
-		
-		for (File mapFile : mapFiles) {
-			String fileName = mapFile.getName();
-			System.out.println(fileName);
-			
-//			boolean accept = pattern.matcher(fileName).matches();
-//			if (accept) {
-				maps.add(fileName.substring(0, fileName.length() - 5));
-//			}
-		}
 	}
 
 }
