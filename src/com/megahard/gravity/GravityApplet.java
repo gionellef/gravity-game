@@ -63,20 +63,25 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 		running = true;
 		long mspf = 1000/FPS;
 		long start = 0;
-		long end = 0;
 		long error = 0;
 		try {
 			while (running) {
 				start = System.currentTimeMillis();
 
-				engine.update();
-				if(error <= 0)
+				// processing; don't render if too slow
+				do{
+					engine.update();
+					error -= mspf;
+				}while(error > mspf);
+				if(error < 0)
 					engine.getRenderer().render(engine.getState());
 
-				end = System.currentTimeMillis();
-				error += end - start - mspf;
-				if(error > 15){
-					Thread.sleep(error);
+				// delay if too fast
+				error += System.currentTimeMillis() - start;
+				if(error < 0){
+					System.out.println(error);
+					Thread.sleep(-error);
+					error = 0;
 				}
 			}
 		} catch (InterruptedException e) {
