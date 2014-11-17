@@ -1,14 +1,10 @@
 package com.megahard.gravity;
 
-import java.applet.Applet;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JApplet;
 import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
 
 public class GravityApplet extends JApplet implements Runnable, ActionListener, EngineFinishListener {
 
@@ -119,6 +115,18 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 			
 			remove(lm);
 			validate();
+		}
+		
+		if (a.equals(lm.getLeft())) {
+			System.out.println("Map: " + lm.lastMap);
+			if (lm.lastMap > 0)
+				lm.setLevelLabel(lm.maps.get(--lm.lastMap));
+		}
+		
+		if (a.equals(lm.getRight())) {
+			System.out.println("Map: " + lm.lastMap);
+			if (lm.lastMap < lm.maps.size()-1)
+				lm.setLevelLabel(lm.maps.get(++lm.lastMap));
 		}
 	}
 	
