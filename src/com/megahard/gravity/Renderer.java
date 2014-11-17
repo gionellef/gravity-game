@@ -12,6 +12,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import com.megahard.gravity.GameMap.Tile;
+import com.megahard.gravity.objects.Player;
 
 public class Renderer extends Canvas {
 
@@ -19,6 +20,8 @@ public class Renderer extends Canvas {
 
 	public static final int TILE_SIZE = 16;
 	public static final int SCALE_FACTOR = 2;
+	
+	private Engine game;
 
 	private Vector2 camera;
 	private BufferedImage buffer;
@@ -29,7 +32,8 @@ public class Renderer extends Canvas {
 	public boolean debug = false;
 	private Font debugFont = new Font(Font.SANS_SERIF, 0, 8);
 
-	public Renderer() {
+	public Renderer(Engine engine) {
+		game = engine;
 		camera = new Vector2();
 		buffer = new BufferedImage(GravityApplet.WIDTH/SCALE_FACTOR, GravityApplet.HEIGHT/SCALE_FACTOR, BufferedImage.TYPE_INT_RGB);
 
@@ -69,10 +73,13 @@ public class Renderer extends Canvas {
 //			cy = bufferHeight/2/TILE_SIZE;
 //		}
 
+		// Draw background
 		g.drawImage(back,
 			(int)((bufferWidth-back.getWidth()) * cx / mapWidth),
 			(int)((bufferHeight-back.getHeight()) * cy / mapHeight),
 			null);
+		
+		// Draw map
 		int columns = s.map.getImgwidth() / TILE_SIZE;
 		for (int y = 0; y < mapHeight; y++) {
 			for (int x = 0; x < mapWidth; x++) {
@@ -91,6 +98,7 @@ public class Renderer extends Canvas {
 			}
 		}
 
+		// Draw objects
 		for (GameObject o : s.objects) {
 			if (o.sprite != null) {
 				int dx = (int) ((o.position.x - cx) * TILE_SIZE
@@ -109,7 +117,14 @@ public class Renderer extends Canvas {
 						(int) (o.size.y * TILE_SIZE));
 			}
 		}
+		
+		// Draw HUD
+		Player player = game.getPlayerObject();
+		if(player != null){
+			g.drawString("Gravs left: " + player.getGravsLeft(), 5, 20);
+		}
 
+		// end of drawings
 		g.dispose();
 
 		BufferStrategy bs = getBufferStrategy();

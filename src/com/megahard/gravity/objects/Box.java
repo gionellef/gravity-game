@@ -10,7 +10,7 @@ public class Box extends GameObject {
 		size.set(1.5, 1.5);
 		mass = 40;
 		restitution = 0.1;
-		friction = 0.8;
+		friction = 0.7;
 		staticFriction = 0;
 	}
 

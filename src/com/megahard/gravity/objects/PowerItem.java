@@ -9,7 +9,8 @@ public class PowerItem extends GameObject {
 		super(game, "power-item");
 		size.set(0.65, 0.65);
 		mass = 1;
-		friction = 0.2;
+		friction = 0.6;
+		staticFriction = 0;
 	}
 
 	@Override

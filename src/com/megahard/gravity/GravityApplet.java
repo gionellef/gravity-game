@@ -59,6 +59,7 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 	public void run() {
 		running = true;
 		long nspf = 1000000000/FPS;
+		long threshold = nspf * 4;
 		long start;
 		long error = 0;
 		try {
@@ -66,6 +67,7 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 				start = System.nanoTime();
 
 				// processing
+				if(error > threshold) error = 0;
 				engine.update();
 				while(error > nspf){
 					error -= nspf;

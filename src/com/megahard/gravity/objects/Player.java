@@ -242,4 +242,12 @@ public class Player extends GameObject {
 		sprite.setAction(action);
 	}
 	
+	public int getGravsLeft(){
+		return gravsLeft;
+	}
+	
+	public int getJumpsLeft(){
+		return jumpsLeft;
+	}
+	
 }

@@ -19,10 +19,10 @@ import java.util.Map.Entry;
 import com.megahard.gravity.GameMap.Layers;
 import com.megahard.gravity.GameMap.Layers.GameObjects;
 import com.megahard.gravity.Sound.Clips;
+import com.megahard.gravity.objects.Player;
 
 public class Engine implements KeyListener, MouseListener, MouseMotionListener{
-	// TEST CODE
-	private GameObject player;
+	private Player playerObject;
 
 	// Keys
 	private enum KeyState{
@@ -65,7 +65,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 		mouseLeftState = KeyState.UP;
 		mouseRightState = KeyState.UP;
 		
-		renderer = new Renderer();
+		renderer = new Renderer(this);
 		
 		finishListener = null;
 	}
@@ -99,9 +99,9 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 	}
 	
 	public void playSoundAtLocation(Clips sound, Vector2 position, double volume){
-		double distance = player.position.sub(position).length();
+		double distance = playerObject.position.sub(position).length();
 		float v  =(float) ((volume * 34) / (34 + distance));
-		float p = (float) (1 - Math.atan2(1.5, position.x - player.position.x)*2/Math.PI);
+		float p = (float) (1 - Math.atan2(1.5, position.x - playerObject.position.x)*2/Math.PI);
 		sound.play(v, p);
 	}
 
@@ -137,8 +137,8 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 					addObject(o2);
 
 					if (type.equals("Player")) {
-						player = o2;
-						renderer.setCamera(player.position);
+						playerObject = (Player) o2;
+						renderer.setCamera(playerObject.position);
 					}
 				} catch (ClassNotFoundException e1) {
 					System.err.println("Object type " + type + " not found!");
@@ -218,7 +218,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 		}
 		
 		// dead player
-		if(!player.active){
+		if(!playerObject.active){
 			// Game over
 			finish(false);
 		}
@@ -379,5 +379,9 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 			}
 		}
 		return list;
+	}
+
+	public Player getPlayerObject() {
+		return playerObject;
 	}
 }
