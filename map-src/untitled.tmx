@@ -4,7 +4,7 @@
  <tileset firstgid="501" source="objects.tsx"/>
  <layer name="Tile Layer 1" width="90" height="40">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <objectgroup name="Object Layer 1">
@@ -13,14 +13,16 @@
   <object gid="503" x="640" y="286.5"/>
   <object gid="503" x="1013" y="409.5"/>
   <object gid="505" x="352.583" y="470.917"/>
-  <object gid="505" x="304.75" y="471"/>
+  <object gid="505" x="462.75" y="426"/>
   <object gid="505" x="680.667" y="295.333"/>
   <object gid="505" x="248.333" y="213.667"/>
   <object gid="506" x="511" y="466"/>
   <object gid="507" x="417.5" y="408"/>
-  <object gid="508" x="597.167" y="458"/>
-  <object gid="508" x="597" y="426.5"/>
-  <object gid="508" x="597.5" y="394.5"/>
-  <object gid="508" x="596.5" y="361.5"/>
+  <object gid="508" x="598.5" y="451.333"/>
+  <object gid="508" x="419.667" y="279.833"/>
+  <object gid="508" x="599.5" y="408.5"/>
+  <object gid="508" x="598.5" y="366.167"/>
+  <object gid="505" x="169.5" y="473"/>
+  <object gid="507" x="319.909" y="472"/>
  </objectgroup>
 </map>
