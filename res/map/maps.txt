@@ -1,4 +1,5 @@
 Test Bed,untitled
+Luck,luck
 Fly,fly
 Hell,hell
 Lean's challenge,lean
