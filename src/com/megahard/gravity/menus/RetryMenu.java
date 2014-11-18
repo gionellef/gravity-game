@@ -17,7 +17,7 @@ public class RetryMenu extends JPanel{
 
 	private static final long serialVersionUID = 1L;
 	
-	private String name = "Retry?";
+	private String name = "";
 
 	public Container c;
 	private JFrame retryScreen;
@@ -56,7 +56,7 @@ public class RetryMenu extends JPanel{
 		
 		g.setFont(new Font(name, 10,50));
 		g.setColor(new Color(240,240,240));
-		g.drawString(name, 325, 100);
+		g.drawString(name, 75, 100);
 	}
 	
 	public JButton getRetryButton() {
@@ -67,4 +67,12 @@ public class RetryMenu extends JPanel{
 		return menuButton;
 	}
 
+	public void setWin(boolean win) {
+		
+		name = "You Lost! Lose again?";
+		if (win) {
+			name = "Yay, cake! Try again?";
+		}
+	}
+	
 }
