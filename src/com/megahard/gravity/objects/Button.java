@@ -111,6 +111,10 @@ public class Button extends GameObject {
 		
 		sprite.setAction(pressed ? "pressed" : "default");
 		
+		if(outputX != -1 && outputY != -1){
+			powerWire(outputX, outputY, outputInverted ? !pressed : pressed);
+		}
+		
 		if(pressed)
 			getGame().playSoundAtLocation(Sound.button_press, position, 0.6);
 		else
@@ -188,10 +192,6 @@ public class Button extends GameObject {
 		}else{
 			if(pressed)
 				setPressed(false);
-		}
-		
-		if(outputX != -1 && outputY != -1){
-			powerWire(outputX, outputY, outputInverted ? !pressed : pressed);
 		}
 		
 		totalMass = 0;
