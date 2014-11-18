@@ -8,7 +8,7 @@ public class DeadlyObj extends GameObject {
 
 	public DeadlyObj(Engine game) {
 		super(game, "deadlyobj");
-		size.set(0.2, 0.2);
+		size.set(0.7, 0.7);
 		mass = 0.5;
 		fixed = true;
 	}

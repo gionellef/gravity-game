@@ -109,10 +109,6 @@ public class Button extends GameObject {
 	private void setPressed(boolean p){
 		pressed = p;
 		
-		if(outputX != -1 && outputY != -1){
-			powerWire(outputX, outputY, outputInverted ? !pressed : pressed);
-		}
-		
 		sprite.setAction(pressed ? "pressed" : "default");
 		
 		if(pressed)
@@ -192,6 +188,10 @@ public class Button extends GameObject {
 		}else{
 			if(pressed)
 				setPressed(false);
+		}
+		
+		if(outputX != -1 && outputY != -1){
+			powerWire(outputX, outputY, outputInverted ? !pressed : pressed);
 		}
 		
 		totalMass = 0;

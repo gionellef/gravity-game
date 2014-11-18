@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="40" height="30" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" source="main.tsx"/>
+ <tileset firstgid="501" source="objects.tsx"/>
+ <layer name="Tile Layer 1" width="40" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzt0U1OwkAYxvEOZwBJLGDxAm6MoidwYTEegYWVcA8/8A4UKHegpeUOyo34G5q0mWhNkxnZvItf0nc6feZp6zqO4wohhBCG3ePSEt9Avw5a6ncjNCvuVzk11K9NVhc9dbjW57vS+rczeOhr6zqT/a5wXcouz3q/AW5w+0/93sh6xxQfqphf8PpDvxnPhJjn7+ZjiAdL/RZkLRFhpYo5xBwn+XlL9kZYI0aS9wvwjLGlfhuyUmTYqmKOkeAiPy9lb4ZPfGHn2P+/T2hYEhjoV9cjzg2qe773R97kCN9ECCGE0O0B2rCXhw==
+  </data>
+ </layer>
+ <objectgroup name="Object Layer 1">
+  <object gid="501" x="167.591" y="285.5"/>
+  <object gid="504" x="440.125" y="280"/>
+  <object gid="505" x="327.5" y="250"/>
+  <object gid="506" x="391.875" y="291.75"/>
+ </objectgroup>
+</map>

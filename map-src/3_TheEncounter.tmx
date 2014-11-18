@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="30" height="50" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" source="main.tsx"/>
+ <tileset firstgid="501" source="objects.tsx"/>
+ <layer name="Tile Layer 1" width="30" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztmEkvBEEUx6uJxM7BktiXSYgEB8YukTmIgyG4cJC4WOLGxVmcfYQhfAWxhA+Bb2J39a/oFy+lqlWr6nFx+MWkdffPq3r13huNQojGf/5JiFkwaEk25nPZCG8TqA3saFCeqw+iaTA4iy29fWDNo3fM8vlez/FK7zooMFAYvntN4416jtiI8EblR1qY99cFvs6toA20K2ubtHcEjIKxX+yXi3cBLIKlPHtVghh54tPrK7a43gERr+7F9dI5LNT4e3Eth5/NoMXz/tJnXdzkHQLDf+BNIp/ps67uTYfrXxR84sPbAbY117tBT8iusg5J5LipTqc9x6u65PsfwCN4As+a/fblVXOpBJSCMlAefPcn5ZV0glSI6k/SOwEmmZv7fXl5reL9V9cTfPYFHjfvvzKuFfF1nkwsOzhlTstc5v1X9oQa8fNsnPG8x7oaKcmCOTAfrkm+vBtgE2zl2eszXtMcTD0hKt5DBy8nqieoM5fLmfrpO11a8dLs4zrvUDy8H5hm2Bx+dwSOhXvdIq/aD3TeC9x7Ca48ejsM/YB7b3HvHbj35N3HOw9YPzDVZp91WnrPIDpnPZDnTnV4H9XqPUefenZ1szPVBelcFfH+D2I758u4aYYiqDcQNnPQC669gjfwbpEHulo5E9ZKImeR9xWgElSBaos5QXpPwCnz12m844a8J5+81gW6QcbSew1umLdf4zXNQSnmnFJyxCa/dL2B4LnXafCmwlhd588d8dkfMhF/W5LnXPp9nt+/4AMhgdG2
+  </data>
+ </layer>
+ <objectgroup name="Object Layer 1">
+  <object gid="507" x="72.2083" y="343.958"/>
+  <object gid="507" x="56.5" y="552"/>
+  <object gid="507" x="202.235" y="568"/>
+  <object gid="507" x="119.636" y="648"/>
+  <object gid="506" x="31.5" y="289"/>
+  <object gid="506" x="16" y="448.5"/>
+  <object gid="505" x="105" y="169"/>
+  <object gid="505" x="104.5" y="249"/>
+  <object gid="505" x="24.5" y="554"/>
+  <object gid="501" x="39.5795" y="157.443"/>
+  <object gid="508" x="199.5" y="743.5"/>
+  <object gid="508" x="189.75" y="722.25"/>
+  <object gid="508" x="190.438" y="766.5"/>
+  <object gid="508" x="344" y="744"/>
+  <object gid="508" x="354" y="722"/>
+  <object gid="508" x="354" y="765.5"/>
+  <object gid="505" x="168.5" y="601.5"/>
+  <object gid="505" x="151.5" y="649.5"/>
+  <object gid="505" x="8.5" y="681"/>
+ </objectgroup>
+</map>

@@ -10,6 +10,7 @@ public class TogglePlasma extends GameObject {
 	private boolean online = false;
 	private int sourceX = -1;
 	private int sourceY = -1;
+	private double power = 0;
 
 	private static final int[] SOURCE_ON = {
 		59,
@@ -28,7 +29,7 @@ public class TogglePlasma extends GameObject {
 	
 	public TogglePlasma(Engine game) {
 		super(game, "toggle-plasma");
-		size.set(0.2, 0.2);
+		size.set(0.7, 0.7);
 		mass = 0.5;
 		fixed = true;
 	}
@@ -113,6 +114,11 @@ public class TogglePlasma extends GameObject {
 		GameMap map = getGame().getMap();
 		
 		int sourceTileIndex = map.getTile(sourceX, sourceY).getTileIndex();
+
+		double dx = position.x - sourceX;
+		double dy = position.y - sourceY;
+		double d = dx*dx + dy*dy;
+		
 		if(online){
 			if(Math.random() < 0.1 && n < 20){
 				n += 3;
@@ -122,17 +128,25 @@ public class TogglePlasma extends GameObject {
 
 			for(int index : SOURCE_OFF){
 				if(sourceTileIndex == index){
-					setOnline(false);
+					power -= 9/(d+1);
 					break;
 				}
+			}
+			if(power <= 0){
+				power = 0;
+				setOnline(false);
 			}
 		}else{
 			if(sourceX != -1 && sourceY != -1){
 				for(int index : SOURCE_ON){
 					if(sourceTileIndex == index){
-						setOnline(true, true);
+						power += 8/(d+1);
 						break;
 					}
+				}
+				if(power >= 1){
+					power = 1;
+					setOnline(true, true);
 				}
 			}
 		}
