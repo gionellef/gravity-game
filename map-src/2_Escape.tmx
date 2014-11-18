@@ -4,14 +4,14 @@
  <tileset firstgid="501" source="objects.tsx"/>
  <layer name="Tile Layer 1" width="40" height="30">
   <data encoding="base64" compression="zlib">
-   eJzt1E8PwTAYx/GWiysiEsPB0b8LIfEaSHgRlvCeEF4EwovAu8HJb0mXLMt0TddqIz18Lj1s3zx9No8Q4jmO81emMBQwM9RXhwpNV7O4r2+4r0r5ejAQ3APVO7KEHJPntDagKXkWynIHBTbLPRwSOkcwljxT0TdhfRe4JvQ9cfYS9P5yD1n7eHddhJKgsqb58b4b030raMHc0r74HFX00ci+BHzL+oJ5Ldi9pJHp28AWdkS+L77XKud3hBOcoY33dQR1f9R3gzs8SPK+p9HZF/0XyvI19tn6vPA/qMpacZ/jOPb5AJPklKc=
+   eJzt1M0OwUAUBeApG1tEJIqFpb+Nv8QzkPAQJLwTwkMgPATeBitH0iaTpp3eztxFwyy+zSxOT+6dqSuEcC3L+ikT6BNMmTOpeVUoOfEqCfpRMql5lKyuRr+yo5akX1xWB3rEe/A1YOy3gIwnq8itQV3zzKSfL+fNcg+HkJ5DGGmecfQbe/0ucA3p98TZi+jNuF+5n2rXeSgQFSM6OVL+UqOf6t1w9Es6M9kKGjBLab/gHP+139zbU5BOvw1sYSf0+snvwX8TwXtuMr8jnOAMTXysRdRWzGvN2O8Gd3iI8H1R/nGm84rqJ/8LdXHsM6pfWvP8/yAX0/tmWVb6fQCok5T3
   </data>
  </layer>
  <objectgroup name="Object Layer 1">
-  <object gid="504" x="463.398" y="263.989"/>
+  <object gid="504" x="519.822" y="215.928"/>
   <object gid="501" x="103.818" y="173.318"/>
-  <object gid="505" x="200" y="314.25"/>
-  <object gid="505" x="424.75" y="362.5"/>
-  <object gid="505" x="392" y="362.25"/>
+  <object gid="505" x="488.083" y="313.833"/>
+  <object gid="505" x="472.333" y="313.917"/>
+  <object gid="505" x="447.667" y="314.333"/>
  </objectgroup>
 </map>
