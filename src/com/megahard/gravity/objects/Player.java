@@ -136,20 +136,23 @@ public class Player extends GameObject {
 	}
 
 	private void conjureGrav(Vector2 pos) {
-		if(!isAreaClear(pos)){
-			Vector2 pro = new Vector2();
-			out: for(double r = 1; r < 4; r += 0.5){
-				for(double a = 0; a < 2*Math.PI; a += Math.PI/2){
-					pro.set(pos.x + r * Math.cos(a), pos.y + r * Math.sin(a));
-					if(isAreaClear(pro)){
-						pos = pro;
-						break out;
+		if(gravsLeft > 0){
+			// Find a clear spot for the gravwell to appear
+			if(!isAreaClear(pos)){
+				Vector2 pro = new Vector2();
+				out: for(double r = 0; r < 4; r += 0.1){
+					for(double a = 0; a < 2*Math.PI; a += Math.PI/2){
+						pro.set(pos.x + r * Math.cos(a), pos.y + r * Math.sin(a));
+						if(isAreaClear(pro)){
+							pos = pro;
+							break out;
+						}
 					}
 				}
+				if(pos != pro) return;
 			}
-			if(pos != pro) return;
-		}
-		if(gravsLeft > 0){
+			
+			// make it appear now
 			gravsLeft--;
 			
 			if(well != null) well.destroy();
@@ -165,10 +168,11 @@ public class Player extends GameObject {
 	}
 	
 	private boolean isAreaClear(Vector2 pos){
-		Vector2 se = new Vector2(pos.x + 1, pos.y + 1);
-		Vector2 ne = new Vector2(pos.x + 1, pos.y - 1);
-		Vector2 nw = new Vector2(pos.x - 1, pos.y - 1);
-		Vector2 sw = new Vector2(pos.x - 1, pos.y + 1);
+		double radius = 0.8;
+		Vector2 se = new Vector2(pos.x + radius, pos.y + radius);
+		Vector2 ne = new Vector2(pos.x + radius, pos.y - radius);
+		Vector2 nw = new Vector2(pos.x - radius, pos.y - radius);
+		Vector2 sw = new Vector2(pos.x - radius, pos.y + radius);
 		GameMap map = getGame().getMap();
 		return
 			!map.getTile(pos).getCollidable()
