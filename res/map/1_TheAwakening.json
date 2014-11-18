@@ -77,7 +77,7 @@
                  "y":291.75
                 }, 
                 {
-                 "height":84.5,
+                 "height":79,
                  "name":"script_STheAwakening",
                  "properties":
                     {
@@ -86,9 +86,9 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":14,
-                 "x":316.5,
-                 "y":164
+                 "width":20.5,
+                 "x":359,
+                 "y":156
                 }],
          "opacity":1,
          "type":"objectgroup",

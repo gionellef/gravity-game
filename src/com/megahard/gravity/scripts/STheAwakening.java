@@ -12,7 +12,7 @@ public class STheAwakening extends Script {
 	private boolean firstRun = true;
 	private boolean active = false;
 	private int timer = 0;
-	private int offset = 15;
+	private int offset = 20;
 
 	public STheAwakening(Engine game, Double region) {
 		super(game, region);

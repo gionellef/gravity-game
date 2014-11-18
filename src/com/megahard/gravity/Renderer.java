@@ -152,7 +152,7 @@ public class Renderer extends Canvas {
 			}
 		}
 
-		int cineStripHeight = 50;
+		int cineStripHeight = 60;
 		
 		// Draw "cinematic mode"
 		if(s.cinematicMode){
@@ -167,11 +167,16 @@ public class Renderer extends Canvas {
 			int marginY = 5;
 			g.setColor(Color.white);
 			g.setFont(font);
-			drawStringWrapped(g,
+			int w = drawStringWrapped(g,
 				message,
 				marginX,
 				bufferHeight - cineStripHeight + font.getSize() + marginY,
-				bufferWidth - 2 * marginX);
+				bufferWidth - 2 * marginX,
+				cineStripHeight - 2 * marginY);
+			if(w >= 0){
+				// handle overflow (by scrolling)
+				System.out.println(message);
+			}
 		}
 		
 		// Draw HUD
@@ -226,7 +231,7 @@ public class Renderer extends Canvas {
 	}
 	
 	// Method from http://stackoverflow.com/a/400676
-	private void drawStringWrapped(Graphics g, String s, int x, int y, int width){
+	private int drawStringWrapped(Graphics g, String s, int x, int y, int width, int height){
 		// FontMetrics gives us information about the width,
 		// height, etc. of the current Graphics object's Font.
 		FontMetrics fm = g.getFontMetrics();
@@ -236,10 +241,12 @@ public class Renderer extends Canvas {
 		int curX = x;
 		int curY = y;
 
-		String[] words = s.split(" ");
+		String[] words = s.split("\\s");
 
-		for (String word : words)
-		{
+		int i;
+		for(i = 0; i < words.length; i++){
+			String word = words[i];
+			
 			// Find out thw width of the word.
 			int wordWidth = fm.stringWidth(word + " ");
 
@@ -249,12 +256,19 @@ public class Renderer extends Canvas {
 				curY += lineHeight;
 				curX = x;
 			}
+			
+			// If height exceeded break
+			if(curY >= y + height){
+				break;
+			}
 
 			g.drawString(word, curX, curY);
 
 			// Move over to the right for next word.
 			curX += wordWidth;
 		}
+		
+		return i == words.length ? -1 : i;
 	}
 
 	public Vector2 getCamera() {
