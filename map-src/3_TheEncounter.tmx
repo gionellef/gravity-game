@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="30" height="50" tilewidth="16" tileheight="16">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="37" height="50" tilewidth="16" tileheight="16">
  <tileset firstgid="1" source="main.tsx"/>
  <tileset firstgid="501" source="objects.tsx"/>
- <layer name="Tile Layer 1" width="30" height="50">
+ <layer name="Tile Layer 1" width="37" height="50">
   <data encoding="base64" compression="zlib">
-   eJztmMsuBEEUhquJxN0sXJIZ95mESLBg3CUyC7EwBCsLiY1LbISNtXiOIbyCuISHwJu42/or3ZWclKpWrU+zsfgynZru/uZUnzqnejJCiMw//yTEPBh2pBjxumKItxU0eW6ktetavHDSFmelo3cArDN6Jxyv72eOV3o3QJmF8uDe6wZv2HWKzRBvWH7khf35xoHOcwfoBF3a3CbtHQPjYOIHzyuOdwksg5Vf9up4EfKE08sVW1TvkIhW96J61TosN/j7MVbCZxtoZ36+6tgUt/KOgNE/8CaRz+rYVPdmg/mv8Hw4vN1gxzDeC/oC9rV5SCLHbXU6zxyv7pL3fwRP4Bm8GJ43l1fPpSpQDWpArffVn5RXkgW5AN2fpHcKTBM39XN5aa2i/dfUEzj7Ao2b9t8kewLNaZnLtP+aegJ3j7D1o5JhrAgWwCLDnETxboItsP3LXhnvKc4/E/G9LvtnGu8Nxm4ZvJRO4feLXctc0PUVZ019906X17wqz7lymfYD2x62hO+OwQnDHCuv3g9M3kucewWuGb3dln5AvXc49x48MHkPcc8j0g9stZmzTkvvOUQXpAfS3EkF560Kf99zENOnr13T3lnOZSFwrolo/4O41nAZt9pDKWTcjQSXfdArxt7AO/hwyANTrZzz/P2zouSQ93WgHjSAlEMNl15Vd9U9mg3eSUveK58c6wG9oODoVXVXeQcNXts+KEecM1qOuOSX6X1BQXMva/Hmgljj7j/3hP/OUAj5bUmuc+nnXL9/wSfsP9B4
+   eJztmMtKHEEUhqsjgvEWF4mC9+hAREhc6GjiBWQW4iITia6yCLiJETeiG9fB5xhDfAXxgj5EkjdJ4m3rX3QfOClPtdVtd/WECH44VHf1fHWqTp3q6VFK9TzwwH/AWzDhSDVhv6rD90v0gmeBG91Gv64gnu4UPk2OTq/Aqienacdnv/QYJ+30CTyy0BB976rgFNePWEvpFLdWy8q+nvKCz90AGATPjfkq0uk1eAOmM14f93F6D5bBSh05meAvkzWbpZOPmCR1GlfZ1YqkTrTP0F70116Jthr+94F+j+uJPkvxIqdJMFVnTr7zjj5LtWIhmtPGICRvpyGwIbSPgNGIbSN+vnPRVvfKHuNkeujv/gV+gz/gXBWzZ5nr+jFoBi2gNbjtVoSTZhiUIky3opxmwRzz4m4+nPgezs9PUv31VYN5vPj5qaj6S+jc0znHz09S/fVZj23ngprQVgXvwFLOsUzitAY+g/U6ctJx+ob791W+Ti7vdzxOp2g7y9mJM6jC2rxpiSHfI/LaF+76baRsOFE++sg5Xntt71E1XNsDX1POmzR+aWzkZNZeyekI9x6Dk5ROUi5Jz6H7hiy1l/f/jnt/gJ8enL7g2i6rvbZal7bu0ZyZazPO6QDXDtk5ha/jjui+Dyo8C+9kFB8atzS2uHc7PYZK5PPRskZdaqLrnEljoTM3oeP1lOFyNr5A2yW4AtcqfIbrnLnEdzEI3++ImkN+toF28AR0CNfj5kxyojpG/TsFpxlLfpKLbnsBRkBFcEqSr9qJ6hj1HxOcbGfjEvOZt+xvSZ1sdXiBwfNg2OJUimIk1cesauSWCt+FKzHeWf/um8Qt7f70r3MDW7b2aw==
   </data>
  </layer>
  <objectgroup name="Object Layer 1">

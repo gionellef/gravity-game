@@ -89,7 +89,7 @@ public class GameObject {
 	
 				// collision resolution
 				if (blocked) {
-					double targetY = Math.ceil(down) - size.y / 2;
+					double targetY = Math.floor(nextDown) - E - size.y / 2;
 					if(velocity.y > gravity + E || position.y < targetY) onHitBottom();
 					position.y = targetY;
 					if(Math.abs(velocity.x) < staticFriction) velocity.x = 0;
@@ -101,7 +101,7 @@ public class GameObject {
 				} else {
 					position.y += velocity.y;
 				}
-			} else {
+			} else if(velocity.y < 0){
 				double nextUp = up + velocity.y;
 	
 				// Check if the top of the object collides with the map
@@ -118,7 +118,7 @@ public class GameObject {
 	
 				// collision resolution
 				if (blocked) {
-					position.y = Math.floor(up) + size.y / 2;
+					position.y = Math.ceil(nextUp) + E + size.y / 2;
 					if(Math.abs(velocity.x) < staticFriction) velocity.x = 0;
 					else velocity.x *= friction;
 					velocity.y *= -restitution;
@@ -148,12 +148,12 @@ public class GameObject {
 	
 				// collision resolution
 				if (blocked) {
-					position.x = Math.ceil(right) - size.x / 2;
+					position.x = Math.floor(nextRight) - E - size.x / 2;
 					velocity.x *= -restitution;
 				} else {
 					position.x += velocity.x;
 				}
-			} else {
+			} else if(velocity.x < 0){
 				double nextLeft = left + velocity.x;
 	
 				// Check if the left of the object collides with the map
@@ -170,7 +170,7 @@ public class GameObject {
 	
 				// collision resolution
 				if (blocked) {
-					position.x = Math.floor(left) + size.x / 2;
+					position.x = Math.ceil(nextLeft) + E + size.x / 2;
 					velocity.x *= -restitution;
 				} else {
 					position.x += velocity.x;
