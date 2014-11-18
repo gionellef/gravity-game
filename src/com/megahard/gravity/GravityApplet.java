@@ -22,6 +22,8 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 	private boolean running = true;
 	
 	private Engine engine;
+	private MusicPlayer music;
+	private Thread musThread = new Thread(music);
 	
 	private static final int FPS = 30;
 
@@ -31,6 +33,7 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 	@Override
 	public void init() {
 		Sound.touch();
+		music = new MusicPlayer();
 		
 		lm = new LevelMenu(this);
 		rm = new RetryMenu(this);
@@ -95,6 +98,7 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 
 	public void stop() {
 		running = false;
+		musThread.stop();
 	}
 	
 	@Override
@@ -166,7 +170,6 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 	}
 	
 	private void renderGameScreen() {
-		
 		engine = new Engine();
 		engine.initialize(lm.maps.get(LevelMenu.lastMap)[1]);
 		engine.getRenderer().addKeyListener(engine);
@@ -178,6 +181,9 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 		engine.setFinishListener(this);
 		
 		new Thread(this).start();
+		music.play("Let Go.mp3");
+		musThread = new Thread(music);
+		musThread.start();
 	}
 	
 	private void showTitleScreen() {
