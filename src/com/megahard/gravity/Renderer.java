@@ -40,7 +40,7 @@ public class Renderer extends Canvas {
 		back = null;
 		tileset = null;
 		try {
-			back = ImageIO.read(this.getClass().getResource("/back2.png"));
+			back = ImageIO.read(this.getClass().getResource("/back75.png"));
 			tileset = ImageIO.read(this.getClass().getResource("/tileset.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
