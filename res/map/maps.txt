@@ -1,4 +1,6 @@
 Test Bed,untitled
+Noob Paradise 1,NoobParadise_1
+Noob Paradise 2,NoobParadise_2
 Luck,luck
 Fly,fly
 Hell,hell
