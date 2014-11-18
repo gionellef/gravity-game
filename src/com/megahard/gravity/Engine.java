@@ -64,7 +64,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 	private List<GameObject> addObj;
 	private List<GameObject> removeObj;
 	
-	private boolean cinematicMode = false;
+
 
 	private EngineFinishListener finishListener;
 	private boolean finished = false;
@@ -149,7 +149,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 				GameObjects object = objects[i];
 				
 				String name = object.getName();
-				if(name.startsWith("Script_")){
+				if(name.startsWith("script_")){
 					loadScript(object);
 				}else{
 					loadObject(map, object);
@@ -161,7 +161,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 	}
 
 	private void loadScript(GameObjects object) {
-		String type = object.getName();
+		String type = object.getName().substring("script_".length());
 		try {
 			@SuppressWarnings("unchecked")
 			Class<Script> subclass = (Class<Script>) Class
@@ -228,7 +228,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 	}
 
 	public void update() {
-		if(!cinematicMode){
+		if(!isCinematicMode()){
 			updateInputEvents();
 		}
 		updateObjects();
@@ -558,11 +558,11 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 	}
 
 	public boolean isCinematicMode() {
-		return cinematicMode;
+		return state.cinematicMode;
 	}
 
 	public void setCinematicMode(boolean cinematicMode) {
-		this.cinematicMode = cinematicMode;
+		state.cinematicMode = cinematicMode;
 		if(cinematicMode){
 			keyStates.clear();
 			mouseStates.clear();

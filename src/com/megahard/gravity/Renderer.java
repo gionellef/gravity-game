@@ -125,6 +125,14 @@ public class Renderer extends Canvas {
 			}
 		}
 		
+		// Draw "cinematic mode"
+		if(s.cinematicMode){
+			int stripHeight = 50;
+			g.setColor(Color.black);
+			g.fillRect(0, 0, bufferWidth, stripHeight);
+			g.fillRect(0, bufferHeight-stripHeight, bufferWidth, stripHeight);
+		}
+		
 		// Draw HUD
 		Player player = game.getPlayerObject();
 		if(player != null){
