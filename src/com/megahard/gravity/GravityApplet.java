@@ -8,12 +8,14 @@ import javax.swing.JApplet;
 import javax.swing.JFrame;
 
 import com.megahard.gravity.menus.LevelMenu;
+import com.megahard.gravity.menus.RetryMenu;
 import com.megahard.gravity.menus.TitleScreen;
 
 public class GravityApplet extends JApplet implements Runnable, ActionListener, EngineFinishListener {
 
 	public static TitleScreen ts;
 	public static LevelMenu lm;
+	public static RetryMenu rm;
 	
 	private static final long serialVersionUID = 1L;
 
@@ -30,6 +32,8 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 	public void init() {
 		Sound.touch();
 		
+		lm = new LevelMenu(this);
+		rm = new RetryMenu(this);
 		ts = new TitleScreen(this);
 		showTitleScreen();
 		
@@ -48,14 +52,6 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 		applet.init();
-	}
-
-	private void showTitleScreen() {
-		add(ts);
-	}
-
-	private void showLevelMenu() {
-		add(lm);
 	}
 	
 	@Override
@@ -105,7 +101,8 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 	public void onFinish(int score, int time, boolean win) {
 		stop();
 		System.out.println("win = " + win);
-		showTitleScreen();
+		
+		showRetryMenu();
 	}
 
 	@Override
@@ -127,18 +124,7 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 		}
 		
 		if (a.equals(lm.getPlayButton())) {
-			
-			engine = new Engine();
-			engine.initialize(lm.maps.get(LevelMenu.lastMap)[1]);
-			engine.getRenderer().addKeyListener(engine);
-			engine.getRenderer().addMouseListener(engine);
-			engine.getRenderer().addMouseMotionListener(engine);
-			
-			add(engine.getRenderer(), BorderLayout.CENTER);
-			
-			engine.setFinishListener(this);
-			
-			new Thread(this).start();
+			renderGameScreen();
 			
 			remove(lm);
 			validate();
@@ -159,6 +145,46 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 			
 			System.out.println("Map: " + LevelMenu.lastMap);
 		}
+		
+		if (a.equals(rm.getMenuButton())) {
+			showTitleScreen();
+			remove (rm);
+			validate();
+			repaint();
+		}
+		
+		if (a.equals(rm.getRetryButton())) {
+			renderGameScreen();
+			remove (rm);
+			validate();
+		}
+	}
+	
+	private void renderGameScreen() {
+		
+		engine = new Engine();
+		engine.initialize(lm.maps.get(LevelMenu.lastMap)[1]);
+		engine.getRenderer().addKeyListener(engine);
+		engine.getRenderer().addMouseListener(engine);
+		engine.getRenderer().addMouseMotionListener(engine);
+		
+		add(engine.getRenderer(), BorderLayout.CENTER);
+		
+		engine.setFinishListener(this);
+		
+		new Thread(this).start();
+	}
+	
+	private void showTitleScreen() {
+		add(ts);
+	}
+
+	private void showLevelMenu() {
+		add(lm);
+	}
+	
+	private void showRetryMenu() {
+		add(rm);
 	}
 	
 }
