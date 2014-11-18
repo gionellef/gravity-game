@@ -24,5 +24,8 @@
   <object gid="508" x="344" y="744"/>
   <object gid="508" x="354" y="722"/>
   <object gid="508" x="354" y="765.5"/>
+  <object gid="505" x="168.5" y="601.5"/>
+  <object gid="505" x="151.5" y="649.5"/>
+  <object gid="505" x="8.5" y="681"/>
  </objectgroup>
 </map>
