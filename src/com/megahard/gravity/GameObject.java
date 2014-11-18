@@ -90,7 +90,7 @@ public class GameObject {
 				// collision resolution
 				if (blocked) {
 					double targetY = Math.floor(nextDown) - E - size.y / 2;
-					if(velocity.y > gravity + E || position.y < targetY) onHitBottom();
+					if(position.y < targetY) onHitBottom();
 					position.y = targetY;
 					if(Math.abs(velocity.x) < staticFriction) velocity.x = 0;
 					else velocity.x *= friction;
