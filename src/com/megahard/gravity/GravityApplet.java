@@ -3,6 +3,7 @@ package com.megahard.gravity;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 import javax.swing.JApplet;
 import javax.swing.JFrame;
@@ -181,7 +182,8 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 		engine.setFinishListener(this);
 		
 		new Thread(this).start();
-		music.play("Let Go.mp3");
+		
+		music.play(MusicPlayer.mFiles.get(new Random().nextInt(6))[1]);
 		musThread = new Thread(music);
 		musThread.start();
 	}

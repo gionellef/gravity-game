@@ -25,6 +25,7 @@ public class MusicPlayer implements Runnable{
 			//String mapName = values[0];
 			//String fileName = values[1];
 			mFiles.add(values);
+			System.out.println(values);
 		}
 		
 		scanner.close();
@@ -32,6 +33,7 @@ public class MusicPlayer implements Runnable{
 	
 	public void play(String fileName){
 	    this.fileName = fileName;
+	    System.out.println(fileName);
     }
 
 	@Override
