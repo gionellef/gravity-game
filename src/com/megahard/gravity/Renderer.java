@@ -31,6 +31,8 @@ public class Renderer extends Canvas {
 	private BufferedImage back;
 	private BufferedImage tileset;
 
+	private String message;
+
 	private static Font font;
 	static {
 		String fontPath = "/munro.ttf";
@@ -41,6 +43,8 @@ public class Renderer extends Canvas {
 	        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 
 	        ge.registerFont(font);
+			
+			font = font.deriveFont(10f);
 	        
 		} catch (FontFormatException | IOException e) {
 			e.printStackTrace();
@@ -67,7 +71,7 @@ public class Renderer extends Canvas {
 			e.printStackTrace();
 		}
 		
-		font = font.deriveFont(10f);
+		message = null;
 	}
 	
 	public void render(GameState s) {
@@ -146,13 +150,23 @@ public class Renderer extends Canvas {
 						(int) (o.size.y * TILE_SIZE));
 			}
 		}
+
+		int cineStripHeight = 50;
 		
 		// Draw "cinematic mode"
 		if(s.cinematicMode){
-			int stripHeight = 50;
 			g.setColor(Color.black);
-			g.fillRect(0, 0, bufferWidth, stripHeight);
-			g.fillRect(0, bufferHeight-stripHeight, bufferWidth, stripHeight);
+			g.fillRect(0, 0, bufferWidth, cineStripHeight);
+			g.fillRect(0, bufferHeight-cineStripHeight, bufferWidth, cineStripHeight);
+		}
+		
+		// Draw messages
+		if(message != null){
+			int marginX = 15;
+			int marginY = 5;
+			g.setColor(Color.white);
+			g.setFont(font);
+			g.drawString(message, marginX, marginY + bufferHeight-cineStripHeight + font.getSize());
 		}
 		
 		// Draw HUD
@@ -212,6 +226,14 @@ public class Renderer extends Canvas {
 
 	public void setCamera(Vector2 camera) {
 		this.camera = camera;
+	}
+
+	public void showMessage(String message) {
+		this.message = message;
+	}
+
+	public void removeMessage() {
+		message = null;
 	}
 
 }

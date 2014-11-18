@@ -68,6 +68,8 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 
 	private EngineFinishListener finishListener;
 	private boolean finished = false;
+	private int messageExpiry;
+
 
 	public Engine() {
 		state = new GameState();
@@ -84,6 +86,8 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 		mouseY = 0;
 		
 		renderer = new Renderer(this);
+		
+		messageExpiry = 0;
 		
 		finishListener = null;
 	}
@@ -253,6 +257,12 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 		// update key states
 		updateKeyStates();
 
+		// messages
+		if(messageExpiry > 0 && state.time > messageExpiry){
+			renderer.removeMessage();
+		}
+		
+		state.time++;
 	}
 
 	private void updateScripts() {
@@ -565,5 +575,10 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 		state.cinematicMode = cinematicMode;
 		keyStates.clear();
 		mouseStates.clear();
+	}
+
+	public void showMessage(String message, int duration) {
+		renderer.showMessage(message);
+		messageExpiry = state.time + duration;
 	}
 }

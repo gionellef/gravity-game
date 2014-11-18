@@ -12,6 +12,7 @@ public class STheAwakening extends Script {
 	private boolean firstRun = true;
 	private boolean active = false; 
 	private int timer = 0;
+	private int offset = 15;
 	
 	public STheAwakening(Engine game, Double region) {
 		super(game, region);
@@ -28,14 +29,38 @@ public class STheAwakening extends Script {
 		
 		if(active){
 			
-			// Hindi pa kasi naiimplement ang dialogues/messages
-			System.out.println("BLABLAHBLABLAH MESSAGES");
+			final int halfbeat = 5;
+			final String[] words = {
+				"Never", "gonna", "give", "you", "up", "",
+				"Never", "gonna", "let", "you", "down", "",
+				"Never", "gonna", "come", "around", "and", "desert", "you", "",
+			};
+			final int[] durations = {
+				2, 2, 3, 3, 4, 2,
+				2, 2, 3, 3, 4, 2,
+				2, 2, 4, 6, 4, 6, 6, 2, 
+			};
+
+			int i;
+			int d = offset;
+			for(i=0; i<words.length; i++){
+				if(d == timer){
+					getGame().showMessage(words[i], halfbeat * durations[i]);
+					break;
+				}else if(d < timer){
+					d += halfbeat * durations[i];
+				}else{
+					break;
+				}
+			}
 			
-			if(timer > 60){
+			// end this
+			if(i == words.length){
 				active = false;
 				getGame().setCinematicMode(false);
 				// end of show
 			}
+			
 			timer++;
 		}
 	}
