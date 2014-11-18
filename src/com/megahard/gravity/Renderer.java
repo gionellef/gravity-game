@@ -4,6 +4,7 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GraphicsEnvironment;
@@ -166,7 +167,11 @@ public class Renderer extends Canvas {
 			int marginY = 5;
 			g.setColor(Color.white);
 			g.setFont(font);
-			g.drawString(message, marginX, marginY + bufferHeight-cineStripHeight + font.getSize());
+			drawStringWrapped(g,
+				message,
+				marginX,
+				bufferHeight - cineStripHeight + font.getSize() + marginY,
+				bufferWidth - 2 * marginX);
 		}
 		
 		// Draw HUD
@@ -218,6 +223,38 @@ public class Renderer extends Canvas {
 		}
 		
 		bs.show();
+	}
+	
+	// Method from http://stackoverflow.com/a/400676
+	private void drawStringWrapped(Graphics g, String s, int x, int y, int width){
+		// FontMetrics gives us information about the width,
+		// height, etc. of the current Graphics object's Font.
+		FontMetrics fm = g.getFontMetrics();
+
+		int lineHeight = fm.getHeight();
+
+		int curX = x;
+		int curY = y;
+
+		String[] words = s.split(" ");
+
+		for (String word : words)
+		{
+			// Find out thw width of the word.
+			int wordWidth = fm.stringWidth(word + " ");
+
+			// If text exceeds the width, then move to next line.
+			if (curX + wordWidth >= x + width)
+			{
+				curY += lineHeight;
+				curX = x;
+			}
+
+			g.drawString(word, curX, curY);
+
+			// Move over to the right for next word.
+			curX += wordWidth;
+		}
 	}
 
 	public Vector2 getCamera() {

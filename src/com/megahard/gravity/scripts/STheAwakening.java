@@ -10,10 +10,10 @@ import com.megahard.gravity.objects.Player;
 public class STheAwakening extends Script {
 
 	private boolean firstRun = true;
-	private boolean active = false; 
+	private boolean active = false;
 	private int timer = 0;
 	private int offset = 15;
-	
+
 	public STheAwakening(Engine game, Double region) {
 		super(game, region);
 	}
@@ -26,41 +26,40 @@ public class STheAwakening extends Script {
 	@Override
 	public void onUpdate() {
 		// things to run always
-		
-		if(active){
-			
+
+		if (active) {
+
 			final int halfbeat = 5;
-			final String[] words = {
-				"Never", "gonna", "give", "you", "up", "",
-				"Never", "gonna", "let", "you", "down", "",
-				"Never", "gonna", "come", "around", "and", "desert", "you", "",
-			};
-			final int[] durations = {
-				2, 2, 3, 3, 4, 2,
-				2, 2, 3, 3, 4, 2,
-				2, 2, 4, 6, 4, 6, 6, 2, 
-			};
+			final String[] words = { "Never", "gonna", "give", "you", "up", "",
+					"Never", "gonna", "let", "you", "down", "", "Never",
+					"gonna", "come", "around", "and", "desert", "you", "", };
+			final int[] durations = { 2, 2, 3, 3, 4, 2, 2, 2, 3, 3, 4, 2, 2, 2,
+					4, 6, 4, 6, 6, 2, };
 
 			int i;
 			int d = offset;
-			for(i=0; i<words.length; i++){
-				if(d == timer){
+			for (i = 0; i < words.length; i++) {
+				if (d == timer) {
 					getGame().showMessage(words[i], halfbeat * durations[i]);
 					break;
-				}else if(d < timer){
+				} else if (d < timer) {
 					d += halfbeat * durations[i];
-				}else{
+				} else {
 					break;
 				}
 			}
-			
+
 			// end this
-			if(i == words.length){
+			if (i == words.length) {
+				getGame().showMessage(
+					"BYE! TESTING LONG LINE TESTING LONG LINE TESTING LONG LINE TESTING LONG LINE TESTING LONG LINE TESTING LONG LINE TESTING LONG LINE TESTING LONG LINE TESTING LONG LINE TESTING LONG LINE TESTING LONG LINE TESTING LONG LINE TESTING LONG LINE TESTING LONG LINE TESTING LONG LINE TESTING LONG LINE TESTING LONG LINE TESTING LONG LINE TESTING LONG LINE TESTING LONG LINE TESTING LONG LINE TESTING LONG LINE TESTING LONG LINE",
+					40);
+
 				active = false;
 				getGame().setCinematicMode(false);
 				// end of show
 			}
-			
+
 			timer++;
 		}
 	}
@@ -68,14 +67,14 @@ public class STheAwakening extends Script {
 	@Override
 	public void onEnter(GameObject object) {
 		// things to run when an object enters the region
-		
+
 		// run only once, when the player enters this
-		if(firstRun && object.getClass().equals(Player.class)){
+		if (firstRun && object.getClass().equals(Player.class)) {
 			// start the show!
 			getGame().setCinematicMode(true);
-			
+
 			object.velocity.x = 0;
-			
+
 			active = true;
 			firstRun = false;
 		}
