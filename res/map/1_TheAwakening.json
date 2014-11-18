@@ -13,7 +13,7 @@
         }, 
         {
          "draworder":"topdown",
-         "height":30,
+         "height":0,
          "name":"Object Layer 1",
          "objects":[
                 {
@@ -28,7 +28,7 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":167.590909090909,
+                 "x":167.591,
                  "y":285.5
                 }, 
                 {
@@ -75,11 +75,25 @@
                  "width":0,
                  "x":391.875,
                  "y":291.75
+                }, 
+                {
+                 "height":84.5,
+                 "name":"Script_TheAwakening",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":14,
+                 "x":316.5,
+                 "y":164
                 }],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
-         "width":40,
+         "width":0,
          "x":0,
          "y":0
         }],

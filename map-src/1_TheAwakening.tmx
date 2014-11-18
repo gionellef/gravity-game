@@ -12,5 +12,6 @@
   <object gid="504" x="440.125" y="280"/>
   <object gid="505" x="327.5" y="250"/>
   <object gid="506" x="391.875" y="291.75"/>
+  <object name="Script_TheAwakening" x="316.5" y="164" width="14" height="84.5"/>
  </objectgroup>
 </map>

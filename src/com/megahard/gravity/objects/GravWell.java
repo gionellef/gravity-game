@@ -31,7 +31,7 @@ public class GravWell extends GameObject {
 			getGame().playSoundAtLocation(Sound.gravwell, position, 1);
 			
 			double radius = 12;
-			for(GameObject o : getGame().findObjects(position.x - radius, position.y - radius, 2*radius, 2*radius)){
+			for(GameObject o : getGame().findObjects(position.x - radius, position.y - radius, 2*radius, 2*radius, true)){
 				Vector2 diff = position.sub(o.position);
 				double d = diff.length();
 				if(d > 1){

@@ -155,7 +155,7 @@ public class GameMap {
 			private double width;
 //			private String type;
 			private int gid;
-//			private String name;
+			private String name;
 			private double x;
 			private double y;
 //			private Properties properties;
@@ -176,9 +176,9 @@ public class GameMap {
 //				System.out.println(offset);
 //				return tilesets[1].tileproperties.get(String.valueOf(gid - offset - 1)).getType();
 //			}
-//			public String getName() {
-//				return name;
-//			}
+			public String getName() {
+				return name;
+			}
 
 			public double getX() {
 				return x;

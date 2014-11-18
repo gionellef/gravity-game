@@ -5,6 +5,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.geom.Rectangle2D;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -62,6 +63,8 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 
 	private List<GameObject> addObj;
 	private List<GameObject> removeObj;
+	
+	private boolean cinematicMode = false;
 
 	private EngineFinishListener finishListener;
 	private boolean finished = false;
@@ -89,6 +92,11 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 		// populate the game state using level data
 		state = new GameState();
 		state.map = loadMapAndObjects(levelData);
+		
+		// initialize scripts
+		for(Script s : state.scripts){
+			s.onStart();
+		}
 	}
 
 	public void addObject(GameObject obj) {
@@ -128,7 +136,6 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 		return state.map;
 	}
 	
-	@SuppressWarnings("unchecked")
 	public GameMap loadMapAndObjects(String mapName) {
 		InputStream in = getClass().getResourceAsStream("/map/" + mapName + ".json");
 		BufferedReader input = new BufferedReader(new InputStreamReader(in));
@@ -141,34 +148,11 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 			if (objects[i] != null) {
 				GameObjects object = objects[i];
 				
-				String type = map.getObjectType(object.getGID());
-				Class<GameObject> subclass = null;
-				try {
-					subclass = (Class<GameObject>) Class
-							.forName("com.megahard.gravity.objects." + type);
-					Constructor<GameObject> constructor = null;
-					constructor = subclass.getConstructor(Engine.class);
-					GameObject o2 = null;
-					o2 = constructor.newInstance(this);
-
-					o2.position.set(object.getX() / 16 + 2,
-							object.getY() / 16 - 2);
-					addObject(o2);
-
-					if (type.equals("Player")) {
-						playerObject = (Player) o2;
-						renderer.setCamera(playerObject.position);
-					}
-				} catch (ClassNotFoundException e1) {
-					System.err.println("Object type " + type + " not found!");
-					e1.printStackTrace();
-				} catch (NoSuchMethodException | SecurityException e1) {
-					System.err.println("Invalid constructor for object type " + type);
-					e1.printStackTrace();
-				} catch (InstantiationException | IllegalAccessException
-						| IllegalArgumentException | InvocationTargetException e) {
-					System.err.println("Invalid constructor for object type " + type);
-					e.printStackTrace();
+				String name = object.getName();
+				if(name.startsWith("Script_")){
+					loadScript(object);
+				}else{
+					loadObject(map, object);
 				}
 
 			}
@@ -176,27 +160,79 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 		return map;
 	}
 
+	private void loadScript(GameObjects object) {
+		String type = object.getName();
+		try {
+			@SuppressWarnings("unchecked")
+			Class<Script> subclass = (Class<Script>) Class
+					.forName("com.megahard.gravity.scripts." + type);
+			Constructor<Script> constructor = null;
+			constructor = subclass.getConstructor(Engine.class, Rectangle2D.Double.class);
+			
+			Rectangle2D.Double region =
+				new Rectangle2D.Double(
+					object.getX() / Renderer.TILE_SIZE,
+					object.getY() / Renderer.TILE_SIZE,
+					object.getWidth() / Renderer.TILE_SIZE,
+					object.getHeight() / Renderer.TILE_SIZE);
+			Script s = constructor.newInstance(this, region);
+			
+			addScript(s);
+
+		} catch (ClassNotFoundException e1) {
+			System.err.println("Script type " + type + " not found!");
+			e1.printStackTrace();
+		} catch (NoSuchMethodException | SecurityException e1) {
+			System.err.println("Invalid constructor for script type " + type);
+			e1.printStackTrace();
+		} catch (InstantiationException | IllegalAccessException
+				| IllegalArgumentException | InvocationTargetException e) {
+			System.err.println("Invalid constructor for script type " + type);
+			e.printStackTrace();
+		}
+	}
+
+	private void addScript(Script s) {
+		state.scripts.add(s);
+	}
+
+	private void loadObject(GameMap map, GameObjects object) {
+		String type = map.getObjectType(object.getGID());
+		try {
+			@SuppressWarnings("unchecked")
+			Class<GameObject> subclass = (Class<GameObject>) Class
+					.forName("com.megahard.gravity.objects." + type);
+			Constructor<GameObject> constructor = null;
+			constructor = subclass.getConstructor(Engine.class);
+			GameObject instance = constructor.newInstance(this);
+
+			instance.position.set(object.getX() / Renderer.TILE_SIZE + 2,
+					object.getY() / Renderer.TILE_SIZE - 2);
+			addObject(instance);
+
+			if (type.equals("Player")) {
+				playerObject = (Player) instance;
+				renderer.setCamera(playerObject.position);
+			}
+		} catch (ClassNotFoundException e1) {
+			System.err.println("Object type " + type + " not found!");
+			e1.printStackTrace();
+		} catch (NoSuchMethodException | SecurityException e1) {
+			System.err.println("Invalid constructor for object type " + type);
+			e1.printStackTrace();
+		} catch (InstantiationException | IllegalAccessException
+				| IllegalArgumentException | InvocationTargetException e) {
+			System.err.println("Invalid constructor for object type " + type);
+			e.printStackTrace();
+		}
+	}
+
 	public void update() {
-		// add all objects to be added
-		for(GameObject o : addObj){
-			o.init();
-			state.objects.add(0, o);
+		if(!cinematicMode){
+			updateInputEvents();
 		}
-		addObj.clear();
-		
-		// process input events
-		updateInputEvents();
-
-		// update all the objects
-		for (GameObject o : state.objects) {
-			o.update();
-		}
-		// Check inter-object collisions
-		checkCollisions();
-
-		// remove all objects to be removed
-		state.objects.removeAll(removeObj);
-		removeObj.clear();
+		updateObjects();
+		updateScripts();
 		
 		// dead player
 		if(!playerObject.active){
@@ -204,7 +240,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 			finish(false);
 		}
 		
-		//debug rendering
+		// debug rendering
 		if(keyIsJustReleased(KeyEvent.VK_F8)){
 			renderer.debug = !renderer.debug;
 		}
@@ -217,6 +253,47 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 		// update key states
 		updateKeyStates();
 
+	}
+
+	private void updateScripts() {
+		for(Script s : state.scripts){
+			// check objects in regions first
+			List<GameObject> objects = findObjects(s.getRegion().x, s.getRegion().y, s.getRegion().width, s.getRegion().height, true);
+			for(GameObject o : objects){
+				if(!s.overlaps.contains(o)){
+					s.onEnter(o);
+				}
+			}
+			for(GameObject o : s.overlaps){
+				if(!objects.contains(o)){
+					s.onExit(o);
+				}
+			}
+			s.overlaps = objects;
+			
+			// update
+			s.onUpdate();
+		}
+	}
+
+	private void updateObjects() {
+		// add all objects to be added
+		for(GameObject o : addObj){
+			o.init();
+			state.objects.add(0, o);
+		}
+		addObj.clear();
+
+		// update all the objects
+		for (GameObject o : state.objects) {
+			o.update();
+		}
+		// Check inter-object collisions
+		checkCollisions();
+
+		// remove all objects to be removed
+		state.objects.removeAll(removeObj);
+		removeObj.clear();
 	}
 
 	private void updateInputEvents() {
@@ -421,9 +498,9 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 
 	@SuppressWarnings("unchecked")
 	public <T> T findObject(Class<T> type, double x, double y, double w,
-			double h, boolean edgeNotCenter) {
+			double h, boolean inclusive) {
 		for (GameObject o : state.objects) {
-			if (!edgeNotCenter) {
+			if (!inclusive) {
 				if(o.position.x < x) continue;
 				if(o.position.x > x + w) break;
 				if (o.position.x >= x
@@ -450,14 +527,27 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 		return null;
 	}
 	
-	public List<GameObject> findObjects(double x, double y, double w, double h){
+	public List<GameObject> findObjects(double x, double y, double w, double h, boolean inclusive){
 		List<GameObject> list = new LinkedList<GameObject>();
-		for(GameObject o : state.objects){
-			if(o.position.x >= x
-			&& o.position.y >= y
-			&& o.position.x < x + w
-			&& o.position.y < y + h){
-				list.add(o);
+		for (GameObject o : state.objects) {
+			if (!inclusive) {
+				if(o.position.x < x) continue;
+				if(o.position.x > x + w) break;
+				if (o.position.x >= x
+				&& o.position.y >= y
+				&& o.position.x < x + w
+				&& o.position.y < y + h) {
+					list.add(o);
+				}
+			} else {
+				if(o.position.x + o.size.x / 2 < x) continue;
+				if(o.position.x - o.size.x / 2 > x + w) break;
+				if (o.position.x - o.size.x / 2 < x + w
+				&& o.position.x + o.size.x / 2 >= x
+				&& o.position.y - o.size.y / 2 < y + h
+				&& o.position.y + o.size.y / 2 >= y) {
+					list.add(o);
+				}
 			}
 		}
 		return list;
@@ -465,5 +555,17 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 
 	public Player getPlayerObject() {
 		return playerObject;
+	}
+
+	public boolean isCinematicMode() {
+		return cinematicMode;
+	}
+
+	public void setCinematicMode(boolean cinematicMode) {
+		this.cinematicMode = cinematicMode;
+		if(cinematicMode){
+			keyStates.clear();
+			mouseStates.clear();
+		}
 	}
 }

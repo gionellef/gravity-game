@@ -5,9 +5,11 @@ import java.util.ArrayList;
 public class GameState {
 	public GameMap map;
 	public ArrayList<GameObject> objects;
+	public ArrayList<Script> scripts;
 
 	public GameState() {
 		map = null;
-		objects = new ArrayList<GameObject>();
+		objects = new ArrayList<>();
+		scripts = new ArrayList<>();
 	}
 }
