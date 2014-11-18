@@ -3,8 +3,10 @@ package com.megahard.gravity;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GraphicsEnvironment;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -28,9 +30,28 @@ public class Renderer extends Canvas {
 
 	private BufferedImage back;
 	private BufferedImage tileset;
+
+	private static Font font;
+	static {
+		String fontPath = "/munro.ttf";
+		font = null;
+		try {
+			font = Font.createFont(Font.TRUETYPE_FONT, Renderer.class.getResourceAsStream(fontPath));
+
+	        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+
+	        ge.registerFont(font);
+	        
+		} catch (FontFormatException | IOException e) {
+			e.printStackTrace();
+		}
+		
+		// ugly default
+		if(font == null) 
+			font = new Font(Font.SANS_SERIF, Font.PLAIN, 10);
+	}
 	
 	public boolean debug = false;
-	private Font debugFont = new Font(Font.SANS_SERIF, 0, 8);
 
 	public Renderer(Engine engine) {
 		game = engine;
@@ -45,7 +66,8 @@ public class Renderer extends Canvas {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		
+		font = font.deriveFont(10f);
 	}
 	
 	public void render(GameState s) {
@@ -136,6 +158,8 @@ public class Renderer extends Canvas {
 		// Draw HUD
 		Player player = game.getPlayerObject();
 		if(player != null){
+			g.setColor(Color.white);
+			g.setFont(font);
 			g.drawString("Gravs left: " + player.getGravsLeft(), 5, 20);
 		}
 
@@ -156,7 +180,7 @@ public class Renderer extends Canvas {
 		if(debug){
 			Graphics bg = bs.getDrawGraphics();
         	bg.setColor(Color.red);
-    		bg.setFont(debugFont);
+    		bg.setFont(font);
 			for (int y = 0; y < mapHeight; y++) {
 				for (int x = 0; x < mapWidth; x++) {
 					Tile tile = s.map.getTile(x, y);
