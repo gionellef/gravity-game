@@ -104,6 +104,10 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 		
 		rm.setWin(win);
 		showRetryMenu();
+		
+		if (win) 
+			LevelMenu.lastMap++;
+		
 	}
 
 	@Override

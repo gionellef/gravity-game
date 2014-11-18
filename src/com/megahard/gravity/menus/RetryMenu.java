@@ -27,7 +27,7 @@ public class RetryMenu extends JPanel{
 	public RetryMenu(GravityApplet app) {
 		retryScreen = new JFrame ("Retry Menu");
 		
-		retryButton = new CustomButton("Retry Level", new Color(34,47,91), new Color(14,26,64));
+		retryButton = new CustomButton("Play more", new Color(34,47,91), new Color(14,26,64));
 		retryButton.setPreferredSize(new Dimension(200,75));
 		retryButton.setBounds(0,150,400,75);
 		retryButton.addActionListener(app);
@@ -69,9 +69,9 @@ public class RetryMenu extends JPanel{
 
 	public void setWin(boolean win) {
 		
-		name = "You Lost! Lose again?";
+		name = "You Lost! Lose more?";
 		if (win) {
-			name = "Yay, cake! Try again?";
+			name = "Go? Next Level?";
 		}
 	}
 	
