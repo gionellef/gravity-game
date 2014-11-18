@@ -4,7 +4,7 @@
  <tileset firstgid="501" source="objects.tsx"/>
  <layer name="Tile Layer 1" width="30" height="50">
   <data encoding="base64" compression="zlib">
-   eJztmDlOAzEUhj0gIraCgkVKWAMFQkIUEJYImhSIghRAEw4ABR3cAFFzBEBwBcQiOARwE5YL8JvME0/G9oyxZ9Kk+KQoyfiLx8/v96QkhCi1aZMR22ApJXXH6+oW7ygYitJRVK4biewUDc7ulNfrxvHxVlvoPQAdBjqFeRzbdcShxWurj4rF6wO/zxNgEkzFjvmEugrlXQVroPqP9fLx7oBdsJezVyVyqJOQ3lBzc/UuCre+5+qlfaju1Z+ajt8bA+OB15de6+ZN3mWw0gJvFvVMr3V9bzO+/11RkxDeMjjSvD8L5mJOlPuQRY2b+nQl8HxVlxz/HXyAT/ClWe9QXrWWekAv6AP90V9/Vl7JNJiJUf1ZetfBBnNzfygv71U8f3WZEDIX+Lx5/sp57Yvf/WSi4eGUNS1rmeevzIRBkXw2rgVeY12P1O2ptte9ppMyoaDxnnt4ObZMUM9cPnsq6ZmOZ0KBnX18zzs0H54HpvW8wGeX4Er49y3yqnmg897juw/gMaC3bMgD7n3Bd1/BWyDvKcY8Y3lg6s0h+7T03kJ0xzKQ186AQw26/M9gOztTX5D50BBuz+dpzwlyTNovBGUDoT4Lh/Kq12zFvZJwdab1XoMbNv5wTt4n8MzGX8jBa8sGQld7vl4Tx6KZDzXLb8tyn0t/VucsH1zy/xvCMsAm
+   eJztmEkvBEEUx6uJxM7BktiXSYgEB8YukTmIgyG4cJC4WOLGxVmcfYQhfAWxhA+Bb2J39a/oFy+lqlWr6nFx+MWkdffPq3r13huNQojGf/5JiFkwaEk25nPZCG8TqA3saFCeqw+iaTA4iy29fWDNo3fM8vlez/FK7zooMFAYvntN4416jtiI8EblR1qY99cFvs6toA20K2ubtHcEjIKxX+yXi3cBLIKlPHtVghh54tPrK7a43gERr+7F9dI5LNT4e3Eth5/NoMXz/tJnXdzkHQLDf+BNIp/ps67uTYfrXxR84sPbAbY117tBT8iusg5J5LipTqc9x6u65PsfwCN4As+a/fblVXOpBJSCMlAefPcn5ZV0glSI6k/SOwEmmZv7fXl5reL9V9cTfPYFHjfvvzKuFfF1nkwsOzhlTstc5v1X9oQa8fNsnPG8x7oaKcmCOTAfrkm+vBtgE2zl2eszXtMcTD0hKt5DBy8nqieoM5fLmfrpO11a8dLs4zrvUDy8H5hm2Bx+dwSOhXvdIq/aD3TeC9x7Ca48ejsM/YB7b3HvHbj35N3HOw9YPzDVZp91WnrPIDpnPZDnTnV4H9XqPUefenZ1szPVBelcFfH+D2I758u4aYYiqDcQNnPQC669gjfwbpEHulo5E9ZKImeR9xWgElSBaos5QXpPwCnz12m844a8J5+81gW6QcbSew1umLdf4zXNQSnmnFJyxCa/dL2B4LnXafCmwlhd588d8dkfMhF/W5LnXPp9nt+/4AMhgdG2
   </data>
  </layer>
  <objectgroup name="Object Layer 1">
@@ -18,5 +18,11 @@
   <object gid="505" x="104.5" y="249"/>
   <object gid="505" x="24.5" y="554"/>
   <object gid="501" x="39.5795" y="157.443"/>
+  <object gid="508" x="199.5" y="743.5"/>
+  <object gid="508" x="189.75" y="722.25"/>
+  <object gid="508" x="190.438" y="766.5"/>
+  <object gid="508" x="344" y="744"/>
+  <object gid="508" x="354" y="722"/>
+  <object gid="508" x="354" y="765.5"/>
  </objectgroup>
 </map>
