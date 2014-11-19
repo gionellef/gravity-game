@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="40" height="20" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" source="main.tsx"/>
+ <tileset firstgid="501" source="objects.tsx"/>
+ <layer name="Tile Layer 1" width="40" height="20">
+  <data encoding="base64" compression="zlib">
+   eJztls1OwkAUhWfqVkiQhUlrgizQhLBDE3WtO1gIa9jRh1ILDwH+vAX4NoaVZxJNrpPb6Z2pNSS4+NL56Zk5ObmdaaKUSvaEQ1AD9R3wwtEBZ+D8D/ccgIsKGZb0dwIetFKP4EnntxvgiNB0vEvbcck6Mv6WWGcFnnV+m/Mn0cUBdUvryPg71sVw/iS62KNuuVq7FPj7wDtTy98EbAXavkc9clllX88WOAVtpm9nRzN06ej6NM8Qf1fgGtwwfZc/l+43/d2DERgzfZc/l87X3wxEFgeCGnL5K9Jqa7804Hyh65kFNYjIWBfcWd5uQa9A951XmfOFZmqyzMAcLJQ7Qzs7qqOZpR7ni+QueQGv4E39zITzR+epLuTOkPpbgw14JzmYXDl/dJ7qqvJnfz9pznjRvOQbqIL//7/d4xPVl3yL
+  </data>
+ </layer>
+ <objectgroup name="Object Layer 1">
+  <object gid="505" x="296" y="272"/>
+  <object gid="506" x="224" y="256.25"/>
+  <object gid="506" x="352" y="256.25"/>
+  <object gid="506" x="416.5" y="225"/>
+  <object gid="506" x="125.636" y="226.364"/>
+  <object gid="501" x="56.5" y="185"/>
+  <object gid="504" x="519.5" y="184"/>
+  <object name="script_TheAwakening" x="332" y="54.5" width="26" height="208.5"/>
+  <object name="script_BlackPerson" x="177" y="80" width="79" height="72"/>
+ </objectgroup>
+</map>
