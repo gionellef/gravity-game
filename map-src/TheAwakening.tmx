@@ -15,7 +15,7 @@
   <object gid="506" x="125.636" y="226.364"/>
   <object gid="501" x="56.5" y="185"/>
   <object gid="504" x="519.5" y="184"/>
-  <object name="script_TheAwakening" x="332" y="54.5" width="26" height="208.5"/>
+  <object name="script_TheAwakening" x="326.5" y="54" width="26" height="208.5"/>
   <object name="script_BlackPerson" x="177" y="80" width="79" height="72"/>
  </objectgroup>
 </map>

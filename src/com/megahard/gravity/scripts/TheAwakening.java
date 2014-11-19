@@ -14,7 +14,6 @@ public class TheAwakening extends Script {
 	
 	public TheAwakening(Engine game, Double region) {
 		super(game, region);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

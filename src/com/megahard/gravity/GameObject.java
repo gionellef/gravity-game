@@ -57,7 +57,6 @@ public class GameObject {
 			
 			double gravity = 0.05;
 			velocity.y += gravity;
-			standing = false;
 	
 			// max velocity
 			if(velocity.length() > 1) {
@@ -95,9 +94,6 @@ public class GameObject {
 					if(Math.abs(velocity.x) < staticFriction) velocity.x = 0;
 					else velocity.x *= friction;
 					velocity.y *= -restitution;
-					if(velocity.y < E){
-						standing = true;
-					}
 				} else {
 					position.y += velocity.y;
 				}
@@ -176,6 +172,11 @@ public class GameObject {
 					position.x += velocity.x;
 				}
 			}
+			
+			left = position.x - size.x / 2;
+			right = position.x + size.x - E;
+	
+			standing = map.getTile(left, down + 2 * E).getCollidable() || map.getTile(right, down + 2 * E).getCollidable(); 
 			
 			if(position.y > getGame().getMap().getHeight()){
 				getGame().removeObject(this);
