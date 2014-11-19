@@ -8,3 +8,4 @@ Luck,luck
 Fly,fly
 Hell,hell
 Lean's challenge,lean
+Paradox,Paradox

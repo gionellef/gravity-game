@@ -151,10 +151,35 @@ public class Renderer extends Canvas {
 						(int) (o.size.y * TILE_SIZE));
 			}
 		}
+		
+		// Draw borders
+		g.setColor(Color.black);
+		if(cx * TILE_SIZE - halfBufWidth < 0){
+			g.fillRect(0, 0, (int) (halfBufWidth - cx * TILE_SIZE), bufferHeight);
+		}
+		if(cx * TILE_SIZE + halfBufWidth > s.map.getWidth() * TILE_SIZE){
+			int borderWidth = (int) (cx * TILE_SIZE + halfBufWidth - s.map.getWidth() * TILE_SIZE) + 1;
+			g.fillRect(bufferWidth - borderWidth, 0, borderWidth, bufferHeight);
+		}
+		if(cy * TILE_SIZE - halfBufHeight < 0){
+			g.fillRect(0, 0, bufferWidth, (int) (halfBufHeight - cy * TILE_SIZE));
+		}
+		if(cy * TILE_SIZE + halfBufHeight > s.map.getHeight() * TILE_SIZE){
+			int borderHeight = (int) (cy* TILE_SIZE + halfBufHeight - s.map.getHeight() * TILE_SIZE) + 1;
+			g.fillRect(0, bufferHeight - borderHeight, bufferWidth, borderHeight);
+		}
+		
+		// Draw HUD
+		Player player = game.getPlayerObject();
+		if(player != null){
+			g.setColor(Color.white);
+			g.setFont(font);
+			g.drawString("Gravs left: " + player.getGravsLeft(), 5, 20);
+		}
 
-		int cineStripHeight = 60;
 		
 		// Draw "cinematic mode"
+		int cineStripHeight = 60;
 		if(s.cinematicMode){
 			g.setColor(Color.black);
 			g.fillRect(0, 0, bufferWidth, cineStripHeight);
@@ -177,14 +202,6 @@ public class Renderer extends Canvas {
 				// handle overflow (by scrolling)
 				System.out.println(message);
 			}
-		}
-		
-		// Draw HUD
-		Player player = game.getPlayerObject();
-		if(player != null){
-			g.setColor(Color.white);
-			g.setFont(font);
-			g.drawString("Gravs left: " + player.getGravsLeft(), 5, 20);
 		}
 
 		// end of drawings
