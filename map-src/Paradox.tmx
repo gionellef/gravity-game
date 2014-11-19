@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" source="main.tsx"/>
+ <tileset firstgid="501" source="objects.tsx"/>
+ <layer name="Tile Layer 1" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt2bENwkAQRNEDikDCmCZA0AQ2VdjQfwVsgnQ6Gbhbgh1GE/zA2T2xE9GllDqllFJKpat1cjQAvD1vb21X7R3BLF4HmiV3DNZo3Sq/kSy5Y7bu1qPyG8nyy10hWSZrXbRx2qItS7bS0luH4t3Ie3lnOVuXwoG8l2+/C9ONMVm0l/jYb4zJor3Ex35jTBbtJT72G2OyaC/xsd8Yk0V7iY/9xpgstXvZAbz/k6V2L2gO740hOjwWVEerBdnRYkF31Fr+wfGylP/H5M0Ab1TLPQGlEyQ0
+  </data>
+ </layer>
+ <objectgroup name="Object Layer 1">
+  <object name="script_SParadoxFall" x="505.5" y="504.333" width="125.5" height="127.833"/>
+  <object gid="501" x="55.3333" y="251"/>
+  <object gid="505" x="88" y="256"/>
+  <object gid="505" x="152" y="312.333"/>
+  <object gid="505" x="296" y="456.333"/>
+  <object gid="505" x="279.667" y="440"/>
+  <object gid="505" x="456.333" y="616.667"/>
+  <object gid="505" x="616" y="776.667"/>
+  <object gid="505" x="648.333" y="777.333"/>
+  <object gid="505" x="663" y="777.333"/>
+  <object gid="505" x="712.333" y="778.333"/>
+  <object gid="503" x="631.333" y="744"/>
+  <object gid="503" x="647.333" y="695.667"/>
+  <object gid="503" x="439.5" y="504"/>
+  <object gid="503" x="360.364" y="503.818"/>
+  <object gid="503" x="344.25" y="392.25"/>
+ </objectgroup>
+</map>
