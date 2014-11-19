@@ -5,6 +5,9 @@ The Awakening,TheAwakening
 Test Bed,untitled
 Noob Paradise 1,NoobParadise_1
 Noob Paradise 2,NoobParadise_2
+Noob Paradise 3,NoobParadise_3
+Noob Paradise 4,NoobParadise_4
+Noob Paradise 5,NoobParadise_5
 Luck,luck
 Fly,fly
 Hell,hell

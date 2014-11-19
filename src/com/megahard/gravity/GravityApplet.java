@@ -3,6 +3,7 @@ package com.megahard.gravity;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 import javax.swing.JApplet;
 import javax.swing.JFrame;
@@ -21,7 +22,11 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 
 	private boolean running = true;
 	
+	private Thread gameThread;
 	private Engine engine;
+	private MusicPlayer music;
+	private Thread musThread = new Thread(music);
+	private boolean win;
 	
 	private static final int FPS = 30;
 
@@ -31,6 +36,7 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 	@Override
 	public void init() {
 		Sound.touch();
+		music = new MusicPlayer();
 		
 		lm = new LevelMenu(this);
 		rm = new RetryMenu(this);
@@ -39,19 +45,6 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 		
 		setSize(WIDTH, HEIGHT);
 		setLayout(new BorderLayout());
-	}
-
-	// application mode
-	public static void main(String args[]) {
-		GravityApplet applet = new GravityApplet();
-
-		JFrame frame = new JFrame("Gravity");
-		frame.getContentPane().add(applet);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(WIDTH, HEIGHT);
-		frame.setLocationRelativeTo(null);
-		frame.setVisible(true);
-		applet.init();
 	}
 	
 	@Override
@@ -89,12 +82,36 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 			e.printStackTrace();
 		}
 
+		
+		rm.setWin(win);
+		
 		remove(engine.getRenderer());
 		engine = null;
+
+			
+		if (win) {
+			if (LevelMenu.lastMap<lm.maps.size()-1)
+				LevelMenu.lastMap++;
+			else
+				LevelMenu.lastMap = 0;
+			
+			System.out.println(LevelMenu.lastMap);
+			
+		}
+			
+			
+		renderGameScreen();
+
+			
+		
+		validate();
+		repaint();
+		
 	}
 
 	public void stop() {
 		running = false;
+		music.stop();
 	}
 	
 	@Override
@@ -102,12 +119,31 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 		stop();
 		System.out.println("win = " + win);
 		
-		rm.setWin(win);
-		showRetryMenu();
+		this.win = win;
 		
-		if (win) 
-			LevelMenu.lastMap++;
+	}
+	
+	private void renderGameScreen() {
+		engine = new Engine();
+		engine.initialize(lm.maps.get(LevelMenu.lastMap)[1]);
+		engine.getRenderer().addKeyListener(engine);
+		engine.getRenderer().addMouseListener(engine);
+		engine.getRenderer().addMouseMotionListener(engine);
 		
+		add(engine.getRenderer(), BorderLayout.CENTER);
+		
+		engine.setFinishListener(this);
+		
+		gameThread = new Thread(this);
+		gameThread.start();
+		
+		startMusic();
+	}
+	
+	private void startMusic() {
+		music.play(MusicPlayer.mFiles.get(new Random().nextInt(8))[1]);
+		musThread = new Thread(music);
+		musThread.start();
 	}
 
 	@Override
@@ -165,21 +201,6 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 		}
 	}
 	
-	private void renderGameScreen() {
-		
-		engine = new Engine();
-		engine.initialize(lm.maps.get(LevelMenu.lastMap)[1]);
-		engine.getRenderer().addKeyListener(engine);
-		engine.getRenderer().addMouseListener(engine);
-		engine.getRenderer().addMouseMotionListener(engine);
-		
-		add(engine.getRenderer(), BorderLayout.CENTER);
-		
-		engine.setFinishListener(this);
-		
-		new Thread(this).start();
-	}
-	
 	private void showTitleScreen() {
 		add(ts);
 	}
@@ -192,4 +213,19 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 		add(rm);
 	}
 	
+	
+	// application mode
+	public static void main(String args[]) {
+		GravityApplet applet = new GravityApplet();
+
+		JFrame frame = new JFrame("Gravity");
+		frame.getContentPane().add(applet);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(WIDTH, HEIGHT);
+		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
+		frame.setResizable(false);
+		applet.init();
+		
+	}
 }
