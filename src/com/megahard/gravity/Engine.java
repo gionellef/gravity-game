@@ -96,6 +96,13 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 		// populate the game state using level data
 		state = new GameState();
 		state.map = loadMapAndObjects(levelData);
+
+		// add all objects to be added
+		for(GameObject o : addObj){
+			o.init();
+			state.objects.add(o);
+		}
+		addObj.clear();
 		
 		// initialize scripts
 		for(Script s : state.scripts){
@@ -290,7 +297,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 		// add all objects to be added
 		for(GameObject o : addObj){
 			o.init();
-			state.objects.add(0, o);
+			state.objects.add(o);
 		}
 		addObj.clear();
 
@@ -580,5 +587,14 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 	public void showMessage(String message, int duration) {
 		renderer.showMessage(message);
 		messageExpiry = state.time + duration;
+	}
+
+	public <T> T  findObject(Class<T> type) {
+		for (GameObject o : state.objects) {
+			if (o.getClass().equals(type)) {
+				return (T) o;
+			}
+		}
+		return null;
 	}
 }

@@ -7,6 +7,8 @@ import com.megahard.gravity.Vector2;
 
 public class GravWell extends GameObject {
 
+	public double power = 1;
+	
 	private boolean online = true;
 	private int time = 0;
 	
@@ -35,9 +37,9 @@ public class GravWell extends GameObject {
 				Vector2 diff = position.sub(o.position);
 				double d = diff.length();
 				if(d > 1){
-					double str = 0.1 + 0.7f/time;
-					double accel = str / (d * d);
-					if(accel > 0.01){
+					double str = 0.1 + 0.8f/time;
+					double accel = power * str / (d * d);
+					if(accel > 0.005){
 						o.velocity = o.velocity.add(diff.scale(accel));
 					}
 				}else{
