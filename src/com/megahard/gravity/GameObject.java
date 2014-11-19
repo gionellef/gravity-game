@@ -174,9 +174,11 @@ public class GameObject {
 			}
 			
 			left = position.x - size.x / 2;
-			right = position.x + size.x - E;
+			right = position.x + size.x / 2 - E;
 	
-			standing = map.getTile(left, down + 2 * E).getCollidable() || map.getTile(right, down + 2 * E).getCollidable(); 
+			double bottom = down + gravity + 2 * E;
+			standing = map.getTile(left, bottom).getCollidable()
+					|| map.getTile(right, bottom).getCollidable(); 
 			
 			if(position.y > getGame().getMap().getHeight()){
 				getGame().removeObject(this);
