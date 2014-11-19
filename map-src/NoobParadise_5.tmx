@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="30" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" source="main.tsx"/>
+ <tileset firstgid="501" source="objects.tsx"/>
+ <layer name="Tile Layer 1" width="50" height="30">
+  <data encoding="base64" compression="zlib">
+   eJyTZmBgkB7Fo3gUj+JRPIpHMVbsA8QmA4h9qeQPGSAWZySMRYBYFIjFiFCLjh8B7XgMtWc6EM8A4plQOSk6+8MDSuuT4Y/fQDv+DDJ/eJDhD2RMK3+kAjETnTAzUphR2x+UYBs0fiAQK0GxMo64p1V8UIIzkdwNwlkE1IP8sRCIFzEMLn+QikH+2AXEu2ngD3rWH6YMtC+vngDpp1D2YaTyhRi2LgPx6mntj79A+h+UfQfJfmLYyP4gpH6g6w98WJcEMwZz/eFGgd40KvmDFCyAQ9xpANxCCS4EYi0gjoLSMFw0CNw2ikfxKB7FgwUDAL6vwZY=
+  </data>
+ </layer>
+ <objectgroup name="Object Layer 1">
+  <object gid="508" x="338" y="230"/>
+  <object gid="508" x="339" y="207"/>
+  <object gid="507" x="455" y="232"/>
+  <object gid="507" x="280" y="360"/>
+  <object gid="501" x="135" y="346"/>
+  <object gid="506" x="228" y="356"/>
+  <object gid="506" x="378" y="227"/>
+  <object gid="504" x="140" y="216"/>
+  <object gid="505" x="159" y="359"/>
+  <object gid="505" x="169" y="360"/>
+  <object gid="505" x="179" y="358"/>
+  <object gid="505" x="190" y="361"/>
+  <object gid="505" x="499" y="361"/>
+  <object gid="505" x="514" y="361"/>
+  <object gid="505" x="532" y="361"/>
+  <object gid="505" x="550" y="358"/>
+  <object gid="505" x="575" y="359"/>
+  <object gid="505" x="524" y="235"/>
+  <object gid="505" x="502" y="233"/>
+  <object gid="505" x="486" y="234"/>
+ </objectgroup>
+</map>
