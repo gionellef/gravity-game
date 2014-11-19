@@ -5,7 +5,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.advanced.AdvancedPlayer;
 
 public class MusicPlayer implements Runnable{
@@ -25,7 +24,6 @@ public class MusicPlayer implements Runnable{
 			//String mapName = values[0];
 			//String fileName = values[1];
 			mFiles.add(values);
-			System.out.println(values);
 		}
 		
 		scanner.close();
@@ -39,27 +37,28 @@ public class MusicPlayer implements Runnable{
 	@Override
 	public void run() {
 		playing = true;
-		
-		while (playing) {
-			try {
-				
-				DataInputStream dis = new DataInputStream(
-						Sound.class.getResourceAsStream("/music/" + fileName));
-		        pl = new AdvancedPlayer(dis);
-		
-		        pl.getPlayBackListener();
-			  
-				pl.play();
-			} catch (JavaLayerException e) {
-				e.printStackTrace();
-			}
+		DataInputStream dis = new DataInputStream(
+				Sound.class.getResourceAsStream("/music/" + fileName));
+        try {
+        	while (playing) {
+        		pl = new AdvancedPlayer(dis);
+    			pl.getPlayBackListener();
+    			pl.play();
+        	}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			
 		}
-		
-		System.out.println("IM HERE");
 	}
 	
 	public void stop() {
 		playing = false;
+		try {
+			pl.close();
+		} catch (Exception e) {
+			
+		}
+		
 	}
 	
 }
