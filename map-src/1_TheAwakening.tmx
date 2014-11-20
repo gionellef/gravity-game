@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="40" height="30" tilewidth="16" tileheight="16">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="48" height="30" tilewidth="16" tileheight="16">
  <tileset firstgid="1" source="main.tsx"/>
  <tileset firstgid="501" source="objects.tsx"/>
- <layer name="Tile Layer 1" width="40" height="30">
+ <layer name="Tile Layer 1" width="48" height="30">
   <data encoding="base64" compression="zlib">
-   eJzt0U1OwkAYxvEOZwBJLGDxAm6MoidwYTEegYWVcA8/8A4UKHegpeUOyo34G5q0mWhNkxnZvItf0nc6feZp6zqO4wohhBCG3ePSEt9Avw5a6ncjNCvuVzk11K9NVhc9dbjW57vS+rczeOhr6zqT/a5wXcouz3q/AW5w+0/93sh6xxQfqphf8PpDvxnPhJjn7+ZjiAdL/RZkLRFhpYo5xBwn+XlL9kZYI0aS9wvwjLGlfhuyUmTYqmKOkeAiPy9lb4ZPfGHn2P+/T2hYEhjoV9cjzg2qe773R97kCN9ECCGE0O0B2rCXhw==
+   eJzt0scJwnAUgPH8ncECdl3Ai9gm8GDBETwYxT2sO9h3sO+gbuQnBhKCBSEmObzDD/JSeF9CYpqmxYQQQgjhazXk/6TuQn8cIfVeG8EP1z+JutQfYVcCSfU8ts9Vy/mHFNLI2M7budlfQNGy2zrb+0soo+KT/hG7xphgqsx5gOGL/hnPzLEw3r2OBpoe9S/ZtcIaG2XOcywQNnpW3LvGFjvsjX4dXfQ86j+w64gTzsqcd9gjZ/QcufeEC664ad7/Px0E/kR3of9XLWQd5HRf+su+vg++oRBCCCGcdQfOp7DX
   </data>
  </layer>
  <objectgroup name="Object Layer 1">
-  <object gid="501" x="167.591" y="285.5"/>
-  <object gid="504" x="440.125" y="280"/>
-  <object gid="505" x="327.5" y="250"/>
-  <object gid="506" x="391.875" y="291.75"/>
-  <object name="script_STheAwakening" x="359" y="156" width="20.5" height="79"/>
+  <object gid="501" x="231.591" y="285.5"/>
+  <object gid="504" x="504.125" y="280"/>
+  <object gid="505" x="391.5" y="250"/>
+  <object gid="506" x="455.875" y="291.75"/>
+  <object name="script_STheAwakening" x="423" y="156" width="20.5" height="79"/>
  </objectgroup>
 </map>

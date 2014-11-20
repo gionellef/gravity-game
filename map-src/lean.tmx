@@ -1,30 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="60" height="30" tilewidth="16" tileheight="16">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="74" height="50" tilewidth="16" tileheight="16">
  <tileset firstgid="1" source="main.tsx"/>
  <tileset firstgid="501" source="objects.tsx"/>
- <layer name="Tile Layer 1" width="60" height="30">
+ <layer name="Tile Layer 1" width="74" height="50">
   <data encoding="base64" compression="zlib">
-   eJztlkFOAkEQRbv1BAjRBEyULWBciIm6NGpY4EJcucCd3IBreAPkFuAt1NsoKz+ZIumMVZmuYYhDUsm8TFMpqupNTwcazrlGBtfgEBz48lKP8IjFfMuH+Zqv+Zqv+ZYT8/1f3298/4dYuL8xCS53wcxSNt8K2COGPpn7OYhJcLnVLdjfSoaXBvM13zw8gRYYku8R6h6Dptevi/YNaxfl+5ra3wvUvQRXXr8OfW9AG9xGuHG51VTtPL590BWogXPwgLoD8Oj16xbNvaRDM4YxCS63E9TG5XbASOnLnc8e3U/WPLtaJuj3BqYRfc9oT+630HdCjjMwB++Kvtr3mfPd35Dv6h3cTdX9wOcvl9w/aS3lbsL3lGa7o54S4Sw+Ir46ay8ZdaVczl3rK/Ve9hu75HcppC08q3pEfF24vSn6/0Zsf/M1X/M1X/M13zy+v/nM2nU=
+   eJzt2M8uA0EAx/EZnqAqJK0E17bigAQ3peLAASd/6qYvQF/DG+At8BZ4G3ry2+w0mYwZO5vtjrF+iU+6xpid/arNpk0hRJOIiIiI6A84hPWIHUXQqAsLMC/j1WAndmIndooUO7ETO7FTrNjpf3X6wO9/KiPxfczFNndk2UtVOtVgRunL9HqvtDEX29x6hd9PtYweebATO1W50xm0oK86LWI/S7As8x9PupO+9m93ujPeT5vYzxZsy/zHeqc9aEPPo4ltbt1YO2Snnz6vnIUNOMZ+TuBU5j9uqetNdNS16WMutrkdbW18iSkYBOpku/8cqNcV9bMd6MKuLHavynKP8z3Ao2VPpjUR9nNfn07ncAGXJfZJ2jzBM7x4dAp9H7d1mjM63cAtDAv2GP+vTBvnfMX37yJ9fVPHrrkxdVpV17Sv9uqiX4P0GB/fS64z1nXNtTUL1cm152SfQ5E+H+jajsYNj/Ey/qaxPGf67pud2Imd2Imd2Imdqt0pi/7sNfAYn+T5ylifiIiIiKiIL7jlqnU=
   </data>
  </layer>
  <objectgroup name="Object Layer 1">
-  <object gid="501" x="160.167" y="349.833"/>
-  <object gid="504" x="34" y="360"/>
-  <object gid="507" x="200.875" y="360"/>
-  <object gid="506" x="755.333" y="291.333"/>
-  <object gid="505" x="321.5" y="359.75"/>
-  <object gid="505" x="487.5" y="362.25"/>
-  <object gid="505" x="500.25" y="361.25"/>
-  <object gid="505" x="518.75" y="361.5"/>
-  <object gid="505" x="551" y="330.5"/>
-  <object gid="505" x="494.25" y="354.5"/>
-  <object gid="505" x="614.25" y="345.25"/>
-  <object gid="505" x="689" y="362.25"/>
-  <object gid="505" x="139.25" y="361.25"/>
-  <object gid="505" x="220.5" y="361.75"/>
-  <object gid="505" x="230.5" y="362.25"/>
-  <object gid="505" x="398.5" y="359.75"/>
-  <object gid="508" x="88.5" y="332.5"/>
-  <object gid="508" x="88.5" y="357.5"/>
+  <object gid="501" x="343.167" y="509.833"/>
+  <object gid="504" x="210" y="520"/>
+  <object gid="507" x="376.875" y="520"/>
+  <object gid="506" x="931.333" y="451.333"/>
+  <object gid="505" x="497.5" y="519.75"/>
+  <object gid="505" x="663.5" y="522.25"/>
+  <object gid="505" x="676.25" y="521.25"/>
+  <object gid="505" x="694.75" y="521.5"/>
+  <object gid="505" x="727" y="490.5"/>
+  <object gid="505" x="670.25" y="514.5"/>
+  <object gid="505" x="790.25" y="505.25"/>
+  <object gid="505" x="865" y="522.25"/>
+  <object gid="505" x="315.25" y="521.25"/>
+  <object gid="505" x="396.5" y="521.75"/>
+  <object gid="505" x="406.5" y="522.25"/>
+  <object gid="505" x="574.5" y="519.75"/>
+  <object gid="508" x="264.5" y="492.5"/>
+  <object gid="508" x="264.5" y="517.5"/>
+  <object gid="503" x="438" y="651"/>
+  <object gid="503" x="454" y="651"/>
+  <object gid="503" x="534" y="649"/>
+  <object gid="503" x="550" y="649"/>
+  <object gid="503" x="904" y="645"/>
+  <object gid="503" x="888" y="645"/>
+  <object gid="503" x="920" y="645"/>
+  <object gid="503" x="934" y="644"/>
  </objectgroup>
 </map>
