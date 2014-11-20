@@ -3,6 +3,7 @@ package com.megahard.gravity;
 import java.io.DataInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 import javazoom.jl.player.advanced.AdvancedPlayer;
@@ -37,10 +38,12 @@ public class MusicPlayer implements Runnable{
 	@Override
 	public void run() {
 		playing = true;
-		DataInputStream dis = new DataInputStream(
-				Sound.class.getResourceAsStream("/music/" + fileName));
         try {
         	while (playing) {
+        		int num = new Random().nextInt(mFiles.size());
+        		fileName = mFiles.get(num)[1];
+        		DataInputStream dis = new DataInputStream(
+        				Sound.class.getResourceAsStream("/music/" + fileName));
         		pl = new AdvancedPlayer(dis);
     			pl.getPlayBackListener();
     			pl.play();

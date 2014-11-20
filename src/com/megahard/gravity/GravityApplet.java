@@ -27,6 +27,7 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 	private MusicPlayer music;
 	private Thread musThread = new Thread(music);
 	private boolean win;
+	private boolean esc;
 	
 	private static final int FPS = 30;
 
@@ -81,9 +82,6 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-
-		
-		rm.setWin(win);
 		
 		remove(engine.getRenderer());
 		engine = null;
@@ -99,9 +97,10 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 			
 		}
 			
-			
-		renderGameScreen();
-
+		if (!esc)
+			renderGameScreen();
+		else
+			showRetryMenu();
 			
 		
 		validate();
@@ -111,16 +110,15 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 
 	public void stop() {
 		running = false;
-		music.stop();
 	}
 	
 	@Override
-	public void onFinish(int score, int time, boolean win) {
+	public void onFinish(int score, int time, boolean win, boolean esc) {
 		stop();
 		System.out.println("win = " + win);
 		
 		this.win = win;
-		
+		this.esc = esc;
 	}
 	
 	private void renderGameScreen() {
@@ -136,12 +134,11 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 		
 		gameThread = new Thread(this);
 		gameThread.start();
-		
-		startMusic();
 	}
 	
 	private void startMusic() {
-		music.play(MusicPlayer.mFiles.get(new Random().nextInt(8))[1]);
+		music.play(MusicPlayer.mFiles.get(new Random().nextInt(
+				MusicPlayer.mFiles.size()))[1]);
 		musThread = new Thread(music);
 		musThread.start();
 	}
@@ -169,6 +166,7 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 			
 			remove(lm);
 			validate();
+			startMusic();
 		}
 		
 		if (a.equals(lm.getLeft())) {
@@ -192,6 +190,7 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 			remove (rm);
 			validate();
 			repaint();
+			music.stop();
 		}
 		
 		if (a.equals(rm.getRetryButton())) {

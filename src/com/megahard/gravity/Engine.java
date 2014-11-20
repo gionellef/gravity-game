@@ -120,12 +120,12 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 		obj.active = false;
 	}
 	
-	public void finish(boolean win){
+	public void finish(boolean win,boolean esc){
 		if(finished)
 			return;
 		finished = true;
 		Sound.stopAll();
-		finishListener.onFinish(0, 0, win);
+		finishListener.onFinish(0, 0, win,esc);
 	}
 	
 	public void setFinishListener(EngineFinishListener efl){
@@ -248,7 +248,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 		// dead player
 		if(!playerObject.active){
 			// Game over
-			finish(false);
+			finish(false,false);
 		}
 		
 		// debug rendering
@@ -258,7 +258,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 		
 		// give up
 		if(keyIsJustReleased(KeyEvent.VK_ESCAPE)){
-			finish(false);
+			finish(false,true);
 		}
 		
 		// update key states
