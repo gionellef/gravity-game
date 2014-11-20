@@ -87,16 +87,16 @@ public class SGalileo extends Script {
 		msgQueue.add(new Msg(new Runnable() {
 			@Override
 			public void run() {
-				getGame().fadeScreen(null, Color.black, 50);
+				getGame().fadeScreen(null, Color.black, 20);
 			}
-		}, 50));
+		}, 30));
 		msgQueue.add(new Msg(
 			"PlanetGravitonia",
 			"In the planet of Gravitonia, there exists the royal family who ruled the whole planet. They posses a strange and powerful ability to control gravity.",
 			300
 		));
 		msgQueue.add(new Msg(
-			"GravitonianProtectors",
+			"PlanetGravitonia",
 			"Without them and their power, the planet is at constant risk of being swallowed by rogue black holes getting close to the planet. They are the protectors of Gravitonia.",
 			300
 		));
