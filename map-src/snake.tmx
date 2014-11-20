@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="45" height="90" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" source="main.tsx"/>
+ <tileset firstgid="501" source="objects.tsx"/>
+ <layer name="Tile Layer 1" width="45" height="90">
+  <data encoding="base64" compression="zlib">
+   eJzt2c8uA1EUBvBTfQIEiUqwk5IgNMFObRAWWKAs/Al71Et4DS+JlW8YSXN6p/dOtPeeNt/iF9MYyddx5p5zZ2oiUiOiH+dQz7U6jkNcRM56BJv/cAztyJnnYKYiMg8LsFj5/VxkX32exd83I2V9U5m3YBt28iw3MAXT+c8/t7ALTdiLnPldZT6BUzhT13HVca1bcAXXkTPr2githcwLtOE1YeYP+Mx9AaLIWKDHRJnHEXIiN5lfu+x3l+Jf57J18TlS1s57sChz7Ovn03kPFmWOve72ozasXeeQzE9is3dnmevIuZxbgQ0p17tT9UFtDdYdx1r2P4lV97oP6nnjAA4dx/q8lH1QzxtFmfV5KTPreeMO7h3H+jxL84arf1elu8+nnEVdder6fq51MdUs6qpTa5l99TwMmV3rrvXMw1DPvv2gxcy+/aDFzL56ds1JDemepyxlLjMjWbkHLc5IvnvQ4ozkuwetz0ghzzeqYquei/aDrrpn5nJCnsm4MqdcN0KeybgyW9lbhTwraIitdYN9cHDYB23Uc1EvTPmswJd5GGZ+7gcHYxT3g2Uyp3rfPcp7WEt9UBuGPqhZ7oMPEv5u28r77n5IlXlJer+H7/VOM9Y7eiIiIiIiIiIiIiKiUfUNIxLpHA==
+  </data>
+ </layer>
+ <objectgroup name="Object Layer 1">
+  <object gid="501" x="423" y="173"/>
+  <object gid="505" x="379" y="183"/>
+  <object gid="505" x="353" y="183"/>
+  <object gid="505" x="352.333" y="356"/>
+  <object gid="505" x="368.333" y="355.333"/>
+  <object gid="505" x="285.333" y="561.667"/>
+  <object gid="505" x="307.667" y="563.333"/>
+  <object gid="505" x="349.333" y="722.667"/>
+  <object gid="505" x="370" y="722.333"/>
+  <object gid="503" x="246" y="396.667"/>
+  <object gid="503" x="262.667" y="396"/>
+  <object gid="503" x="214.667" y="397.667"/>
+  <object gid="503" x="229.667" y="397.667"/>
+  <object gid="503" x="375.667" y="604.667"/>
+  <object gid="503" x="392" y="604.667"/>
+  <object gid="503" x="440" y="606"/>
+  <object gid="503" x="408" y="605.333"/>
+  <object gid="503" x="264" y="760"/>
+  <object gid="503" x="247.667" y="760.667"/>
+  <object gid="503" x="217.333" y="760.667"/>
+  <object gid="503" x="232.333" y="760.667"/>
+  <object gid="504" x="230" y="873"/>
+  <object gid="503" x="279" y="396"/>
+  <object gid="503" x="423.667" y="605.667"/>
+  <object gid="503" x="279.333" y="760"/>
+ </objectgroup>
+</map>
