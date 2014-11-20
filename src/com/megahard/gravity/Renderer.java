@@ -187,7 +187,9 @@ public class Renderer extends Canvas {
 
 		// Draw screen effects
 		if(fadeTime > 0){
-			fadeTimer--;
+			if(fadeTimer > 0){
+				fadeTimer--;
+			}
 			
 			double t = (double) fadeTimer/fadeTime; 
 
@@ -205,10 +207,8 @@ public class Renderer extends Canvas {
 				Math.max(0,
 				fadeColorStart.getAlpha() * t + fadeColorEnd.getAlpha() * (1 - t))))));
 
-			g.fillRect(0, 0, bufferWidth, bufferHeight);
-			
-			if(fadeTimer == 0){
-				fadeTime = 0;
+			if(g.getColor().getAlpha() > 0){
+				g.fillRect(0, 0, bufferWidth, bufferHeight);
 			}
 		}
 		
