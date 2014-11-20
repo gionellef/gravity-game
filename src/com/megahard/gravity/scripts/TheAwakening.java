@@ -111,7 +111,7 @@ public class TheAwakening extends Script {
 			}
 			
 			if(timer == 750){
-				getGame().showMessage("isaac", "Augh... What did just happen!?", 60);
+				getGame().showMessage("isaac", "Augh... What just happened!?", 60);
 			}
 			if(timer == 820){
 				getGame().showMessage("isaac", "I feel... ", 80);
