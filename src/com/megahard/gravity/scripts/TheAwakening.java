@@ -69,24 +69,26 @@ public class TheAwakening extends Script {
 			
 			if(timer == 380){
 				// fade to white
-				getGame().fadeScreen(null, Color.white, 140);
+				getGame().fadeScreen(null, Color.white, 80);
 			}
 			
 			if(timer > 360 && timer < 540){
-				if(Math.random() < 0.2){
+				if(Math.random() < 0.1){
 					GravWell g = new GravWell(getGame());
 					g.power = 0.2;
 					g.position.set(player.position.x + Math.random()*16-8, player.position.y + Math.random()*8-4);
 					getGame().addObject(g);
 					wells.add(g);
 				}
-				if(Math.random() < wells.size() * 0.1){
-					wells.remove(0).destroy();;
+				if(Math.random() < wells.size() * 0.01){
+					wells.remove(0).destroy();
 				}
 
-				double m = 0.05;
+				double m = 0.1;
 				player.position.x += (getRegion().x - player.position.x) * m;
 				player.position.y += ((getRegion().y * 2 + getRegion().getHeight())/3 - player.position.y) * m;
+				player.velocity.x *= 0.3;
+				player.velocity.y *= 0.3;
 			}
 			
 			if(timer == 540){
