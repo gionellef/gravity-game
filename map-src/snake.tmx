@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="45" height="90" tilewidth="16" tileheight="16">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="45" height="75" tilewidth="16" tileheight="16">
  <tileset firstgid="1" source="main.tsx"/>
  <tileset firstgid="501" source="objects.tsx"/>
- <layer name="Tile Layer 1" width="45" height="90">
+ <layer name="Tile Layer 1" width="45" height="75">
   <data encoding="base64" compression="zlib">
-   eJzt2c8uA1EUBvBTfQIEiUqwk5IgNMFObRAWWKAs/Al71Et4DS+JlW8YSXN6p/dOtPeeNt/iF9MYyddx5p5zZ2oiUiOiH+dQz7U6jkNcRM56BJv/cAztyJnnYKYiMg8LsFj5/VxkX32exd83I2V9U5m3YBt28iw3MAXT+c8/t7ALTdiLnPldZT6BUzhT13HVca1bcAXXkTPr2githcwLtOE1YeYP+Mx9AaLIWKDHRJnHEXIiN5lfu+x3l+Jf57J18TlS1s57sChz7Ovn03kPFmWOve72ozasXeeQzE9is3dnmevIuZxbgQ0p17tT9UFtDdYdx1r2P4lV97oP6nnjAA4dx/q8lH1QzxtFmfV5KTPreeMO7h3H+jxL84arf1elu8+nnEVdder6fq51MdUs6qpTa5l99TwMmV3rrvXMw1DPvv2gxcy+/aDFzL56ds1JDemepyxlLjMjWbkHLc5IvnvQ4ozkuwetz0ghzzeqYquei/aDrrpn5nJCnsm4MqdcN0KeybgyW9lbhTwraIitdYN9cHDYB23Uc1EvTPmswJd5GGZ+7gcHYxT3g2Uyp3rfPcp7WEt9UBuGPqhZ7oMPEv5u28r77n5IlXlJer+H7/VOM9Y7eiIiIiIiIiIiIiKiUfUNIxLpHA==
+   eJztmc8vQ0EQx6f6FyBIVIKblAShCW7qgnDAAeXgR7ij/gn/hn8SJ98XK3mZzuvui3Z3Xs3hk27T1+TT7ezOzG6DiBqGYRiGoYBz0HR0cuMQLiK7HoHNP3AMupGd58BMjWgeLIDF2s/7IvbZ+1l8vx3J9Y05b4FtsONcbsAUmHavv9yCXdAGe5Gd35nzCTgFZ2weV4W57oArcB3ZmcdGaCxkvIAueE3o/AE+HV8AKjQWyGMi53FITjgm3dxln12Sf5/L9sXnSK75NVjkHHv+fOTXYJFz7H13ELGhbZ5DnJ9IZ+7OnJvwXHasgA0ql7tT5UHOGlgXxpzsP4kV9zwP8nrjABwKY/5cyjzI640iZ/5cSmdeb9yBe2HMn9NUb0j5u069eT5lLSrFqfT7pH0xVS0qxak2Z188V8FZ2ne1O1chnn39oEZnXz+o0dkXz1Kd1KLeekqTc5kaScsa1Fgj+dagxhrJtwa110gh5xt10hXPRf2gFPfmXI6QMxnJOeW+EXImIzlr6a1CzgpapGvfsDw4PCwP6ojnolyY8qzA51yFmt/6weEwiv1gGedU992j3MNqyoOcKuRBjuY8+EDhd9ta7rsHQSrnJep/D9/vTjPWHb1hGIZhGMZ/4BtKTKHr
   </data>
  </layer>
  <objectgroup name="Object Layer 1">
-  <object gid="501" x="423" y="173"/>
-  <object gid="505" x="379" y="183"/>
-  <object gid="505" x="353" y="183"/>
-  <object gid="505" x="352.333" y="356"/>
-  <object gid="505" x="368.333" y="355.333"/>
-  <object gid="505" x="285.333" y="561.667"/>
-  <object gid="505" x="307.667" y="563.333"/>
-  <object gid="505" x="349.333" y="722.667"/>
-  <object gid="505" x="370" y="722.333"/>
-  <object gid="503" x="246" y="396.667"/>
-  <object gid="503" x="262.667" y="396"/>
-  <object gid="503" x="214.667" y="397.667"/>
-  <object gid="503" x="229.667" y="397.667"/>
-  <object gid="503" x="375.667" y="604.667"/>
-  <object gid="503" x="392" y="604.667"/>
-  <object gid="503" x="440" y="606"/>
-  <object gid="503" x="408" y="605.333"/>
-  <object gid="503" x="264" y="760"/>
-  <object gid="503" x="247.667" y="760.667"/>
-  <object gid="503" x="217.333" y="760.667"/>
-  <object gid="503" x="232.333" y="760.667"/>
-  <object gid="504" x="230" y="873"/>
-  <object gid="503" x="279" y="396"/>
-  <object gid="503" x="423.667" y="605.667"/>
-  <object gid="503" x="279.333" y="760"/>
+  <object gid="501" x="423" y="253"/>
+  <object gid="505" x="379" y="263"/>
+  <object gid="505" x="353" y="263"/>
+  <object gid="505" x="352.333" y="436"/>
+  <object gid="505" x="368.333" y="435.333"/>
+  <object gid="505" x="285.333" y="641.667"/>
+  <object gid="505" x="307.667" y="643.333"/>
+  <object gid="505" x="349.333" y="802.667"/>
+  <object gid="505" x="370" y="802.333"/>
+  <object gid="503" x="246" y="476.667"/>
+  <object gid="503" x="262.667" y="476"/>
+  <object gid="503" x="214.667" y="477.667"/>
+  <object gid="503" x="229.667" y="477.667"/>
+  <object gid="503" x="375.667" y="684.667"/>
+  <object gid="503" x="392" y="684.667"/>
+  <object gid="503" x="440" y="686"/>
+  <object gid="503" x="408" y="685.333"/>
+  <object gid="503" x="264" y="840"/>
+  <object gid="503" x="247.667" y="840.667"/>
+  <object gid="503" x="217.333" y="840.667"/>
+  <object gid="503" x="232.333" y="840.667"/>
+  <object gid="504" x="230" y="953"/>
+  <object gid="503" x="279" y="476"/>
+  <object gid="503" x="423.667" y="685.667"/>
+  <object gid="503" x="279.333" y="840"/>
  </objectgroup>
 </map>
