@@ -1,12 +1,12 @@
 package com.megahard.gravity.objects;
 
-import com.megahard.gravity.Engine;
+import com.megahard.gravity.GameContext;
 import com.megahard.gravity.GameObject;
 import com.megahard.gravity.Sound;
 
 public class DeadlyObj extends GameObject {
 
-	public DeadlyObj(Engine game) {
+	public DeadlyObj(GameContext game) {
 		super(game, "deadlyobj");
 		size.set(0.7, 0.7);
 		mass = 0.5;

@@ -24,7 +24,7 @@ import com.megahard.gravity.GameMap.Layers.GameObjects;
 import com.megahard.gravity.Sound.Clips;
 import com.megahard.gravity.objects.Player;
 
-public class Engine implements KeyListener, MouseListener, MouseMotionListener{
+public class Engine implements KeyListener, MouseListener, MouseMotionListener, GameContext{
 	private Player playerObject;
 
 	// Keys
@@ -110,16 +110,25 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see com.megahard.gravity.GameContext#addObject(com.megahard.gravity.GameObject)
+	 */
+	@Override
 	public void addObject(GameObject obj) {
 		addObj.add(obj);
 		obj.active = true;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.megahard.gravity.GameContext#removeObject(com.megahard.gravity.GameObject)
+	 */
+	@Override
 	public void removeObject(GameObject obj) {
 		removeObj.add(obj);
 		obj.active = false;
 	}
 	
+	@Override
 	public void finish(boolean win,boolean esc){
 		if(finished)
 			return;
@@ -132,10 +141,18 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 		finishListener  = efl;
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.megahard.gravity.GameContext#playSoundAtLocation(com.megahard.gravity.Sound.Clips, double, double, double)
+	 */
+	@Override
 	public void playSoundAtLocation(Clips sound, double x, double y, double volume){
 		playSoundAtLocation(sound, new Vector2(x, y), volume);
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.megahard.gravity.GameContext#playSoundAtLocation(com.megahard.gravity.Sound.Clips, com.megahard.gravity.Vector2, double)
+	 */
+	@Override
 	public void playSoundAtLocation(Clips sound, Vector2 position, double volume){
 		double distance = playerObject.position.sub(position).length();
 		float v  =(float) ((volume * 34) / (34 + distance));
@@ -143,6 +160,10 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 		sound.play(v, p);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.megahard.gravity.GameContext#getMap()
+	 */
+	@Override
 	public GameMap getMap() {
 		return state.map;
 	}
@@ -429,18 +450,34 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 	public void keyTyped(KeyEvent e) {
 	}
 
+	/* (non-Javadoc)
+	 * @see com.megahard.gravity.GameContext#keyIsDown(int)
+	 */
+	@Override
 	public boolean keyIsDown(int keyCode){
 		KeyState state = keyStates.get(keyCode);
 		return state == KeyState.PRESS || state == KeyState.CLICK || state == KeyState.DOWN;
 	}
+	/* (non-Javadoc)
+	 * @see com.megahard.gravity.GameContext#keyIsJustPressed(int)
+	 */
+	@Override
 	public boolean keyIsJustPressed(int keyCode){
 		KeyState state = keyStates.get(keyCode);
 		return state == KeyState.PRESS || state == KeyState.CLICK;
 	}
+	/* (non-Javadoc)
+	 * @see com.megahard.gravity.GameContext#keyIsUp(int)
+	 */
+	@Override
 	public boolean keyIsUp(int keyCode){
 		KeyState state = keyStates.get(keyCode);
 		return state == null || state == KeyState.RELEASE || state == KeyState.UP;
 	}
+	/* (non-Javadoc)
+	 * @see com.megahard.gravity.GameContext#keyIsJustReleased(int)
+	 */
+	@Override
 	public boolean keyIsJustReleased(int keyCode){
 		KeyState state = keyStates.get(keyCode);
 		return state == KeyState.RELEASE || state == KeyState.CLICK;
@@ -470,18 +507,34 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 		mouseKeyEvents.add(ke);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.megahard.gravity.GameContext#mouseIsDown(int)
+	 */
+	@Override
 	public boolean mouseIsDown(int button){
 		KeyState state = mouseStates.get(button);
 		return state == KeyState.PRESS || state == KeyState.CLICK || state == KeyState.DOWN;
 	}
+	/* (non-Javadoc)
+	 * @see com.megahard.gravity.GameContext#mouseIsJustPressed(int)
+	 */
+	@Override
 	public boolean mouseIsJustPressed(int button){
 		KeyState state = mouseStates.get(button);
 		return state == KeyState.PRESS || state == KeyState.CLICK;
 	}
+	/* (non-Javadoc)
+	 * @see com.megahard.gravity.GameContext#mouseIsUp(int)
+	 */
+	@Override
 	public boolean mouseIsUp(int button){
 		KeyState state = mouseStates.get(button);
 		return state == null || state == KeyState.RELEASE || state == KeyState.UP;
 	}
+	/* (non-Javadoc)
+	 * @see com.megahard.gravity.GameContext#mouseIsJustReleased(int)
+	 */
+	@Override
 	public boolean mouseIsJustReleased(int button){
 		KeyState state = mouseStates.get(button);
 		return state == KeyState.RELEASE || state == KeyState.CLICK;
@@ -498,6 +551,10 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 		mouseY = e.getY();
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.megahard.gravity.GameContext#getMouseGamePosition()
+	 */
+	@Override
 	public Vector2 getMouseGamePosition() {
 		return new Vector2((double) (mouseX - renderer.getWidth() / 2)
 				/ Renderer.SCALE_FACTOR / Renderer.TILE_SIZE
@@ -506,13 +563,25 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 						/ Renderer.SCALE_FACTOR / Renderer.TILE_SIZE
 						+ renderer.getCamera().y);
 	}
+	/* (non-Javadoc)
+	 * @see com.megahard.gravity.GameContext#getMouseScreenX()
+	 */
+	@Override
 	public int getMouseScreenX(){
 		return mouseX;
 	}
+	/* (non-Javadoc)
+	 * @see com.megahard.gravity.GameContext#getMouseScreenY()
+	 */
+	@Override
 	public int getMouseScreenY(){
 		return mouseY;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.megahard.gravity.GameContext#findObject(java.lang.Class, double, double, double, double, boolean)
+	 */
+	@Override
 	@SuppressWarnings("unchecked")
 	public <T> T findObject(Class<T> type, double x, double y, double w,
 			double h, boolean inclusive) {
@@ -544,6 +613,10 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 		return null;
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.megahard.gravity.GameContext#findObjects(double, double, double, double, boolean)
+	 */
+	@Override
 	public List<GameObject> findObjects(double x, double y, double w, double h, boolean inclusive){
 		List<GameObject> list = new LinkedList<GameObject>();
 		for (GameObject o : state.objects) {
@@ -570,25 +643,45 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 		return list;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.megahard.gravity.GameContext#getPlayerObject()
+	 */
+	@Override
 	public Player getPlayerObject() {
 		return playerObject;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.megahard.gravity.GameContext#isCinematicMode()
+	 */
+	@Override
 	public boolean isCinematicMode() {
 		return state.cinematicMode;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.megahard.gravity.GameContext#setCinematicMode(boolean)
+	 */
+	@Override
 	public void setCinematicMode(boolean cinematicMode) {
 		state.cinematicMode = cinematicMode;
 		keyStates.clear();
 		mouseStates.clear();
 	}
 
+	/* (non-Javadoc)
+	 * @see com.megahard.gravity.GameContext#showMessage(java.lang.String, int)
+	 */
+	@Override
 	public void showMessage(String message, int duration) {
 		renderer.showMessage(message);
 		messageExpiry = state.time + duration;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.megahard.gravity.GameContext#findObject(java.lang.Class)
+	 */
+	@Override
 	@SuppressWarnings("unchecked")
 	public <T> T  findObject(Class<T> type) {
 		for (GameObject o : state.objects) {

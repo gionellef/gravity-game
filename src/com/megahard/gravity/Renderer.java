@@ -33,7 +33,7 @@ public class Renderer extends Canvas {
 		}
 	};
 	
-	private Engine game;
+	private GameContext game;
 
 	private Vector2 camera;
 	private BufferedImage buffer;
@@ -67,7 +67,7 @@ public class Renderer extends Canvas {
 	
 	public boolean debug = false;
 
-	public Renderer(Engine engine) {
+	public Renderer(GameContext engine) {
 		game = engine;
 		camera = new Vector2();
 		buffer = new BufferedImage(GravityApplet.WIDTH/SCALE_FACTOR, GravityApplet.HEIGHT/SCALE_FACTOR, BufferedImage.TYPE_INT_RGB);

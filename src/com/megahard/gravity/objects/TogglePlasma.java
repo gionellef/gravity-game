@@ -1,6 +1,6 @@
 package com.megahard.gravity.objects;
 
-import com.megahard.gravity.Engine;
+import com.megahard.gravity.GameContext;
 import com.megahard.gravity.GameMap;
 import com.megahard.gravity.GameObject;
 import com.megahard.gravity.Sound;
@@ -27,7 +27,7 @@ public class TogglePlasma extends GameObject {
 
 	private int n = 0;
 	
-	public TogglePlasma(Engine game) {
+	public TogglePlasma(GameContext game) {
 		super(game, "toggle-plasma");
 		size.set(0.7, 0.7);
 		mass = 0.5;

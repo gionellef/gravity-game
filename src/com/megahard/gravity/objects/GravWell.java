@@ -1,6 +1,6 @@
 package com.megahard.gravity.objects;
 
-import com.megahard.gravity.Engine;
+import com.megahard.gravity.GameContext;
 import com.megahard.gravity.GameObject;
 import com.megahard.gravity.Sound;
 import com.megahard.gravity.Vector2;
@@ -12,7 +12,7 @@ public class GravWell extends GameObject {
 	private boolean online = true;
 	private int time = 0;
 	
-	public GravWell(Engine game) {
+	public GravWell(GameContext game) {
 		super(game, "gravwell");
 		mass = 0;
 		fixed = true;

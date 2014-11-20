@@ -2,7 +2,7 @@ package com.megahard.gravity;
 
 
 public class GameObject {
-	private final Engine game;
+	private final GameContext game;
 
 	public boolean fixed;
 	
@@ -21,7 +21,7 @@ public class GameObject {
 	public Sprite sprite;
 	public int zIndex;
 
-	public GameObject(Engine game, String spriteName) {
+	public GameObject(GameContext game, String spriteName) {
 		this.game = game;
 		
 		fixed = false;
@@ -192,7 +192,7 @@ public class GameObject {
 		}
 	}
 
-	protected Engine getGame(){
+	protected GameContext getGame(){
 		return game;
 	}
 

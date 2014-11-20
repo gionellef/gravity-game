@@ -1,11 +1,11 @@
 package com.megahard.gravity.objects;
 
-import com.megahard.gravity.Engine;
+import com.megahard.gravity.GameContext;
 import com.megahard.gravity.GameObject;
 
 public class VioletSpark extends GameObject {
 
-	public VioletSpark(Engine game) {
+	public VioletSpark(GameContext game) {
 		super(game, "violet-spark");
 		size.set(0.01, 0.01);
 		mass = 0.001;

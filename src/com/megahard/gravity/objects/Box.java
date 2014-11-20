@@ -1,11 +1,11 @@
 package com.megahard.gravity.objects;
 
-import com.megahard.gravity.Engine;
+import com.megahard.gravity.GameContext;
 import com.megahard.gravity.GameObject;
 
 public class Box extends GameObject {
 
-	public Box(Engine game) {
+	public Box(GameContext game) {
 		super(game, "box");
 		size.set(1.5, 1.5);
 		mass = 40;
