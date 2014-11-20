@@ -1,6 +1,7 @@
-package com.megahard.gravity;
+package com.megahard.gravity.objects;
 
-import com.megahard.gravity.objects.Player;
+import com.megahard.gravity.GameContext;
+import com.megahard.gravity.GameObject;
 
 public class Galileo extends GameObject {
 
