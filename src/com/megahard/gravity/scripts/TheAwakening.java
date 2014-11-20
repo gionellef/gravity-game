@@ -48,9 +48,9 @@ public class TheAwakening extends Script {
 			}
 			
 			if(timer > 240 && timer < 340){
-				double m = 0.1 + 0.3 * (1 - (double)(340 - timer)/(340-240));
-				player.velocity.y += (((getRegion().y * 2 + getRegion().getHeight())/3 - player.position.y) - player.velocity.y) * m;
-				player.velocity.y += 0.9;
+				double m = 0.3 * (1 - (double)(340 - timer)/(340-240));
+				player.velocity.y *= 0.9;
+				player.velocity.y += (((getRegion().y * 2 + getRegion().getHeight())/2 - player.position.y) - player.velocity.y) * m;
 			}
 			
 			if(timer == 260){
@@ -67,9 +67,9 @@ public class TheAwakening extends Script {
 				getGame().addObject(gw);
 			}
 			
-			if(timer == 380){
+			if(timer == 410){
 				// fade to white
-				getGame().fadeScreen(null, Color.white, 80);
+				getGame().fadeScreen(null, Color.white, 150);
 			}
 			
 			if(timer > 360 && timer < 640){
@@ -86,7 +86,7 @@ public class TheAwakening extends Script {
 
 				double m = 0.1;
 				player.position.x += (getRegion().x - player.position.x) * m;
-				player.position.y += ((getRegion().y * 2 + getRegion().getHeight())/3 - player.position.y) * m;
+				player.position.y += ((getRegion().y * 2 + getRegion().getHeight())/2 - player.position.y) * m;
 				player.velocity.x *= 0.3;
 				player.velocity.y *= 0.3;
 			}

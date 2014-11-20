@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" source="main.tsx"/>
+ <tileset firstgid="501" source="objects.tsx"/>
+ <layer name="Tile Layer 1" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJyTZmBgkB7Fo3gUj+IhhH2A2IQI7EukWl8i7ZUBYnFGBgZZIJZjhLBhGFlMCkktNnlxJHWk2GsGxOZoZiCLYbMXmx4pLOGCLQzQzcKFjYHqTIG4HcjuYETQrUDchkTD1BEKA2LtnQXEYkC8AIgXItHzgHg+Ej0Ri15c9r4G4jdA/BaPG0D26gPxTiDehURvB+IdSDSx9qYCMRONcRqN8uIoxo0BqCdSEg==
+  </data>
+ </layer>
+ <objectgroup name="Object Layer 1">
+  <object gid="504" x="376" y="264"/>
+  <object gid="501" x="39.6667" y="268.667"/>
+  <object name="script_Gravity1" x="47.3333" y="127.333" width="90.6667" height="38"/>
+  <object name="script_Gravity2" x="235.333" y="169.333" width="100.667" height="98"/>
+  <object name="script_BlackPerson" x="162.667" y="98.6667" width="116" height="36"/>
+ </objectgroup>
+</map>
