@@ -31,7 +31,7 @@ public class NoobParadise5b extends Script {
 
 			final int halfbeat = 5;
 			final String[] messages = {"This button controls the device connected to it"
-										,"Put the gray object on top of it to press it", ""};
+										,"Put the gray box on top of it to press it", ""};
 
 			final int[] durations = { 15,20, 10};
 

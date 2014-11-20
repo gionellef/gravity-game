@@ -30,7 +30,7 @@ public class NoobParadise2 extends Script {
 		if (active) {
 
 			final int halfbeat = 5;
-			final String[] messages = {"You can do a double jump to jump higher by pressing 'w' 2 times", ""};
+			final String[] messages = {"You can do a double jump to jump higher by pressing 'w' or the spacebar 2 times", ""};
 
 			final int[] durations = { 20,10};
 

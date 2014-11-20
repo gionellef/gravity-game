@@ -2519,5 +2519,6 @@
   <object gid="501" x="199" y="286"/>
   <object gid="504" x="771" y="280"/>
   <object name="script_NoobParadise1" x="209" y="212" width="51" height="60"/>
+  <object name="script_BlackPerson" x="242" y="85" width="68" height="63"/>
  </objectgroup>
 </map>

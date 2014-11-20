@@ -30,9 +30,9 @@ public class NoobParadise1 extends Script {
 		if (active) {
 
 			final int halfbeat = 5;
-			final String[] messages = {"The game's objective is to find the door and go inside it","Use 'a' to go left, 's' to go down, 'd' to go right and 'w' to jump", ""};
+			final String[] messages = {"The game's objective is to find the door and go inside it","Use 'a' to go left, 'd' to go right, and 'w' or the spacebar to jump", ""};
 
-			final int[] durations = { 10,20, 10};
+			final int[] durations = { 13,22, 10};
 
 			int i;
 			int d = offset;
