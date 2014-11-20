@@ -42,6 +42,10 @@ public class Renderer extends Canvas {
 	private BufferedImage tileset;
 
 	private String message;
+	private int fadeTime = 0;
+	private int fadeTimer = 0;
+	private Color fadeColor;
+	private boolean fadeOut;
 
 	private static Font font;
 	static {
@@ -66,7 +70,7 @@ public class Renderer extends Canvas {
 	}
 	
 	public boolean debug = false;
-
+	
 	public Renderer(GameContext engine) {
 		game = engine;
 		camera = new Vector2();
@@ -189,6 +193,26 @@ public class Renderer extends Canvas {
 			g.drawString("Gravs left: " + player.getGravsLeft(), 5, 20);
 		}
 
+		// Draw screen effects
+		if(fadeTime > 0 && fadeTimer > 0){
+			fadeTimer--;
+			
+			if(fadeOut){
+				g.setColor(new Color(
+					fadeColor.getRed(),
+					fadeColor.getGreen(),
+					fadeColor.getBlue(),
+					256 * fadeTimer/fadeTime));
+			}else{
+				g.setColor(new Color(
+					fadeColor.getRed(),
+					fadeColor.getGreen(),
+					fadeColor.getBlue(),
+					255 - 256 * fadeTimer/fadeTime));
+			}
+			
+			g.fillRect(0, 0, bufferWidth, bufferHeight);
+		}
 		
 		// Draw "cinematic mode"
 		int cineStripHeight = 60;
@@ -314,6 +338,16 @@ public class Renderer extends Canvas {
 
 	public void removeMessage() {
 		message = null;
+	}
+	
+	public void fade(Color color, boolean out, int duration){
+		fadeColor = color;
+		fadeOut = !out;
+		fadeTime = fadeTimer = duration;
+	}
+	
+	public void fadeBlack(boolean out, int duration){
+		fade(Color.black, out, duration);
 	}
 
 }

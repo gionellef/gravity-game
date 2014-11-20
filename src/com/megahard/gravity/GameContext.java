@@ -59,4 +59,6 @@ public interface GameContext {
 
 	public abstract void finish(boolean win, boolean esc);
 
+	void fadeScreen(boolean out, int duration);
+
 }

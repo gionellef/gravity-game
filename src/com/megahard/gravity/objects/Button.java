@@ -118,9 +118,9 @@ public class Button extends GameObject {
 		}
 		
 		if(pressed)
-			getGame().playSoundAtLocation(Sound.button_press, position, 0.6);
+			getGame().playSoundAtLocation(Sound.button_press, position, 0.8);
 		else
-			getGame().playSoundAtLocation(Sound.button_release, position, 0.5);
+			getGame().playSoundAtLocation(Sound.button_release, position, 0.7);
 			
 	}
 	

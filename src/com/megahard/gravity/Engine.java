@@ -1,5 +1,6 @@
 package com.megahard.gravity;
 
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -68,7 +69,10 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 
 	private EngineFinishListener finishListener;
 	private boolean finished = false;
+	private int finishTimer;
 	private int messageExpiry;
+	private boolean finishWin;
+	private boolean finishEsc;
 
 
 	public Engine() {
@@ -99,10 +103,13 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 
 		// add all objects to be added
 		for(GameObject o : addObj){
-			o.init();
 			state.objects.add(o);
+			o.init();
 		}
 		addObj.clear();
+		
+		// fade game in
+		fadeScreen(false, 6);
 		
 		// initialize scripts
 		for(Script s : state.scripts){
@@ -132,9 +139,18 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 	public void finish(boolean win,boolean esc){
 		if(finished)
 			return;
+		
+		finishWin = win;
+		finishEsc = esc;
+		
 		finished = true;
+		finishTimer = esc ? 3 : 6;
+		fadeScreen(true, Math.max(0, finishTimer));
+	}
+	
+	public void finalFinish(){
 		Sound.stopAll();
-		finishListener.onFinish(0, 0, win,esc);
+		finishListener.onFinish(0, 0, finishWin,finishEsc);
 	}
 	
 	public void setFinishListener(EngineFinishListener efl){
@@ -260,7 +276,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 	}
 
 	public void update() {
-		if(!isCinematicMode()){
+		if(!isCinematicMode() || finished){
 			updateInputEvents();
 		}
 		updateObjects();
@@ -288,6 +304,11 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 		// messages
 		if(messageExpiry > 0 && state.time > messageExpiry){
 			renderer.removeMessage();
+		}
+		
+		if(finished){
+			if(finishTimer <= 0) finalFinish();
+			finishTimer--;
 		}
 		
 		state.time++;
@@ -683,12 +704,20 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
-	public <T> T  findObject(Class<T> type) {
+	public <T> T findObject(Class<T> type) {
 		for (GameObject o : state.objects) {
 			if (o.getClass().equals(type)) {
 				return (T) o;
 			}
 		}
 		return null;
+	}
+	
+	public void fadeScreen(boolean out, int duration){
+		renderer.fadeBlack(out, duration);
+	}
+	
+	public void fadeScreen(Color color, boolean out, int duration){
+		renderer.fade(color, out, duration);
 	}
 }
