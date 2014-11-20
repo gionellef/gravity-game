@@ -61,4 +61,6 @@ public interface GameContext {
 
 	void fadeScreen(boolean out, int duration);
 
+	void showMessage(String image, String message, int duration);
+
 }

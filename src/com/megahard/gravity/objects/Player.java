@@ -247,5 +247,9 @@ public class Player extends GameObject {
 	public int getJumpsLeft(){
 		return jumpsLeft;
 	}
+
+	public void setGravs(int i) {
+		gravsLeft = i;
+	}
 	
 }

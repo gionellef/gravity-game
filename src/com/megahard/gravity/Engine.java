@@ -698,6 +698,12 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 		renderer.showMessage(message);
 		messageExpiry = state.time + duration;
 	}
+	
+	@Override
+	public void showMessage(String image, String message, int duration) {
+		renderer.showMessage(image, message);
+		messageExpiry = state.time + duration;
+	}
 
 	/* (non-Javadoc)
 	 * @see com.megahard.gravity.GameContext#findObject(java.lang.Class)
@@ -717,7 +723,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 		renderer.fadeBlack(out, duration);
 	}
 	
-	public void fadeScreen(Color color, boolean out, int duration){
-		renderer.fade(color, out, duration);
+	public void fadeScreen(Color colorStart, Color colorEnd, int duration){
+		renderer.fade(colorStart, colorEnd, duration);
 	}
 }

@@ -42,10 +42,11 @@ public class Renderer extends Canvas {
 	private BufferedImage tileset;
 
 	private String message;
+	private String messageImageName;
 	private int fadeTime = 0;
 	private int fadeTimer = 0;
-	private Color fadeColor;
-	private boolean fadeOut;
+	private Color fadeColorEnd;
+	private Color fadeColorStart;
 
 	private static Font font;
 	static {
@@ -70,6 +71,8 @@ public class Renderer extends Canvas {
 	}
 	
 	public boolean debug = false;
+
+	private BufferedImage messageImage;
 	
 	public Renderer(GameContext engine) {
 		game = engine;
@@ -101,17 +104,6 @@ public class Renderer extends Canvas {
 		
 		double cx = camera.x;
 		double cy = camera.y;
-		// prevent "camera overflow"
-//		if(cx + bufferWidth/2/TILE_SIZE >= mapWidth){
-//			cx = mapWidth - bufferWidth/2/TILE_SIZE;
-//		}else if(cx - bufferWidth/2/TILE_SIZE < 0){
-//			cx = bufferWidth/2/TILE_SIZE;
-//		}
-//		if(cy + bufferHeight/2/TILE_SIZE >= mapHeight){
-//			cy = mapHeight - bufferHeight/2/TILE_SIZE;
-//		}else if(cy - bufferHeight/2/TILE_SIZE < 0){
-//			cy = bufferHeight/2/TILE_SIZE;
-//		}
 		
 		// Draw background
 		g.drawImage(back,
@@ -194,23 +186,25 @@ public class Renderer extends Canvas {
 		}
 
 		// Draw screen effects
-		if(fadeTime > 0 && fadeTimer > 0){
+		if(fadeTime > 0){
 			fadeTimer--;
 			
-			if(fadeOut){
-				g.setColor(new Color(
-					fadeColor.getRed(),
-					fadeColor.getGreen(),
-					fadeColor.getBlue(),
-					256 * fadeTimer/fadeTime));
-			}else{
-				g.setColor(new Color(
-					fadeColor.getRed(),
-					fadeColor.getGreen(),
-					fadeColor.getBlue(),
-					255 - 256 * fadeTimer/fadeTime));
-			}
-			
+			double t = (double) fadeTimer/fadeTime; 
+
+			g.setColor(new Color(
+				(int) (Math.min(255,
+				Math.max(0,
+				fadeColorStart.getRed() * t + fadeColorEnd.getRed() * (1 - t)))),
+				(int) (Math.min(255,
+				Math.max(0,
+				fadeColorStart.getGreen() * t + fadeColorEnd.getGreen() * (1 - t)))),
+				(int) (Math.min(255,
+				Math.max(0,
+				fadeColorStart.getBlue() * t + fadeColorEnd.getBlue() * (1 - t)))),
+				(int) (Math.min(255,
+				Math.max(0,
+				fadeColorStart.getAlpha() * t + fadeColorEnd.getAlpha() * (1 - t))))));
+
 			g.fillRect(0, 0, bufferWidth, bufferHeight);
 		}
 		
@@ -237,6 +231,9 @@ public class Renderer extends Canvas {
 			if(w >= 0){
 				// handle overflow (by scrolling)
 				System.out.println(message);
+			}
+			if(messageImageName != null){
+				g.drawImage(messageImage, marginX, bufferHeight - cineStripHeight - messageImage.getHeight(), null);
 			}
 		}
 
@@ -333,21 +330,44 @@ public class Renderer extends Canvas {
 	}
 
 	public void showMessage(String message) {
-		this.message = message;
+		showMessage(null, message);
 	}
 
 	public void removeMessage() {
+		messageImageName = null;
 		message = null;
 	}
 	
-	public void fade(Color color, boolean out, int duration){
-		fadeColor = color;
-		fadeOut = !out;
+	public void fade(Color colorStart, Color colorEnd, int duration){
+		fadeColorStart = colorStart;
+		fadeColorEnd = colorEnd;
+		if(fadeColorStart == null && fadeColorEnd != null){
+			fadeColorStart = new Color(colorEnd.getRed(), colorEnd.getGreen(), colorEnd.getBlue(), 0);
+		}else if(fadeColorStart != null && fadeColorEnd == null){
+			fadeColorEnd = new Color(colorStart.getRed(), colorStart.getGreen(), colorStart.getBlue(), 0);
+		}
 		fadeTime = fadeTimer = duration;
 	}
 	
 	public void fadeBlack(boolean out, int duration){
-		fade(Color.black, out, duration);
+		if(out){
+			fade(null, Color.black, duration);
+		}else{
+			fade(Color.black, null, duration);
+		}
+	}
+
+	public void showMessage(String image, String message) {
+		messageImageName = image;
+		this.message = message;
+		
+		if(messageImageName != null){
+			try {
+				messageImage = ImageIO.read(this.getClass().getResource("/images/" + messageImageName + ".png"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 }
