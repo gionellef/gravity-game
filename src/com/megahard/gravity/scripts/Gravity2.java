@@ -35,7 +35,7 @@ public class Gravity2 extends Script {
 	public void onEnter(GameObject object) {
 		if(firstRun){
 			getGame().setCinematicMode(true);
-			getGame().showMessage("isaac", "What is this place?", 100);
+			getGame().showMessage("isaac-pre", "What is this place?", 100);
 			active = true;
 			firstRun = false;
 		}
