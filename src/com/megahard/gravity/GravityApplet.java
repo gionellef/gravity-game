@@ -86,7 +86,24 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 		remove(engine.getRenderer());
 		engine = null;
 
-			
+		onRealFinish();
+		
+	}
+
+	public void stop() {
+		running = false;
+	}
+	
+	@Override
+	public void onFinish(int score, int time, boolean win, boolean esc) {
+		stop();
+		System.out.println("win = " + win);
+		
+		this.win = win;
+		this.esc = esc;
+	}
+	
+	private void onRealFinish(){
 		if (win) {
 			if (LevelMenu.lastMap<lm.maps.size()-1)
 				LevelMenu.lastMap++;
@@ -105,20 +122,6 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 		
 		validate();
 		repaint();
-		
-	}
-
-	public void stop() {
-		running = false;
-	}
-	
-	@Override
-	public void onFinish(int score, int time, boolean win, boolean esc) {
-		stop();
-		System.out.println("win = " + win);
-		
-		this.win = win;
-		this.esc = esc;
 	}
 	
 	private void renderGameScreen() {

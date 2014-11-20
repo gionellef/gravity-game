@@ -5,10 +5,13 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Image;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicArrowButton;
 
@@ -36,25 +39,27 @@ public class LevelMenu extends JPanel{
 		
 		storeMaps();
 		
-		playButton = new CustomButton("PLAY", new Color(34,47,91), new Color(14,26,64));
+		playButton = new CustomButton("PLAY", Color.black);
 		playButton.setPreferredSize(new Dimension(200,75));
 		playButton.setBounds(0,225,800,75);
 		playButton.addActionListener(app);
 		
-		left = new BasicArrowButton(BasicArrowButton.WEST);
+		left = new BasicArrowButton(BasicArrowButton.WEST, Color.gray,Color.black,Color.black,Color.black);
 		left.setPreferredSize(new Dimension(50,50));
 		left.setBounds(275,150,50,50);
 		left.addActionListener(app);
 		
-		right = new BasicArrowButton(BasicArrowButton.EAST);
+		right = new BasicArrowButton(BasicArrowButton.EAST, Color.gray,Color.black,Color.black,Color.black);
 		right.setPreferredSize(new Dimension(50,50));
 		right.setBounds(475,150,50,50);
 		right.addActionListener(app);
 		
 		levelLabel = new JLabel (maps.get(lastMap)[0]);
 		levelLabel.setPreferredSize(new Dimension(200, 75));
-		levelLabel.setBounds(325, 150, 200, 75);
-		levelLabel.setForeground(Color.red);
+		levelLabel.setFont(new Font(levelLabel.getName(),10,17));
+		levelLabel.setBounds((200/2 - levelLabel.getText().length()*5/2) + 275, 150, 200, 75);
+		levelLabel.setForeground(new Color (240,240,240));
+		
 		
 		levelScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		c = levelScreen.getContentPane();
@@ -71,16 +76,23 @@ public class LevelMenu extends JPanel{
 	}
 
 	public void paintComponent(Graphics g) {
-		g.setColor(new Color(10,10,10));
-		g.fillRect(0, 0, GravityApplet.WIDTH, GravityApplet.HEIGHT);
+		Image bg = null;
+		try {
+			bg = ImageIO.read(getClass().getResource("/back.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		g.drawImage(bg, 0, 0, this);
 		
 		g.setFont(new Font(name, 10,50));
 		g.setColor(new Color(240,240,240));
-		g.drawString(name, 75, 100);
+		g.drawString(name, (800/2-(name.length()*23/2)), 100);
 	}
 	
 	public void setLevelLabel(String newstring) {
 		this.levelLabel.setText(newstring);
+		this.levelLabel.setBounds((200/2 - levelLabel.getText().length()*5/2) + 275, 150, 200, 75);
 		repaint();
 	}
 
