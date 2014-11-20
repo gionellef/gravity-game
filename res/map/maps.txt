@@ -1,10 +1,12 @@
 1 : Gravity,Gravity
-Noob Paradise I,NoobParadise_1
-Noob Paradise II,NoobParadise_2
-Noob Paradise III,NoobParadise_3
-The Awakening,TheAwakening
-2: Escape,2_Escape
-3: The Encounter,3_TheEncounter
+2 : The Unknown,NoobParadise_1
+3 : The Untitled,NoobParadise_2
+4 : give me title,NoobParadise_3
+5 : The Awakening,TheAwakening
+6 : Newfound Power,NoobParadise_4
+7 : Machinery,NoobParadise_5
+8 : Escape,2_Escape
+9: The Encounter,3_TheEncounter
 Test Bed,untitled
 Noob Paradise I,NoobParadise_1
 Noob Paradise II,NoobParadise_2
