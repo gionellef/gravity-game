@@ -82,12 +82,6 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		
-		remove(engine.getRenderer());
-		engine = null;
-
-		onRealFinish();
-		
 	}
 
 	public void stop() {
@@ -137,6 +131,17 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 		
 		gameThread = new Thread(this);
 		gameThread.start();
+		
+		try {
+			gameThread.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		remove(engine.getRenderer());
+		engine = null;
+
+		onRealFinish();
 	}
 	
 	private void startMusic() {

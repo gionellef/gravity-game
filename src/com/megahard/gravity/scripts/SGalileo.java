@@ -81,7 +81,7 @@ public class SGalileo extends Script {
 		msgQueue.add(new Msg(
 			"isaac",
 			"You're crazy. I'm just a normal and handsome gay living a normal and boring life on Earth. How did that happen?",
-			150
+			200
 		));
 		
 		msgQueue.add(new Msg(new Runnable() {
@@ -93,12 +93,12 @@ public class SGalileo extends Script {
 		msgQueue.add(new Msg(
 			"PlanetGravitonia",
 			"In the planet of Gravitonia, there exists the royal family who ruled the whole planet. They posses a strange and powerful ability to control gravity.",
-			300
+			200
 		));
 		msgQueue.add(new Msg(
 			"PlanetGravitonia",
 			"Without them and their power, the planet is at constant risk of being swallowed by rogue black holes getting close to the planet. They are the protectors of Gravitonia.",
-			300
+			200
 		));
 		msgQueue.add(new Msg(new Runnable() {
 			@Override
@@ -125,7 +125,7 @@ public class SGalileo extends Script {
 		msgQueue.add(new Msg(
 				"galileo",
 				"...",
-				80
+				20
 			));
 		msgQueue.add(new Msg(
 				"galileo",
@@ -136,7 +136,7 @@ public class SGalileo extends Script {
 		msgQueue.add(new Msg(
 				"isaac",
 				"WHAT!? But why am I here? And what is this stupid place?",
-				100
+				150
 			));
 
 		msgQueue.add(new Msg(
@@ -164,14 +164,14 @@ public class SGalileo extends Script {
 		msgQueue.add(new Msg(
 				"galileo",
 				"They will do worse than that.",
-				100
+				150
 			));
 		msgQueue.add(new Msg(
 				"galileo",
 				"You need to escape from here. You must go to the communications module. Send a message to Gravitonia. Our royal guards will come and help you.",
 				200
 			));
-	
+/*
 		msgQueue.add(new Msg(
 				"isaac",
 				"Will the royal guards take me back to Earth?",
@@ -187,7 +187,7 @@ public class SGalileo extends Script {
 		msgQueue.add(new Msg(
 				"isaac",
 				"No. I don't want that. I have a life on Earth. My destiny is on Earth.",
-				150
+				200
 			));
 	
 		msgQueue.add(new Msg(
@@ -227,12 +227,13 @@ public class SGalileo extends Script {
 				"I am so glad that I met you. You really resemble Gravis.",
 				150
 			));
-	
+
 		msgQueue.add(new Msg(
 				"isaac",
 				"Farewell, old fool.",
 				100
 			));
+*/
 	}
 
 	@Override
