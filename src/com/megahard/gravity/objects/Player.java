@@ -105,15 +105,6 @@ public class Player extends GameObject {
 				well = null;
 			}
 		}
-		
-		// Door
-		if(standing && velocity.length() < 0.05){
-			ExitDoor door = getGame().findObject(ExitDoor.class, position.x - 0.5, position.y - 1, 1, 2, false);
-			if(door != null){
-				getGame().finish(true,false);
-				System.out.println("YOU WIN!");
-			}
-		}
 	}
 	
 	@Override
