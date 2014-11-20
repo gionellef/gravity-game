@@ -1,6 +1,6 @@
 package com.megahard.gravity.objects;
 
-import com.megahard.gravity.Engine;
+import com.megahard.gravity.GameContext;
 import com.megahard.gravity.GameMap;
 import com.megahard.gravity.GameObject;
 import com.megahard.gravity.Sound;
@@ -57,7 +57,7 @@ public class Button extends GameObject {
 		{237,	44, 	0b1100},
 	};
 	
-	public Button(Engine game) {
+	public Button(GameContext game) {
 		super(game, "button");
 		size.set(2, 0.3);
 		mass = 30;

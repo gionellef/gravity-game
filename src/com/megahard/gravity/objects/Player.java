@@ -4,7 +4,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.Random;
 
-import com.megahard.gravity.Engine;
+import com.megahard.gravity.GameContext;
 import com.megahard.gravity.GameMap;
 import com.megahard.gravity.GameObject;
 import com.megahard.gravity.Sound;
@@ -41,7 +41,7 @@ public class Player extends GameObject {
 	private int gravsLeft = 0;
 	private int jumpsLeft = 0;
 
-	public Player(Engine game) {
+	public Player(GameContext game) {
 		super(game, "person");
 		size.set(0.95, 1.95);
 		mass = 50;
