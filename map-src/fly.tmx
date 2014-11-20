@@ -2554,7 +2554,7 @@
  </tileset>
  <layer name="Tile Layer 1" width="93" height="50">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <objectgroup name="Object Layer 1">
@@ -2572,9 +2572,9 @@
   <object gid="508" x="633" y="321.5"/>
   <object gid="508" x="654" y="321"/>
   <object gid="505" x="298" y="640"/>
-  <object gid="501" x="204" y="638"/>
-  <object gid="505" x="388" y="486"/>
-  <object gid="505" x="363" y="485"/>
+  <object gid="501" x="215" y="638"/>
+  <object gid="505" x="388" y="469"/>
+  <object gid="505" x="363" y="468"/>
   <object gid="505" x="456" y="373"/>
   <object gid="504" x="1204" y="633"/>
   <object gid="503" x="583" y="642"/>
@@ -2588,8 +2588,8 @@
   <object gid="503" x="740" y="630"/>
   <object gid="503" x="759" y="643"/>
   <object gid="503" x="789" y="641"/>
-  <object gid="505" x="374" y="484"/>
-  <object gid="503" x="187" y="628"/>
+  <object gid="505" x="374" y="469"/>
+  <object gid="503" x="193" y="629"/>
   <object gid="505" x="517" y="241"/>
   <object gid="505" x="505.333" y="240.667"/>
   <object gid="503" x="816" y="642"/>
