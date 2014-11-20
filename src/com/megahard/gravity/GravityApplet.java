@@ -91,7 +91,12 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 					engine.update();
 				}
 				if(error <= 0){
-					engine.getRenderer().render(engine.getState());
+					try {
+						engine.getRenderer().render(engine.getState());
+					} catch (IllegalStateException e) {
+						// no error. haha
+					}
+					
 				}
 					
 				Thread.sleep(1);
@@ -115,7 +120,6 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 	@Override
 	public void onFinish(int score, int time, boolean win, boolean esc) {
 		stop();
-		System.out.println("win = " + win);
 		
 		this.win = win;
 		this.esc = esc;
@@ -130,8 +134,6 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 				LevelMenu.lastMap++;
 			else
 				LevelMenu.lastMap = 0;
-			
-			System.out.println(LevelMenu.lastMap);
 			
 		}
 			
@@ -197,7 +199,6 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 			if (LevelMenu.lastMap > 0)
 				lm.setLevelLabel(lm.maps.get(--LevelMenu.lastMap)[0]);
 			
-			System.out.println("Map: " + LevelMenu.lastMap);
 		}
 		
 		if (a.equals(lm.getRight())) {
@@ -205,7 +206,6 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 			if (LevelMenu.lastMap < lm.maps.size()-1)
 				lm.setLevelLabel(lm.maps.get(++LevelMenu.lastMap)[0]);
 			
-			System.out.println("Map: " + LevelMenu.lastMap);
 		}
 		
 		if (a.equals(rm.getMenuButton())) {

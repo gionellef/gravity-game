@@ -17,6 +17,7 @@ import java.util.Comparator;
 import javax.imageio.ImageIO;
 
 import com.megahard.gravity.GameMap.Tile;
+import com.megahard.gravity.menus.LevelMenu;
 import com.megahard.gravity.objects.Player;
 
 public class Renderer extends Canvas {
@@ -183,6 +184,9 @@ public class Renderer extends Canvas {
 			g.setColor(Color.white);
 			g.setFont(font);
 			g.drawString("Gravs left: " + player.getGravsLeft(), 5, 20);
+			
+			String mapName = GravityApplet.lm.maps.get(LevelMenu.lastMap)[0];
+			g.drawString(mapName, 380 - mapName.length()*7/2, 20);
 		}
 
 		// Draw screen effects
