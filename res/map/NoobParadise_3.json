@@ -107,20 +107,6 @@
                  "y":384
                 }, 
                 {
-                 "height":57,
-                 "name":"script_NoobParadise3",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":45,
-                 "x":209,
-                 "y":200
-                }, 
-                {
                  "height":28,
                  "name":"script_BlackPerson",
                  "properties":

@@ -30,8 +30,7 @@ public class NoobParadise5b extends Script {
 		if (active) {
 
 			final int halfbeat = 5;
-			final String[] messages = {"This button controls the device connected to it"
-										,"Put the gray box on top of it to press it", ""};
+			final String[] messages = {"This button controls the device connected to it", ""};
 
 			final int[] durations = { 15,20, 10};
 
