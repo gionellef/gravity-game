@@ -1,14 +1,37 @@
 {
-	sheetWidth: 1,
+	sheetWidth: 8,
 	width: 48,
 	height: 48,
 	actions: [
 		{
 			name: "default",
 			x: 0,
+			y: 1,
+			frames: 1,
+			delay: 1
+		},
+		{
+			name: "opening",
+			x: 0,
+			y: 1,
+			frames: 8,
+			delay: 1,
+			next: "open"
+		},
+		{
+			name: "open",
+			x: 0,
 			y: 0,
 			frames: 1,
 			delay: 1
+		},
+		{
+			name: "closing",
+			x: 0,
+			y: 0,
+			frames: 8,
+			delay: 1,
+			next: "default"
 		}
 	]
 }
