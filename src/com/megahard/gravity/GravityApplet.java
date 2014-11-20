@@ -21,13 +21,16 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 	private static final long serialVersionUID = 1L;
 
 	private boolean running = true;
-	
+	;
 	private Thread gameThread;
 	private Engine engine;
 	private MusicPlayer music;
 	private Thread musThread = new Thread(music);
 	private boolean win;
 	private boolean esc;
+
+	private Thread watchThread;
+	private boolean watching = false;
 	
 	private static final int FPS = 30;
 
@@ -46,10 +49,31 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 		
 		setSize(WIDTH, HEIGHT);
 		setLayout(new BorderLayout());
+		
+		watchThread = new Thread(){
+			public void run() {
+				try {
+					while(true){
+						Thread.sleep(100);
+						
+						if(gameThread != null && gameThread.isAlive())
+							gameThread.join();
+						if(watching && !running){
+							watching = false;
+							onRealFinish();
+						}
+					}
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			};
+		};
+		watchThread.start();
 	}
 	
 	@Override
 	public void run() {
+		watching = true;
 		running = true;
 		long mspf = 1000/FPS;
 		long threshold = mspf * 4;
@@ -98,6 +122,9 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 	}
 	
 	private void onRealFinish(){
+		remove(engine.getRenderer());
+		engine = null;
+		
 		if (win) {
 			if (LevelMenu.lastMap<lm.maps.size()-1)
 				LevelMenu.lastMap++;
@@ -112,7 +139,6 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 			renderGameScreen();
 		else
 			showRetryMenu();
-			
 		
 		validate();
 		repaint();
@@ -131,17 +157,6 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 		
 		gameThread = new Thread(this);
 		gameThread.start();
-		
-		try {
-			gameThread.join();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		
-		remove(engine.getRenderer());
-		engine = null;
-
-		onRealFinish();
 	}
 	
 	private void startMusic() {
