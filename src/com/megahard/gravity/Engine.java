@@ -235,7 +235,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 			Class<GameObject> subclass = (Class<GameObject>) Class
 					.forName("com.megahard.gravity.objects." + type);
 			Constructor<GameObject> constructor = null;
-			constructor = subclass.getConstructor(Engine.class);
+			constructor = subclass.getConstructor(GameContext.class);
 			GameObject instance = constructor.newInstance(this);
 
 			instance.position.set(object.getX() / Renderer.TILE_SIZE + 2,
