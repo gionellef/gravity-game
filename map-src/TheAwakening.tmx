@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="40" height="20" tilewidth="16" tileheight="16">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="60" height="36" tilewidth="16" tileheight="16">
  <tileset firstgid="1" source="main.tsx"/>
  <tileset firstgid="501" source="objects.tsx"/>
- <layer name="Tile Layer 1" width="40" height="20">
+ <layer name="Tile Layer 1" width="60" height="36">
   <data encoding="base64" compression="zlib">
-   eJztls1OwkAUhWfqVkiQhUlrgizQhLBDE3WtO1gIa9jRh1ILDwH+vAX4NoaVZxJNrpPb6Z2pNSS4+NL56Zk5ObmdaaKUSvaEQ1AD9R3wwtEBZ+D8D/ccgIsKGZb0dwIetFKP4EnntxvgiNB0vEvbcck6Mv6WWGcFnnV+m/Mn0cUBdUvryPg71sVw/iS62KNuuVq7FPj7wDtTy98EbAXavkc9clllX88WOAVtpm9nRzN06ej6NM8Qf1fgGtwwfZc/l+43/d2DERgzfZc/l87X3wxEFgeCGnL5K9Jqa7804Hyh65kFNYjIWBfcWd5uQa9A951XmfOFZmqyzMAcLJQ7Qzs7qqOZpR7ni+QueQGv4E39zITzR+epLuTOkPpbgw14JzmYXDl/dJ7qqvJnfz9pznjRvOQbqIL//7/d4xPVl3yL
+   eJzt1s0uBEEQB/DqdWUTHCSzkuWARNyQ4IZ12z3g5utmXgAvg+UhfL4F3kac/DvZTUqlp7sj2ekWdfhl56t26p9Kz0yLiFpKKaXUPzQOE9DMoJc6LMAiLGXQy291YW2Eehlk5Gbh2hDdwK2p3p6EKWbacy3fLjLIyNehzfuAvh7hyVRvu/LG1BWUft3zdWjzzpgwV96YuoLSrXvXWl2PyPuJa85E3lP4iqhdpXTr2c5yGz3swO6gn/7gtw1zMO/Yl7PlM/bV8f/n864z7xHueQwnop8N2IQtx74vr68uh7wXuOclXIl+9uEADh37vry+utR5z6EhjEWsQV/eUK0R9ytrzDsk30e8P9uggQY7tgx7ImsHVgJ1w3nm9D7iM7ez7sMd3JN/xnK2vI7PtKR8v0PtrJ/hBV7p58xcefl5XpfDN1Vs3jd4hw82Jzt3V15+ntf9lbzyeVZWHA+dT/FMGoXUz5265frcUUoppZRSKuQbtgwObg==
   </data>
  </layer>
  <objectgroup name="Object Layer 1">
-  <object gid="505" x="296" y="272"/>
-  <object gid="506" x="224" y="256.25"/>
-  <object gid="506" x="352" y="256.25"/>
-  <object gid="506" x="416.5" y="225"/>
-  <object gid="506" x="125.636" y="226.364"/>
-  <object gid="501" x="56.5" y="185"/>
-  <object gid="504" x="519.5" y="184"/>
-  <object name="script_TheAwakening" x="326.5" y="54" width="26" height="208.5"/>
-  <object name="script_BlackPerson" x="177" y="80" width="79" height="72"/>
+  <object gid="505" x="456" y="368"/>
+  <object gid="506" x="384" y="352.25"/>
+  <object gid="506" x="512" y="352.25"/>
+  <object gid="506" x="576.5" y="321"/>
+  <object gid="506" x="285.636" y="322.364"/>
+  <object gid="501" x="216.5" y="281"/>
+  <object gid="504" x="679.5" y="280"/>
+  <object name="script_TheAwakening" x="486.5" y="150" width="26" height="208.5"/>
+  <object name="script_BlackPerson" x="337" y="176" width="79" height="72"/>
  </objectgroup>
 </map>
