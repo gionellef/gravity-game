@@ -5,8 +5,8 @@ import com.megahard.gravity.GameObject;
 
 public class Galileo extends GameObject {
 
-	public Galileo(GameContext game, String spriteName) {
-		super(game, spriteName);
+	public Galileo(GameContext game) {
+		super(game, "galileo");
 		size.set(1.5, 2);
 		mass = 70;
 		fixed = true;

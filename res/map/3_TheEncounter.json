@@ -298,8 +298,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":511.667,
-                 "y":832
+                 "x":503.167,
+                 "y":841.5
                 }, 
                 {
                  "gid":505,
@@ -420,6 +420,35 @@
                  "width":0,
                  "x":462,
                  "y":824
+                }, 
+                {
+                 "height":98.3333333333333,
+                 "name":"script_SGalileo",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":80,
+                 "x":440,
+                 "y":726
+                }, 
+                {
+                 "gid":505,
+                 "height":0,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":328,
+                 "y":713.333333333333
                 }],
          "opacity":1,
          "type":"objectgroup",

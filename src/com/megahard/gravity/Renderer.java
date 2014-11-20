@@ -236,8 +236,8 @@ public class Renderer extends Canvas {
 				// handle overflow (by scrolling)
 				System.out.println(message);
 			}
-			if(messageImageName != null){
-				g.drawImage(messageImage, marginX, bufferHeight - cineStripHeight - messageImage.getHeight(), null);
+			if(messageImageName != null && messageImage != null){
+				g.drawImage(messageImage, marginX, bufferHeight - cineStripHeight - messageImage.getHeight() + marginY/2, null);
 			}
 		}
 
