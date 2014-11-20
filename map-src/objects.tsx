@@ -41,4 +41,9 @@
    <property name="type" value="TogglePlasma"/>
   </properties>
  </tile>
+ <tile id="8">
+  <properties>
+   <property name="type" value="Galileo"/>
+  </properties>
+ </tile>
 </tileset>
