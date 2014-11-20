@@ -72,7 +72,7 @@ public class TheAwakening extends Script {
 				getGame().fadeScreen(null, Color.white, 80);
 			}
 			
-			if(timer > 360 && timer < 540){
+			if(timer > 360 && timer < 640){
 				if(Math.random() < 0.1){
 					GravWell g = new GravWell(getGame());
 					g.power = 0.2;
@@ -91,7 +91,7 @@ public class TheAwakening extends Script {
 				player.velocity.y *= 0.3;
 			}
 			
-			if(timer == 540){
+			if(timer == 640){
 				// change sprite
 				player.setSprite("person");
 				
@@ -103,22 +103,22 @@ public class TheAwakening extends Script {
 				}
 			}
 			
-			if(timer == 600){
+			if(timer == 700){
 				gw.destroy();
 			}
 			
-			if(timer == 650){
+			if(timer == 750){
 				getGame().showMessage("isaac", "Augh... What did just happen!?", 60);
 			}
-			if(timer == 720){
+			if(timer == 820){
 				getGame().showMessage("isaac", "I feel... ", 80);
 			}
 			
-			if(timer == 800){
+			if(timer == 900){
 				getGame().showMessage("isaac", "I feel... strange...", 80);
 			}
 				
-			if(timer == 880){
+			if(timer == 980){
 				getGame().setCinematicMode(false);
 				active = false;
 			}

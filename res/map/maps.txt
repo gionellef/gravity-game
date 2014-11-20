@@ -1,5 +1,7 @@
+Noob Paradise I,NoobParadise_1
+Noob Paradise II,NoobParadise_2
+Noob Paradise III,NoobParadise_3
 The Awakening,TheAwakening
-1: The Awakening,1_TheAwakening
 2: Escape,2_Escape
 3: The Encounter,3_TheEncounter
 Test Bed,untitled
