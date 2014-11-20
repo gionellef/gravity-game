@@ -19,6 +19,7 @@ public class GameObject {
 	public boolean active;
 	
 	public Sprite sprite;
+	public int zIndex;
 
 	public GameObject(Engine game, String spriteName) {
 		this.game = game;
@@ -41,6 +42,7 @@ public class GameObject {
 			this.sprite = SpriteStore.get().getSprite(spriteName);
 			sprite.setListener(this);
 		}
+		zIndex = 0;
 	}
 
 	public void setSprite(String spriteName) {

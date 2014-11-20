@@ -11,6 +11,8 @@ public class DeadlyObj extends GameObject {
 		size.set(0.7, 0.7);
 		mass = 0.5;
 		fixed = true;
+		
+		zIndex = 500;
 	}
 	
 	public void init(){

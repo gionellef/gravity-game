@@ -48,6 +48,8 @@ public class Player extends GameObject {
 		restitution = 0.05;
 		friction = 0.6;
 		staticFriction = 0.3;
+		
+		zIndex = 1000;
 	}
 	
 	@Override

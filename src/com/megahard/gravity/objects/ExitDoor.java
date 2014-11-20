@@ -9,6 +9,8 @@ public class ExitDoor extends GameObject {
 		super(game, "door");
 		mass = 90;
 		fixed = true;
+		
+		zIndex = 200;
 	}
 
 }

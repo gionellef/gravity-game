@@ -62,6 +62,8 @@ public class Button extends GameObject {
 		size.set(2, 0.3);
 		mass = 30;
 		fixed = true;
+		
+		zIndex = 250;
 	}
 	
 	@Override

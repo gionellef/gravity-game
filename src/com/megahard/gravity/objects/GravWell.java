@@ -16,6 +16,8 @@ public class GravWell extends GameObject {
 		super(game, "gravwell");
 		mass = 0;
 		fixed = true;
+		
+		zIndex = 300;
 	}
 	
 	public void init(){

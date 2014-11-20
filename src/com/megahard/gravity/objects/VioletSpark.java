@@ -10,6 +10,8 @@ public class VioletSpark extends GameObject {
 		size.set(0.01, 0.01);
 		mass = 0.001;
 		restitution = 1;
+		
+		zIndex = 350;
 	}
 
 	@Override

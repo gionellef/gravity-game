@@ -11,6 +11,8 @@ public class PowerItem extends GameObject {
 		mass = 1;
 		friction = 0.6;
 		staticFriction = 0;
+		
+		zIndex = 550;
 	}
 
 	@Override

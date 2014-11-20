@@ -11,6 +11,8 @@ import java.awt.GraphicsEnvironment;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Comparator;
 
 import javax.imageio.ImageIO;
 
@@ -23,6 +25,13 @@ public class Renderer extends Canvas {
 
 	public static final int TILE_SIZE = 16;
 	public static final int SCALE_FACTOR = 2;
+
+	private static final Comparator<GameObject> ZCOMP = new Comparator<GameObject>() {
+		@Override
+		public int compare(GameObject o1, GameObject o2) {
+			return o1.zIndex - o2.zIndex;
+		}
+	};
 	
 	private Engine game;
 
@@ -130,7 +139,10 @@ public class Renderer extends Canvas {
 		}
 		
 		// Draw objects
-		for (GameObject o : s.objects) {
+		GameObject[] objects = s.objects.toArray(new GameObject[s.objects.size()]);
+		// sort by z-index
+		Arrays.sort(objects, ZCOMP);
+		for (GameObject o : objects) {
 			if (o.sprite != null) {
 				int dx = (int) ((o.position.x - cx) * TILE_SIZE
 						+ halfBufWidth - o.sprite.getWidth() / 2);

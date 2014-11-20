@@ -589,6 +589,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener{
 		messageExpiry = state.time + duration;
 	}
 
+	@SuppressWarnings("unchecked")
 	public <T> T  findObject(Class<T> type) {
 		for (GameObject o : state.objects) {
 			if (o.getClass().equals(type)) {

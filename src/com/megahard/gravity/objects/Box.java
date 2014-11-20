@@ -12,6 +12,8 @@ public class Box extends GameObject {
 		restitution = 0.1;
 		friction = 0.7;
 		staticFriction = 0;
+		
+		zIndex = 400;
 	}
 
 }
