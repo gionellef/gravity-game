@@ -206,6 +206,10 @@ public class Renderer extends Canvas {
 				fadeColorStart.getAlpha() * t + fadeColorEnd.getAlpha() * (1 - t))))));
 
 			g.fillRect(0, 0, bufferWidth, bufferHeight);
+			
+			if(fadeTimer == 0){
+				fadeTime = 0;
+			}
 		}
 		
 		// Draw "cinematic mode"
@@ -341,11 +345,13 @@ public class Renderer extends Canvas {
 	public void fade(Color colorStart, Color colorEnd, int duration){
 		fadeColorStart = colorStart;
 		fadeColorEnd = colorEnd;
-		if(fadeColorStart == null && fadeColorEnd != null){
+		
+		if(colorStart == null && colorEnd != null){
 			fadeColorStart = new Color(colorEnd.getRed(), colorEnd.getGreen(), colorEnd.getBlue(), 0);
-		}else if(fadeColorStart != null && fadeColorEnd == null){
+		}else if(colorStart != null && colorEnd == null){
 			fadeColorEnd = new Color(colorStart.getRed(), colorStart.getGreen(), colorStart.getBlue(), 0);
 		}
+		
 		fadeTime = fadeTimer = duration;
 	}
 	

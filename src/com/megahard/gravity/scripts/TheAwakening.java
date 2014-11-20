@@ -10,6 +10,7 @@ import com.megahard.gravity.GameObject;
 import com.megahard.gravity.Script;
 import com.megahard.gravity.objects.GravWell;
 import com.megahard.gravity.objects.Player;
+import com.megahard.gravity.objects.VioletSpark;
 
 public class TheAwakening extends Script {
 
@@ -48,9 +49,11 @@ public class TheAwakening extends Script {
 			}
 			
 			if(timer > 240 && timer < 340){
-				double m = 0.3 * (1 - (double)(340 - timer)/(340-240));
+				double m = 0.1 * (1 - (double)(340 - timer)/(340-240));
 				player.velocity.y *= 0.9;
 				player.velocity.y += (((getRegion().y * 2 + getRegion().getHeight())/2 - player.position.y) - player.velocity.y) * m;
+				
+				castSparkOnPlayer(1);
 			}
 			
 			if(timer == 260){
@@ -139,6 +142,15 @@ public class TheAwakening extends Script {
 			getGame().setCinematicMode(true);
 			player.velocity.x = 0;
 		}
+	}
+
+	private void castSparkOnPlayer(double range) {
+		VioletSpark s = new VioletSpark(getGame());
+		s.position.set(player.position.x, player.position.y);
+		double a = Math.random() * Math.PI * 2;
+		double r = Math.random() * range;
+		s.velocity.set(Math.cos(a) * r, Math.sin(a) * r - 0.2);
+		getGame().addObject(s);
 	}
 
 	@Override
