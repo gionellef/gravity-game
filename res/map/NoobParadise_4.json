@@ -150,6 +150,20 @@
                  "width":0,
                  "x":200,
                  "y":606
+                }, 
+                {
+                 "height":7.5,
+                 "name":"script_NoobParadise4",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":46,
+                 "x":314.5,
+                 "y":583.5
                 }],
          "opacity":1,
          "type":"objectgroup",

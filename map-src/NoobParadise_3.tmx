@@ -2522,5 +2522,6 @@
   <object gid="503" x="515" y="368"/>
   <object gid="503" x="589" y="344.333"/>
   <object gid="503" x="338" y="384"/>
+  <object name="script_NoobParadise3" x="209" y="200" width="45" height="57"/>
  </objectgroup>
 </map>
