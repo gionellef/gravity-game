@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="60" height="30" tilewidth="16" tileheight="16">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="30" tilewidth="16" tileheight="16">
  <tileset firstgid="1" name="main" tilewidth="16" tileheight="16">
   <image source="../res/tileset.png" width="400" height="320"/>
   <terraintypes>
@@ -2510,13 +2510,13 @@
   </tile>
  </tileset>
  <tileset firstgid="501" source="objects.tsx"/>
- <layer name="Tile Layer 1" width="60" height="30">
+ <layer name="Tile Layer 1" width="64" height="30">
   <data encoding="base64" compression="zlib">
-   eJzt1btLHEEcB/BZFWIIvkKi4ANEDqIGtFBTHByiNhaeWvgveCb/QZLKzkchiLXxTDpjkTTx2Vn5Oh+1ZVIItmqVkO+ws/jLZGfuN7rHCbfFh5ud2/3tfG8eNyqEGC0hUyVmusQ0MRV7HXJws3DzFnst2kSd97Gv/SizSiPQy5QW9nXnUstUv8IgqrzNcqyeEGNwCEdwDGnv//5GYV97stYYqZHT6uSUI0v9FoMo807hXW+1cWa8u346nrA1F5C1bHWOSV5T/TcGUea9YuLML7eWqX6h5rWS5H2P3/YDfPTsbc78curY6hdqXpMk7yLeNQFLnt/eI23a3yPs502f4NVxqZ92zPXMIKk+Zd41vOsrrHt++4K0i93feM+8CU1Sfcq8P+GX+PecoWe1vD5Q9H79Wmog95qey2nXtH2NsdzArfDzZh3yJizzm1J5f8OfPHkbLPZJpnHSPwfzqn2J+svwCVbE3T36b1EF1VADtWp+a6AW6uB5nrypkLlNaHnzzds33PNd+H2cvE+Uz/CF5P0BG7BJagXPBTlfKUFtmbcdOqATXjPmOBXCJe++vAdeoP0Suix5Za5Wz7cDuyTvCZzCmdxDql/PGZZ3AAZhCPod9zM9n2XeSShjKIdhNYYZmCVjovvNY9bjysA5LNwzp55X7uVZmFPtp+SeoD/436pX+bKwqs0P3W/0OZ3pO9d+V++gzYHM260ybsG2tg7byfoz/Qe6CsZ6HkFe074OO9sk7rrPWGq4iiKjS/ZiK2TeWCwWi8ViD/cXDkDaiQ==
+   eJzt1T1MFEEUB/BZJVFi+DJ8JBwkxlwiYCKFYnHJxQANBQcWVmrrATWSKNV1AoWJsRZBO7XQRvnqqPg6lNoSY0xs1UrD/+Vmw/OxM5nlbu8gt8UvNzu3+2b/O7OzCaVUAkaqTEIYqzIyf67KyPyuKr1uj7O2S4nqV3rt2kSdn8bInWBRZifDcMNRRtnXaZhapvo1BlHl76B795QahS3Yhh3IeEf725V9rVKtUVYjL+rktW1L/U6DKPOPYexxcd9Z77Cf31/OgmrZ6uyw/Kb6Nw2izP/Tkcv8u9Yy1S/XvJ9n+R/h2T+Gac/edpl/lzq2+uWa9xTL/wxj34HnXqG9ztq8/7qy7199yq1OmPqZInNeMEjpX8r/BmO/hXdeof2VtSvd316i/EkhpX8p/3eN9qB9/H5T/38LaM/a1GS/PCZt7FzTdXlxzNu/MP5v+KMK+ReKyJ+0zH9a5+/HmAMwCH9x/C8gf5vFBst4m/XPwpxu/0DNFzAPL9XhOfLZ1EE9NECjnv8GaIQmuBgyfzpg7pMi/12Mcw/uG+b1Pc75oJ+JS/5z2it4zfJ/hE+wxGr51/m5r2h+bcrfBd3QA1ePsQbSAXj+SYzzEKYM+TdwziY0o90C1yz5Keclr2AV1lj+XfgMX2Bf98vcQfn7YQAG4VYR74Lc/yn/Azjj4CwM6Xt6AjPsHvn76jnWc5WFPXhaotwyP+0FMzCr27XsHL/f/0626rwLsCjmj7+v/DrJ9F/Y/mJNwOUQKH+vzrwMK2LddrH1avrmhuXf614E+U37QtBeSVzfk6ylRlhRZA7zLCqtnPljsVgsFoudXgeDH+Ns
   </data>
  </layer>
  <objectgroup name="Object Layer 1">
-  <object gid="501" x="160" y="285"/>
-  <object gid="504" x="739" y="279"/>
+  <object gid="501" x="199" y="286"/>
+  <object gid="504" x="771" y="280"/>
  </objectgroup>
 </map>

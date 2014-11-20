@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="60" height="36" tilewidth="16" tileheight="16">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="42" tilewidth="16" tileheight="16">
  <tileset firstgid="1" name="main" tilewidth="16" tileheight="16">
   <image source="../res/tileset.png" width="400" height="320"/>
   <terraintypes>
@@ -2510,17 +2510,17 @@
   </tile>
  </tileset>
  <tileset firstgid="501" source="objects.tsx"/>
- <layer name="Tile Layer 1" width="60" height="36">
+ <layer name="Tile Layer 1" width="64" height="42">
   <data encoding="base64" compression="zlib">
-   eJztlzlvE0EYhncIl4QgAQGRwhEOSwQoAAlEsGRBoAFEwvkLQMQg8QOAyg1Kh4SogUDhAqg5ixRU5OJqUlC6QaIFWt7RzigvH7O7Y3vtdeQtHs3nb2dn5vHMzuxOBEEw0UVMdhlvu4wtHmQ9xjRdfPi6REjLV3MOHO5gRlP23Qr61b9MgxkwK+I5MG+wseuazMnrUfVdfQ20wHcM7Z4XfY2q5DyPlfM8Xll/3lGffWX9VviW0e4NMc5xtZhnX87z+Dkf1c5cRH32le23wvdnB5OW72pTXgfLHPSA2/h/74C7Krs4Ld+ix7w/QH9XwEMVxh8oble+Xt81ERRNGef7HP29AC9VGH+nuF35Rn0LgqIp43x535lW7vPCdR7xmRZ1nzyXOP6Fvn+DP+b5nazDtxAzvyVP36pBntOWKnGB8o/QxmPwBPwwVEV78r9YC9aBXtBn5rcX9IH1YEOCb8kxtwVP36fgGZhSIXpcNse+U4T2XWV4hXqvwRvy5brsaz33GIbMde07BPaCfWC/xxyXHPj4vgPvwYIKqanFHPsuENpphwr5hPgz+EK+XLff4ak5AUbIdwScBKfA8TrWttyf43yjzqlm6An+fxZUwj3jQfjNcL9BT+kbt0fHsdwTuWakr56/sRjKpmzGVXMT7GqQ3WCbJ7xHRvl+E5SJiimb9Y16rl17myaN78Yjxncj2GSwvivAShPz/FZScvVxZ/TcfBTnB/8+CA6J6zYn6582v2fJdzsYdMxvK1x9cPkOmn14JzgDznrk9L2bKWd9j4JhE1eIdnva7wqX7zA4BorklpTTZ9oByrmeX17P7fa13xUu34vgErhMbkm5GbOebc61P2e5nuN8a8RVcM0jVzO+Nh4QfnZPzmo9W99WvH/Y94lKkK0jcyvj/tvNvQ4YQ05OTk5OzlLhL1SCi+U=
+   eJzt109sDFEcB/AZVSRCS7BJi/rTRHFAQtQmG9peEK2/p3IiuiRuSHDai7hJhLihHPaAs7+HHpz0rz+XHhz3InHF1fdl3ku/+XkzO3Z3Zkf2HT6Zt795u2++82be7HR7ntftOI7jtKw7LUbmH28xMv/bFlPLPdLsY04yWxxf/hNJrpPHYG+GDSecfz3k/AUP4CFMwTRMUnsGZjXTtu2TNbk/rL9trK4U8g9gnEEYovzDMALHxTFxnY+d63z8sv+spT/nl/3TyD+Kcc7COco/BkW4JPJznfNwnfNzfSakP+eXv59G/qsY5xpcp/w/vGxIKv8yvb0Iiyza4AbOw0245TevnVT+fIzr4h7GPwP3/aD9gdpp1evNvzxEXm+j8j/H+C/gpR+0v1E7rXqj8vcKeb2Nys/r2KRvfz7Znn856hv2Pfkc5PZPjP0Lfuv7f7yO/L0R81+Imb+s5UKUyQmqP8JvPIYn8F0ri9+T52YFrIQO6NTz3wGdsApW/2P+gmXuzfxXy/8UnsGEH1DHaWqcf4Ko/Eu1V+j3Gt5Qfu7L+U3ubVqf3q/y98F22AE7a7gGChZx8r+D9zDvByr+Qo3zzxOVcZMfmEP7E3ym/Nw3Z8mtHNLnxeQfgEEYgoN13Aty/Y/KH/ZcrEeb9/e941f5zpgXvAPdbVBumT/qGRBlcUzympL51fyORCjqbSOzK5dhS422woaYeM0Ny/9VKJKS3jY6f9i6YFsrlUa8J+/T+dfAWs3kb4clus3zX0ooe5xzwdTcfRTPK/68G/aI/aYm+x/Wn6cp/0boscx/GtnjsOXv0ev8ZjgCR2PU1HfXUc3k3w/9ul0izc5t3pNs+fvhAOQpa7Waeobuoprt/ufrv9n5zXuSLf9JOAWnKWu12pS+/k3Ntv5n6fqPyl8h5+FCjFpF5zftLpHXrPlGVvIn8X/I/L8pednKzK5k4Bia6XYGjsFxHMdxnGh/ANSKwEo=
   </data>
  </layer>
  <objectgroup name="Object Layer 1">
-  <object gid="501" x="157" y="174"/>
-  <object gid="504" x="325" y="424"/>
-  <object gid="503" x="284" y="288.333"/>
-  <object gid="503" x="483" y="272"/>
-  <object gid="503" x="557" y="248.333"/>
-  <object gid="503" x="306" y="288"/>
+  <object gid="501" x="200" y="270"/>
+  <object gid="504" x="357" y="520"/>
+  <object gid="503" x="316" y="384.333"/>
+  <object gid="503" x="515" y="368"/>
+  <object gid="503" x="589" y="344.333"/>
+  <object gid="503" x="338" y="384"/>
  </objectgroup>
 </map>
