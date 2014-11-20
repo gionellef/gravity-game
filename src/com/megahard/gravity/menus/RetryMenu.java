@@ -5,7 +5,10 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Image;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -27,15 +30,15 @@ public class RetryMenu extends JPanel{
 	public RetryMenu(GravityApplet app) {
 		retryScreen = new JFrame ("Retry Menu");
 		
-		retryButton = new CustomButton("Retry", new Color(34,47,91), new Color(14,26,64));
-		retryButton.setPreferredSize(new Dimension(200,75));
-		retryButton.setBounds(0,150,400,75);
-		retryButton.addActionListener(app);
-		
-		menuButton = new CustomButton("Back to Main Menu", new Color(34,47,91), new Color(14,26,64));
+		menuButton = new CustomButton("Back to Main Menu", Color.black);
 		menuButton.setPreferredSize(new Dimension(200,75));
-		menuButton.setBounds(400, 150, 400, 75);
+		menuButton.setBounds(0, 150, 800, 75);
 		menuButton.addActionListener(app);
+		
+		retryButton = new CustomButton("Retry", Color.black);
+		retryButton.setPreferredSize(new Dimension(200,75));
+		retryButton.setBounds(0, 225, 800, 75);
+		retryButton.addActionListener(app);
 		
 		retryScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		c = retryScreen.getContentPane();
@@ -51,12 +54,18 @@ public class RetryMenu extends JPanel{
 	}
 	
 	public void paintComponent(Graphics g) {
-		g.setColor(new Color(10,10,10));
-		g.fillRect(0, 0, GravityApplet.WIDTH, GravityApplet.HEIGHT);
+		Image bg = null;
+		try {
+			bg = ImageIO.read(getClass().getResource("/back.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		g.drawImage(bg, 0, 0, this);
 		
 		g.setFont(new Font(name, 10,50));
 		g.setColor(new Color(240,240,240));
-		g.drawString(name, 75, 100);
+		g.drawString(name, (800/2-(name.length()*23/2)), 100);
 	}
 	
 	public JButton getRetryButton() {
