@@ -47,7 +47,7 @@
                  "y":280
                 }, 
                 {
-                 "height":30,
+                 "height":15,
                  "name":"script_NoobParadise2",
                  "properties":
                     {
@@ -56,9 +56,9 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":60,
-                 "x":273,
-                 "y":238
+                 "width":21,
+                 "x":499,
+                 "y":312
                 }, 
                 {
                  "height":40,
