@@ -2521,7 +2521,7 @@
   <object gid="507" x="503" y="264"/>
   <object gid="507" x="328" y="392"/>
   <object gid="501" x="183" y="382"/>
-  <object gid="506" x="276" y="388"/>
+  <object gid="506" x="251" y="388"/>
   <object gid="506" x="426" y="259"/>
   <object gid="504" x="188" y="248"/>
   <object gid="505" x="207" y="391"/>
@@ -2533,5 +2533,7 @@
   <object gid="505" x="572" y="267"/>
   <object gid="505" x="550" y="265"/>
   <object gid="505" x="534" y="266"/>
+  <object name="script_NoobParadise5a" x="272.5" y="343.5" width="20.5" height="21.5"/>
+  <object name="script_NoobParadise5b" x="347" y="360" width="27.5" height="7.5"/>
  </objectgroup>
 </map>

@@ -17,5 +17,6 @@
   <object gid="505" x="404" y="427"/>
   <object gid="505" x="314" y="503"/>
   <object gid="501" x="200" y="606"/>
+  <object name="script_NoobParadise4" x="314.5" y="583.5" width="46" height="7.5"/>
  </objectgroup>
 </map>

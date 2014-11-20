@@ -103,7 +103,7 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":276,
+                 "x":251,
                  "y":388
                 }, 
                 {
@@ -270,6 +270,34 @@
                  "width":0,
                  "x":534,
                  "y":266
+                }, 
+                {
+                 "height":21.5,
+                 "name":"script_NoobParadise5a",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":20.5,
+                 "x":272.5,
+                 "y":343.5
+                }, 
+                {
+                 "height":7.5,
+                 "name":"script_NoobParadise5b",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":27.5,
+                 "x":347,
+                 "y":360
                 }],
          "opacity":1,
          "type":"objectgroup",
