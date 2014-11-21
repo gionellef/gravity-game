@@ -192,6 +192,10 @@ public class GameObject {
 		}
 	}
 
+	public void kill() {
+		getGame().removeObject(this);
+	}
+	
 	protected GameContext getGame(){
 		return game;
 	}
@@ -200,7 +204,7 @@ public class GameObject {
 	
 	public void init(){
 	}
-
+	
 	public void onHitBottom(){
 	}
 

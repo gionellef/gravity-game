@@ -75,7 +75,7 @@ public class GravWell extends GameObject {
 		}
 	}
 
-	public void destroy() {
+	public void kill() {
 		online = false;
 	}
 	

@@ -23,7 +23,7 @@ public class DeadlyObj extends GameObject {
 	@Override
 	public void onCollide(GameObject obj) {
 		if(obj.getClass().equals(Player.class)){
-			getGame().removeObject(obj);
+			obj.kill();
 		}
 	}
 	

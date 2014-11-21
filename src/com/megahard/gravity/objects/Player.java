@@ -40,6 +40,8 @@ public class Player extends GameObject {
 	private boolean isFacingLeft = false;
 	private int gravsLeft = 0;
 	private int jumpsLeft = 0;
+	
+	private boolean alive = true;
 
 	public Player(GameContext game) {
 		super(game, "person");
@@ -56,55 +58,74 @@ public class Player extends GameObject {
 	public void update() {
 		super.update();
 		
-		// Footsteps
-		if(sprite.getAction().startsWith("run")){
-			if(sprite.getFrame() == 3 || sprite.getFrame() == 9){
-				Clips sound = STEP_SOUNDS[RAND.nextInt(STEP_SOUNDS.length)];
-				getGame().playSoundAtLocation(sound, position, 0.5); 
+		if(alive){
+			// Footsteps
+			if(sprite.getAction().startsWith("run")){
+				if(sprite.getFrame() == 3 || sprite.getFrame() == 9){
+					Clips sound = STEP_SOUNDS[RAND.nextInt(STEP_SOUNDS.length)];
+					getGame().playSoundAtLocation(sound, position, 0.5); 
+				}
 			}
-		}
-		
-		// Animations
-		if(standing){
-			if(!isRunning){
-				setSpriteAction("default", new String[]{"land", "conjure", "default"});
+			
+			// Animations
+			if(standing){
+				if(!isRunning){
+					setSpriteAction("default", new String[]{"land", "conjure", "default"});
+				}
+			} else {
+				if(!sprite.getAction().startsWith("fall")){
+					setSpriteAction("fall", new String[]{"jump"});
+				}
 			}
-		} else {
-			if(!sprite.getAction().startsWith("fall")){
-				setSpriteAction("fall", new String[]{"jump"});
+	
+			// State tracking
+			if(standing){
+				jumpsLeft = 1;
+				staticFriction = 0.3;
+			}else{
+				staticFriction = 0;
 			}
-		}
-
-		// State tracking
-		if(standing){
-			jumpsLeft = 1;
-			staticFriction = 0.3;
+			isRunning = false;
+			
+			// Controls
+			if(getGame().keyIsJustPressed(KeyEvent.VK_SPACE) 
+					|| getGame().keyIsJustPressed(KeyEvent.VK_W)){
+				jump();
+			}else{
+				if(getGame().keyIsDown(KeyEvent.VK_A)){
+					run (true);
+				}
+				else if(getGame().keyIsDown(KeyEvent.VK_D)){
+					run (false);
+				}
+			}
+			if(getGame().mouseIsJustPressed(MouseEvent.BUTTON1)){
+				conjureGrav(getGame().getMouseGamePosition());
+			}
+			if(getGame().mouseIsUp(MouseEvent.BUTTON1)){
+				if(well != null){
+					well.kill();
+					well = null;
+				}
+			}
 		}else{
-			staticFriction = 0;
-		}
-		isRunning = false;
-		
-		// Controls
-		if(getGame().keyIsJustPressed(KeyEvent.VK_SPACE) 
-				|| getGame().keyIsJustPressed(KeyEvent.VK_W)){
-			jump();
-		}else{
-			if(getGame().keyIsDown(KeyEvent.VK_A)){
-				run (true);
-			}
-			else if(getGame().keyIsDown(KeyEvent.VK_D)){
-				run (false);
-			}
-		}
-		if(getGame().mouseIsJustPressed(MouseEvent.BUTTON1)){
-			conjureGrav(getGame().getMouseGamePosition());
-		}
-		if(getGame().mouseIsUp(MouseEvent.BUTTON1)){
 			if(well != null){
-				well.destroy();
+				well.kill();
 				well = null;
 			}
+			staticFriction = 0.1;
+			gravsLeft = 0;
+			jumpsLeft = 0;
+			isRunning = false;
 		}
+	}
+	
+	@Override
+	public void kill() {
+		alive = false;
+		// TODO die animation
+//		setSpriteAction("die");
+		getGame().removeObject(this);
 	}
 	
 	@Override
@@ -148,7 +169,7 @@ public class Player extends GameObject {
 			// make it appear now
 			gravsLeft--;
 			
-			if(well != null) well.destroy();
+			if(well != null) well.kill();
 			
 			well = new GravWell(getGame());
 			well.position = pos;
