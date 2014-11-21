@@ -246,7 +246,7 @@ public class Renderer extends Canvas {
 				cineStripHeight - 2 * marginY);
 			if(w >= 0){
 				// handle overflow (by scrolling)
-				System.out.println(message);
+				System.out.println("Warning! Message overflow:\n " + message.substring(w));
 			}
 			if(messageImageName != null && messageImage != null){
 				g.drawImage(messageImage, marginX, bufferHeight - cineStripHeight - messageImage.getHeight() + marginY/2, null);
@@ -308,7 +308,7 @@ public class Renderer extends Canvas {
 		int curY = y;
 
 		String[] words = s.split("\\s");
-
+		
 		int i;
 		for(i = 0; i < words.length; i++){
 			String word = words[i];
@@ -329,7 +329,7 @@ public class Renderer extends Canvas {
 			}
 
 			g.drawString(word, curX, curY);
-
+			
 			// Move over to the right for next word.
 			curX += wordWidth;
 		}
