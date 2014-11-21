@@ -107,6 +107,8 @@ public class Renderer extends Canvas {
 		
 		double cx = camera.x;
 		double cy = camera.y;
+		int cxm = (int) (cx * TILE_SIZE);
+		int cym = (int) (cy * TILE_SIZE);
 		
 		// Draw background
 		g.drawImage(back,
@@ -122,14 +124,14 @@ public class Renderer extends Canvas {
 
 		int tileSheetColumns = s.map.getImgwidth() / TILE_SIZE;
 		for (int y = yStart; y <= yEnd; y++) {
-		    int dy = (int) ((y - cy) * TILE_SIZE + halfBufHeight);
+		    int dy = (int) (y * TILE_SIZE) - cym + halfBufHeight;
 			for (int x = xStart; x <= xEnd; x++) {
 				Tile tile = s.map.getTile(x, y);
 				int tileIndex = tile.getTileIndex();
 				int frameX = (tileIndex % tileSheetColumns) * TILE_SIZE;
 			    int frameY = (tileIndex / tileSheetColumns) * TILE_SIZE;
 				
-			    int dx = (int) ((x - cx) * TILE_SIZE + halfBufWidth);
+			    int dx = (int) (x * TILE_SIZE) - cxm + halfBufWidth;
 		    	g.drawImage(tileset,
 			    	dx, dy, dx + TILE_SIZE, dy + TILE_SIZE,
 			    	frameX, frameY, frameX + TILE_SIZE, frameY + TILE_SIZE,
@@ -143,10 +145,10 @@ public class Renderer extends Canvas {
 		Arrays.sort(objects, ZCOMP);
 		for (GameObject o : objects) {
 			if (o.sprite != null) {
-				int dx = (int) ((o.position.x - cx) * TILE_SIZE
-						+ halfBufWidth - o.sprite.getWidth() / 2);
-				int dy = (int) ((o.position.y - cy) * TILE_SIZE
-						+ halfBufHeight - o.sprite.getHeight() / 2);
+				int dx = (int) (o.position.x * TILE_SIZE) - cxm
+						+ halfBufWidth - o.sprite.getWidth() / 2;
+				int dy = (int) (o.position.y * TILE_SIZE) - cym
+						+ halfBufHeight - o.sprite.getHeight() / 2;
 				if(dx >= -o.sprite.getWidth()
 				&& dy >= -o.sprite.getHeight()
 				&& dx < bufferWidth
