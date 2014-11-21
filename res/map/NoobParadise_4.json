@@ -2387,7 +2387,7 @@
                 },
              "2":
                 {
-                 "type":"DeadlyObj"
+                 "type":"Plasma"
                 },
              "3":
                 {
@@ -2408,6 +2408,10 @@
              "7":
                 {
                  "type":"TogglePlasma"
+                },
+             "8":
+                {
+                 "type":"Galileo"
                 }
             },
          "tilewidth":64

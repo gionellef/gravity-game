@@ -13,7 +13,7 @@
         }, 
         {
          "draworder":"topdown",
-         "height":150,
+         "height":0,
          "name":"Object Layer 1",
          "objects":[
                 {
@@ -469,7 +469,7 @@
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
-         "width":30,
+         "width":0,
          "x":0,
          "y":0
         }],

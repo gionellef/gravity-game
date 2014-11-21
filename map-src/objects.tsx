@@ -13,7 +13,7 @@
  </tile>
  <tile id="2">
   <properties>
-   <property name="type" value="DeadlyObj"/>
+   <property name="type" value="Plasma"/>
   </properties>
  </tile>
  <tile id="3">

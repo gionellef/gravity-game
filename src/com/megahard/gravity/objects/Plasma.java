@@ -4,10 +4,10 @@ import com.megahard.gravity.GameContext;
 import com.megahard.gravity.GameObject;
 import com.megahard.gravity.Sound;
 
-public class DeadlyObj extends GameObject {
+public class Plasma extends GameObject {
 
-	public DeadlyObj(GameContext game) {
-		super(game, "deadlyobj");
+	public Plasma(GameContext game) {
+		super(game, "plasma");
 		size.set(0.7, 0.7);
 		mass = 0.5;
 		fixed = true;

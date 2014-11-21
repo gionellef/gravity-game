@@ -13,7 +13,7 @@
         }, 
         {
          "draworder":"topdown",
-         "height":40,
+         "height":0,
          "name":"Object Layer 1",
          "objects":[
                 {
@@ -28,8 +28,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":39.5833333333333,
-                 "y":413.166666666667
+                 "x":39.5833,
+                 "y":413.167
                 }, 
                 {
                  "gid":504,
@@ -184,7 +184,7 @@
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
-         "width":60,
+         "width":0,
          "x":0,
          "y":0
         }],
@@ -2403,7 +2403,7 @@
                 },
              "2":
                 {
-                 "type":"DeadlyObj"
+                 "type":"Plasma"
                 },
              "3":
                 {
