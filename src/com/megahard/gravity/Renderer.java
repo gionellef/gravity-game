@@ -122,7 +122,7 @@ public class Renderer extends Canvas {
 
 		int tileSheetColumns = s.map.getImgwidth() / TILE_SIZE;
 		for (int y = yStart; y <= yEnd; y++) {
-		    int dy = (int) ((y - cy) * TILE_SIZE + halfBufHeight);
+		    int dy = (int) ((y - cy) * TILE_SIZE + halfBufHeight - 0.5);
 			for (int x = xStart; x <= xEnd; x++) {
 				Tile tile = s.map.getTile(x, y);
 				int tileIndex = tile.getTileIndex();
