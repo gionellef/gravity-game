@@ -161,17 +161,17 @@ public class Renderer extends Canvas {
 		// Draw borders
 		g.setColor(BORDER_COLOR);
 		if(cx * TILE_SIZE - halfBufWidth < 0){
-			g.fillRect(0, 0, (int) (halfBufWidth - cx * TILE_SIZE), bufferHeight);
+			g.fillRect(0, 0, (int) (halfBufWidth - cx * TILE_SIZE + 1), bufferHeight);
 		}
 		if(cx * TILE_SIZE + halfBufWidth > s.map.getWidth() * TILE_SIZE){
-			int borderWidth = (int) (cx * TILE_SIZE + halfBufWidth - s.map.getWidth() * TILE_SIZE) + 1;
+			int borderWidth = (int) (cx * TILE_SIZE + halfBufWidth - s.map.getWidth() * TILE_SIZE + 1);
 			g.fillRect(bufferWidth - borderWidth, 0, borderWidth, bufferHeight);
 		}
 		if(cy * TILE_SIZE - halfBufHeight < 0){
-			g.fillRect(0, 0, bufferWidth, (int) (halfBufHeight - cy * TILE_SIZE));
+			g.fillRect(0, 0, bufferWidth, (int) (halfBufHeight - cy * TILE_SIZE + 1));
 		}
 		if(cy * TILE_SIZE + halfBufHeight > s.map.getHeight() * TILE_SIZE){
-			int borderHeight = (int) (cy* TILE_SIZE + halfBufHeight - s.map.getHeight() * TILE_SIZE) + 1;
+			int borderHeight = (int) (cy* TILE_SIZE + halfBufHeight - s.map.getHeight() * TILE_SIZE + 1);
 			g.fillRect(0, bufferHeight - borderHeight, bufferWidth, borderHeight);
 		}
 		

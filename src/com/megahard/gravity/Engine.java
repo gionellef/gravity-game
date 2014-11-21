@@ -617,7 +617,26 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 	@SuppressWarnings("unchecked")
 	public <T> T findObject(Class<T> type, double x, double y, double w,
 			double h, boolean inclusive) {
-		for (GameObject o : state.objects) {
+		// binary search
+		int l = 0;
+		int r = state.objects.size() - 1;
+		int s = 0;
+		while(l < r){
+			s = (l + r)/2;
+			double ox = state.objects.get(s).position.x;
+			double nx = state.objects.get(s + 1).position.x;
+			if(nx < x){
+				l = s + 1;
+			}else if(ox > x){
+				r = s;
+			}else{
+				break;
+			}
+		}
+		
+		// find object
+		for (int i=s; i<state.objects.size(); i++) {
+			GameObject o = state.objects.get(i);
 			if (!inclusive) {
 				if(o.position.x < x) continue;
 				if(o.position.x > x + w) break;
@@ -650,8 +669,27 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 	 */
 	@Override
 	public List<GameObject> findObjects(double x, double y, double w, double h, boolean inclusive){
+		// binary search
+		int l = 0;
+		int r = state.objects.size() - 1;
+		int s = 0;
+		while(l < r){
+			s = (l + r)/2;
+			double ox = state.objects.get(s).position.x;
+			double nx = state.objects.get(s + 1).position.x;
+			if(nx < x){
+				l = s + 1;
+			}else if(ox > x){
+				r = s;
+			}else{
+				break;
+			}
+		}
+		
+		// get objects
 		List<GameObject> list = new LinkedList<GameObject>();
-		for (GameObject o : state.objects) {
+		for (int i=s; i<state.objects.size(); i++) {
+			GameObject o = state.objects.get(i);
 			if (!inclusive) {
 				if(o.position.x < x) continue;
 				if(o.position.x > x + w) break;
@@ -743,32 +781,11 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 	@SuppressWarnings("unchecked")
 	public <T> List<T> findObjects(Class<T> type, int x, int y, int w,
 			int h, boolean inclusive) {
+		List<GameObject> objects = findObjects(x, y, w, h, inclusive);
 		List<T> list = new LinkedList<T>();
-		for (GameObject o : state.objects) {
-			if (!inclusive) {
-				if (o.position.x < x)
-					continue;
-				if (o.position.x > x + w)
-					break;
-				if (o.position.x >= x && o.position.y >= y
-						&& o.position.x < x + w && o.position.y < y + h) {
-					if (o.getClass().equals(type)) {
-						list.add((T) o);
-					}
-				}
-			} else {
-				if (o.position.x + o.size.x / 2 < x)
-					continue;
-				if (o.position.x - o.size.x / 2 > x + w)
-					break;
-				if (o.position.x - o.size.x / 2 < x + w
-						&& o.position.x + o.size.x / 2 >= x
-						&& o.position.y - o.size.y / 2 < y + h
-						&& o.position.y + o.size.y / 2 >= y) {
-					if (o.getClass().equals(type)) {
-						list.add((T) o);
-					}
-				}
+		for(GameObject o : objects){
+			if(o.getClass().equals(type)){
+				list.add((T) o);
 			}
 		}
 		return list;

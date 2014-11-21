@@ -121,7 +121,7 @@ public class Player extends GameObject {
 	public void onHitBottom() {
 		setSpriteAction("land");
 		double p = Math.min(1, velocity.y);
-		int f = (int) (Math.pow(1 - p, 0.3) * sprite.getTotalFrames());
+		int f = (int) (Math.pow(1 - p, 0.3) * (sprite.getTotalFrames() + 1));
 		sprite.setFrame(f);
 
 		Clips sound = LAND_SOUNDS[RAND.nextInt(LAND_SOUNDS.length)];
@@ -161,12 +161,16 @@ public class Player extends GameObject {
 	}
 	
 	private boolean isAreaClear(Vector2 pos){
+		GameMap map = getGame().getMap();
+		if(pos.x < 0 || pos.y < 0 || pos.x >= map.getWidth() || pos.y >= map.getHeight()){
+			return false;
+		}
+		
 		double radius = 0.8;
 		Vector2 se = new Vector2(pos.x + radius, pos.y + radius);
 		Vector2 ne = new Vector2(pos.x + radius, pos.y - radius);
 		Vector2 nw = new Vector2(pos.x - radius, pos.y - radius);
 		Vector2 sw = new Vector2(pos.x - radius, pos.y + radius);
-		GameMap map = getGame().getMap();
 		return
 			!map.getTile(pos).getCollidable()
 			&& !map.getTile(se).getCollidable()
