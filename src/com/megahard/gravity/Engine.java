@@ -688,6 +688,8 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 		state.cinematicMode = cinematicMode;
 		keyStates.clear();
 		mouseStates.clear();
+		keyEvents.clear();
+		mouseKeyEvents.clear();
 	}
 
 	/* (non-Javadoc)
