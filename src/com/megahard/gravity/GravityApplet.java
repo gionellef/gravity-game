@@ -225,6 +225,8 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 	
 	private void showTitleScreen() {
 		add(ts);
+		validate();
+		repaint();
 	}
 
 	private void showLevelMenu() {
