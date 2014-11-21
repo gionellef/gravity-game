@@ -1,5 +1,6 @@
 package com.megahard.gravity;
 
+import java.awt.Color;
 import java.util.List;
 
 import com.megahard.gravity.Sound.Clips;
@@ -62,5 +63,10 @@ public interface GameContext {
 	void fadeScreen(boolean out, int duration);
 
 	void showMessage(String image, String message, int duration);
+
+	public abstract void fadeScreen(Color colorStart, Color colorEnd, int duration);
+
+	public abstract <T> List<T> findObjects(Class<T> type, int x, int y, int w,
+			int h, boolean inclusive);
 
 }

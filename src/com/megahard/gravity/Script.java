@@ -23,7 +23,7 @@ public abstract class Script {
 	public abstract void onEnter(GameObject object);
 	public abstract void onExit(GameObject object);
 	
-	protected Engine getGame(){
+	protected GameContext getGame(){
 		return game;
 	}
 	protected Rectangle2D.Double getRegion(){

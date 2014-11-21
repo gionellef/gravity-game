@@ -726,4 +726,38 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 	public void fadeScreen(Color colorStart, Color colorEnd, int duration){
 		renderer.fade(colorStart, colorEnd, duration);
 	}
+
+	@SuppressWarnings("unchecked")
+	public <T> List<T> findObjects(Class<T> type, int x, int y, int w,
+			int h, boolean inclusive) {
+		List<T> list = new LinkedList<T>();
+		for (GameObject o : state.objects) {
+			if (!inclusive) {
+				if (o.position.x < x)
+					continue;
+				if (o.position.x > x + w)
+					break;
+				if (o.position.x >= x && o.position.y >= y
+						&& o.position.x < x + w && o.position.y < y + h) {
+					if (o.getClass().equals(type)) {
+						list.add((T) o);
+					}
+				}
+			} else {
+				if (o.position.x + o.size.x / 2 < x)
+					continue;
+				if (o.position.x - o.size.x / 2 > x + w)
+					break;
+				if (o.position.x - o.size.x / 2 < x + w
+						&& o.position.x + o.size.x / 2 >= x
+						&& o.position.y - o.size.y / 2 < y + h
+						&& o.position.y + o.size.y / 2 >= y) {
+					if (o.getClass().equals(type)) {
+						list.add((T) o);
+					}
+				}
+			}
+		}
+		return list;
+	}
 }

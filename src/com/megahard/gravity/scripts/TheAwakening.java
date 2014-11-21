@@ -8,6 +8,7 @@ import java.util.List;
 import com.megahard.gravity.Engine;
 import com.megahard.gravity.GameObject;
 import com.megahard.gravity.Script;
+import com.megahard.gravity.objects.Box;
 import com.megahard.gravity.objects.GravWell;
 import com.megahard.gravity.objects.Player;
 import com.megahard.gravity.objects.VioletSpark;
@@ -41,7 +42,7 @@ public class TheAwakening extends Script {
 			}
 			
 			if(timer == 40){
-				getGame().showMessage("isaac-pre", "What is this violet rock?", 100);
+				getGame().showMessage("isaac-pre", "What is this rock?", 100);
 			}
 			
 			if(timer == 140){
@@ -52,6 +53,7 @@ public class TheAwakening extends Script {
 				double m = 0.1 * (1 - (double)(340 - timer)/(340-240));
 				player.velocity.y *= 0.9;
 				player.velocity.y += (((getRegion().y * 2 + getRegion().getHeight())/2 - player.position.y) - player.velocity.y) * m;
+				player.position.x += (getRegion().x - player.position.x) * m;
 				
 				castSparkOnPlayer(1);
 			}
@@ -70,16 +72,22 @@ public class TheAwakening extends Script {
 				getGame().addObject(gw);
 			}
 			
-			if(timer == 410){
+			if(timer == 550){
 				// fade to white
-				getGame().fadeScreen(null, Color.white, 150);
+				getGame().fadeScreen(null, Color.white, 80);
 			}
 			
-			if(timer > 360 && timer < 640){
-				if(Math.random() < 0.1){
+			if(timer > 370 && timer < 640){
+				if(Math.random() < 0.08){
 					GravWell g = new GravWell(getGame());
 					g.power = 0.2;
-					g.position.set(player.position.x + Math.random()*16-8, player.position.y + Math.random()*8-4);
+					if(Math.random() < 0.2){
+						List<Box> boxes = getGame().findObjects(Box.class, 0, 0, getGame().getMap().getWidth(), getGame().getMap().getHeight(), true);
+						Box box = boxes.get((int)(Math.random() * boxes.size()));
+						g.position.set(box.position.x + Math.random() + 2-1, box.position.y - 2);
+					}else{
+						g.position.set(player.position.x + Math.random()*16-8, player.position.y + Math.random()*8-4);
+					}
 					getGame().addObject(g);
 					wells.add(g);
 				}
@@ -87,11 +95,15 @@ public class TheAwakening extends Script {
 					wells.remove(0).destroy();
 				}
 
-				double m = 0.1;
+				double m = 0.05;
 				player.position.x += (getRegion().x - player.position.x) * m;
 				player.position.y += ((getRegion().y * 2 + getRegion().getHeight())/2 - player.position.y) * m;
-				player.velocity.x *= 0.3;
-				player.velocity.y *= 0.3;
+				player.velocity.x *= 0.98;
+				player.velocity.y *= 0.98;
+
+				castSparkOnPlayer(8);
+				castSparkOnPlayer(6);
+				castSparkOnPlayer(4);
 			}
 			
 			if(timer == 640){
@@ -113,15 +125,23 @@ public class TheAwakening extends Script {
 			if(timer == 750){
 				getGame().showMessage("isaac", "Augh... What just happened!?", 60);
 			}
-			if(timer == 820){
-				getGame().showMessage("isaac", "I feel... ", 80);
+			
+			if(timer == 810){
+				getGame().showMessage("isaac", "My hair! It turned white!", 80);
 			}
 			
-			if(timer == 900){
+			if(timer == 890){
+				getGame().showMessage("isaac", "I feel... ", 80);
+			}
+			if(timer == 960){
 				getGame().showMessage("isaac", "I feel... strange...", 80);
 			}
+			
+			if(timer == 1030){
+				getGame().showMessage("isaac", "It's like something has awakened inside of me.", 100);
+			}
 				
-			if(timer == 980){
+			if(timer == 1130){
 				getGame().setCinematicMode(false);
 				active = false;
 			}
