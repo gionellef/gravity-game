@@ -86,10 +86,9 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 		keyEvents = new ConcurrentLinkedQueue<>();
 		mouseKeyEvents = new ConcurrentLinkedQueue<>();
 		
-		mouseX = 0;
-		mouseY = 0;
-		
 		renderer = new Renderer(this);
+
+		mouseX = mouseY = -1;
 		
 		messageExpiry = 0;
 		
@@ -281,16 +280,17 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 		updateObjects();
 		updateScripts();
 
-
 		if(state.cinematicMode){
 			renderer.setCamera(renderer.getCamera().add(playerObject.position.sub(renderer.getCamera()).scale(0.1)));
-		}else{
+		}else if(mouseX > 0 && mouseY > 0){
 			renderer.getCamera().set(
 				playerObject.position.x + ((double)(mouseX - renderer.getWidth() / 2)
 				/ Renderer.SCALE_FACTOR / Renderer.TILE_SIZE) * 0.5,
 				playerObject.position.y + ((double)(mouseY - renderer.getHeight() / 2)
 							/ Renderer.SCALE_FACTOR / Renderer.TILE_SIZE) * 0.5
 			);
+		}else{
+			renderer.setCamera(new Vector2(playerObject.position.x, playerObject.position.y));
 		}
 		
 		// dead player
@@ -773,4 +773,6 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 		}
 		return list;
 	}
+
+
 }
