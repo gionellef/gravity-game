@@ -4,14 +4,13 @@
  <tileset firstgid="501" source="objects.tsx"/>
  <layer name="Tile Layer 1" width="90" height="40">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <objectgroup name="Object Layer 1">
   <object type="Player" gid="501" x="267.25" y="461"/>
   <object gid="504" x="1109.83" y="408"/>
   <object gid="503" x="640" y="286.5"/>
-  <object gid="503" x="1013" y="409.5"/>
   <object gid="505" x="352.583" y="470.917"/>
   <object gid="505" x="462.75" y="426"/>
   <object gid="505" x="680.667" y="295.333"/>
@@ -19,11 +18,12 @@
   <object gid="506" x="237" y="467.333"/>
   <object gid="507" x="417.5" y="408"/>
   <object gid="508" x="598.5" y="451.333"/>
-  <object gid="508" x="419.667" y="279.833"/>
-  <object gid="508" x="599.5" y="408.5"/>
-  <object gid="508" x="598.5" y="366.167"/>
   <object gid="505" x="169.5" y="473"/>
   <object gid="507" x="319.909" y="472"/>
   <object gid="506" x="512.667" y="291.333"/>
+  <object gid="509" x="536" y="457"/>
+  <object gid="507" x="663.75" y="472"/>
+  <object gid="506" x="711.5" y="480"/>
+  <object name="script_InfiniteGravitites" x="210" y="294" width="51" height="50"/>
  </objectgroup>
 </map>
