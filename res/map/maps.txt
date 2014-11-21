@@ -6,7 +6,8 @@
 6 : Newfound Power,NoobParadise_4
 7 : Machinery,NoobParadise_5
 8 : Escape,2_Escape
-9: The Encounter,3_TheEncounter
+9 : The Encounter,3_TheEncounter
+10 : Pit,Pit 
 Luck,luck
 Snake,snake
 Dots,dots
