@@ -92,6 +92,8 @@ public class Renderer extends Canvas {
 		}
 		
 		message = null;
+		
+		setBackground(Color.black);
 	}
 	
 	public void render(GameState s) {

@@ -199,10 +199,13 @@ public class Player extends GameObject {
 		if(standing){
 			jumpsLeft++;
 		}
-		if(jumpsLeft > 0 && velocity.y < jumpStrength){
+		if(jumpsLeft > 0){
 			jumpsLeft--;
-			velocity.y = Math.min(velocity.y, -jumpStrength);
-			
+			if(velocity.y < jumpStrength){
+				velocity.y = Math.min(velocity.y, -jumpStrength);
+			}else{
+				velocity.y = -jumpStrength/2;
+			}
 			setSpriteAction("jump");
 			
 			Clips sound = JUMP_SOUNDS[RAND.nextInt(JUMP_SOUNDS.length)];
