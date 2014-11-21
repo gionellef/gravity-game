@@ -17,6 +17,11 @@ public class Vector2 {
 		this.x = x;
 		this.y = y;
 	}
+	
+	public Vector2(Vector2 vector){
+		x = vector.x;
+		y = vector.y;
+	}
 
 	// Magnitude... 7.1 earthquake in guam
 	public double length() {
@@ -47,6 +52,12 @@ public class Vector2 {
 
 	public Vector2 normalize() {
 		return scale(1/length());
+	}
+
+	public void set(Vector2 value) {
+		// set(value.x, value.y)
+		x = value.x;
+		y = value.y; 
 	}
 
 }
