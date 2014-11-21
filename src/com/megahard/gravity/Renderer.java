@@ -22,6 +22,8 @@ import com.megahard.gravity.objects.Player;
 
 public class Renderer extends Canvas {
 
+	private static final Color BORDER_COLOR = new Color(0x252525);
+
 	private static final long serialVersionUID = 1L;
 
 	public static final int TILE_SIZE = 16;
@@ -162,7 +164,7 @@ public class Renderer extends Canvas {
 		}
 		
 		// Draw borders
-		g.setColor(Color.black);
+		g.setColor(BORDER_COLOR);
 		if(cx * TILE_SIZE - halfBufWidth < 0){
 			g.fillRect(0, 0, (int) (halfBufWidth - cx * TILE_SIZE), bufferHeight);
 		}

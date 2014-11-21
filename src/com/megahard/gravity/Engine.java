@@ -260,7 +260,6 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 
 			if (type.equals("Player")) {
 				playerObject = (Player) instance;
-				renderer.setCamera(playerObject.position);
 			}
 		} catch (ClassNotFoundException e1) {
 			System.err.println("Object type " + type + " not found!");
@@ -281,6 +280,14 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 		}
 		updateObjects();
 		updateScripts();
+
+
+		renderer.getCamera().set(
+			playerObject.position.x + ((double)(mouseX - renderer.getWidth() / 2)
+			/ Renderer.SCALE_FACTOR / Renderer.TILE_SIZE) * 0.5,
+			playerObject.position.y + ((double)(mouseY - renderer.getHeight() / 2)
+						/ Renderer.SCALE_FACTOR / Renderer.TILE_SIZE) * 0.5
+		);
 		
 		// dead player
 		if(!playerObject.active){
