@@ -282,12 +282,16 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 		updateScripts();
 
 
-		renderer.getCamera().set(
-			playerObject.position.x + ((double)(mouseX - renderer.getWidth() / 2)
-			/ Renderer.SCALE_FACTOR / Renderer.TILE_SIZE) * 0.5,
-			playerObject.position.y + ((double)(mouseY - renderer.getHeight() / 2)
-						/ Renderer.SCALE_FACTOR / Renderer.TILE_SIZE) * 0.5
-		);
+		if(state.cinematicMode){
+			renderer.setCamera(renderer.getCamera().add(playerObject.position.sub(renderer.getCamera()).scale(0.1)));
+		}else{
+			renderer.getCamera().set(
+				playerObject.position.x + ((double)(mouseX - renderer.getWidth() / 2)
+				/ Renderer.SCALE_FACTOR / Renderer.TILE_SIZE) * 0.5,
+				playerObject.position.y + ((double)(mouseY - renderer.getHeight() / 2)
+							/ Renderer.SCALE_FACTOR / Renderer.TILE_SIZE) * 0.5
+			);
+		}
 		
 		// dead player
 		if(!playerObject.active){
