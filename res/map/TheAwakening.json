@@ -132,8 +132,8 @@
                  "type":"",
                  "visible":true,
                  "width":26,
-                 "x":486.5,
-                 "y":150
+                 "x":483.954545454545,
+                 "y":151.212121212121
                 }, 
                 {
                  "height":72,
@@ -2392,6 +2392,10 @@
              "7":
                 {
                  "type":"TogglePlasma"
+                },
+             "8":
+                {
+                 "type":"Galileo"
                 }
             },
          "tilewidth":64

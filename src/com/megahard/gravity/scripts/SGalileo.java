@@ -54,11 +54,6 @@ public class SGalileo extends Script {
 		));
 		msgQueue.add(new Msg(
 			"galileo",
-			"But no... It can't be...",
-			100
-		));
-		msgQueue.add(new Msg(
-			"galileo",
 			"Are you perhaps a descendant of the royal princess Gravis?",
 			150
 		));
@@ -169,8 +164,8 @@ public class SGalileo extends Script {
 */
 		msgQueue.add(new Msg(
 				"galileo",
-				"You need to escape from here. You must go to the communications module. Send a message to Gravitonia. Our royal guards will come and help you.",
-				200
+				"You need to escape from here. You must go to the communications module in the eastern tower of this outpost. Send a message to Gravitonia. Our royal guards will come and help you.",
+				250
 			));
 /*
 		msgQueue.add(new Msg(

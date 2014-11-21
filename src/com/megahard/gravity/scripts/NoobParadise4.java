@@ -33,10 +33,9 @@ public class NoobParadise4 extends Script {
 			final String[] messages = {"The rock you just got is called Gravitite"
 										,"You will see the number of Gravitites you have on the top left corner of your screen"
 										,"With it, you can create a Gravity Well by pressing and holding the left mouse button"
-										,"To destroy your current Gravity Well, just release your left mouse button" 
 										,"Gravity Wells alter gravity around it. Use it wisely!",""};
 
-			final int[] durations = { 15,25,28, 28,25,10};
+			final int[] durations = { 15,25,28, 28,10};
 
 			int i;
 			int d = offset;
