@@ -109,8 +109,8 @@ public class Renderer extends Canvas {
 		
 		double cx = camera.x;
 		double cy = camera.y;
-		int cxm = (int) Math.ceil(cx * TILE_SIZE);
-		int cym = (int) Math.ceil(cy * TILE_SIZE);
+		int cxm = (int) (cx * TILE_SIZE);
+		int cym = (int) (cy * TILE_SIZE);
 		
 		// Draw background
 		g.drawImage(back,
@@ -146,9 +146,9 @@ public class Renderer extends Canvas {
 		// sort by z-index
 		Arrays.sort(objects, ZCOMP);
 		for (GameObject o : objects) {
-			int dx = (int) (o.position.x * TILE_SIZE) - cxm
+			int dx = (int) (o.position.x * TILE_SIZE + 0.5) - cxm
 					+ halfBufWidth - o.sprite.getWidth() / 2;
-			int dy = (int) (o.position.y * TILE_SIZE) - cym
+			int dy = (int) (o.position.y * TILE_SIZE + 0.5) - cym
 					+ halfBufHeight - o.sprite.getHeight() / 2;
 			if(dx >= -o.sprite.getWidth()
 			&& dy >= -o.sprite.getHeight()
@@ -180,7 +180,9 @@ public class Renderer extends Canvas {
 		if(player != null){
 			g.setColor(Color.white);
 			g.setFont(font);
-			g.drawString("Gravs left: " + player.getGravsLeft(), 5, 20);
+			if(player.getGravsLeft() > 0){
+				g.drawString("Gravitites: " + player.getGravsLeft(), 5, 20);
+			}
 			
 			String mapName = GravityApplet.lm.maps.get(LevelMenu.lastMap)[0];
 			g.drawString(mapName, 380 - mapName.length()*7/2, 20);
