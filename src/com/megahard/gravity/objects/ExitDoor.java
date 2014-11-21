@@ -34,7 +34,6 @@ public class ExitDoor extends GameObject {
 				}else if(d < 1 && sprite.getAction().equals("open")){
 					if(player.standing && player.velocity.length() < 0.01){
 						getGame().finish(true,false);
-						System.out.println("YOU WIN!");
 					}
 				}
 			}else{
