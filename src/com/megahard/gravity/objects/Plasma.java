@@ -32,8 +32,8 @@ public class Plasma extends GameObject {
 		super.update();
 		
 		if(Math.random() < 0.02){
-			int n = 1 + (int) (Math.random() * 8);
-			getGame().playSoundAtLocation(Sound.spark, position, 0.5 + n/16.0);
+			int n = 1 + (int) (Math.random() * 4);
+			getGame().playSoundAtLocation(Sound.spark, position, 0.5 + n/8.0);
 			for(int i = n; i > 0; i--){
 				RedSpark s = new RedSpark(getGame());
 				s.position.set(position.x, position.y);
