@@ -46,6 +46,8 @@ public class Renderer extends Canvas {
 
 	private String message;
 	private String messageImageName;
+	private int messageChars;
+	
 	private int fadeTime = 0;
 	private int fadeTimer = 0;
 	private Color fadeColorEnd;
@@ -225,12 +227,19 @@ public class Renderer extends Canvas {
 		
 		// Draw messages
 		if(message != null){
+			int n = message.length();
+			if(messageChars < n){
+				messageChars += 3;
+				if(messageChars > n){
+					messageChars = n;
+				}
+			}
 			int marginX = 15;
 			int marginY = 5;
 			g.setColor(Color.white);
 			g.setFont(font);
 			int w = drawStringWrapped(g,
-				message,
+				message.substring(0, messageChars),
 				marginX,
 				bufferHeight - cineStripHeight + font.getSize() + marginY,
 				bufferWidth - 2 * marginX,
@@ -367,6 +376,8 @@ public class Renderer extends Canvas {
 	}
 
 	public void showMessage(String image, String message) {
+		messageChars = 0;
+		
 		messageImageName = image;
 		this.message = message;
 		
