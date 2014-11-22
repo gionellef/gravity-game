@@ -2518,6 +2518,6 @@
  <objectgroup name="Object Layer 1">
   <object gid="501" x="199" y="286"/>
   <object gid="504" x="771" y="280"/>
-  <object name="script_BlackPerson" x="242" y="85" width="68" height="63"/>
+  <object name="script_IsaacPre" x="242" y="85" width="68" height="63"/>
  </objectgroup>
 </map>
