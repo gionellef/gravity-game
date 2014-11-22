@@ -44,9 +44,9 @@ public class Bomb extends GameObject {
 			}
 		}else{
 			if (rotate >= 1) {
-				if (!sprite.getAction().equals("fast-rotate")) {
+				if (!sprite.getAction().equals("rotate-fast")) {
 					int f = sprite.getFrame();
-					sprite.setAction("fast-rotate");
+					sprite.setAction("rotate-fast");
 					sprite.setFrame(f);
 				}
 			} else {

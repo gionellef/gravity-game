@@ -7,7 +7,7 @@ import com.megahard.gravity.GameObject;
 
 public class Explosion extends GameObject {
 
-	private double radius = 1.5;
+	private double radius = 1.7;
 	
 	private static final Class<?>[] DESTRUCTIBLES = {
 		Player.class,
