@@ -300,7 +300,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 		
 		// debug rendering
 		if(keyIsJustReleased(KeyEvent.VK_F8)){
-			renderer.debug = !renderer.debug;
+			renderer.setDebug(!renderer.getDebug());
 		}
 		
 		// give up

@@ -22,7 +22,7 @@ public class Sprite {
 		public SpriteAction[] actions; 
 	}
 	
-	
+	private String imagePath;
 	private Image image;
 	private Rectangle region;
 	private SpriteData data;
@@ -36,7 +36,8 @@ public class Sprite {
 	public int offsetX = 0;
 	public int offsetY = 0;
 	
-	public Sprite(Image image, SpriteData data) {
+	public Sprite(String imagePath, Image image, SpriteData data) {
+		this.imagePath = imagePath;
 		this.image = image;
 		this.data = data;
 		region = new Rectangle(0, 0, data.width, data.height);
@@ -135,6 +136,9 @@ public class Sprite {
 	 * Draws the sprite in the g
 	 */
 	public void draw(Graphics2D g, int x, int y) {
+		if(GravityApplet.USE_GPU){
+			image = SpriteStore.get().getVolatileImage(imagePath);
+		}
 		x += offsetX;
 		y += offsetY;
 		g.drawImage(image,
