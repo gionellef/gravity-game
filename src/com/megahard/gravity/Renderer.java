@@ -143,12 +143,12 @@ public class Renderer extends Canvas {
 		for (int y = yStart; y <= yEnd; y++) {
 		    int dy = (int) (y * TILE_SIZE) - cym + halfBufHeight;
 			for (int x = xStart; x <= xEnd; x++) {
+			    int dx = (int) (x * TILE_SIZE) - cxm + halfBufWidth;
+			    
 				Tile tile = s.map.getTile(x, y);
 				int tileIndex = tile.getTileIndex();
 				int frameX = (tileIndex % tileSheetColumns) * TILE_SIZE;
 			    int frameY = (tileIndex / tileSheetColumns) * TILE_SIZE;
-				
-			    int dx = (int) (x * TILE_SIZE) - cxm + halfBufWidth;
 		    	g.drawImage(tileset,
 			    	dx, dy, dx + TILE_SIZE, dy + TILE_SIZE,
 			    	frameX, frameY, frameX + TILE_SIZE, frameY + TILE_SIZE,
@@ -282,27 +282,44 @@ public class Renderer extends Canvas {
 		
 		if(debug){
 			Graphics bg = bs.getDrawGraphics();
-        	bg.setColor(Color.red);
     		bg.setFont(font);
-			for (int y = 0; y < mapHeight; y++) {
-				for (int x = 0; x < mapWidth; x++) {
-					Tile tile = s.map.getTile(x, y);
-				    int dx = (int) ((x - cx) * TILE_SIZE + halfBufWidth);
-				    int dy = (int) ((y - cy) * TILE_SIZE + halfBufHeight);
-				    if(dx >= -TILE_SIZE && dy >= - TILE_SIZE && dx < bufferWidth && dy < bufferWidth){
-				    	bg.drawString(Integer.toHexString(tile.getTileIndex()).toUpperCase(), dx * SCALE_FACTOR + 1, dy * SCALE_FACTOR + 9);
-				    }
-				}
-			}
+    		
+        	bg.setColor(Color.green);
+        	
+        	Vector2 mouse = game.getMouseGamePosition();
+		    int tx = (int) (mouse.y);
+		    int ty = (int) (mouse.x);
+			int dy = tx * TILE_SIZE - cym + halfBufHeight;
+			int dx = ty * TILE_SIZE - cxm + halfBufWidth;
 
+		    Tile tile = s.map.getTile(mouse.x, mouse.y);
+		    int px = dx * SCALE_FACTOR;
+		    int py = dy * SCALE_FACTOR;
+		    bg.drawRect(px, py, TILE_SIZE * SCALE_FACTOR, TILE_SIZE * SCALE_FACTOR);
+		    bg.drawString(Integer.toHexString(tile.getTileIndex()).toUpperCase(), px + 1, py + 10 + 1);
+		    bg.drawString(tx + "," + ty, px + 1, py + 20 + 1);
+
+        	bg.setColor(Color.red);
 			for (GameObject o : s.objects) {
 				bg.drawRect(
-						(int) ((o.position.x - o.size.x / 2 - cx) * TILE_SIZE + halfBufWidth)
-								* SCALE_FACTOR,
-						(int) ((o.position.y - o.size.y / 2 - cy) * TILE_SIZE + halfBufHeight)
-								* SCALE_FACTOR, (int) (o.size.x * TILE_SIZE)
-								* SCALE_FACTOR, (int) (o.size.y * TILE_SIZE)
-								* SCALE_FACTOR);
+						(int) (((o.position.x - o.size.x / 2) * TILE_SIZE + 0.5 - cxm + halfBufWidth)
+								* SCALE_FACTOR),
+						(int) (((o.position.y - o.size.y / 2) * TILE_SIZE + 0.5 - cym + halfBufHeight)
+								* SCALE_FACTOR), (int) (o.size.x * TILE_SIZE
+								* SCALE_FACTOR), (int) (o.size.y * TILE_SIZE
+								* SCALE_FACTOR));
+			}
+
+        	bg.setColor(Color.cyan);
+			for (Script c : s.scripts) {
+				int x = (int) ((c.getRegion().x * TILE_SIZE + 0.5 - cxm + halfBufWidth) * SCALE_FACTOR);
+				int y = (int)((c.getRegion().y * TILE_SIZE + 0.5 - cym + halfBufHeight) * SCALE_FACTOR);
+				bg.drawRect(
+					x, y,
+					(int)(c.getRegion().width * TILE_SIZE * SCALE_FACTOR),
+					(int)(c.getRegion().height * TILE_SIZE * SCALE_FACTOR)
+				);
+				bg.drawString(c.getClass().getSimpleName(), x, y);
 			}
 		}
 		
