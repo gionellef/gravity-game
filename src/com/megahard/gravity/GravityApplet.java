@@ -21,7 +21,7 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 	private static final long serialVersionUID = 1L;
 
 	private boolean running = true;
-	;
+
 	private Thread gameThread;
 	private Engine engine;
 	private MusicPlayer music;
@@ -36,6 +36,8 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 
 	public static final int WIDTH = 800;
 	public static final int HEIGHT = 600;
+	
+	public static boolean USE_GPU = false;
 	
 	@Override
 	public void init() {

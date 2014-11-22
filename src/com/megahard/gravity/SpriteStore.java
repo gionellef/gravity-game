@@ -1,10 +1,15 @@
 package com.megahard.gravity;
 
+import java.awt.AWTException;
+import java.awt.AlphaComposite;
+import java.awt.Graphics2D;
 import java.awt.GraphicsConfiguration;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
+import java.awt.ImageCapabilities;
 import java.awt.Transparency;
 import java.awt.image.BufferedImage;
+import java.awt.image.VolatileImage;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -20,7 +25,8 @@ import com.megahard.gravity.Sprite.SpriteData;
  */
 public class SpriteStore {
 	private static SpriteStore single = new SpriteStore();
-	private HashMap<String, Image> images = new HashMap<>();
+	private HashMap<String, VolatileImage> volatileImages = new HashMap<>();
+	private HashMap<String, BufferedImage> images = new HashMap<>();
 	
 	/*
 	 * returns the single instance of this class
@@ -36,11 +42,16 @@ public class SpriteStore {
 	 */
 	public Sprite getSprite(String name) {
 		// Create new sprite
-		Image image = loadImage(name);
+		String imagePath = getImagePath(name);
+		Image image = loadImage(imagePath, false);
 		SpriteData data = loadData(name);
-		Sprite sprite = new Sprite(image, data);
+		Sprite sprite = new Sprite(imagePath, image, data);
 		
 		return sprite;
+	}
+
+	public String getImagePath(String name) {
+		return "/objects/" + name + "/graphics.png";
 	}
 
 	private SpriteData loadData(String name) {
@@ -51,12 +62,11 @@ public class SpriteStore {
 		return data;
 	}
 
-	private Image loadImage(String name) {
-		if (images.get(name) != null) {
-			return images.get(name);
+	public Image loadImage(String imagePath, boolean vram) {
+		if (images.containsKey(imagePath)) {
+			return vram ? getVolatileImage(imagePath) : images.get(imagePath);
 		}
 		
-		String imagePath = "/objects/" + name + "/graphics.png";
 		BufferedImage sourceImage = null;
 		try {
 			sourceImage = ImageIO.read(this.getClass().getResource(imagePath));
@@ -64,16 +74,58 @@ public class SpriteStore {
 			System.out.println("Failed to load: " + imagePath);
 		}
 		
-		// create an accelerated image of the right size to store our sprite in
 		GraphicsConfiguration gc = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
-		Image image = gc.createCompatibleImage(sourceImage.getWidth(),sourceImage.getHeight(),Transparency.BITMASK);
-		
-		// draw our source image into the accelerated image
-		image.getGraphics().drawImage(sourceImage,0,0,null);
+		BufferedImage bimage = gc.createCompatibleImage(sourceImage.getWidth(), sourceImage.getHeight(), Transparency.BITMASK);
 
-		images.put(name, image);
+		Graphics2D bg = bimage.createGraphics();
+		bg.drawImage(sourceImage,0,0,null);
+		bg.dispose();
 		
-		return image;
+		images.put(imagePath, bimage);
+		
+		return vram ? getVolatileImage(imagePath) : bimage;
+	}
+
+	public VolatileImage getVolatileImage(String imagePath){
+		VolatileImage vimage = volatileImages.get(imagePath);
+		
+		GraphicsConfiguration gc = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
+		if(vimage == null || vimage.validate(gc) != VolatileImage.IMAGE_OK) {
+			if(vimage == null){
+				System.out.println("New: " + imagePath);
+			}else{
+				System.out.println("Refresh: " + imagePath);
+			}
+			vimage = createVolatileImage(imagePath);
+			volatileImages.put(imagePath, vimage);
+		}
+
+		return vimage;
+	}
+
+	private VolatileImage createVolatileImage(String imagePath) {
+		GraphicsConfiguration gc = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
+		BufferedImage bimage = images.get(imagePath);
+
+		VolatileImage vimage;
+		try {
+			vimage = gc.createCompatibleVolatileImage(bimage.getWidth(),
+					bimage.getHeight(), new ImageCapabilities(true),
+					VolatileImage.BITMASK);
+		} catch (AWTException e) {
+			vimage = gc.createCompatibleVolatileImage(bimage.getWidth(),
+					bimage.getHeight(), Transparency.BITMASK);
+		}
+
+		do{
+			Graphics2D vg = vimage.createGraphics();
+			vg.setComposite(AlphaComposite.Src);
+			vg.clearRect(0, 0, vimage.getWidth(), vimage.getHeight());
+			vg.drawImage(bimage,0,0,null);
+			vg.dispose();
+		}while(vimage.contentsLost());
+		
+		return vimage;
 	}
 	
 
