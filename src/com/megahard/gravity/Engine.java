@@ -275,12 +275,33 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 	}
 
 	public void update() {
-		if(!isCinematicMode() || finished){
+		if(!finished){
 			updateInputEvents();
 		}
-		updateScripts();
-		updateObjects();
 
+		// Toggle debug rendering
+		if(keyIsJustReleased(KeyEvent.VK_F8)){
+			GravityApplet.debug = !GravityApplet.debug;
+		}
+		
+		// Give up
+		if(keyIsJustReleased(KeyEvent.VK_ESCAPE)){
+			finish(false,true);
+		}
+		
+		updateScripts();
+		
+		// No control in cinematic mode
+		if(isCinematicMode()){
+			clearInputs();
+		}
+		
+		updateObjects();
+		
+		// update key states
+		updateKeyStates();
+
+		// Set camera
 		if(state.cinematicMode){
 			renderer.getCameraTarget().set(playerObject.position);
 		}else{
@@ -292,28 +313,15 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 			);
 		}
 		
-		// dead player
+		// Messages
+		if(messageExpiry > 0 && state.time > messageExpiry){
+			renderer.removeMessage();
+		}
+		
+		// Dead player
 		if(!playerObject.active){
 			// Game over
 			finish(false,false);
-		}
-		
-		// debug rendering
-		if(keyIsJustReleased(KeyEvent.VK_F8)){
-			renderer.setDebug(!renderer.getDebug());
-		}
-		
-		// give up
-		if(keyIsJustReleased(KeyEvent.VK_ESCAPE)){
-			finish(false,true);
-		}
-		
-		// update key states
-		updateKeyStates();
-
-		// messages
-		if(messageExpiry > 0 && state.time > messageExpiry){
-			renderer.removeMessage();
 		}
 		
 		if(finished){
@@ -734,6 +742,10 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 	@Override
 	public void setCinematicMode(boolean cinematicMode) {
 		state.cinematicMode = cinematicMode;
+		clearInputs();
+	}
+
+	private void clearInputs() {
 		keyStates.clear();
 		mouseStates.clear();
 		keyEvents.clear();

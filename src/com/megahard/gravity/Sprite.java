@@ -136,7 +136,7 @@ public class Sprite {
 	 * Draws the sprite in the g
 	 */
 	public void draw(Graphics2D g, int x, int y) {
-		if(GravityApplet.USE_GPU){
+		if(GravityApplet.useGPU){
 			image = SpriteStore.get().getVolatileImage(imagePath);
 		}
 		x += offsetX;

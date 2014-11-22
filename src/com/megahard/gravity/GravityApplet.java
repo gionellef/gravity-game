@@ -37,7 +37,9 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 	public static final int WIDTH = 800;
 	public static final int HEIGHT = 600;
 	
-	public static boolean USE_GPU = true;
+	public static boolean debug = true;
+	
+	public static boolean useGPU = true;
 	
 	@Override
 	public void init() {

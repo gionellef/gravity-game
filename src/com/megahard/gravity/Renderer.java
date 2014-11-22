@@ -80,7 +80,7 @@ public class Renderer extends Canvas {
 			font = new Font(Font.SANS_SERIF, Font.PLAIN, 10);
 	}
 	
-	private boolean debug = false;
+
 
 	private Image messageImage;
 	
@@ -112,7 +112,7 @@ public class Renderer extends Canvas {
 			backBuffer = createVolatileImage(GravityApplet.WIDTH/SCALE_FACTOR, GravityApplet.HEIGHT/SCALE_FACTOR);
 		}
 
-		if(GravityApplet.USE_GPU){
+		if(GravityApplet.useGPU){
 			background = SpriteStore.get().getVolatileImage(BACKGROUND_PATH);
 			tileset = SpriteStore.get().getVolatileImage(TILESET_PATH);
 		}
@@ -298,7 +298,7 @@ public class Renderer extends Canvas {
 				GravityApplet.HEIGHT, 0, 0, bufferWidth,
 				bufferHeight, null);
 		
-		if(debug){
+		if(GravityApplet.debug){
     		bg.setFont(font);
     		
     		{
@@ -435,16 +435,6 @@ public class Renderer extends Canvas {
 		if(messageImageName != null){
 			messageImage = SpriteStore.get().loadImage("/images/" + messageImageName + ".png", false);
 		}
-	}
-
-
-	public boolean getDebug() {
-		return debug;
-	}
-
-
-	public void setDebug(boolean debug) {
-		this.debug = debug;
 	}
 
 }
