@@ -92,7 +92,7 @@ public class TheAwakening extends Script {
 					wells.add(g);
 				}
 				if(Math.random() < wells.size() * 0.01){
-					wells.remove(0).destroy();
+					wells.remove(0).kill();
 				}
 
 				double m = 0.05;
@@ -108,18 +108,18 @@ public class TheAwakening extends Script {
 			
 			if(timer == 640){
 				// change sprite
-				player.setSprite("person");
+				player.setSprite("isaac");
 				
 				// fade screen back
 				getGame().fadeScreen(Color.white, null, 40);
 
 				while(!wells.isEmpty()){
-					wells.remove(0).destroy();
+					wells.remove(0).kill();
 				}
 			}
 			
 			if(timer == 700){
-				gw.destroy();
+				gw.kill();
 			}
 			
 			if(timer == 750){

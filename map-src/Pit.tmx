@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" source="main.tsx"/>
+ <tileset firstgid="501" source="objects.tsx"/>
+ <layer name="Tile Layer 1" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztl8EuBEEQhnt4AiQkVoIrEoklwQ1H64BwwNE6ckCCeAm8BeKpuHkAJMR/rHSqtrpnddJ6Ktkvk1S6a+rL1PTUtpxzrYbRAYuFs0V8J8BYVTbjDfe9Quwa3GRQWwgLoK2soU6+7x1i9+AhA5cQNkFHWUOdfN9HxJ7AcwYuIRyDrrKGOv33fg6hpH4OoYR+xs8NeAwK35eYft4D+xn4+dC6ue8prTumn0/BWQZ+Pm1mdloivrTuEvo5hl79fFuVje/7UpVN0+fnv8j5gTyfDF995pfyxtwrhe8QGGYYSZQ35l7m69wkmALTyv2ldTNglmEucL8Ur+tL83G+y2AFrCq+0rqKmfW4eU/aL8Xr+tJ8nO822AG7iq+0jpv1uPdF2i/F6/rSfJzvGlgHG4qvhOb7iutbjbMi1ft7AA7BERhN4PuN609GvufgAlyC+QS+dZHOwZCzkautK5wz2v/LGN+YmcGfHyqlPqlWuu9EqK2f59PLN6Yn/f6U8mq1xuzzc7wHkIuvVo89X/M1X/M1X/M1X/M1X/M13zDfXzTrcJs=
+  </data>
+ </layer>
+ <objectgroup name="Object Layer 1">
+  <object gid="501" x="39.5833" y="413.167"/>
+  <object gid="504" x="872" y="408"/>
+  <object gid="505" x="97" y="416"/>
+  <object gid="505" x="343" y="328"/>
+  <object gid="505" x="120" y="422"/>
+  <object gid="505" x="785" y="417"/>
+  <object gid="505" x="640" y="416"/>
+  <object gid="503" x="504" y="312"/>
+  <object gid="503" x="503.75" y="271.5"/>
+  <object gid="503" x="504.25" y="352.25"/>
+  <object gid="503" x="503.5" y="232"/>
+ </objectgroup>
+</map>

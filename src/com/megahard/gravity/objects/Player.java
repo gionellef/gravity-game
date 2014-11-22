@@ -40,9 +40,11 @@ public class Player extends GameObject {
 	private boolean isFacingLeft = false;
 	private int gravsLeft = 0;
 	private int jumpsLeft = 0;
+	
+	private boolean alive = true;
 
 	public Player(GameContext game) {
-		super(game, "person");
+		super(game, "isaac");
 		size.set(0.95, 1.95);
 		mass = 50;
 		restitution = 0.05;
@@ -56,61 +58,80 @@ public class Player extends GameObject {
 	public void update() {
 		super.update();
 		
-		// Footsteps
-		if(sprite.getAction().startsWith("run")){
-			if(sprite.getFrame() == 3 || sprite.getFrame() == 9){
-				Clips sound = STEP_SOUNDS[RAND.nextInt(STEP_SOUNDS.length)];
-				getGame().playSoundAtLocation(sound, position, 0.5); 
+		if(alive){
+			// Footsteps
+			if(sprite.getAction().startsWith("run")){
+				if(sprite.getFrame() == 3 || sprite.getFrame() == 9){
+					Clips sound = STEP_SOUNDS[RAND.nextInt(STEP_SOUNDS.length)];
+					getGame().playSoundAtLocation(sound, position, 0.5); 
+				}
 			}
-		}
-		
-		// Animations
-		if(standing){
-			if(!isRunning){
-				setSpriteAction("default", new String[]{"land", "conjure", "default"});
+			
+			// Animations
+			if(standing){
+				if(!isRunning){
+					setSpriteAction("default", new String[]{"land", "conjure", "default"});
+				}
+			} else {
+				if(!sprite.getAction().startsWith("fall")){
+					setSpriteAction("fall", new String[]{"jump"});
+				}
 			}
-		} else {
-			if(!sprite.getAction().startsWith("fall")){
-				setSpriteAction("fall", new String[]{"jump"});
+	
+			// State tracking
+			if(standing){
+				jumpsLeft = 1;
+				staticFriction = 0.3;
+			}else{
+				staticFriction = 0;
 			}
-		}
-
-		// State tracking
-		if(standing){
-			jumpsLeft = 1;
-			staticFriction = 0.3;
+			isRunning = false;
+			
+			// Controls
+			if(getGame().keyIsJustPressed(KeyEvent.VK_SPACE) 
+					|| getGame().keyIsJustPressed(KeyEvent.VK_W)){
+				jump();
+			}else{
+				if(getGame().keyIsDown(KeyEvent.VK_A)){
+					run (true);
+				}
+				else if(getGame().keyIsDown(KeyEvent.VK_D)){
+					run (false);
+				}
+			}
+			if(getGame().mouseIsJustPressed(MouseEvent.BUTTON1)){
+				conjureGrav(getGame().getMouseGamePosition());
+			}
+			if(getGame().mouseIsUp(MouseEvent.BUTTON1)){
+				if(well != null){
+					well.kill();
+					well = null;
+				}
+			}
 		}else{
-			staticFriction = 0;
-		}
-		isRunning = false;
-		
-		// Controls
-		if(getGame().keyIsJustPressed(KeyEvent.VK_SPACE) 
-				|| getGame().keyIsJustPressed(KeyEvent.VK_W)){
-			jump();
-		}else{
-			if(getGame().keyIsDown(KeyEvent.VK_A)){
-				run (true);
-			}
-			else if(getGame().keyIsDown(KeyEvent.VK_D)){
-				run (false);
-			}
-		}
-		if(getGame().mouseIsJustPressed(MouseEvent.BUTTON1)){
-			conjureGrav(getGame().getMouseGamePosition());
-		}
-		if(getGame().mouseIsUp(MouseEvent.BUTTON1)){
 			if(well != null){
-				well.destroy();
+				well.kill();
 				well = null;
 			}
+			staticFriction = 0.1;
+			gravsLeft = 0;
+			jumpsLeft = 0;
+			isRunning = false;
 		}
+	}
+	
+	@Override
+	public void kill() {
+		alive = false;
+		// TODO die animation
+//		setSpriteAction("die");
+		getGame().removeObject(this);
 	}
 	
 	@Override
 	public void onCollide(GameObject obj) {
 		Class<? extends GameObject> objClass = obj.getClass();
-		if(objClass.equals(PowerItem.class)){
+		if(objClass.equals(Gravitite.class)){
 			gravsLeft++;
 			getGame().removeObject(obj);
 			getGame().playSoundAtLocation(Sound.power, position, 1);
@@ -148,7 +169,7 @@ public class Player extends GameObject {
 			// make it appear now
 			gravsLeft--;
 			
-			if(well != null) well.destroy();
+			if(well != null) well.kill();
 			
 			well = new GravWell(getGame());
 			well.position = pos;
@@ -161,12 +182,16 @@ public class Player extends GameObject {
 	}
 	
 	private boolean isAreaClear(Vector2 pos){
+		GameMap map = getGame().getMap();
+		if(pos.x < 0 || pos.y < 0 || pos.x >= map.getWidth() || pos.y >= map.getHeight()){
+			return false;
+		}
+		
 		double radius = 0.8;
 		Vector2 se = new Vector2(pos.x + radius, pos.y + radius);
 		Vector2 ne = new Vector2(pos.x + radius, pos.y - radius);
 		Vector2 nw = new Vector2(pos.x - radius, pos.y - radius);
 		Vector2 sw = new Vector2(pos.x - radius, pos.y + radius);
-		GameMap map = getGame().getMap();
 		return
 			!map.getTile(pos).getCollidable()
 			&& !map.getTile(se).getCollidable()
@@ -199,10 +224,13 @@ public class Player extends GameObject {
 		if(standing){
 			jumpsLeft++;
 		}
-		if(jumpsLeft > 0 && velocity.y < jumpStrength){
+		if(jumpsLeft > 0){
 			jumpsLeft--;
-			velocity.y = Math.min(velocity.y, -jumpStrength);
-			
+			if(velocity.y < jumpStrength){
+				velocity.y = Math.min(velocity.y, -jumpStrength);
+			}else{
+				velocity.y = -jumpStrength/2;
+			}
 			setSpriteAction("jump");
 			
 			Clips sound = JUMP_SOUNDS[RAND.nextInt(JUMP_SOUNDS.length)];

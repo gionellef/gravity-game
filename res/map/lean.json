@@ -2628,7 +2628,7 @@
                 },
              "2":
                 {
-                 "type":"DeadlyObj"
+                 "type":"Plasma"
                 },
              "3":
                 {
@@ -2636,7 +2636,7 @@
                 },
              "4":
                 {
-                 "type":"PowerItem"
+                 "type":"Gravitite"
                 },
              "5":
                 {
@@ -2649,6 +2649,10 @@
              "7":
                 {
                  "type":"TogglePlasma"
+                },
+             "8":
+                {
+                 "type":"Galileo"
                 }
             },
          "tilewidth":64

@@ -3,10 +3,10 @@ package com.megahard.gravity.objects;
 import com.megahard.gravity.GameContext;
 import com.megahard.gravity.GameObject;
 
-public class PowerItem extends GameObject {
+public class Gravitite extends GameObject {
 
-	public PowerItem(GameContext game) {
-		super(game, "power-item");
+	public Gravitite(GameContext game) {
+		super(game, "gravitite");
 		size.set(0.65, 0.65);
 		mass = 1;
 		friction = 0.6;
@@ -17,7 +17,7 @@ public class PowerItem extends GameObject {
 
 	@Override
 	public void onCollide(GameObject obj) {
-		if(obj.getClass().equals(PowerItem.class)){
+		if(obj.getClass().equals(Gravitite.class)){
 			velocity = velocity.add(position.sub(obj.position).normalize().scale(0.01f));
 		}
 	}

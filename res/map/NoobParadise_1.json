@@ -47,20 +47,6 @@
                  "y":280
                 }, 
                 {
-                 "height":60,
-                 "name":"script_NoobParadise1",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":51,
-                 "x":123,
-                 "y":153
-                }, 
-                {
                  "height":63,
                  "name":"script_BlackPerson",
                  "properties":
@@ -2296,7 +2282,7 @@
                 },
              "2":
                 {
-                 "type":"DeadlyObj"
+                 "type":"Plasma"
                 },
              "3":
                 {
@@ -2304,7 +2290,7 @@
                 },
              "4":
                 {
-                 "type":"PowerItem"
+                 "type":"Gravitite"
                 },
              "5":
                 {
@@ -2317,6 +2303,10 @@
              "7":
                 {
                  "type":"TogglePlasma"
+                },
+             "8":
+                {
+                 "type":"Galileo"
                 }
             },
          "tilewidth":64

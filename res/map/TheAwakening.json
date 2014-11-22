@@ -132,8 +132,8 @@
                  "type":"",
                  "visible":true,
                  "width":26,
-                 "x":486.5,
-                 "y":150
+                 "x":483.955,
+                 "y":151.212
                 }, 
                 {
                  "height":72,
@@ -2371,7 +2371,7 @@
                 },
              "2":
                 {
-                 "type":"DeadlyObj"
+                 "type":"Plasma"
                 },
              "3":
                 {
@@ -2379,7 +2379,7 @@
                 },
              "4":
                 {
-                 "type":"PowerItem"
+                 "type":"Gravitite"
                 },
              "5":
                 {
@@ -2392,6 +2392,10 @@
              "7":
                 {
                  "type":"TogglePlasma"
+                },
+             "8":
+                {
+                 "type":"Galileo"
                 }
             },
          "tilewidth":64

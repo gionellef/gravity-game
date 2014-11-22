@@ -7,29 +7,37 @@ import com.megahard.gravity.GameObject;
 import com.megahard.gravity.Script;
 import com.megahard.gravity.objects.Player;
 
-public class BlackPerson extends Script {
+public class InfiniteGravitites extends Script {
 
-	public BlackPerson(Engine game, Double region) {
+	public InfiniteGravitites(Engine game, Double region) {
 		super(game, region);
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void onStart() {
-		Player player = getGame().getPlayerObject();
-		if(player != null)
-			player.setSprite("isaac-pre");
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override
 	public void onUpdate() {
+		Player player = getGame().getPlayerObject();
+		if(player != null){
+			player.setGravs(99);
+		}
 	}
 
 	@Override
 	public void onEnter(GameObject object) {
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override
 	public void onExit(GameObject object) {
+		// TODO Auto-generated method stub
+
 	}
 
 }

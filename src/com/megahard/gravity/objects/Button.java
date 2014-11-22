@@ -55,6 +55,9 @@ public class Button extends GameObject {
 		{18,	19, 	0b1100},
 		{68,	69, 	0b1100},
 		{237,	44, 	0b1100},
+		{20,	45, 	0b0011},
+		{22,	47, 	0b0011},
+		{238,	46, 	0b0011},
 	};
 	
 	public Button(GameContext game) {

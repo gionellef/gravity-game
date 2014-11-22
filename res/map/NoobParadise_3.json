@@ -119,6 +119,21 @@
                  "width":45,
                  "x":756,
                  "y":203
+                }, 
+                {
+                 "gid":503,
+                 "height":0,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":400,
+                 "y":384.667
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -2342,7 +2357,7 @@
                 },
              "2":
                 {
-                 "type":"DeadlyObj"
+                 "type":"Plasma"
                 },
              "3":
                 {
@@ -2350,7 +2365,7 @@
                 },
              "4":
                 {
-                 "type":"PowerItem"
+                 "type":"Gravitite"
                 },
              "5":
                 {
@@ -2363,6 +2378,10 @@
              "7":
                 {
                  "type":"TogglePlasma"
+                },
+             "8":
+                {
+                 "type":"Galileo"
                 }
             },
          "tilewidth":64

@@ -13,7 +13,7 @@
         }, 
         {
          "draworder":"topdown",
-         "height":150,
+         "height":0,
          "name":"Object Layer 1",
          "objects":[
                 {
@@ -469,7 +469,7 @@
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
-         "width":30,
+         "width":0,
          "x":0,
          "y":0
         }],
@@ -2688,7 +2688,7 @@
                 },
              "2":
                 {
-                 "type":"DeadlyObj"
+                 "type":"Plasma"
                 },
              "3":
                 {
@@ -2696,7 +2696,7 @@
                 },
              "4":
                 {
-                 "type":"PowerItem"
+                 "type":"Gravitite"
                 },
              "5":
                 {

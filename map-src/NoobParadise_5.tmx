@@ -2512,7 +2512,7 @@
  <tileset firstgid="501" source="objects.tsx"/>
  <layer name="Tile Layer 1" width="56" height="36">
   <data encoding="base64" compression="zlib">
-   eJzt1b0OwVAYBuCDGzD4SdTEJhELm0UlYmCwYiVh83ctGLkMRrdh4jIYvE2O5KRJ02o5beUdnpzT9mu+87ZNjyGEMIiIiIgolnpQD1H/x/mKkE+4y0AWch5q7W7ocZd9trCDvbxWiEi+rhxrPvI90OMZk3xdH/lUuvNNIKlJSnmWuvIF0bQdD6AklR2+Fd3vL4iZkscyd6m38h3gKOKR71NWvhOcNebTuf81RDj/zxb6mNCWPS/K/87LvCq814eRb4g+IxjLnldlXV7maj63+jDyrdBnDRufe5qa7x/3v06Ae6c/zveJtMN5MwJr+4YFVGAox7dlBNZGREREFGUvtkj3Ag==
+   eJzt1b0OwVAYxvGDGzD4SDCxScTCZlGJdGCwYiVh83UtGLkMRrdh4jIYPE2O5KRJ0yo9beUZfmlxmvf8E+kpCiGKRERERBRLPWiEqB9wXwnyCXcZyELOw1q7G2bc5Zwt7GAvfytEpM+U17qPvgdmPGPSZ/roU+num0BSk5TQ3/eNlu3zAMpSxeG/Eqe+mdJjmbust/oOcBTx6PuU1XeCs8Y+nedfU4Tz/mxjjgEdOfOivO+83NeE9/Vh9A0xZwRjOfOq7MvLvdrntj6MvhXmrGHj80xT+/7x/Ot+8ew04L5PpB2+NyKwt19YQBWG8vq2jMDeiIiIiKLsBYsW+AM=
   </data>
  </layer>
  <objectgroup name="Object Layer 1">
@@ -2533,7 +2533,5 @@
   <object gid="505" x="572" y="267"/>
   <object gid="505" x="550" y="265"/>
   <object gid="505" x="534" y="266"/>
-  <object name="script_NoobParadise5a" x="269" y="284.5" width="20.5" height="21.5"/>
-  <object name="script_NoobParadise5b" x="347" y="386" width="27.5" height="7.5"/>
  </objectgroup>
 </map>

@@ -43,7 +43,7 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":183.6667,
+                 "x":183.667,
                  "y":268.667
                 }, 
                 {
@@ -57,7 +57,7 @@
                  "type":"",
                  "visible":true,
                  "width":90.6667,
-                 "x":191.3333,
+                 "x":191.333,
                  "y":127.333
                 }, 
                 {
@@ -2310,7 +2310,7 @@
                 },
              "2":
                 {
-                 "type":"DeadlyObj"
+                 "type":"Plasma"
                 },
              "3":
                 {
@@ -2318,7 +2318,7 @@
                 },
              "4":
                 {
-                 "type":"PowerItem"
+                 "type":"Gravitite"
                 },
              "5":
                 {
@@ -2331,6 +2331,10 @@
              "7":
                 {
                  "type":"TogglePlasma"
+                },
+             "8":
+                {
+                 "type":"Galileo"
                 }
             },
          "tilewidth":64

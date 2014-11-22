@@ -39,6 +39,8 @@ public class Renderer extends Canvas {
 	private GameContext game;
 
 	private Vector2 camera;
+	private Vector2 cameraTarget;
+	private double cameraSmoothing;
 	private BufferedImage buffer;
 
 	private BufferedImage back;
@@ -46,6 +48,8 @@ public class Renderer extends Canvas {
 
 	private String message;
 	private String messageImageName;
+	private int messageChars;
+	
 	private int fadeTime = 0;
 	private int fadeTimer = 0;
 	private Color fadeColorEnd;
@@ -79,7 +83,11 @@ public class Renderer extends Canvas {
 	
 	public Renderer(GameContext engine) {
 		game = engine;
+		
 		camera = new Vector2();
+		cameraTarget = new Vector2();
+		cameraSmoothing = 1;
+		
 		buffer = new BufferedImage(GravityApplet.WIDTH/SCALE_FACTOR, GravityApplet.HEIGHT/SCALE_FACTOR, BufferedImage.TYPE_INT_RGB);
 
 		back = null;
@@ -92,6 +100,8 @@ public class Renderer extends Canvas {
 		}
 		
 		message = null;
+		
+		setBackground(Color.black);
 	}
 	
 	public void render(GameState s) {
@@ -105,8 +115,17 @@ public class Renderer extends Canvas {
 		int mapHeight = s.map.getHeight();
 		int mapWidth = s.map.getWidth();
 		
+		if(s.cinematicMode){
+			cameraSmoothing = 0.2;
+		}else{
+			cameraSmoothing += (1 - cameraSmoothing) * 0.05;
+		}
+		camera = camera.add(cameraTarget.sub(camera).scale(cameraSmoothing));
+		
 		double cx = camera.x;
 		double cy = camera.y;
+		int cxm = (int) (cx * TILE_SIZE);
+		int cym = (int) (cy * TILE_SIZE);
 		
 		// Draw background
 		g.drawImage(back,
@@ -122,14 +141,14 @@ public class Renderer extends Canvas {
 
 		int tileSheetColumns = s.map.getImgwidth() / TILE_SIZE;
 		for (int y = yStart; y <= yEnd; y++) {
-		    int dy = (int) ((y - cy) * TILE_SIZE + halfBufHeight);
+		    int dy = (int) (y * TILE_SIZE) - cym + halfBufHeight;
 			for (int x = xStart; x <= xEnd; x++) {
 				Tile tile = s.map.getTile(x, y);
 				int tileIndex = tile.getTileIndex();
 				int frameX = (tileIndex % tileSheetColumns) * TILE_SIZE;
 			    int frameY = (tileIndex / tileSheetColumns) * TILE_SIZE;
 				
-			    int dx = (int) ((x - cx) * TILE_SIZE + halfBufWidth);
+			    int dx = (int) (x * TILE_SIZE) - cxm + halfBufWidth;
 		    	g.drawImage(tileset,
 			    	dx, dy, dx + TILE_SIZE, dy + TILE_SIZE,
 			    	frameX, frameY, frameX + TILE_SIZE, frameY + TILE_SIZE,
@@ -142,41 +161,32 @@ public class Renderer extends Canvas {
 		// sort by z-index
 		Arrays.sort(objects, ZCOMP);
 		for (GameObject o : objects) {
-			if (o.sprite != null) {
-				int dx = (int) ((o.position.x - cx) * TILE_SIZE
-						+ halfBufWidth - o.sprite.getWidth() / 2);
-				int dy = (int) ((o.position.y - cy) * TILE_SIZE
-						+ halfBufHeight - o.sprite.getHeight() / 2);
-				if(dx >= -o.sprite.getWidth()
-				&& dy >= -o.sprite.getHeight()
-				&& dx < bufferWidth
-				&& dy < bufferHeight){
-					o.sprite.draw(g, dx, dy);
-				}
-			}else{
-				g.fillRect((int) ((o.position.x - o.size.x / 2 - cx)
-						* TILE_SIZE + halfBufWidth), (int) ((o.position.y
-						- o.size.y / 2 - cy)
-						* TILE_SIZE + halfBufHeight),
-						(int) (o.size.x * TILE_SIZE),
-						(int) (o.size.y * TILE_SIZE));
+			int dx = (int) (o.position.x * TILE_SIZE + 0.5) - cxm
+					+ halfBufWidth - o.sprite.getWidth() / 2;
+			int dy = (int) (o.position.y * TILE_SIZE + 0.5) - cym
+					+ halfBufHeight - o.sprite.getHeight() / 2;
+			if(dx >= -o.sprite.getWidth()
+			&& dy >= -o.sprite.getHeight()
+			&& dx < bufferWidth
+			&& dy < bufferHeight){
+				o.sprite.draw(g, dx, dy);
 			}
 		}
 		
 		// Draw borders
 		g.setColor(BORDER_COLOR);
 		if(cx * TILE_SIZE - halfBufWidth < 0){
-			g.fillRect(0, 0, (int) (halfBufWidth - cx * TILE_SIZE), bufferHeight);
+			g.fillRect(0, 0, (int) (halfBufWidth - cx * TILE_SIZE + 1), bufferHeight);
 		}
 		if(cx * TILE_SIZE + halfBufWidth > s.map.getWidth() * TILE_SIZE){
-			int borderWidth = (int) (cx * TILE_SIZE + halfBufWidth - s.map.getWidth() * TILE_SIZE) + 1;
+			int borderWidth = (int) (cx * TILE_SIZE + halfBufWidth - s.map.getWidth() * TILE_SIZE + 1);
 			g.fillRect(bufferWidth - borderWidth, 0, borderWidth, bufferHeight);
 		}
 		if(cy * TILE_SIZE - halfBufHeight < 0){
-			g.fillRect(0, 0, bufferWidth, (int) (halfBufHeight - cy * TILE_SIZE));
+			g.fillRect(0, 0, bufferWidth, (int) (halfBufHeight - cy * TILE_SIZE + 1));
 		}
 		if(cy * TILE_SIZE + halfBufHeight > s.map.getHeight() * TILE_SIZE){
-			int borderHeight = (int) (cy* TILE_SIZE + halfBufHeight - s.map.getHeight() * TILE_SIZE) + 1;
+			int borderHeight = (int) (cy* TILE_SIZE + halfBufHeight - s.map.getHeight() * TILE_SIZE + 1);
 			g.fillRect(0, bufferHeight - borderHeight, bufferWidth, borderHeight);
 		}
 		
@@ -185,7 +195,9 @@ public class Renderer extends Canvas {
 		if(player != null){
 			g.setColor(Color.white);
 			g.setFont(font);
-			g.drawString("Gravs left: " + player.getGravsLeft(), 5, 20);
+			if(player.getGravsLeft() > 0){
+				g.drawString("Gravitites: " + player.getGravsLeft(), 5, 20);
+			}
 			
 			String mapName = GravityApplet.lm.maps.get(LevelMenu.lastMap)[0];
 			g.drawString(mapName, 380 - mapName.length()*7/2, 20);
@@ -228,19 +240,26 @@ public class Renderer extends Canvas {
 		
 		// Draw messages
 		if(message != null){
+			int n = message.length();
+			if(messageChars < n){
+				messageChars += 3;
+				if(messageChars > n){
+					messageChars = n;
+				}
+			}
 			int marginX = 15;
 			int marginY = 5;
 			g.setColor(Color.white);
 			g.setFont(font);
 			int w = drawStringWrapped(g,
-				message,
+				message.substring(0, messageChars),
 				marginX,
 				bufferHeight - cineStripHeight + font.getSize() + marginY,
 				bufferWidth - 2 * marginX,
 				cineStripHeight - 2 * marginY);
 			if(w >= 0){
 				// handle overflow (by scrolling)
-				System.out.println(message);
+				System.out.println("Warning! Message overflow:\n " + message.substring(w));
 			}
 			if(messageImageName != null && messageImage != null){
 				g.drawImage(messageImage, marginX, bufferHeight - cineStripHeight - messageImage.getHeight() + marginY/2, null);
@@ -302,7 +321,7 @@ public class Renderer extends Canvas {
 		int curY = y;
 
 		String[] words = s.split("\\s");
-
+		
 		int i;
 		for(i = 0; i < words.length; i++){
 			String word = words[i];
@@ -323,7 +342,7 @@ public class Renderer extends Canvas {
 			}
 
 			g.drawString(word, curX, curY);
-
+			
 			// Move over to the right for next word.
 			curX += wordWidth;
 		}
@@ -331,12 +350,12 @@ public class Renderer extends Canvas {
 		return i == words.length ? -1 : i;
 	}
 
-	public Vector2 getCamera() {
-		return camera;
+	public Vector2 getCameraTarget() {
+		return cameraTarget;
 	}
 
-	public void setCamera(Vector2 camera) {
-		this.camera = camera;
+	public void setCameraTarget(Vector2 camera) {
+		this.cameraTarget = camera;
 	}
 
 	public void showMessage(String message) {
@@ -370,6 +389,8 @@ public class Renderer extends Canvas {
 	}
 
 	public void showMessage(String image, String message) {
+		messageChars = 0;
+		
 		messageImageName = image;
 		this.message = message;
 		

@@ -4,10 +4,10 @@ import com.megahard.gravity.GameContext;
 import com.megahard.gravity.GameObject;
 import com.megahard.gravity.Sound;
 
-public class DeadlyObj extends GameObject {
+public class Plasma extends GameObject {
 
-	public DeadlyObj(GameContext game) {
-		super(game, "deadlyobj");
+	public Plasma(GameContext game) {
+		super(game, "plasma");
 		size.set(0.7, 0.7);
 		mass = 0.5;
 		fixed = true;
@@ -23,7 +23,7 @@ public class DeadlyObj extends GameObject {
 	@Override
 	public void onCollide(GameObject obj) {
 		if(obj.getClass().equals(Player.class)){
-			getGame().removeObject(obj);
+			obj.kill();
 		}
 	}
 	
@@ -32,8 +32,8 @@ public class DeadlyObj extends GameObject {
 		super.update();
 		
 		if(Math.random() < 0.02){
-			int n = 1 + (int) (Math.random() * 8);
-			getGame().playSoundAtLocation(Sound.spark, position, 0.5 + n/16.0);
+			int n = 1 + (int) (Math.random() * 4);
+			getGame().playSoundAtLocation(Sound.spark, position, 0.5 + n/8.0);
 			for(int i = n; i > 0; i--){
 				RedSpark s = new RedSpark(getGame());
 				s.position.set(position.x, position.y);

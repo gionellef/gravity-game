@@ -54,11 +54,6 @@ public class SGalileo extends Script {
 		));
 		msgQueue.add(new Msg(
 			"galileo",
-			"But no... It can't be...",
-			100
-		));
-		msgQueue.add(new Msg(
-			"galileo",
 			"Are you perhaps a descendant of the royal princess Gravis?",
 			150
 		));
@@ -146,7 +141,7 @@ public class SGalileo extends Script {
 			));
 		msgQueue.add(new Msg(
 				"galileo",
-				"The whole royal family of Gravitonia was massacred in order to unlock the secrets on how they could control gravity by using their bodies in experiments.",
+				"The whole royal family of Gravitonia was massacred by the Ytivargs in order to unlock the secrets on how they could control gravity by using their bodies in experiments.",
 				200
 			));
 		msgQueue.add(new Msg(
@@ -154,7 +149,7 @@ public class SGalileo extends Script {
 				"Our then king told me, in his dying breaths, to burn their bodies in order to protect the secrets. I managed to burn their bodies but I was captured in the process. So I am here now.",
 				200
 			));
-		
+/*	
 		msgQueue.add(new Msg(
 				"isaac",
 				"So they will kill me and use me in their experiments!?",
@@ -166,10 +161,11 @@ public class SGalileo extends Script {
 				"They will do worse than that.",
 				150
 			));
+*/
 		msgQueue.add(new Msg(
 				"galileo",
-				"You need to escape from here. You must go to the communications module. Send a message to Gravitonia. Our royal guards will come and help you.",
-				200
+				"You need to escape from here. You must go to the communications module in the eastern tower of this outpost. Send a message to Gravitonia. Our royal guards will come and help you.",
+				250
 			));
 /*
 		msgQueue.add(new Msg(
@@ -261,8 +257,11 @@ public class SGalileo extends Script {
 	@Override
 	public void onEnter(GameObject object) {
 		if(firstRun && object.getClass().equals(Player.class)){
-			player = (Player) object;
 			getGame().setCinematicMode(true);
+			
+			player = (Player) object;
+			player.velocity.x = 0;
+			
 			firstRun = false;
 			active = true;
 		}
