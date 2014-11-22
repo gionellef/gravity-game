@@ -287,10 +287,10 @@ public class Renderer extends Canvas {
     		{
 	        	bg.setColor(Color.green);
 	        	Vector2 mouse = game.getMouseGamePosition();
-			    int tx = (int) (mouse.y);
-			    int ty = (int) (mouse.x);
-				int dy = tx * TILE_SIZE - cym + halfBufHeight;
-				int dx = ty * TILE_SIZE - cxm + halfBufWidth;
+			    int tx = (int) (mouse.x);
+			    int ty = (int) (mouse.y);
+				int dx = tx * TILE_SIZE - cxm + halfBufWidth;
+				int dy = ty * TILE_SIZE - cym + halfBufHeight;
 			    int px = dx * SCALE_FACTOR;
 			    int py = dy * SCALE_FACTOR;
 	
