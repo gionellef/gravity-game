@@ -296,8 +296,8 @@ public class Renderer extends Canvas {
 	
 			    Tile tile = s.map.getTile(mouse.x, mouse.y);
 			    bg.drawRect(px, py, TILE_SIZE * SCALE_FACTOR, TILE_SIZE * SCALE_FACTOR);
-			    bg.drawString(Integer.toHexString(tile.getTileIndex()).toUpperCase(), px + 1, py + 10 + 1);
-			    bg.drawString(tx + "," + ty, px + 1, py + 20 + 1);
+			    bg.drawString(Integer.toHexString(tile.getTileIndex()).toUpperCase(), px + 2, py + 10 + 2);
+			    bg.drawString(tx + "," + ty, px + 2, py + 20 + 2);
     		}
 
         	bg.setColor(Color.red);
@@ -311,7 +311,7 @@ public class Renderer extends Canvas {
 					(int) (o.size.x * TILE_SIZE * SCALE_FACTOR),
 					(int) (o.size.y * TILE_SIZE * SCALE_FACTOR)
 				);
-				bg.drawString(o.getClass().getSimpleName(), x, y);
+				bg.drawString(o.getClass().getSimpleName(), x + 1, y - 1);
 			}
 
         	bg.setColor(Color.cyan);
@@ -323,7 +323,7 @@ public class Renderer extends Canvas {
 					(int)(c.getRegion().width * TILE_SIZE * SCALE_FACTOR),
 					(int)(c.getRegion().height * TILE_SIZE * SCALE_FACTOR)
 				);
-				bg.drawString(c.getClass().getSimpleName(), x, y);
+				bg.drawString(c.getClass().getSimpleName(), x + 1, y - 1);
 			}
 		}
 		
