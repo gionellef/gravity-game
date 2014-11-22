@@ -18,7 +18,7 @@ public class TitleScreen extends JPanel{
 
 	private static final long serialVersionUID = 1L;
 
-	public String name = "Gravity (The Game)";
+	public String name = "Gravity: The Awakening";
 	
 	public Container c;
 	private JFrame menuscreen;
