@@ -39,6 +39,8 @@ public class Renderer extends Canvas {
 	private GameContext game;
 
 	private Vector2 camera;
+	private Vector2 cameraTarget;
+	private double cameraSmoothing;
 	private BufferedImage buffer;
 
 	private BufferedImage back;
@@ -81,7 +83,11 @@ public class Renderer extends Canvas {
 	
 	public Renderer(GameContext engine) {
 		game = engine;
+		
 		camera = new Vector2();
+		cameraTarget = new Vector2();
+		cameraSmoothing = 1;
+		
 		buffer = new BufferedImage(GravityApplet.WIDTH/SCALE_FACTOR, GravityApplet.HEIGHT/SCALE_FACTOR, BufferedImage.TYPE_INT_RGB);
 
 		back = null;
@@ -108,6 +114,13 @@ public class Renderer extends Canvas {
 		
 		int mapHeight = s.map.getHeight();
 		int mapWidth = s.map.getWidth();
+		
+		if(s.cinematicMode){
+			cameraSmoothing = 0.2;
+		}else{
+			cameraSmoothing += (1 - cameraSmoothing) * 0.05;
+		}
+		camera = camera.add(cameraTarget.sub(camera).scale(cameraSmoothing));
 		
 		double cx = camera.x;
 		double cy = camera.y;
@@ -337,12 +350,12 @@ public class Renderer extends Canvas {
 		return i == words.length ? -1 : i;
 	}
 
-	public Vector2 getCamera() {
-		return camera;
+	public Vector2 getCameraTarget() {
+		return cameraTarget;
 	}
 
-	public void setCamera(Vector2 camera) {
-		this.camera = camera;
+	public void setCameraTarget(Vector2 camera) {
+		this.cameraTarget = camera;
 	}
 
 	public void showMessage(String message) {

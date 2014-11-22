@@ -108,7 +108,7 @@ public class TheAwakening extends Script {
 			
 			if(timer == 640){
 				// change sprite
-				player.setSprite("person");
+				player.setSprite("isaac");
 				
 				// fade screen back
 				getGame().fadeScreen(Color.white, null, 40);

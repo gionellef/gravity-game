@@ -88,7 +88,8 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 		
 		renderer = new Renderer(this);
 
-		mouseX = mouseY = -1;
+		mouseX = GravityApplet.WIDTH/2;
+		mouseY = GravityApplet.HEIGHT/2;
 		
 		messageExpiry = 0;
 		
@@ -281,16 +282,14 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 		updateScripts();
 
 		if(state.cinematicMode){
-			renderer.setCamera(renderer.getCamera().add(playerObject.position.sub(renderer.getCamera()).scale(0.1)));
-		}else if(mouseX > 0 && mouseY > 0){
-			renderer.getCamera().set(
+			renderer.getCameraTarget().set(playerObject.position);
+		}else{
+			renderer.getCameraTarget().set(
 				playerObject.position.x + ((double)(mouseX - renderer.getWidth() / 2)
 				/ Renderer.SCALE_FACTOR / Renderer.TILE_SIZE) * 0.5,
 				playerObject.position.y + ((double)(mouseY - renderer.getHeight() / 2)
 							/ Renderer.SCALE_FACTOR / Renderer.TILE_SIZE) * 0.5
 			);
-		}else{
-			renderer.setCamera(new Vector2(playerObject.position.x, playerObject.position.y));
 		}
 		
 		// dead player
@@ -590,10 +589,10 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 	public Vector2 getMouseGamePosition() {
 		return new Vector2((double) (mouseX - renderer.getWidth() / 2)
 				/ Renderer.SCALE_FACTOR / Renderer.TILE_SIZE
-				+ renderer.getCamera().x,
+				+ renderer.getCameraTarget().x,
 				(double) (mouseY - renderer.getHeight() / 2)
 						/ Renderer.SCALE_FACTOR / Renderer.TILE_SIZE
-						+ renderer.getCamera().y);
+						+ renderer.getCameraTarget().y);
 	}
 	/* (non-Javadoc)
 	 * @see com.megahard.gravity.GameContext#getMouseScreenX()
