@@ -21,6 +21,8 @@ public class GameObject {
 	public Sprite sprite;
 	public int zIndex;
 
+	public static final double GRAVITY = 0.05;
+
 	public GameObject(GameContext game, String spriteName) {
 		this.game = game;
 		
@@ -57,8 +59,7 @@ public class GameObject {
 		if(!fixed){
 			GameMap map = game.getMap();
 			
-			double gravity = 0.05;
-			velocity.y += gravity;
+			velocity.y += GRAVITY;
 	
 			// max velocity
 			if(velocity.length() > 1) {
@@ -178,7 +179,7 @@ public class GameObject {
 			left = position.x - size.x / 2;
 			right = position.x + size.x / 2 - E;
 	
-			double bottom = down + gravity + 2 * E;
+			double bottom = down + GRAVITY + 2 * E;
 			standing = map.getTile(left, bottom).getCollidable()
 					|| map.getTile(right, bottom).getCollidable(); 
 			

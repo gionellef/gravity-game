@@ -51,16 +51,20 @@ public class GravWell extends GameObject {
 		}
 
 		if(Math.random() < 0.4){
-			double a = Math.random() * Math.PI * 2;
-			double r = Math.random() * 2;
-			double x = position.x + Math.cos(a) * r;
-			double y = position.y + Math.sin(a) * r;
-			if(!getGame().getMap().getTile(x, y).getCollidable()){
-				VioletSpark s = new VioletSpark(getGame());
-				s.position.set(x, y);
-				s.velocity.set(Math.cos(a - Math.PI/3) * -r/3, Math.sin(a - Math.PI/3) * -r/3 - 0.2);
-				getGame().addObject(s);
-			}
+			spark();
+		}
+	}
+
+	private void spark() {
+		double a = Math.random() * Math.PI * 2;
+		double r = 1 + Math.random() * 2;
+		double x = position.x + Math.cos(a) * r;
+		double y = position.y + Math.sin(a) * r;
+		if(!getGame().getMap().getTile(x, y).getCollidable()){
+			VioletSpark s = new VioletSpark(getGame());
+			s.position.set(x, y);
+			s.velocity.set(Math.cos(a - Math.PI/3) * -r/3, Math.sin(a - Math.PI/3) * -r/3);
+			getGame().addObject(s);
 		}
 	}
 	
