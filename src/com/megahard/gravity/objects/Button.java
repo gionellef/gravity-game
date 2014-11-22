@@ -62,7 +62,7 @@ public class Button extends GameObject {
 	
 	public Button(GameContext game) {
 		super(game, "button");
-		size.set(2, 0.3);
+		size.set(1.6, 0.3);
 		mass = 30;
 		fixed = true;
 		
