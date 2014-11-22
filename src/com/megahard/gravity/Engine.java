@@ -88,8 +88,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 		
 		renderer = new Renderer(this);
 
-		mouseX = GravityApplet.WIDTH/2;
-		mouseY = GravityApplet.HEIGHT/2;
+		mouseX = mouseY = -1;
 		
 		messageExpiry = 0;
 		
@@ -303,14 +302,20 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 
 		// Set camera
 		if(state.cinematicMode){
+			renderer.setCameraSmoothing(0.2);
 			renderer.getCameraTarget().set(playerObject.position);
-		}else{
+		}else if(mouseX >= 0 && mouseY >= 0){
+			renderer.setCameraSmoothing(renderer.getCameraSmoothing()
+					+ (1 - renderer.getCameraSmoothing()) * 0.05);
 			renderer.getCameraTarget().set(
 				playerObject.position.x + ((double)(mouseX - renderer.getWidth() / 2)
 				/ Renderer.SCALE_FACTOR / Renderer.TILE_SIZE) * 0.5,
 				playerObject.position.y + ((double)(mouseY - renderer.getHeight() / 2)
 							/ Renderer.SCALE_FACTOR / Renderer.TILE_SIZE) * 0.5
 			);
+		}else{
+			renderer.setCameraSmoothing(0.5);
+			renderer.getCameraTarget().set(playerObject.position);
 		}
 		
 		// Messages
@@ -533,6 +538,9 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 	}
 	@Override
 	public void mousePressed(MouseEvent e) {
+		mouseX = e.getX();
+		mouseY = e.getY();
+		
 		MouseKeyEvent ke = new MouseKeyEvent();
 		ke.button = e.getButton();
 		ke.state = KeyState.PRESS;
@@ -540,6 +548,9 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 	}
 	@Override
 	public void mouseReleased(MouseEvent e) {
+		mouseX = e.getX();
+		mouseY = e.getY();
+		
 		MouseKeyEvent ke = new MouseKeyEvent();
 		ke.button = e.getButton();
 		ke.state = KeyState.RELEASE;

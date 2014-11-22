@@ -87,7 +87,7 @@ public class Renderer extends Canvas {
 	public Renderer(GameContext engine) {
 		game = engine;
 		
-		camera = new Vector2();
+		camera = new Vector2(Double.NaN,0);
 		cameraTarget = new Vector2();
 		cameraSmoothing = 1;
 
@@ -125,12 +125,11 @@ public class Renderer extends Canvas {
 		int mapHeight = s.map.getHeight();
 		int mapWidth = s.map.getWidth();
 
-		if(s.cinematicMode){
-			cameraSmoothing = 0.2;
+		if(Double.isNaN(camera.x)){
+			camera.set(cameraTarget);
 		}else{
-			cameraSmoothing += (1 - cameraSmoothing) * 0.05;
+			camera = camera.add(cameraTarget.sub(camera).scale(cameraSmoothing));
 		}
-		camera = camera.add(cameraTarget.sub(camera).scale(cameraSmoothing));
 		
 		double cx = camera.x;
 		double cy = camera.y;
@@ -435,6 +434,16 @@ public class Renderer extends Canvas {
 		if(messageImageName != null){
 			messageImage = SpriteStore.get().loadImage("/images/" + messageImageName + ".png", false);
 		}
+	}
+
+
+	public void setCameraSmoothing(double v) {
+		cameraSmoothing = v;
+	}
+
+
+	public double getCameraSmoothing() {
+		return cameraSmoothing;
 	}
 
 }
