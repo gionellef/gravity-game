@@ -90,12 +90,14 @@ public class SpriteStore {
 		VolatileImage vimage = volatileImages.get(imagePath);
 		
 		GraphicsConfiguration gc = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
-		if(vimage == null || vimage.validate(gc) != VolatileImage.IMAGE_OK) {
-			if(vimage == null){
-				System.out.println("New: " + imagePath);
-			}else{
-				System.out.println("Refresh: " + imagePath);
-			}
+		if(vimage == null){
+			vimage = createVolatileImage(imagePath);
+			volatileImages.put(imagePath, vimage);
+		}
+		int valid = vimage.validate(gc);
+		if(valid == VolatileImage.IMAGE_RESTORED) {
+			redrawVolatileImage(vimage, imagePath);
+		}else if(valid != VolatileImage.IMAGE_OK){
 			vimage = createVolatileImage(imagePath);
 			volatileImages.put(imagePath, vimage);
 		}
@@ -117,6 +119,13 @@ public class SpriteStore {
 					bimage.getHeight(), Transparency.BITMASK);
 		}
 
+		redrawVolatileImage(vimage, imagePath);
+		
+		return vimage;
+	}
+
+	private void redrawVolatileImage(VolatileImage vimage, String imagePath) {
+		BufferedImage bimage = images.get(imagePath);
 		do{
 			Graphics2D vg = vimage.createGraphics();
 			vg.setComposite(AlphaComposite.Src);
@@ -124,8 +133,6 @@ public class SpriteStore {
 			vg.drawImage(bimage,0,0,null);
 			vg.dispose();
 		}while(vimage.contentsLost());
-		
-		return vimage;
 	}
 	
 

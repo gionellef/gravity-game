@@ -111,6 +111,11 @@ public class Renderer extends Canvas {
 		if(backBuffer == null){
 			backBuffer = createVolatileImage(GravityApplet.WIDTH/SCALE_FACTOR, GravityApplet.HEIGHT/SCALE_FACTOR);
 		}
+
+		if(GravityApplet.USE_GPU){
+			background = SpriteStore.get().getVolatileImage(BACKGROUND_PATH);
+			tileset = SpriteStore.get().getVolatileImage(TILESET_PATH);
+		}
 		
 		int bufferWidth = backBuffer.getWidth();
 		int bufferHeight = backBuffer.getHeight();
