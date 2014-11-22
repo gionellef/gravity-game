@@ -23,7 +23,7 @@
  </tile>
  <tile id="4">
   <properties>
-   <property name="type" value="PowerItem"/>
+   <property name="type" value="Gravitite"/>
   </properties>
  </tile>
  <tile id="5">

@@ -131,7 +131,7 @@ public class Player extends GameObject {
 	@Override
 	public void onCollide(GameObject obj) {
 		Class<? extends GameObject> objClass = obj.getClass();
-		if(objClass.equals(PowerItem.class)){
+		if(objClass.equals(Gravitite.class)){
 			gravsLeft++;
 			getGame().removeObject(obj);
 			getGame().playSoundAtLocation(Sound.power, position, 1);

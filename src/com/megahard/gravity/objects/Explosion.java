@@ -9,9 +9,17 @@ public class Explosion extends GameObject {
 
 	private double radius = 1.5;
 	
+	private static final Class<?>[] DESTRUCTIBLES = {
+		Player.class,
+		Bomb.class,
+		Gravitite.class,
+	};
+	
 	public Explosion(GameContext game) {
 		super(game, "explosion");
 		fixed = true;
+		
+		zIndex = 1200;
 	}
 
 	public void setRadius(double value) {
@@ -22,10 +30,19 @@ public class Explosion extends GameObject {
 	public void onStartAction(String action) {
 		List<GameObject> objects = getGame().findObjects(position.x - radius, position.y - radius, radius * 2, radius * 2, false);
 		for(GameObject o : objects){
-			if(this == o) continue;
-			double distance = o.position.sub(position).length();
-			if(distance < radius){
-				o.kill();
+			boolean dest = false;
+			for(Class<?> type : DESTRUCTIBLES){
+				if(o.getClass().equals(type)){
+					dest = true;
+					break;
+				}
+			}
+			
+			if(dest){
+				double distance = o.position.sub(position).length();
+				if(distance < radius){
+					o.kill();
+				}
 			}
 		}
 	}

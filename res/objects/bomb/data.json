@@ -16,6 +16,20 @@
 			y: 1,
 			frames: 8,
 			delay: 1
-		}
+		},
+		{
+			name: "fast",
+			x: 0,
+			y: 2,
+			frames: 8,
+			delay: 1
+		},
+		{
+			name: "rotate-fast",
+			x: 0,
+			y: 3,
+			frames: 8,
+			delay: 1
+		},
 	]
 }

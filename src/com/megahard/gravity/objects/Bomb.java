@@ -11,13 +11,13 @@ public class Bomb extends GameObject {
 	
 	public Bomb(GameContext game) {
 		super(game, "bomb");
-		size.set(0.375, 0.375);
+		size.set(0.3, 0.3);
 		mass = 0.1;
 		restitution = 0.5;
 		friction = 0.5;
 		staticFriction = 0.1;
 		
-		zIndex = 500;
+		zIndex = 600;
 	}
 
 	@Override
@@ -28,20 +28,36 @@ public class Bomb extends GameObject {
 	public void update() {
 		super.update();
 		
-		if(rotate >= 1){
-			if(!sprite.getAction().equals("rotate")){
-				int f = sprite.getFrame();
-				sprite.setAction("rotate");
-				sprite.setFrame(f);
+		if (timeout > 48) {
+			if (rotate >= 1) {
+				if (!sprite.getAction().equals("rotate")) {
+					int f = sprite.getFrame();
+					sprite.setAction("rotate");
+					sprite.setFrame(f);
+				}
+			} else {
+				if (!sprite.getAction().equals("default")) {
+					int f = sprite.getFrame();
+					sprite.setAction("default");
+					sprite.setFrame(f);
+				}
 			}
 		}else{
-			if(!sprite.getAction().equals("default")){
-				int f = sprite.getFrame();
-				sprite.setAction("default");
-				sprite.setFrame(f);
+			if (rotate >= 1) {
+				if (!sprite.getAction().equals("fast-rotate")) {
+					int f = sprite.getFrame();
+					sprite.setAction("fast-rotate");
+					sprite.setFrame(f);
+				}
+			} else {
+				if (!sprite.getAction().equals("fast")) {
+					int f = sprite.getFrame();
+					sprite.setAction("fast");
+					sprite.setFrame(f);
+				}
 			}
 		}
-		
+
 		if(standing){
 			rotate *= 0.5;
 		}
