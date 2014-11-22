@@ -46,6 +46,7 @@ public class TitleScreen extends JPanel{
 		GridBagConstraints c = new GridBagConstraints();
 		
 		JLabel titleLabel = new JLabel(name, SwingConstants.CENTER);
+		titleLabel.setPreferredSize(new Dimension(800, 200));
 		titleLabel.setForeground(Color.white);
 		titleLabel.setFont(GravityApplet.fontTitle);
 		
