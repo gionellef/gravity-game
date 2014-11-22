@@ -284,30 +284,34 @@ public class Renderer extends Canvas {
 			Graphics bg = bs.getDrawGraphics();
     		bg.setFont(font);
     		
-        	bg.setColor(Color.green);
-        	
-        	Vector2 mouse = game.getMouseGamePosition();
-		    int tx = (int) (mouse.y);
-		    int ty = (int) (mouse.x);
-			int dy = tx * TILE_SIZE - cym + halfBufHeight;
-			int dx = ty * TILE_SIZE - cxm + halfBufWidth;
-
-		    Tile tile = s.map.getTile(mouse.x, mouse.y);
-		    int px = dx * SCALE_FACTOR;
-		    int py = dy * SCALE_FACTOR;
-		    bg.drawRect(px, py, TILE_SIZE * SCALE_FACTOR, TILE_SIZE * SCALE_FACTOR);
-		    bg.drawString(Integer.toHexString(tile.getTileIndex()).toUpperCase(), px + 1, py + 10 + 1);
-		    bg.drawString(tx + "," + ty, px + 1, py + 20 + 1);
+    		{
+	        	bg.setColor(Color.green);
+	        	Vector2 mouse = game.getMouseGamePosition();
+			    int tx = (int) (mouse.y);
+			    int ty = (int) (mouse.x);
+				int dy = tx * TILE_SIZE - cym + halfBufHeight;
+				int dx = ty * TILE_SIZE - cxm + halfBufWidth;
+			    int px = dx * SCALE_FACTOR;
+			    int py = dy * SCALE_FACTOR;
+	
+			    Tile tile = s.map.getTile(mouse.x, mouse.y);
+			    bg.drawRect(px, py, TILE_SIZE * SCALE_FACTOR, TILE_SIZE * SCALE_FACTOR);
+			    bg.drawString(Integer.toHexString(tile.getTileIndex()).toUpperCase(), px + 1, py + 10 + 1);
+			    bg.drawString(tx + "," + ty, px + 1, py + 20 + 1);
+    		}
 
         	bg.setColor(Color.red);
 			for (GameObject o : s.objects) {
+				int x = (int) (((o.position.x - o.size.x / 2) * TILE_SIZE + 0.5 - cxm + halfBufWidth)
+						* SCALE_FACTOR);
+				int y = (int) (((o.position.y - o.size.y / 2) * TILE_SIZE + 0.5 - cym + halfBufHeight)
+						* SCALE_FACTOR);
 				bg.drawRect(
-						(int) (((o.position.x - o.size.x / 2) * TILE_SIZE + 0.5 - cxm + halfBufWidth)
-								* SCALE_FACTOR),
-						(int) (((o.position.y - o.size.y / 2) * TILE_SIZE + 0.5 - cym + halfBufHeight)
-								* SCALE_FACTOR), (int) (o.size.x * TILE_SIZE
-								* SCALE_FACTOR), (int) (o.size.y * TILE_SIZE
-								* SCALE_FACTOR));
+					x, y,
+					(int) (o.size.x * TILE_SIZE * SCALE_FACTOR),
+					(int) (o.size.y * TILE_SIZE * SCALE_FACTOR)
+				);
+				bg.drawString(o.getClass().getSimpleName(), x, y);
 			}
 
         	bg.setColor(Color.cyan);
