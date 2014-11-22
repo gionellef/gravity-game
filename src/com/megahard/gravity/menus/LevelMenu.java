@@ -3,7 +3,6 @@ package com.megahard.gravity.menus;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.IOException;
@@ -12,7 +11,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.plaf.basic.BasicArrowButton;
 
 import com.megahard.gravity.CustomButton;
@@ -43,6 +45,7 @@ public class LevelMenu extends JPanel{
 		playButton.setPreferredSize(new Dimension(200,75));
 		playButton.setBounds(0,225,800,75);
 		playButton.addActionListener(app);
+		playButton.setFont(GravityApplet.font);
 		
 		left = new BasicArrowButton(BasicArrowButton.WEST, Color.gray,Color.black,Color.black,Color.black);
 		left.setPreferredSize(new Dimension(50,50));
@@ -56,9 +59,9 @@ public class LevelMenu extends JPanel{
 		
 		levelLabel = new JLabel (maps.get(lastMap)[0]);
 		levelLabel.setPreferredSize(new Dimension(200, 75));
-		levelLabel.setFont(new Font(levelLabel.getName(),10,17));
 		levelLabel.setBounds((200/2 - levelLabel.getText().length()*5/2) + 275, 150, 200, 75);
 		levelLabel.setForeground(new Color (240,240,240));
+		levelLabel.setFont(GravityApplet.font);
 		
 		
 		levelScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -85,7 +88,7 @@ public class LevelMenu extends JPanel{
 		}
 		g.drawImage(bg, 0, 0, this);
 		
-		g.setFont(new Font(name, 10,50));
+		g.setFont(GravityApplet.fontTitle);
 		g.setColor(new Color(240,240,240));
 		g.drawString(name, (800/2-(name.length()*23/2)), 100);
 	}

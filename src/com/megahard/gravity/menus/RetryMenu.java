@@ -34,11 +34,13 @@ public class RetryMenu extends JPanel{
 		menuButton.setPreferredSize(new Dimension(200,75));
 		menuButton.setBounds(0, 150, 800, 75);
 		menuButton.addActionListener(app);
+		menuButton.setFont(GravityApplet.font);
 		
 		retryButton = new CustomButton("Retry", Color.black);
 		retryButton.setPreferredSize(new Dimension(200,75));
 		retryButton.setBounds(0, 225, 800, 75);
 		retryButton.addActionListener(app);
+		retryButton.setFont(GravityApplet.font);
 		
 		retryScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		c = retryScreen.getContentPane();
@@ -63,7 +65,7 @@ public class RetryMenu extends JPanel{
 		}
 		g.drawImage(bg, 0, 0, this);
 		
-		g.setFont(new Font(name, 10,50));
+		g.setFont(GravityApplet.fontTitle);
 		g.setColor(new Color(240,240,240));
 		g.drawString(name, (800/2-(name.length()*23/2)), 100);
 	}

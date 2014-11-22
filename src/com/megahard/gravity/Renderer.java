@@ -87,7 +87,7 @@ public class Renderer extends Canvas {
 	public Renderer(GameContext engine) {
 		game = engine;
 		
-		camera = new Vector2(Double.NaN,0);
+		camera = null;
 		cameraTarget = new Vector2();
 		cameraSmoothing = 1;
 
@@ -125,8 +125,8 @@ public class Renderer extends Canvas {
 		int mapHeight = s.map.getHeight();
 		int mapWidth = s.map.getWidth();
 
-		if(Double.isNaN(camera.x)){
-			camera.set(cameraTarget);
+		if(camera == null){
+			camera = new Vector2(cameraTarget);
 		}else{
 			camera = camera.add(cameraTarget.sub(camera).scale(cameraSmoothing));
 		}

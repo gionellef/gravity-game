@@ -1,8 +1,12 @@
 package com.megahard.gravity;
 
 import java.awt.BorderLayout;
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.GraphicsEnvironment;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.Random;
 
 import javax.swing.JApplet;
@@ -31,13 +35,38 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 
 	private Thread watchThread;
 	private boolean watching = false;
+
+	public static Font font;
+	public static Font fontTitle;
+	static {
+		String fontPath = "/gravitate.ttf";
+		font = null;
+		try {
+			font = Font.createFont(Font.TRUETYPE_FONT, Renderer.class.getResourceAsStream(fontPath));
+
+	        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+
+	        ge.registerFont(font);
+			
+			font = font.deriveFont(30f);
+	        
+		} catch (FontFormatException | IOException e) {
+			e.printStackTrace();
+		}
+		
+		// ugly default
+		if(font == null) 
+			font = new Font(Font.SANS_SERIF, Font.PLAIN, 30);
+		
+		fontTitle = font.deriveFont(50f);
+	}
 	
 	private static final int FPS = 30;
 
 	public static final int WIDTH = 800;
 	public static final int HEIGHT = 600;
 	
-	public static boolean debug = true;
+	public static boolean debug = false;
 	
 	public static boolean useGPU = true;
 	

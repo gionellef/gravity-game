@@ -1,15 +1,22 @@
 package com.megahard.gravity.menus;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import com.megahard.gravity.CustomButton;
 import com.megahard.gravity.GravityApplet;
@@ -18,58 +25,77 @@ public class TitleScreen extends JPanel{
 
 	private static final long serialVersionUID = 1L;
 
-	public String name = "Gravity (The Game)";
+	public String name = "Gravity";
 	
 	public Container c;
-	private JFrame menuscreen;
+	private JPanel menuscreen;
 	
 	private CustomButton startButton;
 	private CustomButton exitButton;
-	
+
+	private Image background;
 	
 	public TitleScreen(GravityApplet app) {
-		menuscreen = new JFrame ("Gravity Menu");
+		setForeground(Color.white);
 		
-		startButton = new CustomButton("New Game", Color.black);
+		setLayout(new BorderLayout());
+		
+		JPanel innerPanel = new JPanel();
+		innerPanel.setOpaque(false);
+		innerPanel.setLayout(new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
+		
+		JLabel titleLabel = new JLabel(name, SwingConstants.CENTER);
+		titleLabel.setForeground(Color.white);
+		titleLabel.setFont(GravityApplet.fontTitle);
+		
+		startButton = new CustomButton("Play", Color.black);
 		startButton.setPreferredSize(new Dimension(200,75));
-		startButton.setBounds(0,150,800,75);
 		startButton.addActionListener(app);
+		startButton.setFont(GravityApplet.font);
 		
 		exitButton = new CustomButton("Quit", Color.black);
 		exitButton.setPreferredSize(new Dimension(200,75));
-		exitButton.setBounds(0, 225, 800, 75);
 		exitButton.addActionListener(app);
+		exitButton.setFont(GravityApplet.font);
 		
-		menuscreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		c = menuscreen.getContentPane();
+		c.gridx = 0;
+		c.gridy = 0;
+		c.weightx = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		innerPanel.add(titleLabel, c);
 		
-		this.setLayout(null);
-		this.add(startButton);
-		this.add(exitButton);
+		c.gridx = 0;
+		c.gridy = 1;
+		c.weightx = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		innerPanel.add(startButton, c);
 		
-		c.add(this);
+		c.gridx = 0;
+		c.gridy = 2;
+		c.weightx = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		innerPanel.add(exitButton, c);
+		
+		add(innerPanel);
 		
 		this.setPreferredSize(new Dimension(800,600));
-		menuscreen.pack();
-		
-	}
-	
-	public void paintComponent(Graphics g) {
-		
-		Image bg = null;
+
+		background = null;
 		try {
-			bg = ImageIO.read(getClass().getResource("/back.png"));
+			background = ImageIO.read(getClass().getResource("/back.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		g.drawImage(bg, 0, 0, this);
-		
-		g.setFont(new Font(name, 10,50));
-		g.setColor(new Color(240,240,240));
-		g.drawString(name, (800/2-(name.length()*23/2)), 100);
 	}
-
+	
+	@Override
+	protected void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		g.drawImage(background, 0, 0, this);
+	}
+	
 	public JButton getStartButton() {
 		return startButton;
 	}
