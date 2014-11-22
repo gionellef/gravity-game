@@ -44,7 +44,7 @@ public class Player extends GameObject {
 	private boolean alive = true;
 
 	public Player(GameContext game) {
-		super(game, "person");
+		super(game, "isaac");
 		size.set(0.95, 1.95);
 		mass = 50;
 		restitution = 0.05;

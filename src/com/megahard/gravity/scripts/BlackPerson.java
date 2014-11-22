@@ -17,7 +17,7 @@ public class BlackPerson extends Script {
 	public void onStart() {
 		Player player = getGame().getPlayerObject();
 		if(player != null)
-			player.setSprite("black-person");
+			player.setSprite("isaac-pre");
 	}
 
 	@Override
