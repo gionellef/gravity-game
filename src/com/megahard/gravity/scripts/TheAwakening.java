@@ -8,6 +8,7 @@ import java.util.List;
 import com.megahard.gravity.Engine;
 import com.megahard.gravity.GameObject;
 import com.megahard.gravity.Script;
+import com.megahard.gravity.objects.Box;
 import com.megahard.gravity.objects.GravWell;
 import com.megahard.gravity.objects.Player;
 import com.megahard.gravity.objects.VioletSpark;
@@ -51,7 +52,7 @@ public class TheAwakening extends Script {
 			if(timer > 240 && timer < 340){
 				double m = 0.1 * (1 - (double)(340 - timer)/(340-240));
 				player.velocity.y *= 0.9;
-				player.velocity.y += (((getRegion().y * 2 + getRegion().getHeight())/2 - player.position.y) - player.velocity.y) * m;
+				player.velocity.y += (((getRegion().y * 2 + getRegion().getHeight())/2 - 1 - player.position.y) - player.velocity.y) * m;
 				player.position.x += (getRegion().x - player.position.x) * m;
 				
 				castSparkOnPlayer(1);
@@ -76,26 +77,44 @@ public class TheAwakening extends Script {
 				getGame().fadeScreen(null, Color.white, 80);
 			}
 			
-			if(timer > 370 && timer < 640){
-				if(Math.random() < 0.05){
+			if(timer > 370 && timer < 670){
+				if(Math.random() < 0.06 && wells.size() < 6){
 					GravWell g = new GravWell(getGame());
-					g.power = 0.2;
-					g.position.set(player.position.x + Math.random()*16-8, player.position.y + Math.random()*8-4);
+					g.power = 0.3;
+					g.position.set(player.position);
 					getGame().addObject(g);
-					wells.add(g);
+					wells.add((int) (Math.random() * wells.size()), g);
 				}
-				if(Math.random() < wells.size() * 0.01){
-					wells.remove(0).kill();
+				
+				int i = 0;
+				double t = ((double)timer - 370) / (670 - 370);
+				double r = 3 + wells.size() * 0.3;
+				for(GravWell w : wells){
+					double a = Math.PI * 2 * (1 - (double)i / wells.size()) + t * 16;
+					w.position.x += (player.position.x + Math.cos(a) * r - w.position.x) * 0.1;
+					w.position.y += (player.position.y + Math.sin(a) * r - w.position.y) * 0.1;
+					i++;
+				}
+				
+				for(Box b : getGame().findObjects(Box.class)){
+					b.velocity.x *= 0.95;
+					b.velocity.y *= 0.95;
+					double d = b.position.sub(player.position).length();
+					if(d < 2){
+						double a = Math.atan2(b.position.y - player.position.y, b.position.x - player.position.x);
+						b.velocity.x += Math.cos(a);
+						b.velocity.y += Math.sin(a);
+					}
+					b.velocity.y -= GameObject.GRAVITY;
 				}
 
-				double m = 0.05;
+				double m = 0.1;
 				player.position.x += (getRegion().x - player.position.x) * m;
 				player.position.y += ((getRegion().y * 2 + getRegion().getHeight())/2 - player.position.y) * m;
-				player.velocity.x *= 0.98;
-				player.velocity.y *= 0.98;
+				player.velocity.x *= 0.9;
+				player.velocity.y *= 0.9;
 
 				castSparkOnPlayer(8);
-				castSparkOnPlayer(6);
 				castSparkOnPlayer(4);
 			}
 			
@@ -105,7 +124,16 @@ public class TheAwakening extends Script {
 				
 				// fade screen back
 				getGame().fadeScreen(Color.white, null, 40);
-
+				
+				// throw boxes away
+				for(Box b : getGame().findObjects(Box.class)){
+					double a = Math.atan2(b.position.y - player.position.y, b.position.x - player.position.y);
+					b.velocity.x += Math.cos(a) * 0.1;
+					b.velocity.y += Math.sin(a) * 0.1;
+				}
+			}
+			
+			if(timer == 670){
 				while(!wells.isEmpty()){
 					wells.remove(0).kill();
 				}

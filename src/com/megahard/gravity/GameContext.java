@@ -69,4 +69,6 @@ public interface GameContext {
 	public abstract <T> List<T> findObjects(Class<T> type, int x, int y, int w,
 			int h, boolean inclusive);
 
+	public abstract <T> List<T> findObjects(Class<T> type);
+
 }
