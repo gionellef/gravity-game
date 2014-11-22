@@ -7,7 +7,6 @@ import com.megahard.gravity.Sound;
 
 public class Button extends GameObject {
 
-	private double totalMass = 0;
 	private int pressCounter = 0;
 	private boolean pressed = false;
 	
@@ -198,15 +197,12 @@ public class Button extends GameObject {
 			if(pressed)
 				setPressed(false);
 		}
-		
-		totalMass = 0;
 	}
 	
 	@Override
 	public void onCollide(GameObject obj) {
 		if(!obj.fixed){
-			totalMass += obj.mass;
-			if(totalMass > 30){
+			if(obj.mass > 30){
 				pressCounter = 1;
 			}
 		}

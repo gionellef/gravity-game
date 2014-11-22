@@ -63,7 +63,7 @@ public class Bomb extends GameObject {
 			}
 		}else{
 			if(f == 0){
-				getGame().playSoundAtLocation(Sound.bomb_beep, position, 0.8);
+				getGame().playSoundAtLocation(Sound.bomb_beep, position, 0.9);
 			}	
 		}
 
@@ -89,6 +89,11 @@ public class Bomb extends GameObject {
 		
 		Explosion explosion = new Explosion(getGame());
 		explosion.position.set(position);
+		
+		if(standing){
+			explosion.position.y -= 0.5;
+		}
+		
 		getGame().addObject(explosion);
 	}
 	

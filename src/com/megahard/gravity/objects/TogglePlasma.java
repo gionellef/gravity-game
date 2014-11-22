@@ -25,8 +25,6 @@ public class TogglePlasma extends GameObject {
 		133 + 8,
 	};
 
-	private int n = 0;
-	
 	public TogglePlasma(GameContext game) {
 		super(game, "toggle-plasma");
 		size.set(0.7, 0.7);
@@ -45,9 +43,7 @@ public class TogglePlasma extends GameObject {
 		setOnline(o);
 		if(online && spark){
 			getGame().playSoundAtLocation(Sound.spark, position, 1);
-			for(int i=0; i<10; i++){
-				castSpark(1);
-			}
+			castSparks(10);
 		}
 	}
 
@@ -122,10 +118,10 @@ public class TogglePlasma extends GameObject {
 		double d = dx*dx + dy*dy;
 		
 		if(online){
-			if(Math.random() < 0.1 && n < 20){
-				n += 3;
-				getGame().playSoundAtLocation(Sound.spark, position, n/20.0);
-				castSpark(0.5);
+			if(Math.random() < 0.02){
+				int n = 1 + (int) (Math.random() * 6);
+				getGame().playSoundAtLocation(Sound.spark, position, 0.5 + n/12.0);
+				castSparks(n);
 			}
 
 			for(int index : SOURCE_OFF){
@@ -152,25 +148,23 @@ public class TogglePlasma extends GameObject {
 				}
 			}
 		}
-		
-		if(n > 0){
-			n--;
+	}
+
+	private void castSparks(int n) {
+		for(int i = n; i > 0; i--){
+			RedSpark s = new RedSpark(getGame());
+			s.position.set(position.x, position.y);
+			double a = Math.random() * Math.PI * 2;
+			double r = Math.random() * 0.5;
+			s.velocity.set(Math.cos(a) * r, Math.sin(a) * r - 0.2);
+			getGame().addObject(s);
 		}
 	}
 
-	private void castSpark(double range) {
-		RedSpark s = new RedSpark(getGame());
-		s.position.set(position.x, position.y);
-		double a = Math.random() * Math.PI * 2;
-		double r = Math.random() * range;
-		s.velocity.set(Math.cos(a) * r, Math.sin(a) * r - 0.2);
-		getGame().addObject(s);
-	}
-	
 	@Override
 	public void onStartAction(String action) {
 		if(online)
-			getGame().playSoundAtLocation(Sound.plasma, position, 0.8);
+			getGame().playSoundAtLocation(Sound.plasma, position, 1);
 	}
 
 }

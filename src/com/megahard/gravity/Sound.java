@@ -63,6 +63,7 @@ public class Sound {
 					float min = balanceControl.getMinimum();
 					balanceControl.setValue(Math.max(min, Math.min(pan, max)));
 				}catch(IllegalArgumentException e2){
+					System.out.println("Can't pan sound!");
 				}
 			}
 

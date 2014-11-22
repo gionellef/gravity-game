@@ -32,22 +32,26 @@ public class Plasma extends GameObject {
 		super.update();
 		
 		if(Math.random() < 0.02){
-			int n = 1 + (int) (Math.random() * 4);
-			getGame().playSoundAtLocation(Sound.spark, position, 0.5 + n/8.0);
-			for(int i = n; i > 0; i--){
-				RedSpark s = new RedSpark(getGame());
-				s.position.set(position.x, position.y);
-				double a = Math.random() * Math.PI * 2;
-				double r = Math.random() * 0.5;
-				s.velocity.set(Math.cos(a) * r, Math.sin(a) * r - 0.2);
-				getGame().addObject(s);
-			}
+			int n = 1 + (int) (Math.random() * 6);
+			getGame().playSoundAtLocation(Sound.spark, position, 0.5 + n/12.0);
+			castSparks(n);
+		}
+	}
+
+	private void castSparks(int n) {
+		for(int i = n; i > 0; i--){
+			RedSpark s = new RedSpark(getGame());
+			s.position.set(position.x, position.y);
+			double a = Math.random() * Math.PI * 2;
+			double r = Math.random() * 0.5;
+			s.velocity.set(Math.cos(a) * r, Math.sin(a) * r - 0.2);
+			getGame().addObject(s);
 		}
 	}
 	
 	@Override
 	public void onStartAction(String action) {
-		getGame().playSoundAtLocation(Sound.plasma, position, 0.8);
+		getGame().playSoundAtLocation(Sound.plasma, position, 1);
 	}
 
 }
