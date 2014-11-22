@@ -76,7 +76,7 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 		watching = true;
 		running = true;
 		long mspf = 1000/FPS;
-		long threshold = mspf * 4;
+		long threshold = mspf * 10;
 		long start;
 		long error = 0;
 		try {

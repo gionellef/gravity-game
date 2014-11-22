@@ -9,6 +9,7 @@ Test Bed,untitled
 8 : Escape,2_Escape
 9 : The Encounter,3_TheEncounter
 10 : Pit,Pit
+Bridge,Bridge
 Luck,luck
 Snake,snake
 Dots,dots

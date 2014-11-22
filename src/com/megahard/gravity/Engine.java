@@ -278,8 +278,8 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 		if(!isCinematicMode() || finished){
 			updateInputEvents();
 		}
-		updateObjects();
 		updateScripts();
+		updateObjects();
 
 		if(state.cinematicMode){
 			renderer.getCameraTarget().set(playerObject.position);

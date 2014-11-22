@@ -50,7 +50,7 @@ public class GravWell extends GameObject {
 			}
 		}
 
-		if(Math.random() < 0.4){
+		if(Math.random() < 0.2){
 			spark();
 		}
 	}
@@ -63,7 +63,7 @@ public class GravWell extends GameObject {
 		if(!getGame().getMap().getTile(x, y).getCollidable()){
 			VioletSpark s = new VioletSpark(getGame());
 			s.position.set(x, y);
-			s.velocity.set(Math.cos(a - Math.PI/3) * -r/3, Math.sin(a - Math.PI/3) * -r/3);
+			s.velocity.set(Math.cos(a - Math.PI/3) * -1/r, Math.sin(a - Math.PI/3) * -1/r);
 			getGame().addObject(s);
 		}
 	}

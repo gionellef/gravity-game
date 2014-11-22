@@ -8,7 +8,6 @@ import java.util.List;
 import com.megahard.gravity.Engine;
 import com.megahard.gravity.GameObject;
 import com.megahard.gravity.Script;
-import com.megahard.gravity.objects.Box;
 import com.megahard.gravity.objects.GravWell;
 import com.megahard.gravity.objects.Player;
 import com.megahard.gravity.objects.VioletSpark;
@@ -78,16 +77,10 @@ public class TheAwakening extends Script {
 			}
 			
 			if(timer > 370 && timer < 640){
-				if(Math.random() < 0.08){
+				if(Math.random() < 0.05){
 					GravWell g = new GravWell(getGame());
 					g.power = 0.2;
-					if(Math.random() < 0.2){
-						List<Box> boxes = getGame().findObjects(Box.class, 0, 0, getGame().getMap().getWidth(), getGame().getMap().getHeight(), true);
-						Box box = boxes.get((int)(Math.random() * boxes.size()));
-						g.position.set(box.position.x + Math.random() + 2-1, box.position.y - 2);
-					}else{
-						g.position.set(player.position.x + Math.random()*16-8, player.position.y + Math.random()*8-4);
-					}
+					g.position.set(player.position.x + Math.random()*16-8, player.position.y + Math.random()*8-4);
 					getGame().addObject(g);
 					wells.add(g);
 				}
