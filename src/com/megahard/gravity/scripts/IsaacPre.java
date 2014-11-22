@@ -7,9 +7,9 @@ import com.megahard.gravity.GameObject;
 import com.megahard.gravity.Script;
 import com.megahard.gravity.objects.Player;
 
-public class BlackPerson extends Script {
+public class IsaacPre extends Script {
 
-	public BlackPerson(Engine game, Double region) {
+	public IsaacPre(Engine game, Double region) {
 		super(game, region);
 	}
 
