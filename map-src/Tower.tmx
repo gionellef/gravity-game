@@ -1217,7 +1217,6 @@
   <object gid="508" x="88" y="756"/>
   <object gid="510" x="128" y="768"/>
   <object gid="505" x="120" y="776"/>
-  <object gid="505" x="144" y="776"/>
   <object gid="503" x="56" y="664"/>
   <object gid="503" x="56" y="600"/>
   <object gid="503" x="120" y="600"/>
@@ -1226,7 +1225,7 @@
   <object gid="503" x="64" y="440"/>
   <object gid="503" x="96" y="440"/>
   <object gid="503" x="128" y="440"/>
-  <object gid="510" x="180" y="420"/>
+  <object gid="510" x="-4" y="532"/>
   <object gid="505" x="72" y="312"/>
   <object gid="503" x="56" y="216"/>
   <object gid="503" x="120" y="216"/>
@@ -1234,5 +1233,8 @@
   <object gid="503" x="56" y="168"/>
   <object gid="503" x="88" y="56"/>
   <object gid="504" x="24" y="88"/>
+  <object gid="505" x="-8" y="536"/>
+  <object gid="505" x="-8" y="520"/>
+  <object gid="505" x="-8" y="504"/>
  </objectgroup>
 </map>
