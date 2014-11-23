@@ -63,6 +63,7 @@ public class Sound {
 					float min = balanceControl.getMinimum();
 					balanceControl.setValue(Math.max(min, Math.min(pan, max)));
 				}catch(IllegalArgumentException e2){
+					System.out.println("Can't pan sound!");
 				}
 			}
 
@@ -90,9 +91,11 @@ public class Sound {
 	private static List<Clips> allClipses = new LinkedList<>();
 
 	public static Clips airjump = load("airjump.wav", 2);
+	public static Clips bomb_beep = load("bomb-beep.wav", 4);
 	public static Clips button_press = load("button-press.wav", 2);
 	public static Clips button_release = load("button-release.wav", 2);
-	public static Clips gravwell = load("gravwell.wav", 2);
+	public static Clips explosion = load("explosion.wav", 8);
+	public static Clips gravwell = load("gravwell.wav", 8);
 	public static Clips gravwell_start = load("gravwell-start.wav", 4);
 	public static Clips jump1 = load("jump1.wav", 2);
 	public static Clips jump2 = load("jump2.wav", 2);

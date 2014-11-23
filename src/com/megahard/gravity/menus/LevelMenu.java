@@ -1,18 +1,26 @@
 package com.megahard.gravity.menus;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.prefs.BackingStoreException;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.plaf.basic.BasicArrowButton;
 
 import com.megahard.gravity.CustomButton;
@@ -25,7 +33,6 @@ public class LevelMenu extends JPanel{
 	private String name = "Level Select";
 	
 	public Container c;
-	private JFrame levelScreen;
 	private CustomButton playButton;
 	private BasicArrowButton left;
 	private BasicArrowButton right;
@@ -33,61 +40,104 @@ public class LevelMenu extends JPanel{
 	
 	public static int lastMap = 0;
 	public ArrayList<String[]> maps;
+
+	private Image background;
 	
 	public LevelMenu (GravityApplet app) {
-		levelScreen = new JFrame ("Select Level Menu");
 		
 		storeMaps();
+
 		
-		playButton = new CustomButton("PLAY", Color.black);
+		setForeground(Color.white);
+		
+		setLayout(new BorderLayout());
+		
+		JPanel innerPanel = new JPanel();
+		innerPanel.setOpaque(false);
+		innerPanel.setLayout(new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
+		
+		JLabel titleLabel = new JLabel(name, SwingConstants.CENTER);
+		titleLabel.setPreferredSize(new Dimension(800, 200));
+		titleLabel.setForeground(Color.white);
+		titleLabel.setFont(GravityApplet.fontTitle);
+		
+		playButton = new CustomButton("Play", Color.black);
 		playButton.setPreferredSize(new Dimension(200,75));
-		playButton.setBounds(0,225,800,75);
 		playButton.addActionListener(app);
-		
-		left = new BasicArrowButton(BasicArrowButton.WEST, Color.gray,Color.black,Color.black,Color.black);
+		playButton.setFont(GravityApplet.font);
+
+		left = new BasicArrowButton(BasicArrowButton.WEST, Color.black,Color.black,Color.white,Color.black);
 		left.setPreferredSize(new Dimension(50,50));
-		left.setBounds(275,150,50,50);
+		left.setBorderPainted(false);
+		left.setOpaque(false);
+		left.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		left.addActionListener(app);
 		
-		right = new BasicArrowButton(BasicArrowButton.EAST, Color.gray,Color.black,Color.black,Color.black);
+		right = new BasicArrowButton(BasicArrowButton.EAST, Color.black,Color.black,Color.white,Color.black);
 		right.setPreferredSize(new Dimension(50,50));
-		right.setBounds(475,150,50,50);
+		right.setBorderPainted(false);
+		right.setOpaque(false);
+		right.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		right.addActionListener(app);
 		
 		levelLabel = new JLabel (maps.get(lastMap)[0]);
 		levelLabel.setPreferredSize(new Dimension(200, 75));
-		levelLabel.setFont(new Font(levelLabel.getName(),10,17));
-		levelLabel.setBounds((200/2 - levelLabel.getText().length()*5/2) + 275, 150, 200, 75);
 		levelLabel.setForeground(new Color (240,240,240));
+		levelLabel.setFont(GravityApplet.font);
+
+
+		c.gridx = 0;
+		c.gridy = 0;
+		c.gridwidth = 3;
+		c.weightx = 1;
+		c.fill = GridBagConstraints.BOTH;
+		innerPanel.add(titleLabel, c);
+
+		c.gridx = 0;
+		c.gridy = 1;
+		c.gridwidth = 1;
+		c.weightx = 1;
+		c.fill = GridBagConstraints.BOTH;
+		innerPanel.add(left, c);
+
+		c.gridx = 1;
+		c.gridy = 1;
+		c.gridwidth = 1;
+		c.weightx = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		innerPanel.add(levelLabel, c);
 		
+		c.gridx = 2;
+		c.gridy = 1;
+		c.gridwidth = 1;
+		c.weightx = 1;
+		c.fill = GridBagConstraints.BOTH;
+		innerPanel.add(right, c);
 		
-		levelScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		c = levelScreen.getContentPane();
+		c.gridx = 0;
+		c.gridy = 2;
+		c.gridwidth = 3;
+		c.weightx = 1;
+		c.fill = GridBagConstraints.BOTH;
+		innerPanel.add(playButton, c);
 		
-		this.setLayout(null);
-		this.add(playButton);
-		this.add(left);
-		this.add(right);
-		this.add(levelLabel);
-		c.add(this);
+		add(innerPanel);
 		
 		this.setPreferredSize(new Dimension(800,600));
-		levelScreen.pack();	
-	}
 
-	public void paintComponent(Graphics g) {
-		Image bg = null;
+		background = null;
 		try {
-			bg = ImageIO.read(getClass().getResource("/back.png"));
+			background = ImageIO.read(getClass().getResource("/back.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		g.drawImage(bg, 0, 0, this);
 		
-		g.setFont(new Font(name, 10,50));
-		g.setColor(new Color(240,240,240));
-		g.drawString(name, (800/2-(name.length()*23/2)), 100);
+	}
+
+	public void paintComponent(Graphics g) {
+		g.drawImage(background, 0, 0, this);
 	}
 	
 	public void setLevelLabel(String newstring) {

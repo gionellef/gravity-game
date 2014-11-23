@@ -9,13 +9,13 @@
  </layer>
  <objectgroup name="Object Layer 1">
   <object gid="505" x="456" y="368"/>
-  <object gid="506" x="384" y="352.25"/>
-  <object gid="506" x="512" y="352.25"/>
-  <object gid="506" x="576.5" y="321"/>
-  <object gid="506" x="285.636" y="322.364"/>
+  <object gid="506" x="380.75" y="355.25"/>
+  <object gid="506" x="530.833" y="354.917"/>
+  <object gid="506" x="558.5" y="323"/>
+  <object gid="506" x="343.636" y="323.614"/>
   <object gid="501" x="216.5" y="281"/>
   <object gid="504" x="679.5" y="280"/>
   <object name="script_TheAwakening" x="483.955" y="151.212" width="26" height="208.5"/>
-  <object name="script_BlackPerson" x="337" y="176" width="79" height="72"/>
+  <object name="script_IsaacPre" x="337" y="176" width="79" height="72"/>
  </objectgroup>
 </map>

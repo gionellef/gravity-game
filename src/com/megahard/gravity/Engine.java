@@ -88,8 +88,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 		
 		renderer = new Renderer(this);
 
-		mouseX = GravityApplet.WIDTH/2;
-		mouseY = GravityApplet.HEIGHT/2;
+		mouseX = mouseY = -1;
 		
 		messageExpiry = 0;
 		
@@ -275,45 +274,59 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 	}
 
 	public void update() {
-		if(!isCinematicMode() || finished){
+		if(!finished){
 			updateInputEvents();
 		}
-		updateObjects();
-		updateScripts();
 
+		// Toggle debug rendering
+		if(keyIsJustReleased(KeyEvent.VK_F8)){
+			GravityApplet.debug = !GravityApplet.debug;
+		}
+		
+		// Give up
+		if(keyIsJustReleased(KeyEvent.VK_ESCAPE)){
+			finish(false,true);
+		}
+		
+		updateScripts();
+		
+		// No control in cinematic mode
+		if(isCinematicMode()){
+			clearInputs();
+		}
+		
+		updateObjects();
+		
+		// update key states
+		updateKeyStates();
+
+		// Set camera
 		if(state.cinematicMode){
+			renderer.setCameraSmoothing(0.2);
 			renderer.getCameraTarget().set(playerObject.position);
-		}else{
+		}else if(mouseX >= 0 && mouseY >= 0){
+			renderer.setCameraSmoothing(renderer.getCameraSmoothing()
+					+ (1 - renderer.getCameraSmoothing()) * 0.05);
 			renderer.getCameraTarget().set(
 				playerObject.position.x + ((double)(mouseX - renderer.getWidth() / 2)
 				/ Renderer.SCALE_FACTOR / Renderer.TILE_SIZE) * 0.5,
 				playerObject.position.y + ((double)(mouseY - renderer.getHeight() / 2)
 							/ Renderer.SCALE_FACTOR / Renderer.TILE_SIZE) * 0.5
 			);
+		}else{
+			renderer.setCameraSmoothing(0.5);
+			renderer.getCameraTarget().set(playerObject.position);
 		}
 		
-		// dead player
+		// Messages
+		if(messageExpiry > 0 && state.time > messageExpiry){
+			renderer.removeMessage();
+		}
+		
+		// Dead player
 		if(!playerObject.active){
 			// Game over
 			finish(false,false);
-		}
-		
-		// debug rendering
-		if(keyIsJustReleased(KeyEvent.VK_F8)){
-			renderer.debug = !renderer.debug;
-		}
-		
-		// give up
-		if(keyIsJustReleased(KeyEvent.VK_ESCAPE)){
-			finish(false,true);
-		}
-		
-		// update key states
-		updateKeyStates();
-
-		// messages
-		if(messageExpiry > 0 && state.time > messageExpiry){
-			renderer.removeMessage();
 		}
 		
 		if(finished){
@@ -525,6 +538,9 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 	}
 	@Override
 	public void mousePressed(MouseEvent e) {
+		mouseX = e.getX();
+		mouseY = e.getY();
+		
 		MouseKeyEvent ke = new MouseKeyEvent();
 		ke.button = e.getButton();
 		ke.state = KeyState.PRESS;
@@ -532,6 +548,9 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 	}
 	@Override
 	public void mouseReleased(MouseEvent e) {
+		mouseX = e.getX();
+		mouseY = e.getY();
+		
 		MouseKeyEvent ke = new MouseKeyEvent();
 		ke.button = e.getButton();
 		ke.state = KeyState.RELEASE;
@@ -734,6 +753,10 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 	@Override
 	public void setCinematicMode(boolean cinematicMode) {
 		state.cinematicMode = cinematicMode;
+		clearInputs();
+	}
+
+	private void clearInputs() {
 		keyStates.clear();
 		mouseStates.clear();
 		keyEvents.clear();
@@ -784,6 +807,18 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 		List<T> list = new LinkedList<T>();
 		for(GameObject o : objects){
 			if(o.getClass().equals(type)){
+				list.add((T) o);
+			}
+		}
+		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <T> List<T> findObjects(Class<T> type) {
+		List<T> list = new LinkedList<>();
+		for (GameObject o : state.objects) {
+			if (o.getClass().equals(type)) {
 				list.add((T) o);
 			}
 		}

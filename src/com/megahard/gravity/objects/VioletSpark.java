@@ -18,6 +18,7 @@ public class VioletSpark extends GameObject {
 	public void update() {
 		super.update();
 		velocity = velocity.scale(0.9);
+		velocity.y -= GameObject.GRAVITY;
 	}
 	
 	@Override

@@ -2,6 +2,7 @@ package com.megahard.gravity.objects;
 
 import com.megahard.gravity.GameContext;
 import com.megahard.gravity.GameObject;
+import com.megahard.gravity.Sound;
 
 public class Bomb extends GameObject {
 
@@ -27,17 +28,17 @@ public class Bomb extends GameObject {
 	@Override
 	public void update() {
 		super.update();
+
+		int f = sprite.getFrame();
 		
 		if (timeout > 48) {
 			if (rotate >= 1) {
 				if (!sprite.getAction().equals("rotate")) {
-					int f = sprite.getFrame();
 					sprite.setAction("rotate");
 					sprite.setFrame(f);
 				}
 			} else {
 				if (!sprite.getAction().equals("default")) {
-					int f = sprite.getFrame();
 					sprite.setAction("default");
 					sprite.setFrame(f);
 				}
@@ -45,17 +46,25 @@ public class Bomb extends GameObject {
 		}else{
 			if (rotate >= 1) {
 				if (!sprite.getAction().equals("rotate-fast")) {
-					int f = sprite.getFrame();
 					sprite.setAction("rotate-fast");
 					sprite.setFrame(f);
 				}
 			} else {
 				if (!sprite.getAction().equals("fast")) {
-					int f = sprite.getFrame();
 					sprite.setAction("fast");
 					sprite.setFrame(f);
 				}
 			}
+		}
+
+		if(sprite.getAction().endsWith("fast")){
+			if(f == 0 || f == 4){
+				getGame().playSoundAtLocation(Sound.bomb_beep, position, 1);
+			}
+		}else{
+			if(f == 0){
+				getGame().playSoundAtLocation(Sound.bomb_beep, position, 0.9);
+			}	
 		}
 
 		if(standing){
@@ -70,11 +79,21 @@ public class Bomb extends GameObject {
 		}
 	}
 	
+	@Override
+	public void kill() {
+		detonate();
+	}
+	
 	public void detonate(){
 		getGame().removeObject(this);
 		
 		Explosion explosion = new Explosion(getGame());
 		explosion.position.set(position);
+		
+		if(standing){
+			explosion.position.y -= 0.5;
+		}
+		
 		getGame().addObject(explosion);
 	}
 	

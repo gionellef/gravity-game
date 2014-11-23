@@ -43,8 +43,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":384,
-                 "y":352.25
+                 "x":380.75,
+                 "y":355.25
                 }, 
                 {
                  "gid":506,
@@ -58,8 +58,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":512,
-                 "y":352.25
+                 "x":530.833,
+                 "y":354.917
                 }, 
                 {
                  "gid":506,
@@ -73,8 +73,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":576.5,
-                 "y":321
+                 "x":558.5,
+                 "y":323
                 }, 
                 {
                  "gid":506,
@@ -88,8 +88,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":285.636,
-                 "y":322.364
+                 "x":343.636,
+                 "y":323.614
                 }, 
                 {
                  "gid":501,
@@ -137,7 +137,7 @@
                 }, 
                 {
                  "height":72,
-                 "name":"script_BlackPerson",
+                 "name":"script_IsaacPre",
                  "properties":
                     {
 

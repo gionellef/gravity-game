@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.megahard.gravity.GameContext;
 import com.megahard.gravity.GameObject;
+import com.megahard.gravity.Sound;
 
 public class Explosion extends GameObject {
 
@@ -28,6 +29,8 @@ public class Explosion extends GameObject {
 
 	@Override
 	public void onStartAction(String action) {
+		getGame().playSoundAtLocation(Sound.explosion, position, 1);
+		
 		List<GameObject> objects = getGame().findObjects(position.x - radius, position.y - radius, radius * 2, radius * 2, false);
 		for(GameObject o : objects){
 			boolean dest = false;
