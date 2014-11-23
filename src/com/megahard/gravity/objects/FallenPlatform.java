@@ -7,7 +7,7 @@ public class FallenPlatform extends GameObject {
 
 	public FallenPlatform(GameContext game) {
 		super(game, "fallen-platform");
-		size.set(0.9375, 0.9375);
+		size.set(1.875, 1.875);
 		mass = 400;
 		restitution = 0;
 		friction = 0.1;
