@@ -197,6 +197,10 @@ public class GameObject {
 		getGame().removeObject(this);
 	}
 	
+	public void applyImpulse(Vector2 force){
+		velocity = velocity.add(force.scale(1/mass));
+	}
+	
 	protected GameContext getGame(){
 		return game;
 	}

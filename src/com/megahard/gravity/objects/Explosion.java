@@ -7,6 +7,7 @@ import com.megahard.gravity.GameMap;
 import com.megahard.gravity.GameMap.Tile;
 import com.megahard.gravity.GameObject;
 import com.megahard.gravity.Sound;
+import com.megahard.gravity.Vector2;
 
 public class Explosion extends GameObject {
 	
@@ -68,14 +69,18 @@ public class Explosion extends GameObject {
 			for(Class<?> type : DESTRUCTIBLE_OBJECTS){
 				if(o.getClass().equals(type)){
 					dest = true;
-					break;
 				}
 			}
-			
-			if(dest){
-				double distance = o.position.sub(position).length();
-				if(distance < radius){
+
+			double strength = radius * 0.3;
+			Vector2 delta = o.position.sub(position);
+			Vector2 pushForce = delta.scale(strength);
+			double distance = delta.length();
+			if(distance < radius){
+				if(dest){
 					o.kill();
+				}else{
+					o.applyImpulse(pushForce);
 				}
 			}
 		}
