@@ -32,7 +32,6 @@ public class MusicPlayer implements Runnable{
 	
 	public void play(String fileName){
 	    this.fileName = fileName;
-	    System.out.println(fileName);
     }
 
 	@Override
@@ -40,13 +39,14 @@ public class MusicPlayer implements Runnable{
 		playing = true;
         try {
         	while (playing) {
-        		int num = new Random().nextInt(mFiles.size());
-        		fileName = mFiles.get(num)[1];
         		DataInputStream dis = new DataInputStream(
         				Sound.class.getResourceAsStream("/music/" + fileName));
         		pl = new AdvancedPlayer(dis);
     			pl.getPlayBackListener();
     			pl.play();
+
+        		int num = new Random().nextInt(mFiles.size());
+        		fileName = mFiles.get(num)[1];
         	}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
