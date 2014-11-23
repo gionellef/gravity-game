@@ -203,7 +203,7 @@ public class Button extends GameObject {
 	public void onCollide(GameObject obj) {
 		if(!obj.fixed){
 			if(obj.mass > 30){
-				pressCounter = 1;
+				pressCounter = 2;
 			}
 		}
 	}
