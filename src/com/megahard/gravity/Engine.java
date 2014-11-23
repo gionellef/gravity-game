@@ -170,8 +170,22 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 	@Override
 	public void playSoundAtLocation(Clips sound, Vector2 position, double volume){
 		double distance = playerObject.position.sub(position).length();
-		float v  =(float) ((volume * 34) / (34 + distance));
-		float p = (float) (1 - Math.atan2(1.5, position.x - playerObject.position.x)*2/Math.PI);
+		float v = (float) ((volume * 34) / (34 + distance));
+		
+		Vector2 cam = renderer.getCamera();
+		if(cam != null){
+			double halfWidth = (double)renderer.getWidth() / 2 / Renderer.TILE_SIZE / Renderer.SCALE_FACTOR;
+			double halfHeight = (double)renderer.getHeight() / 2 / Renderer.TILE_SIZE / Renderer.SCALE_FACTOR;
+			double leftEdge = cam.x - halfWidth;
+			double rightEdge = cam.x + halfWidth;
+			double topEdge = cam.y - halfHeight;
+			double bottomEdge = cam.y + halfHeight; 
+			if(position.x < leftEdge || position.y < topEdge || position.x >= rightEdge || position.y > bottomEdge){
+				v *= 0.6;
+			}
+		}
+		
+		float p = (float) (1 - Math.atan2(3, position.x - playerObject.position.x)*2/Math.PI);
 		sound.play(v, p);
 	}
 
@@ -608,10 +622,10 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 	public Vector2 getMouseGamePosition() {
 		return new Vector2((double) (mouseX - renderer.getWidth() / 2)
 				/ Renderer.SCALE_FACTOR / Renderer.TILE_SIZE
-				+ renderer.getCameraTarget().x,
+				+ renderer.getCamera().x,
 				(double) (mouseY - renderer.getHeight() / 2)
 						/ Renderer.SCALE_FACTOR / Renderer.TILE_SIZE
-						+ renderer.getCameraTarget().y);
+						+ renderer.getCamera().y);
 	}
 	/* (non-Javadoc)
 	 * @see com.megahard.gravity.GameContext#getMouseScreenX()
