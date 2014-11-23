@@ -4,6 +4,7 @@ import java.awt.geom.Rectangle2D;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public abstract class Script {
 	
@@ -11,11 +12,17 @@ public abstract class Script {
 	
 	private Rectangle2D.Double region;
 	public List<GameObject> overlaps; // ENGINE-INTERNAL USE ONLY. Kung gusto mong malinis, gawa ka ng interface
+	private Map<String, String> properties;
 
-	public Script(Engine game, Rectangle2D.Double region) {
+	public Script(Engine game, Rectangle2D.Double region, Map<String, String> properties) {
 		this.game = game;
 		this.region = region;
+		this.properties = properties;
 		overlaps = new LinkedList<>();
+	}
+
+	public Script(Engine game, Rectangle2D.Double region) {
+		this(game, region, Collections.<String, String> emptyMap());
 	}
 	
 	public abstract void onStart();
@@ -31,5 +38,12 @@ public abstract class Script {
 	}
 	protected List<GameObject> getObjects(){
 		return Collections.unmodifiableList(overlaps);
+	}
+	protected String getProperty(String property){
+		return properties.get(property);
+	}
+
+	protected Vector2 getCenter() {
+		return new Vector2((region.x * 2 + region.width) / 2, (region.y * 2 + region.height) / 2);
 	}
 }

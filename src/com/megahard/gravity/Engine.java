@@ -228,7 +228,11 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 			Class<Script> subclass = (Class<Script>) Class
 					.forName("com.megahard.gravity.scripts." + type);
 			Constructor<Script> constructor = null;
-			constructor = subclass.getConstructor(Engine.class, Rectangle2D.Double.class);
+			try{
+				constructor = subclass.getConstructor(Engine.class, Rectangle2D.Double.class, Map.class);
+			} catch (NoSuchMethodException | SecurityException e1) {
+				constructor = subclass.getConstructor(Engine.class, Rectangle2D.Double.class);
+			}
 			
 			Rectangle2D.Double region =
 				new Rectangle2D.Double(
@@ -236,7 +240,13 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 					object.getY() / Renderer.TILE_SIZE,
 					object.getWidth() / Renderer.TILE_SIZE,
 					object.getHeight() / Renderer.TILE_SIZE);
-			Script s = constructor.newInstance(this, region);
+			
+			Script s = null;
+			if(constructor.getParameterCount() == 3){
+				s = constructor.newInstance(this, region, object.getProperties());
+			}else{
+				s = constructor.newInstance(this, region);
+			}
 			
 			addScript(s);
 

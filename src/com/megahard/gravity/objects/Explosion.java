@@ -21,15 +21,15 @@ public class Explosion extends GameObject {
 	
 	// {original tile, destroyed top, destroyed bottom, destroyed left, destroyed right}
 	private static final int[][] PARTIALLY_DESTRUCTIBLE_TILES= {
-		{000,	000,	190,	000,	163},
-		{001,	001,	191,	169,	168},
-		{002,	002,	192,	164,	002},
-		{025,	220,	195,	025,	188},
-		{026,	221,	196,	194,	193},
-		{027,	222,	197,	189,	027},
-		{050,	215,	050,	050,	213},
-		{051,	216,	051,	219,	218},
-		{052,	217,	214,	052,	052},
+		{  0,	  0,	190,	  0,	163},
+		{  1,	  1,	191,	169,	168},
+		{  2,	  2,	192,	164,	  2},
+		{ 25,	220,	195,	 25,	188},
+		{ 26,	221,	196,	194,	193},
+		{ 27,	222,	197,	189,	 27},
+		{ 50,	215,	 50,	 50,	213},
+		{ 51,	216,	 51,	219,	218},
+		{ 52,	217,	214,	 52,	 52},
 	};
 	
 	private static final Class<?>[] DESTRUCTIBLE_OBJECTS = {
@@ -89,6 +89,10 @@ public class Explosion extends GameObject {
 				
 				if(isTileDestructible(ty, tx)){
 					destroy[x][y] = true;
+					partiallyDestroyTile(tx, ty+1, 1);
+					partiallyDestroyTile(tx, ty-1, 2);
+					partiallyDestroyTile(tx+1, ty, 3);
+					partiallyDestroyTile(tx-1, ty, 4);
 				}
 			}
 		}
@@ -100,10 +104,6 @@ public class Explosion extends GameObject {
 				
 				if(destroy[x][y]){
 					destroyTile(tx, ty);
-					partiallyDestroyTile(tx, ty+1, 1);
-					partiallyDestroyTile(tx, ty-1, 2);
-					partiallyDestroyTile(tx+1, ty, 3);
-					partiallyDestroyTile(tx-1, ty, 4);
 				}
 			}
 		}
