@@ -14,6 +14,8 @@ import com.megahard.gravity.objects.Player;
 
 public class Bridge extends Script {
 	
+	private boolean started = false;
+	private double progress;
 	private Queue<Integer> fallQueue;
 
 	public Bridge(Engine game, Double region) {
@@ -29,29 +31,30 @@ public class Bridge extends Script {
 	@Override
 	public void onUpdate() {
 		int y = (int) (getRegion().y + 0.5);
-		
-		GameMap map = getGame().getMap();
-		for(GameObject o : getObjects()){
-			if(o.getClass().equals(Player.class)){
-				int x = (int)(o.position.x) / 2 * 2;
-				if(x < getRegion().x){
-					x += 2;
-				}
-				if(!fallQueue.contains(x)){
-					fallQueue.add(x);
+
+		if(!started){
+			for(GameObject o : getObjects()){
+				if(o.getClass().equals(Player.class)){
+					started = true;
+					progress = getRegion().x - 1;
+					fallQueue.add((int)(getRegion().x + 2)/2*2);
 				}
 			}
+		}else{
+			progress += 0.12;
+			fallQueue.add((int)(progress)/2*2);
 		}
 		
-		if(fallQueue.size() > 1){
+		if(fallQueue.size() > 0){
 			int x = fallQueue.remove();
 			for(int i = (int)(getRegion().x)/2*2; i <= x; i += 2){
-				fellPlatform(map, i, y);
+				fellPlatform(i, y);
 			}
 		}
 	}
 
-	private void fellPlatform(GameMap map, int x, int y) {
+	private void fellPlatform(int x, int y) {
+		GameMap map = getGame().getMap();
 		Tile tile = map.getTile(x, y);
 		if(tile.getTileIndex() == 0xA0){
 			FallenPlatform fp = new FallenPlatform(getGame());
