@@ -22,7 +22,7 @@ public class GravWell extends GameObject {
 	
 	public void init(){
 		sprite.setAction("create");
-		getGame().playSoundAtLocation(Sound.gravwell_start, position, 1);
+		getGame().playSoundAtLocation(Sound.gravwell_start, position, 0.8);
 	}
 
 	@Override
@@ -31,9 +31,7 @@ public class GravWell extends GameObject {
 		
 		time++;
 		
-		if(online){
-			getGame().playSoundAtLocation(Sound.gravwell, position, 1);
-			
+		if(online || (sprite.getAction().equals("create") && sprite.getFrame() == 0)){
 			double radius = 12;
 			for(GameObject o : getGame().findObjects(position.x - radius, position.y - radius, 2*radius, 2*radius, true)){
 				Vector2 diff = position.sub(o.position);
@@ -66,6 +64,11 @@ public class GravWell extends GameObject {
 			s.velocity.set(Math.cos(a - Math.PI/3) * -1/r, Math.sin(a - Math.PI/3) * -1/r);
 			getGame().addObject(s);
 		}
+	}
+	
+	@Override
+	public void onStartAction(String action) {
+		getGame().playSoundAtLocation(Sound.gravwell, position, 0.5);
 	}
 	
 	@Override

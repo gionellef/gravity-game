@@ -94,6 +94,8 @@ public class Sound {
 	public static Clips bomb_beep = load("bomb-beep.wav", 4);
 	public static Clips button_press = load("button-press.wav", 2);
 	public static Clips button_release = load("button-release.wav", 2);
+	public static Clips door_close = load("door-close.wav", 2);
+	public static Clips door_open = load("door-open.wav", 2);
 	public static Clips explosion = load("explosion.wav", 8);
 	public static Clips gravwell = load("gravwell.wav", 8);
 	public static Clips gravwell_start = load("gravwell-start.wav", 4);

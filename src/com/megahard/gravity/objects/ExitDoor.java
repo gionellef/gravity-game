@@ -2,6 +2,7 @@ package com.megahard.gravity.objects;
 
 import com.megahard.gravity.GameContext;
 import com.megahard.gravity.GameObject;
+import com.megahard.gravity.Sound;
 
 public class ExitDoor extends GameObject {
 
@@ -31,6 +32,7 @@ public class ExitDoor extends GameObject {
 				timer = 100;
 				if(sprite.getAction().equals("default")){
 					sprite.setAction("opening");
+					getGame().playSoundAtLocation(Sound.door_open, position, 1);
 				}else if(d < 1 && sprite.getAction().equals("open")){
 					if(player.standing && player.velocity.length() < 0.01){
 						getGame().finish(true,false);
@@ -42,6 +44,7 @@ public class ExitDoor extends GameObject {
 				}else{
 					if(sprite.getAction().equals("open")){
 						sprite.setAction("closing");
+						getGame().playSoundAtLocation(Sound.door_close, position, 0.8);
 					}
 				}
 			}

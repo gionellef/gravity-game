@@ -446,4 +446,9 @@ public class Renderer extends Canvas {
 		return cameraSmoothing;
 	}
 
+
+	public Vector2 getCamera() {
+		return camera;
+	}
+
 }

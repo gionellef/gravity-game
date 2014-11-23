@@ -120,7 +120,7 @@ public class TogglePlasma extends GameObject {
 		if(online){
 			if(Math.random() < 0.02){
 				int n = 1 + (int) (Math.random() * 6);
-				getGame().playSoundAtLocation(Sound.spark, position, 0.5 + n/12.0);
+				getGame().playSoundAtLocation(Sound.spark, position, 0.3 + n/12.0);
 				castSparks(n);
 			}
 
@@ -164,7 +164,7 @@ public class TogglePlasma extends GameObject {
 	@Override
 	public void onStartAction(String action) {
 		if(online)
-			getGame().playSoundAtLocation(Sound.plasma, position, 1);
+			getGame().playSoundAtLocation(Sound.plasma, position, 0.4);
 	}
 
 }

@@ -79,7 +79,7 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 		rm = new RetryMenu(this);
 		ts = new TitleScreen(this);
 		showTitleScreen();
-		
+
 		setSize(WIDTH, HEIGHT);
 		setLayout(new BorderLayout());
 		
@@ -195,10 +195,24 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 	}
 	
 	private void startMusic() {
-		music.play(MusicPlayer.mFiles.get(new Random().nextInt(
+		startMusic(MusicPlayer.mFiles.get(new Random().nextInt(
 				MusicPlayer.mFiles.size()))[1]);
+	}
+	private void startMusic(String fileName){
+		stopMusic();
+		music.play(fileName);
 		musThread = new Thread(music);
 		musThread.start();
+	}
+	
+	private void stopMusic(){
+		music.stop();
+		try {
+			musThread.join();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -246,7 +260,6 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 			remove (rm);
 			validate();
 			repaint();
-			music.stop();
 		}
 		
 		if (a.equals(rm.getRetryButton())) {
@@ -260,6 +273,8 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 		add(ts);
 		validate();
 		repaint();
+		
+		startMusic("Grave.mp3");
 	}
 
 	private void showLevelMenu() {
