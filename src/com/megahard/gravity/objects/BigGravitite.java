@@ -21,4 +21,29 @@ public class BigGravitite extends GameObject {
 			velocity = velocity.add(position.sub(obj.position).normalize().scale(0.01f));
 		}
 	}
+	
+	@Override
+	public void kill() {
+		super.kill();
+		
+		for(int i=0; i<3; i++){
+			Gravitite g = new Gravitite(getGame());
+			g.position.set(position);
+			g.velocity.set(Math.random() * 0.2-0.1, Math.random() * 0.2-0.1);
+			getGame().addObject(g);
+		}
+		
+		castSparks(15, 0.2);
+	}
+
+	private void castSparks(int n, double r) {
+		for(int i=0; i<n; i++){
+			VioletSpark s = new VioletSpark(getGame());
+			s.position.set(position);
+			s.velocity.set(r * (Math.random() * 2 - 1), r * (Math.random() * 2 - 1));
+			getGame().addObject(s);
+		}
+	}
+	
+	
 }

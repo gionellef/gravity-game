@@ -32,7 +32,7 @@ public class Explosion extends GameObject {
 		
 		{ 50,	215,	 50,	 50,	213},
 		{ 51,	216,	 51,	219,	218},
-		{ 52,	217,	214,	 52,	 52},
+		{ 52,	217,	 52,	214,	 52},
 		
 		{ 75,	221,	196,	194,	193},
 		{ 76,	221,	196,	194,	193},
@@ -44,6 +44,7 @@ public class Explosion extends GameObject {
 		Player.class,
 		Bomb.class,
 		Gravitite.class,
+		BigGravitite.class,
 	};
 
 	private double radius = 1.7;
@@ -72,10 +73,10 @@ public class Explosion extends GameObject {
 				}
 			}
 
-			double strength = radius * 0.3;
+			double strength = radius * 8;
 			Vector2 delta = o.position.sub(position);
-			Vector2 pushForce = delta.scale(strength);
 			double distance = delta.length();
+			Vector2 pushForce = delta.normalize().scale(strength/(distance + 1));
 			if(distance < radius){
 				if(dest){
 					o.kill();
