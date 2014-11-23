@@ -21,3 +21,4 @@ Skyfall,skyfall
 Lean's challenge,lean
 Companion Cube,CompanionCube
 Demolition,Demolition
+Tower,Tower
