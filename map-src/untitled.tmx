@@ -26,5 +26,6 @@
   <object gid="506" x="711.5" y="480"/>
   <object name="script_InfiniteGravitites" x="210" y="294" width="51" height="50"/>
   <object name="script_TestBomber" x="392.333" y="168.667" width="18.3333" height="18"/>
+  <object gid="510" x="184" y="456"/>
  </objectgroup>
 </map>
