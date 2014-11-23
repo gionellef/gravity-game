@@ -135,6 +135,10 @@ public class Player extends GameObject {
 			gravsLeft++;
 			getGame().removeObject(obj);
 			getGame().playSoundAtLocation(Sound.power, position, 1);
+		}else if(objClass.equals(BigGravitite.class)){
+			gravsLeft += 5;
+			getGame().removeObject(obj);
+			getGame().playSoundAtLocation(Sound.power, position, 1);
 		}
 	}
 	

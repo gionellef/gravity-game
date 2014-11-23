@@ -46,4 +46,9 @@
    <property name="type" value="Galileo"/>
   </properties>
  </tile>
+ <tile id="9">
+  <properties>
+   <property name="type" value="BigGravitite"/>
+  </properties>
+ </tile>
 </tileset>
