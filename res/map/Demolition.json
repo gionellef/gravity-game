@@ -276,7 +276,7 @@
                  "name":"script_BombSpawn",
                  "properties":
                     {
-                     "delay":"0",
+                     "delay":"50",
                      "interval":"250"
                     },
                  "rotation":0,
@@ -291,7 +291,7 @@
                  "name":"script_BombSpawn",
                  "properties":
                     {
-                     "delay":"26",
+                     "delay":"326",
                      "interval":"250"
                     },
                  "rotation":0,
@@ -306,7 +306,7 @@
                  "name":"script_BombSpawn",
                  "properties":
                     {
-                     "delay":"52",
+                     "delay":"602",
                      "interval":"250"
                     },
                  "rotation":0,
