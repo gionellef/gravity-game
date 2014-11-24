@@ -63,7 +63,7 @@ public class GameObject {
 	
 			// max velocity
 			if(velocity.length() > 1) {
-				velocity = velocity.scale(1/velocity.length());
+				velocity = velocity.times(1/velocity.length());
 			}
 	
 			// Get object bounds
@@ -195,6 +195,10 @@ public class GameObject {
 
 	public void kill() {
 		getGame().removeObject(this);
+	}
+	
+	public void applyImpulse(Vector2 force){
+		velocity = velocity.plus(force.times(1/mass));
 	}
 	
 	protected GameContext getGame(){

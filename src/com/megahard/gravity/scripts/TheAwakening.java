@@ -99,7 +99,7 @@ public class TheAwakening extends Script {
 				for(Box b : getGame().findObjects(Box.class)){
 					b.velocity.x *= 0.95;
 					b.velocity.y *= 0.95;
-					double d = b.position.sub(player.position).length();
+					double d = b.position.minus(player.position).length();
 					if(d < 2){
 						double a = Math.atan2(b.position.y - player.position.y, b.position.x - player.position.x);
 						b.velocity.x += Math.cos(a);

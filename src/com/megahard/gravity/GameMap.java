@@ -158,7 +158,7 @@ public class GameMap {
 			private String name;
 			private double x;
 			private double y;
-//			private Properties properties;
+			private Map<String, String> properties;
 //			
 //			public class Properties {
 //
@@ -190,9 +190,9 @@ public class GameMap {
 			public int getGID() {
 				return gid;
 			}
-//			public Properties getProperties() {
-//				return properties;
-//			}
+			public Map<String, String> getProperties() {
+				return properties;
+			}
 
 
 		}

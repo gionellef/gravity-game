@@ -9,12 +9,17 @@ Test Bed,untitled
 8 : Escape,2_Escape
 9 : The Encounter,3_TheEncounter
 10 : Pit,Pit
-Bridge,Bridge
+11 : Bridge,Bridge
+12 : Insequirus,Insequirus
+13 : Dots,dots
+14 : Snake,snake
+15 : Boom Room,BoomRoom
 Luck,luck
-Snake,snake
-Dots,dots
 Hell,hell
 Fly,fly
 Skyfall,skyfall
 Lean's challenge,lean
 Companion Cube,CompanionCube
+Demolition,Demolition
+Tower,Tower
+Popcorn,popcorn

@@ -128,7 +128,7 @@ public class Renderer extends Canvas {
 		if(camera == null){
 			camera = new Vector2(cameraTarget);
 		}else{
-			camera = camera.add(cameraTarget.sub(camera).scale(cameraSmoothing));
+			camera = camera.plus(cameraTarget.minus(camera).times(cameraSmoothing));
 		}
 		
 		double cx = camera.x;

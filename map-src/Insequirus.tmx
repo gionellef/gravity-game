@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" source="main.tsx"/>
+ <tileset firstgid="501" source="objects.tsx"/>
+ <layer name="Tile Layer 1" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztmMmPTEEcx6tMHBmJLZkZDA4mEmZkjGVOtJAhxlieJcZhhmhcTGI5WY8chdjCgftgHLnb/hXLkatvyau86p/au/r1E530J11dr7bPq1/Ve129jLHe/4z9YHNCxivgZKMPLOXNMw3GQE8FnMrwlc6qr0/slB0Pwnc5/5upSOce5r6X00o/ZceDyTcW6ivyxsEBMEHS7fK9hn5v8OIbHzbPQlde57pST6bF+O+Au4pvHZwD50laXBv2iPmU+6QY0wP0+5AX32LM/WCNhoN5nVmUewVe88a0Ov4Rj/kdApsi0mOWuHL5zirjpmOm92/UsQaku/R3ze9esA9kgellTfjSMav3k7bn8r0JbuXc5u75PQ3ORKQHm/Q9Co6Rex7j+wg8znniMb/csVf4Ug/0vQhmEvi+AXM5bw1l/pRDG3OsGs8jNX5CfeVeLfdrU7nPaONLRXx1MSbjRfieTRSDIXHYSl/bPb/AimfTTMljtbEC417J0/tWlS0Y91ZP3xfgJfu3fX0Rvu/Ae8U31TteK4n9X2Xba+WakL9/ouwvS3ldnZiyuvznidaczVeuiQVgIegGi/JrH8BH8MlQR80LKWvKT+0rn/9qm9JzXc6A57y1gtS+8vmv8xTsaKNrSt+Yd4cuEgc8UVlbferru6emOC+ia952r0PK2upTX/rbBO3vOFgfyEYwqDCUqCzlhIdv5vhO8S5R1vzWPOdXrBG6bkz9xZy3j5C2bWsppCxdd8JX7i+2faDOzPsQ/T8Scj751HH9mSbvHvl9P2Dd1cg45/MCcX2CFWdqobFpey+S13x8aTsmX11/ap6IgyWecbLYESc6X9O7jnrNx5e2Y/LV9UfzNiiOYr2uAv1gNW9cvz8sMUrXry6evyLvG/hOrpUZzzrfbWA7GE3suxPUwC6S327fQ+AwOOLwzZS0j+9JMAlOaXwzQ7uZw1eW9fXFh+0x7LmU3Zr9O8T3MrgCrrZxfun+bMN2hkh9U569paQe6Ov7/K0SA6zxffKSZz31DFGwtgIuHTp0SMtvTBdc3g==
+  </data>
+ </layer>
+ <objectgroup name="Object Layer 1">
+  <object gid="506" x="656" y="432"/>
+  <object gid="505" x="216" y="408"/>
+  <object gid="505" x="376" y="376"/>
+  <object gid="505" x="360" y="376"/>
+  <object gid="507" x="552" y="568"/>
+  <object gid="507" x="840" y="568"/>
+  <object gid="501" x="88" y="556"/>
+  <object gid="508" x="708" y="472"/>
+  <object gid="508" x="684" y="472"/>
+  <object gid="506" x="864" y="432"/>
+  <object gid="505" x="840" y="520"/>
+  <object gid="508" x="744" y="424"/>
+  <object gid="505" x="840" y="432"/>
+  <object gid="505" x="824" y="432"/>
+  <object gid="505" x="832" y="416"/>
+  <object gid="505" x="80" y="232"/>
+  <object gid="505" x="96" y="232"/>
+  <object gid="505" x="88" y="224"/>
+  <object gid="505" x="112" y="232"/>
+  <object gid="505" x="120" y="224"/>
+  <object gid="505" x="128" y="232"/>
+  <object gid="508" x="240" y="224"/>
+  <object gid="508" x="264" y="200"/>
+  <object gid="508" x="288" y="176"/>
+  <object gid="507" x="88" y="120"/>
+  <object gid="506" x="128" y="192"/>
+  <object gid="504" x="760" y="168"/>
+  <object gid="505" x="368" y="368"/>
+  <object gid="505" x="440" y="376"/>
+  <object gid="510" x="832" y="424"/>
+  <object gid="510" x="104" y="216"/>
+  <object gid="505" x="872" y="520"/>
+ </objectgroup>
+</map>
