@@ -15,7 +15,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import com.megahard.gravity.CustomButton;
 import com.megahard.gravity.GravityApplet;
 
 public class RetryMenu extends JPanel{

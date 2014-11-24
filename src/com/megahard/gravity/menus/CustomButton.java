@@ -1,4 +1,4 @@
-package com.megahard.gravity;
+package com.megahard.gravity.menus;
 
 import java.awt.Color;
 import java.awt.event.MouseEvent;
@@ -10,7 +10,7 @@ import javax.swing.JButton;
 public class CustomButton extends JButton implements MouseListener { 
 	 
 	private static final long serialVersionUID = 1L;
-	private static final Color DEFAULT_COLOR = new Color(1, 1, 1, 0.5f);
+	private static final Color DEFAULT_COLOR = new Color(1, 1, 1, 0.4f);
 	 
 	public CustomButton(String text){
 		this(text, DEFAULT_COLOR);

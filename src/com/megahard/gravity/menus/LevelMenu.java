@@ -3,7 +3,6 @@ package com.megahard.gravity.menus;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
-import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
@@ -21,7 +20,6 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.plaf.basic.BasicArrowButton;
 
-import com.megahard.gravity.CustomButton;
 import com.megahard.gravity.GravityApplet;
 
 public class LevelMenu extends JPanel{
@@ -59,18 +57,12 @@ public class LevelMenu extends JPanel{
 		playButton.setPreferredSize(new Dimension(200,75));
 		playButton.addActionListener(app);
 
-		left = new BasicArrowButton(BasicArrowButton.WEST, Color.black,Color.black,Color.white,Color.black);
+		left = new CustomArrowButton(CustomArrowButton.WEST);
 		left.setPreferredSize(new Dimension(50,50));
-		left.setBorderPainted(false);
-		left.setOpaque(false);
-		left.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		left.addActionListener(app);
 		
-		right = new BasicArrowButton(BasicArrowButton.EAST, Color.black,Color.black,Color.white,Color.black);
+		right = new CustomArrowButton(CustomArrowButton.EAST);
 		right.setPreferredSize(new Dimension(50,50));
-		right.setBorderPainted(false);
-		right.setOpaque(false);
-		right.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		right.addActionListener(app);
 		
 		levelLabel = new JLabel (maps.get(lastMap)[0], SwingConstants.CENTER);
