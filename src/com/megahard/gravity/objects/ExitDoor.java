@@ -27,7 +27,7 @@ public class ExitDoor extends GameObject {
 		
 		Player player = getGame().getPlayerObject();
 		if(player != null){
-			double d = player.position.sub(position).length();
+			double d = player.position.minus(position).length();
 			if(d < 7){
 				timer = 100;
 				if(sprite.getAction().equals("default")){

@@ -17,7 +17,7 @@ public class RedSpark extends GameObject {
 	@Override
 	public void update() {
 		super.update();
-		velocity = velocity.scale(0.8);
+		velocity = velocity.times(0.8);
 	}
 	
 	@Override

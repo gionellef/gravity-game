@@ -28,15 +28,15 @@ public class Vector2 {
 		return Math.sqrt(x * x + y * y);
 	}
 
-	public Vector2 add(Vector2 v1) {
+	public Vector2 plus(Vector2 v1) {
 		return new Vector2(this.x + v1.x, this.y + v1.y);
 	}
 
-	public Vector2 sub(Vector2 v) {
+	public Vector2 minus(Vector2 v) {
 		return new Vector2(x - v.x, y - v.y);
 	}
 
-	public Vector2 scale(double scaleFactor) {
+	public Vector2 times(double scaleFactor) {
 		return new Vector2(this.x * scaleFactor, this.y * scaleFactor);
 	}
 
@@ -44,14 +44,25 @@ public class Vector2 {
 		return this.x * v1.x + this.y * v1.y;
 	}
 
+	public Vector2 normalized() {
+		return times(1/length());
+	}
+	
+	public double angle(){
+		return Math.atan2(y, x);
+	}
+	
+	public double distance(Vector2 other){
+		return displacement(other).length();
+	}
+	
+	public Vector2 displacement(Vector2 other){
+		return other.minus(this);
+	}
+
 	public void set(double x, double y) {
 		this.x = x;
 		this.y = y;
-
-	}
-
-	public Vector2 normalize() {
-		return scale(1/length());
 	}
 
 	public void set(Vector2 value) {
@@ -60,6 +71,25 @@ public class Vector2 {
 		y = value.y; 
 	}
 
+	public void add(double x, double y) {
+		this.x += x;
+		this.y += y;
+	}
+
+	public void subtract(double x, double y) {
+		this.x -= x;
+		this.y -= y;
+	}
+
+	public void scale(double scaleFactor) {
+		this.x *= scaleFactor;
+		this.y *= scaleFactor;
+	}
+
+	public void normalize() {
+		scale(1/length());
+	}
+	
 	@Override
 	public String toString() {
 		return "Vector2(" + x + "," + y + ")";

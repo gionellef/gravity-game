@@ -169,7 +169,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 	 */
 	@Override
 	public void playSoundAtLocation(Clips sound, Vector2 position, double volume){
-		double distance = playerObject.position.sub(position).length();
+		double distance = playerObject.position.minus(position).length();
 		float v = (float) ((volume * 34) / (34 + distance));
 		
 		Vector2 cam = renderer.getCamera();

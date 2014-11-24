@@ -18,7 +18,7 @@ public class BigGravitite extends GameObject {
 	@Override
 	public void onCollide(GameObject obj) {
 		if(obj.getClass().equals(getClass())){
-			velocity = velocity.add(position.sub(obj.position).normalize().scale(0.01f));
+			velocity = velocity.plus(position.minus(obj.position).normalized().times(0.01f));
 		}
 	}
 	
@@ -29,7 +29,8 @@ public class BigGravitite extends GameObject {
 		for(int i=0; i<3; i++){
 			Gravitite g = new Gravitite(getGame());
 			g.position.set(position);
-			g.velocity.set(Math.random() * 0.2-0.1, Math.random() * 0.2-0.1);
+			g.velocity.set(velocity);
+			g.velocity.add(Math.random() * 0.2-0.1, Math.random() * 0.2-0.1);
 			getGame().addObject(g);
 		}
 		

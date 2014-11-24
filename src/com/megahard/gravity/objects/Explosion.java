@@ -73,14 +73,13 @@ public class Explosion extends GameObject {
 			}
 
 			double strength = radius * 8;
-			Vector2 delta = o.position.sub(position);
+			Vector2 delta = o.position.minus(position);
 			double distance = delta.length();
-			Vector2 pushForce = delta.normalize().scale(strength/(distance + 1));
+			Vector2 pushForce = delta.normalized().times(strength/(distance + 1));
 			if(distance < radius){
+				o.applyImpulse(pushForce);
 				if(dest){
 					o.kill();
-				}else{
-					o.applyImpulse(pushForce);
 				}
 			}
 		}
