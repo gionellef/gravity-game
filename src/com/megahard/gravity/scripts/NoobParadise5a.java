@@ -2,9 +2,9 @@ package com.megahard.gravity.scripts;
 
 import java.awt.geom.Rectangle2D.Double;
 
-import com.megahard.gravity.Engine;
-import com.megahard.gravity.GameObject;
-import com.megahard.gravity.Script;
+import com.megahard.gravity.engine.Engine;
+import com.megahard.gravity.engine.base.GameObject;
+import com.megahard.gravity.engine.base.Script;
 import com.megahard.gravity.objects.Player;
 
 public class NoobParadise5a extends Script {

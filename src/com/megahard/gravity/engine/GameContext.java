@@ -1,10 +1,12 @@
-package com.megahard.gravity;
+package com.megahard.gravity.engine;
 
 import java.awt.Color;
 import java.util.List;
 
-import com.megahard.gravity.Sound.Clips;
+import com.megahard.gravity.engine.base.GameObject;
 import com.megahard.gravity.objects.Player;
+import com.megahard.gravity.util.Sound.Clips;
+import com.megahard.gravity.util.Vector2;
 
 public interface GameContext {
 

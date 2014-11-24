@@ -16,9 +16,13 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.plaf.synth.SynthLookAndFeel;
 
+import com.megahard.gravity.engine.Engine;
+import com.megahard.gravity.engine.EngineFinishListener;
 import com.megahard.gravity.menus.LevelMenu;
 import com.megahard.gravity.menus.RetryMenu;
 import com.megahard.gravity.menus.TitleScreen;
+import com.megahard.gravity.util.MusicPlayer;
+import com.megahard.gravity.util.Sound;
 
 public class GravityApplet extends JApplet implements Runnable, ActionListener, EngineFinishListener {
 
@@ -54,7 +58,7 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 
 		String fontPath = "/gravitate.ttf";
 		try {
-			Font font = Font.createFont(Font.TRUETYPE_FONT, Renderer.class.getResourceAsStream(fontPath));
+			Font font = Font.createFont(Font.TRUETYPE_FONT, com.megahard.gravity.engine.Renderer.class.getResourceAsStream(fontPath));
 	        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 	        ge.registerFont(font);
 		} catch (FontFormatException | IOException e) {

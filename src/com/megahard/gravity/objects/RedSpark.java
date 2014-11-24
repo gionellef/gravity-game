@@ -1,7 +1,7 @@
 package com.megahard.gravity.objects;
 
-import com.megahard.gravity.GameContext;
-import com.megahard.gravity.GameObject;
+import com.megahard.gravity.engine.GameContext;
+import com.megahard.gravity.engine.base.GameObject;
 
 public class RedSpark extends GameObject {
 

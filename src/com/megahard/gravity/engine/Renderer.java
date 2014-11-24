@@ -1,4 +1,4 @@
-package com.megahard.gravity;
+package com.megahard.gravity.engine;
 
 import java.awt.Canvas;
 import java.awt.Color;
@@ -15,9 +15,13 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Comparator;
 
-import com.megahard.gravity.GameMap.Tile;
+import com.megahard.gravity.GravityApplet;
+import com.megahard.gravity.engine.GameMap.Tile;
+import com.megahard.gravity.engine.base.GameObject;
+import com.megahard.gravity.engine.base.Script;
 import com.megahard.gravity.menus.LevelMenu;
 import com.megahard.gravity.objects.Player;
+import com.megahard.gravity.util.Vector2;
 
 public class Renderer extends Canvas {
 

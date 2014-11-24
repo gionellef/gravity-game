@@ -1,7 +1,9 @@
-package com.megahard.gravity;
+package com.megahard.gravity.engine;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import com.megahard.gravity.util.Vector2;
 
 public class GameMap {
 

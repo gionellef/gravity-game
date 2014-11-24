@@ -4,12 +4,12 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.Random;
 
-import com.megahard.gravity.GameContext;
-import com.megahard.gravity.GameMap;
-import com.megahard.gravity.GameObject;
-import com.megahard.gravity.Sound;
-import com.megahard.gravity.Sound.Clips;
-import com.megahard.gravity.Vector2;
+import com.megahard.gravity.engine.GameContext;
+import com.megahard.gravity.engine.GameMap;
+import com.megahard.gravity.engine.base.GameObject;
+import com.megahard.gravity.util.Sound;
+import com.megahard.gravity.util.Vector2;
+import com.megahard.gravity.util.Sound.Clips;
 
 public class Player extends GameObject {
 	private static final Clips[] STEP_SOUNDS = new Clips[]{

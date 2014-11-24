@@ -1,4 +1,4 @@
-package com.megahard.gravity;
+package com.megahard.gravity.engine;
 
 import java.awt.AWTException;
 import java.awt.AlphaComposite;
@@ -17,7 +17,8 @@ import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 
-import com.megahard.gravity.Sprite.SpriteData;
+import com.megahard.gravity.engine.Sprite.SpriteData;
+import com.megahard.gravity.util.J;
 
 /*
  * Singleton
@@ -44,7 +45,7 @@ public class SpriteStore {
 		// Create new sprite
 		String imagePath = getImagePath(name);
 		Image image = loadImage(imagePath, false);
-		SpriteData data = loadData(name);
+		com.megahard.gravity.engine.Sprite.SpriteData data = loadData(name);
 		Sprite sprite = new Sprite(imagePath, image, data);
 		
 		return sprite;

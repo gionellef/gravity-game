@@ -2,12 +2,12 @@ package com.megahard.gravity.objects;
 
 import java.util.List;
 
-import com.megahard.gravity.GameContext;
-import com.megahard.gravity.GameMap;
-import com.megahard.gravity.GameMap.Tile;
-import com.megahard.gravity.GameObject;
-import com.megahard.gravity.Sound;
-import com.megahard.gravity.Vector2;
+import com.megahard.gravity.engine.GameContext;
+import com.megahard.gravity.engine.GameMap;
+import com.megahard.gravity.engine.GameMap.Tile;
+import com.megahard.gravity.engine.base.GameObject;
+import com.megahard.gravity.util.Sound;
+import com.megahard.gravity.util.Vector2;
 
 public class Explosion extends GameObject {
 	

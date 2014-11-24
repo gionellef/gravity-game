@@ -1,8 +1,11 @@
-package com.megahard.gravity;
+package com.megahard.gravity.engine;
 
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
+
+import com.megahard.gravity.GravityApplet;
+import com.megahard.gravity.engine.base.GameObject;
 
 public class Sprite {
 	

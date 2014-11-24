@@ -1,10 +1,14 @@
-package com.megahard.gravity;
+package com.megahard.gravity.engine.base;
 
 import java.awt.geom.Rectangle2D;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+
+import com.megahard.gravity.engine.Engine;
+import com.megahard.gravity.engine.GameContext;
+import com.megahard.gravity.util.Vector2;
 
 public abstract class Script {
 	
@@ -33,7 +37,7 @@ public abstract class Script {
 	protected GameContext getGame(){
 		return game;
 	}
-	protected Rectangle2D.Double getRegion(){
+	public Rectangle2D.Double getRegion(){
 		return region;
 	}
 	protected List<GameObject> getObjects(){

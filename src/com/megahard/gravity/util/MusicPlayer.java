@@ -1,4 +1,4 @@
-package com.megahard.gravity;
+package com.megahard.gravity.util;
 
 import java.io.DataInputStream;
 import java.io.InputStream;

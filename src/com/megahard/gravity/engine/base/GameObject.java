@@ -1,4 +1,9 @@
-package com.megahard.gravity;
+package com.megahard.gravity.engine.base;
+
+import com.megahard.gravity.engine.GameContext;
+import com.megahard.gravity.engine.GameMap;
+import com.megahard.gravity.engine.SpriteStore;
+import com.megahard.gravity.util.Vector2;
 
 
 public class GameObject {
@@ -18,7 +23,7 @@ public class GameObject {
 	public boolean standing;
 	public boolean active;
 	
-	public Sprite sprite;
+	public com.megahard.gravity.engine.Sprite sprite;
 	public int zIndex;
 
 	public static final double GRAVITY = 0.05;

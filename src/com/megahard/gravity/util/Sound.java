@@ -1,4 +1,4 @@
-package com.megahard.gravity;
+package com.megahard.gravity.util;
 
 // Sound class adapted from Metagun source code
 // Ⓒ Markus Persson

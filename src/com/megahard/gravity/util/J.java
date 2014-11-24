@@ -1,4 +1,4 @@
-package com.megahard.gravity;
+package com.megahard.gravity.util;
 
 import com.google.gson.Gson;
 

@@ -1,4 +1,4 @@
-package com.megahard.gravity;
+package com.megahard.gravity.engine;
 
 import java.awt.Color;
 import java.awt.event.KeyEvent;
@@ -20,10 +20,16 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-import com.megahard.gravity.GameMap.Layers;
-import com.megahard.gravity.GameMap.Layers.GameObjects;
-import com.megahard.gravity.Sound.Clips;
+import com.megahard.gravity.GravityApplet;
+import com.megahard.gravity.engine.GameMap.Layers;
+import com.megahard.gravity.engine.GameMap.Layers.GameObjects;
+import com.megahard.gravity.engine.base.GameObject;
+import com.megahard.gravity.engine.base.Script;
 import com.megahard.gravity.objects.Player;
+import com.megahard.gravity.util.J;
+import com.megahard.gravity.util.Sound;
+import com.megahard.gravity.util.Sound.Clips;
+import com.megahard.gravity.util.Vector2;
 
 public class Engine implements KeyListener, MouseListener, MouseMotionListener, GameContext{
 	private Player playerObject;
