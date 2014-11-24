@@ -21,7 +21,9 @@ public class TitleScreen extends JPanel{
 
 	private static final long serialVersionUID = 1L;
 
-	public String name = "Gravity";
+
+	public String name = "Gravity: The Awakening";
+
 	
 	private CustomButton startButton;
 	private CustomButton exitButton;
