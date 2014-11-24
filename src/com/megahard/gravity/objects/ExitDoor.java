@@ -44,7 +44,7 @@ public class ExitDoor extends GameObject {
 				}else{
 					if(sprite.getAction().equals("open")){
 						sprite.setAction("closing");
-						getGame().playSoundAtLocation(Sound.door_close, position, 0.8);
+						getGame().playSoundAtLocation(Sound.door_close, position, 1);
 					}
 				}
 			}
