@@ -13,11 +13,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.prefs.BackingStoreException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -44,11 +42,7 @@ public class LevelMenu extends JPanel{
 	private Image background;
 	
 	public LevelMenu (GravityApplet app) {
-		
 		storeMaps();
-
-		
-		setForeground(Color.white);
 		
 		setLayout(new BorderLayout());
 		
@@ -60,12 +54,10 @@ public class LevelMenu extends JPanel{
 		JLabel titleLabel = new JLabel(name, SwingConstants.CENTER);
 		titleLabel.setPreferredSize(new Dimension(800, 200));
 		titleLabel.setForeground(Color.white);
-		titleLabel.setFont(GravityApplet.fontTitle);
 		
-		playButton = new CustomButton("Play", Color.black);
+		playButton = new CustomButton("Play");
 		playButton.setPreferredSize(new Dimension(200,75));
 		playButton.addActionListener(app);
-		playButton.setFont(GravityApplet.font);
 
 		left = new BasicArrowButton(BasicArrowButton.WEST, Color.black,Color.black,Color.white,Color.black);
 		left.setPreferredSize(new Dimension(50,50));
@@ -84,7 +76,6 @@ public class LevelMenu extends JPanel{
 		levelLabel = new JLabel (maps.get(lastMap)[0], SwingConstants.CENTER);
 		levelLabel.setPreferredSize(new Dimension(200, 75));
 		levelLabel.setForeground(new Color (240,240,240));
-		levelLabel.setFont(GravityApplet.font);
 
 
 		c.gridx = 0;

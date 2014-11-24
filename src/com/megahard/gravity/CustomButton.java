@@ -1,38 +1,36 @@
 package com.megahard.gravity;
 
-import javax.swing.JButton;
-
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+import javax.swing.JButton;
  
  
 public class CustomButton extends JButton implements MouseListener { 
 	 
 	private static final long serialVersionUID = 1L;
-	private Color mouseOverColor;
+	private static final Color DEFAULT_COLOR = new Color(1, 1, 1, 0.5f);
 	 
+	public CustomButton(String text){
+		this(text, DEFAULT_COLOR);
+	}
+	
 	public CustomButton(String text, Color mouseOverColor) { 
 		super(text);
 		
-		this.setFont(new Font(text,10,25));
-		this.setForeground(Color.white);
-		this.setFocusPainted(false);
 		opaquize (false);
 		
-		this.mouseOverColor = mouseOverColor;
+		setBackground(mouseOverColor);
 		addMouseListener(this);
 	}
-	
-	
 
 	public void mouseClicked(MouseEvent e) { }
 	public void mousePressed(MouseEvent e) { }
 	public void mouseReleased(MouseEvent e) { }
 	  
 	public void mouseEntered(MouseEvent e) { 
-		if(e.getSource()==this) {  this.setBackground(this.mouseOverColor); opaquize(true);}
+		if(e.getSource()==this) { opaquize(true);}
 	}
 
 	public void mouseExited(MouseEvent e) { 

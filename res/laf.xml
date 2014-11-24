@@ -1,0 +1,38 @@
+<synth>
+
+	<style id="backingStyle">
+		<opaque value="false"/>
+		<font name="Gravitate BRK" size="30"/>
+		<state>
+			<color type="BACKGROUND" value="#000000"/>
+			<color type="FOREGROUND" value="#FFFFFF"/>
+		</state>
+	</style>
+	<bind style="backingStyle" type="region" key=".*"/>
+
+	<style id="button">
+		<insets top="15" left="20" bottom="15" right="20"/>
+		<opaque value="false"/>
+
+		<state>
+			<opaque value="false"/>
+			<font name="Gravitate BRK" size="30"/>
+			<color type="BACKGROUND" value="#000000"/>
+			<color type="TEXT_FOREGROUND" value="#FFFFFF"/>
+		</state>
+
+		<state value="PRESSED"> 
+			<opaque value="false"/>
+			<color type="BACKGROUND" value="#40CCFFFF"/>
+			<color type="TEXT_FOREGROUND" value="#000000"/>
+		</state>
+
+		<state value="MOUSE_OVER">
+			<opaque value="false"/>
+			<color type="BACKGROUND" value="#66FFFFFF"/>
+			<color type="TEXT_FOREGROUND" value="#FFFFFF"/>
+		</state>
+	</style>
+	<bind style="button" type="region" key="Button"/>
+
+</synth>

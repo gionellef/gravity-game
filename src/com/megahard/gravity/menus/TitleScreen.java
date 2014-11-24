@@ -2,7 +2,6 @@ package com.megahard.gravity.menus;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
@@ -11,9 +10,7 @@ import java.awt.Image;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -27,17 +24,12 @@ public class TitleScreen extends JPanel{
 
 	public String name = "Gravity";
 	
-	public Container c;
-	private JPanel menuscreen;
-	
 	private CustomButton startButton;
 	private CustomButton exitButton;
 
 	private Image background;
 	
 	public TitleScreen(GravityApplet app) {
-		setForeground(Color.white);
-		
 		setLayout(new BorderLayout());
 		
 		JPanel innerPanel = new JPanel();
@@ -46,19 +38,17 @@ public class TitleScreen extends JPanel{
 		GridBagConstraints c = new GridBagConstraints();
 		
 		JLabel titleLabel = new JLabel(name, SwingConstants.CENTER);
+		titleLabel.setFont(titleLabel.getFont().deriveFont(40f));
 		titleLabel.setPreferredSize(new Dimension(800, 200));
 		titleLabel.setForeground(Color.white);
-		titleLabel.setFont(GravityApplet.fontTitle);
 		
-		startButton = new CustomButton("Play", Color.black);
+		startButton = new CustomButton("Play");
 		startButton.setPreferredSize(new Dimension(200,75));
 		startButton.addActionListener(app);
-		startButton.setFont(GravityApplet.font);
 		
-		exitButton = new CustomButton("Quit", Color.black);
+		exitButton = new CustomButton("Exit");
 		exitButton.setPreferredSize(new Dimension(200,75));
 		exitButton.addActionListener(app);
-		exitButton.setFont(GravityApplet.font);
 		
 		c.gridx = 0;
 		c.gridy = 0;
@@ -86,7 +76,6 @@ public class TitleScreen extends JPanel{
 		try {
 			background = ImageIO.read(getClass().getResource("/back.png"));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

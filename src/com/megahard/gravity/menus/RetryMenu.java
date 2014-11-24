@@ -1,17 +1,19 @@
 package com.megahard.gravity.menus;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
-import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import com.megahard.gravity.CustomButton;
 import com.megahard.gravity.GravityApplet;
@@ -22,52 +24,66 @@ public class RetryMenu extends JPanel{
 	
 	private String name = "Retry Level?";
 
-	public Container c;
-	private JFrame retryScreen;
 	private CustomButton retryButton;
 	private CustomButton menuButton;
+
+	private Image background;
 	
 	public RetryMenu(GravityApplet app) {
-		retryScreen = new JFrame ("Retry Menu");
+		setLayout(new BorderLayout());
 		
-		menuButton = new CustomButton("Back to Main Menu", Color.black);
-		menuButton.setPreferredSize(new Dimension(200,75));
-		menuButton.setBounds(0, 150, 800, 75);
-		menuButton.addActionListener(app);
-		menuButton.setFont(GravityApplet.font);
+		JPanel innerPanel = new JPanel();
+		innerPanel.setOpaque(false);
+		innerPanel.setLayout(new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
 		
-		retryButton = new CustomButton("Retry", Color.black);
+		JLabel titleLabel = new JLabel(name, SwingConstants.CENTER);
+		titleLabel.setFont(titleLabel.getFont().deriveFont(40f));
+		titleLabel.setPreferredSize(new Dimension(800, 200));
+		titleLabel.setForeground(Color.white);
+		
+		retryButton = new CustomButton("Retry");
 		retryButton.setPreferredSize(new Dimension(200,75));
-		retryButton.setBounds(0, 225, 800, 75);
 		retryButton.addActionListener(app);
-		retryButton.setFont(GravityApplet.font);
 		
-		retryScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		c = retryScreen.getContentPane();
+		menuButton = new CustomButton("Quit");
+		menuButton.setPreferredSize(new Dimension(200,75));
+		menuButton.addActionListener(app);
 		
-		this.setLayout(null);
-		this.add(retryButton);
-		this.add(menuButton);
-		c.add(this);
+		c.gridx = 0;
+		c.gridy = 0;
+		c.weightx = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		innerPanel.add(titleLabel, c);
 		
+		c.gridx = 0;
+		c.gridy = 1;
+		c.weightx = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		innerPanel.add(retryButton, c);
+		
+		c.gridx = 0;
+		c.gridy = 2;
+		c.weightx = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		innerPanel.add(menuButton, c);
+		
+		add(innerPanel);
+
 		this.setPreferredSize(new Dimension(800,600));
-		retryScreen.pack();
-		
-	}
-	
-	public void paintComponent(Graphics g) {
-		Image bg = null;
+
+		background = null;
 		try {
-			bg = ImageIO.read(getClass().getResource("/back.png"));
+			background = ImageIO.read(getClass().getResource("/back.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		g.drawImage(bg, 0, 0, this);
 		
-		g.setFont(GravityApplet.fontTitle);
-		g.setColor(new Color(240,240,240));
-		g.drawString(name, (800/2-(name.length()*23/2)), 100);
+	}
+
+	public void paintComponent(Graphics g) {
+		g.drawImage(background, 0, 0, this);
 	}
 	
 	public JButton getRetryButton() {
