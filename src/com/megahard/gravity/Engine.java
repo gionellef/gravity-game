@@ -242,7 +242,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 					object.getHeight() / Renderer.TILE_SIZE);
 			
 			Script s = null;
-			if(constructor.getParameterCount() == 3){
+			if(constructor.getParameterTypes().length == 3){
 				s = constructor.newInstance(this, region, object.getProperties());
 			}else{
 				s = constructor.newInstance(this, region);
