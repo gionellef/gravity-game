@@ -345,6 +345,21 @@
                  "width":0,
                  "x":464,
                  "y":388
+                }, 
+                {
+                 "height":48,
+                 "name":"script_BombSpawn",
+                 "properties":
+                    {
+                     "delay":"1200",
+                     "interval":"101"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":48,
+                 "x":304,
+                 "y":48
                 }],
          "opacity":1,
          "type":"objectgroup",

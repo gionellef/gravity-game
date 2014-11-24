@@ -1644,5 +1644,11 @@
   </object>
   <object gid="501" x="88" y="156"/>
   <object gid="510" x="464" y="388"/>
+  <object name="script_BombSpawn" x="304" y="48" width="48" height="48">
+   <properties>
+    <property name="delay" value="1200"/>
+    <property name="interval" value="101"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>
