@@ -158,8 +158,8 @@ public class Player extends GameObject {
 			// Find a clear spot for the gravwell to appear
 			if(!isAreaClear(pos)){
 				Vector2 pro = new Vector2();
-				out: for(double r = 0; r < 4; r += 0.1){
-					for(double a = 0; a < 2*Math.PI; a += Math.PI/2){
+				out: for(double r = 0; r < 2; r += 0.1){
+					for(double a = 0; a < 2*Math.PI; a += Math.PI/4){
 						pro.set(pos.x + r * Math.cos(a), pos.y + r * Math.sin(a));
 						if(isAreaClear(pro)){
 							pos = pro;
@@ -191,7 +191,7 @@ public class Player extends GameObject {
 			return false;
 		}
 		
-		double radius = 0.8;
+		double radius = 0.5;
 		Vector2 se = new Vector2(pos.x + radius, pos.y + radius);
 		Vector2 ne = new Vector2(pos.x + radius, pos.y - radius);
 		Vector2 nw = new Vector2(pos.x - radius, pos.y - radius);
