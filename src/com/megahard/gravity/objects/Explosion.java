@@ -42,7 +42,6 @@ public class Explosion extends GameObject {
 	
 	private static final Class<?>[] DESTRUCTIBLE_OBJECTS = {
 		Player.class,
-		Bomb.class,
 		Gravitite.class,
 		BigGravitite.class,
 	};
