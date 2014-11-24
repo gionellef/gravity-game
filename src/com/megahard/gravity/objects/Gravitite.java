@@ -32,7 +32,8 @@ public class Gravitite extends GameObject {
 		for(int i=0; i<n; i++){
 			VioletSpark s = new VioletSpark(getGame());
 			s.position.set(position);
-			s.velocity.set(r * (Math.random() * 2 - 1), r * (Math.random() * 2 - 1));
+			s.velocity.set(velocity);
+			s.velocity.add(r * (Math.random() * 2 - 1), r * (Math.random() * 2 - 1));
 			getGame().addObject(s);
 		}
 	}

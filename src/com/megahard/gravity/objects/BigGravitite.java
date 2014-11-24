@@ -8,7 +8,7 @@ public class BigGravitite extends GameObject {
 	public BigGravitite(GameContext game) {
 		super(game, "big-gravitite");
 		size.set(1.125, 1.125);
-		mass = 3;
+		mass = 6;
 		friction = 0.6;
 		staticFriction = 0;
 		
