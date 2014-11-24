@@ -81,7 +81,7 @@ public class LevelMenu extends JPanel{
 		right.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		right.addActionListener(app);
 		
-		levelLabel = new JLabel (maps.get(lastMap)[0]);
+		levelLabel = new JLabel (maps.get(lastMap)[0], SwingConstants.CENTER);
 		levelLabel.setPreferredSize(new Dimension(200, 75));
 		levelLabel.setForeground(new Color (240,240,240));
 		levelLabel.setFont(GravityApplet.font);
@@ -119,6 +119,7 @@ public class LevelMenu extends JPanel{
 		c.gridy = 2;
 		c.gridwidth = 3;
 		c.weightx = 1;
+		c.ipady = 40;
 		c.fill = GridBagConstraints.BOTH;
 		innerPanel.add(playButton, c);
 		
