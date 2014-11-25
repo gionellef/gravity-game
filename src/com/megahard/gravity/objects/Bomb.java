@@ -90,10 +90,6 @@ public class Bomb extends GameObject {
 		Explosion explosion = new Explosion(getGame());
 		explosion.position.set(position);
 		
-		if(standing){
-			explosion.position.y -= 0.5;
-		}
-		
 		getGame().addObject(explosion);
 	}
 	

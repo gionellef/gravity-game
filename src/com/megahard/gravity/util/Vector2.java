@@ -29,9 +29,14 @@ public class Vector2 {
 	}
 
 	public Vector2 plus(Vector2 v1) {
+		// return plus(v1.x, v1.y);
 		return new Vector2(this.x + v1.x, this.y + v1.y);
 	}
 
+	public Vector2 plus(double x, double y) {
+		return new Vector2(this.x + x, this.y + y);
+	}
+	
 	public Vector2 minus(Vector2 v) {
 		return new Vector2(x - v.x, y - v.y);
 	}
@@ -94,4 +99,5 @@ public class Vector2 {
 	public String toString() {
 		return "Vector2(" + x + "," + y + ")";
 	}
+
 }

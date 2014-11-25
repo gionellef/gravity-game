@@ -48,7 +48,7 @@ public class GravWell extends GameObject {
 			}
 		}
 
-		if(Math.random() < 0.2){
+		if(Math.random() < 0.5){
 			spark();
 		}
 	}
