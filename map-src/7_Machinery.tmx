@@ -2516,13 +2516,13 @@
   </data>
  </layer>
  <objectgroup name="Object Layer 1">
-  <object gid="508" x="386" y="262"/>
-  <object gid="508" x="387" y="239"/>
+  <object gid="508" x="392" y="258"/>
+  <object gid="508" x="392" y="238"/>
   <object gid="507" x="503" y="264"/>
   <object gid="507" x="328" y="392"/>
   <object gid="501" x="183" y="382"/>
   <object gid="506" x="251" y="388"/>
-  <object gid="506" x="426" y="259"/>
+  <object gid="506" x="368" y="260"/>
   <object gid="504" x="188" y="248"/>
   <object gid="505" x="207" y="391"/>
   <object gid="505" x="217" y="392"/>
