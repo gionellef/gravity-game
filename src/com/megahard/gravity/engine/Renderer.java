@@ -351,9 +351,9 @@ public class Renderer extends Canvas {
 	private void renderBorders(Graphics2D g, GameState s, int bufferWidth,
 			int bufferHeight, int halfBufWidth, int halfBufHeight, double cx,
 			double cy) {
-		g.setColor(BORDER_COLOR);
 		if (cx * TILE_SIZE - halfBufWidth < 0) {
 			// left
+			g.setColor(BORDER_COLOR);
 			int borderWidth = (int) (halfBufWidth - cx * TILE_SIZE + 1);
 			g.fillRect(0, 0, borderWidth, bufferHeight);
 			for (int i = 1; i < 16; i++) {
@@ -365,6 +365,7 @@ public class Renderer extends Canvas {
 		}
 		if (cx * TILE_SIZE + halfBufWidth > s.map.getWidth() * TILE_SIZE) {
 			// right
+			g.setColor(BORDER_COLOR);
 			int borderWidth = (int) (cx * TILE_SIZE + halfBufWidth
 					- s.map.getWidth() * TILE_SIZE + 1);
 			g.fillRect(bufferWidth - borderWidth, 0, borderWidth, bufferHeight);
@@ -378,6 +379,7 @@ public class Renderer extends Canvas {
 		}
 		if (cy * TILE_SIZE - halfBufHeight < 0) {
 			// top
+			g.setColor(BORDER_COLOR);
 			int borderHeight = (int) (halfBufHeight - cy * TILE_SIZE + 1);
 			g.fillRect(0, 0, bufferWidth, borderHeight);
 			for (int i = 1; i < 16; i++) {
@@ -389,6 +391,7 @@ public class Renderer extends Canvas {
 		}
 		if (cy * TILE_SIZE + halfBufHeight > s.map.getHeight() * TILE_SIZE) {
 			// bottom
+			g.setColor(BORDER_COLOR);
 			int borderHeight = (int) (cy * TILE_SIZE + halfBufHeight
 					- s.map.getHeight() * TILE_SIZE + 1);
 			g.fillRect(0, bufferHeight - borderHeight, bufferWidth,
