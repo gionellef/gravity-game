@@ -2,17 +2,12 @@ package com.megahard.gravity.scripts;
 
 import java.awt.geom.Rectangle2D.Double;
 
-import com.megahard.gravity.engine.Engine;
+import com.megahard.gravity.engine.GameContext;
 import com.megahard.gravity.engine.base.GameObject;
-import com.megahard.gravity.engine.base.Script;
 
-public class Gravity2 extends Script {
-
-	private boolean firstRun = true;
-	private boolean active;
-	private int timer = 0;
+public class Gravity2 extends ScriptSequencer {
 	
-	public Gravity2(Engine game, Double region) {
+	public Gravity2(GameContext game, Double region) {
 		super(game, region);
 	}
 
@@ -21,30 +16,23 @@ public class Gravity2 extends Script {
 	}
 
 	@Override
-	public void onUpdate() {
-		if(active){
-			timer++; 
-			if(timer == 100){
-				getGame().setCinematicMode(false);
-				active = false;
-			}
-		}
-	}
-
-	@Override
 	public void onEnter(GameObject object) {
-		if(firstRun){
-			getGame().setCinematicMode(true);
-			getGame().showMessage("isaac-pre", "What is this place?", 100);
-			active = true;
-			firstRun = false;
-		}
+		addMessage("isaac-pre", "What is this place?", 100);
+		addMessage("Press 'Enter' to skip dialogue (in this case, monologue (in general, cutscenes))", 1000);
+		
+		beginSequence(true, true, true);
 	}
 
 	@Override
 	public void onExit(GameObject object) {
-		// TODO Auto-generated method stub
+	}
 
+	@Override
+	protected void onSkip() {
+	}
+
+	@Override
+	protected void onEnd() {
 	}
 
 }

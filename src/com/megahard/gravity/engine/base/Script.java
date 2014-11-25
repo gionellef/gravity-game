@@ -12,20 +12,20 @@ import com.megahard.gravity.util.Vector2;
 
 public abstract class Script {
 	
-	private Engine game;
+	private GameContext game;
 	
 	private Rectangle2D.Double region;
 	public List<GameObject> overlaps; // ENGINE-INTERNAL USE ONLY. Kung gusto mong malinis, gawa ka ng interface
 	private Map<String, String> properties;
 
-	public Script(Engine game, Rectangle2D.Double region, Map<String, String> properties) {
+	public Script(GameContext game, Rectangle2D.Double region, Map<String, String> properties) {
 		this.game = game;
 		this.region = region;
 		this.properties = properties;
 		overlaps = new LinkedList<>();
 	}
 
-	public Script(Engine game, Rectangle2D.Double region) {
+	public Script(GameContext game, Rectangle2D.Double region) {
 		this(game, region, Collections.<String, String> emptyMap());
 	}
 	

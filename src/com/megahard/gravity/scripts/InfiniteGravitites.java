@@ -2,16 +2,15 @@ package com.megahard.gravity.scripts;
 
 import java.awt.geom.Rectangle2D.Double;
 
-import com.megahard.gravity.engine.Engine;
+import com.megahard.gravity.engine.GameContext;
 import com.megahard.gravity.engine.base.GameObject;
 import com.megahard.gravity.engine.base.Script;
 import com.megahard.gravity.objects.Player;
 
 public class InfiniteGravitites extends Script {
 
-	public InfiniteGravitites(Engine game, Double region) {
+	public InfiniteGravitites(GameContext game, Double region) {
 		super(game, region);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

@@ -3,7 +3,7 @@ package com.megahard.gravity.scripts;
 import java.awt.geom.Rectangle2D.Double;
 import java.util.Map;
 
-import com.megahard.gravity.engine.Engine;
+import com.megahard.gravity.engine.GameContext;
 import com.megahard.gravity.engine.base.GameObject;
 import com.megahard.gravity.engine.base.Script;
 import com.megahard.gravity.objects.Bomb;
@@ -14,7 +14,7 @@ public class BombSpawn extends Script {
 	private int interval = 200;
 	private int delay = 100;
 	
-	public BombSpawn(Engine game, Double region, Map<String, String> properties) {
+	public BombSpawn(GameContext game, Double region, Map<String, String> properties) {
 		super(game, region, properties);
 	}
 

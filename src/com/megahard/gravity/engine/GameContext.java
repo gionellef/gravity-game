@@ -58,6 +58,8 @@ public interface GameContext {
 
 	public abstract void showMessage(String message, int duration);
 
+	public abstract void removeMessage();
+
 	public abstract <T> T findObject(Class<T> type);
 
 	public abstract void finish(boolean win, boolean esc);
@@ -66,7 +68,8 @@ public interface GameContext {
 
 	void showMessage(String image, String message, int duration);
 
-	public abstract void fadeScreen(Color colorStart, Color colorEnd, int duration);
+	public abstract void fadeScreen(Color colorStart, Color colorEnd,
+			int duration);
 
 	public abstract <T> List<T> findObjects(Class<T> type, int x, int y, int w,
 			int h, boolean inclusive);

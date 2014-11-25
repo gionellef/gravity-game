@@ -4,7 +4,7 @@ import java.awt.geom.Rectangle2D.Double;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import com.megahard.gravity.engine.Engine;
+import com.megahard.gravity.engine.GameContext;
 import com.megahard.gravity.engine.GameMap;
 import com.megahard.gravity.engine.GameMap.Tile;
 import com.megahard.gravity.engine.base.GameObject;
@@ -18,9 +18,8 @@ public class Bridge extends Script {
 	private double progress;
 	private Queue<Integer> fallQueue;
 
-	public Bridge(Engine game, Double region) {
+	public Bridge(GameContext game, Double region) {
 		super(game, region);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

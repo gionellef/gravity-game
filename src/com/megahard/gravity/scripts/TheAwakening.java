@@ -5,79 +5,75 @@ import java.awt.geom.Rectangle2D.Double;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.megahard.gravity.engine.Engine;
+import com.megahard.gravity.engine.GameContext;
 import com.megahard.gravity.engine.base.GameObject;
-import com.megahard.gravity.engine.base.Script;
 import com.megahard.gravity.objects.Box;
 import com.megahard.gravity.objects.GravWell;
 import com.megahard.gravity.objects.Player;
 import com.megahard.gravity.objects.VioletSpark;
 
-public class TheAwakening extends Script {
-
-	private boolean firstRun = true;
-	private boolean active = false;
-	private int timer;
+public class TheAwakening extends ScriptSequencer {
 	
 	private Player player;
 	private GravWell gw;
 	private List<GravWell> wells;
 	
-	public TheAwakening(Engine game, Double region) {
+	public TheAwakening(GameContext game, Double region) {
 		super(game, region);
 	}
 
 	@Override
 	public void onStart() {
 		wells = new LinkedList<>();
-	}
-
-	@Override
-	public void onUpdate() {
-		if(active){
-			timer++;
-			
-			if(timer == 10){
-				getGame().showMessage("isaac-pre", "...", 30);
-			}
-			
-			if(timer == 40){
-				getGame().showMessage("isaac-pre", "What is this rock?", 100);
-			}
-			
-			if(timer == 140){
-				getGame().showMessage("isaac-pre", "It feels strange... I feel attracted to it somehow...", 100);
-			}
-			
-			if(timer > 240 && timer < 340){
-				double m = 0.1 * (1 - (double)(340 - timer)/(340-240));
+		
+		addDelay(10);
+		addMessage("isaac-pre", "...", 30);
+		addMessage("isaac-pre", "What is this rock?", 100);
+		addMessage("isaac-pre", "It feels strange... I feel attracted to it somehow...", 100);
+		
+		// Float
+		Runnable floater = new Runnable() {
+			private int timer = 0;
+			@Override
+			public void run() {
+				timer++;
+				double m = 0.1 * (double)timer/100;
 				player.velocity.y *= 0.9;
 				player.velocity.y += (((getRegion().y * 2 + getRegion().getHeight())/2 - 1 - player.position.y) - player.velocity.y) * m;
 				player.position.x += (getRegion().x - player.position.x) * m;
 				
 				castSparkOnPlayer(1);
+				
+				if(timer == 20){
+					getGame().showMessage("isaac-pre", "Huh!?", 80);
+				}
 			}
-			
-			if(timer == 260){
-				getGame().showMessage("isaac-pre", "Huh!?", 80);
-			}
-			
-			if(timer == 340){
+		};
+		for(int i = 0; i < 100; i++){
+			addRunnable(floater, 1);
+		}
+		
+		// First gravity well
+		addRunnable(new Runnable() {
+			@Override
+			public void run() {
 				getGame().showMessage("isaac-pre", "AAAAAARRGH!!!", 150);
 				
 				player.setGravs(0);
 				gw = new GravWell(getGame());
 				gw.power = 1.2;
 				gw.position.set(player.position.x, player.position.y);
-				getGame().addObject(gw);
+				getGame().addObject(gw);				
 			}
-			
-			if(timer == 550){
-				// fade to white
-				getGame().fadeScreen(null, Color.white, 80);
-			}
-			
-			if(timer > 370 && timer < 670){
+		}, 50);
+		
+		// Gravity circle
+		Runnable circler = new Runnable() {
+			private int timer = 0;
+			@Override
+			public void run() {
+				timer++;
+				
 				if(Math.random() < 0.06 && wells.size() < 6){
 					GravWell g = new GravWell(getGame());
 					g.power = 0.3;
@@ -87,10 +83,9 @@ public class TheAwakening extends Script {
 				}
 				
 				int i = 0;
-				double t = ((double)timer - 370) / (670 - 370);
 				double r = 3 + wells.size() * 0.3;
 				for(GravWell w : wells){
-					double a = Math.PI * 2 * (1 - (double)i / wells.size()) + t * 16;
+					double a = Math.PI * 2 * (1 - (double)i / wells.size()) + timer * 0.016;
 					w.position.x += (player.position.x + Math.cos(a) * r - w.position.x) * 0.1;
 					w.position.y += (player.position.y + Math.sin(a) * r - w.position.y) * 0.1;
 					i++;
@@ -116,9 +111,20 @@ public class TheAwakening extends Script {
 
 				castSparkOnPlayer(8);
 				castSparkOnPlayer(4);
+				
+				if(timer == 100){
+					getGame().fadeScreen(null, Color.white, 80);
+				}
 			}
-			
-			if(timer == 640){
+		};
+		for(int i = 0; i < 200; i++){
+			addRunnable(circler, 1);
+		}
+		
+		// Transformed
+		addRunnable(new Runnable() {
+			@Override
+			public void run() {
 				// change sprite
 				player.setSprite("isaac");
 				
@@ -128,60 +134,42 @@ public class TheAwakening extends Script {
 				// throw boxes away
 				for(Box b : getGame().findObjects(Box.class)){
 					double a = Math.atan2(b.position.y - player.position.y, b.position.x - player.position.y);
-					b.velocity.x += Math.cos(a) * 0.1;
-					b.velocity.y += Math.sin(a) * 0.1;
+					b.velocity.x += Math.cos(a) * 0.2;
+					b.velocity.y += Math.sin(a) * 0.2;
 				}
 			}
-			
-			if(timer == 670){
+		}, 30);
+		
+		// Destroy gravity circle
+		addRunnable(new Runnable() {
+			@Override
+			public void run() {
 				while(!wells.isEmpty()){
 					wells.remove(0).kill();
-				}
+				}				
 			}
-			
-			if(timer == 700){
+		}, 30);
+		addRunnable(new Runnable() {
+			@Override
+			public void run() {
 				gw.kill();
 			}
-			
-			if(timer == 750){
-				getGame().showMessage("isaac", "Augh... What just happened!?", 60);
-			}
-			
-			if(timer == 810){
-				getGame().showMessage("isaac", "My hair! It turned white!", 80);
-			}
-			
-			if(timer == 890){
-				getGame().showMessage("isaac", "I feel... ", 80);
-			}
-			if(timer == 960){
-				getGame().showMessage("isaac", "I feel... strange...", 80);
-			}
-			
-			if(timer == 1030){
-				getGame().showMessage("isaac", "It's like something has awakened inside of me.", 100);
-			}
-				
-			if(timer == 1130){
-				getGame().setCinematicMode(false);
-				active = false;
-			}
-		}
+		}, 30);
+		
+		addMessage("isaac", "What just happened!?", 60);
+		addMessage("isaac", "My hair! It turned white!", 80);
+		addMessage("isaac", "I feel...", 80);
+		addMessage("isaac", "I feel strange...", 80);
+		addMessage("isaac", "I feel a strange power...", 100);
+		addMessage("isaac", "It's like something has awakened inside of me.", 100);
 	}
 
 	@Override
 	public void onEnter(GameObject object) {
-		if(!firstRun) return;
-
 		if(object.getClass().equals(Player.class)){
-			firstRun = false;
-			active = true;
-			timer = 0;
-			
 			player = (Player) object;
-			
-			getGame().setCinematicMode(true);
 			player.velocity.x = 0;
+			beginSequence(true, true, false);
 		}
 	}
 
@@ -196,6 +184,14 @@ public class TheAwakening extends Script {
 
 	@Override
 	public void onExit(GameObject object) {
+	}
+
+	@Override
+	protected void onSkip() {
+	}
+
+	@Override
+	protected void onEnd() {
 	}
 
 }

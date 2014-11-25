@@ -243,10 +243,10 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 					.forName("com.megahard.gravity.scripts." + type);
 			Constructor<Script> constructor = null;
 			try{
-				constructor = subclass.getConstructor(Engine.class, Rectangle2D.Double.class, Map.class);
+				constructor = subclass.getConstructor(GameContext.class, Rectangle2D.Double.class, Map.class);
 				s = constructor.newInstance(this, region, object.getProperties());
 			} catch (NoSuchMethodException | SecurityException e1) {
-				constructor = subclass.getConstructor(Engine.class, Rectangle2D.Double.class);
+				constructor = subclass.getConstructor(GameContext.class, Rectangle2D.Double.class);
 				s = constructor.newInstance(this, region);
 			}
 			
@@ -849,6 +849,11 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 			}
 		}
 		return list;
+	}
+
+	@Override
+	public void removeMessage() {
+		renderer.removeMessage();
 	}
 
 
