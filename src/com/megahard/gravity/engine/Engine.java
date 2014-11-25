@@ -141,7 +141,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 	}
 	
 	@Override
-	public void finish(boolean win,boolean esc){
+	public void finish(boolean win, boolean esc){
 		if(finished)
 			return;
 		
@@ -149,8 +149,8 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 		finishEsc = esc;
 		
 		finished = true;
-		finishTimer = esc ? 3 : 6;
-		fadeScreen(true, Math.max(0, finishTimer));
+		finishTimer = esc ? 5 : 10;
+		fadeScreen(null, win || esc ? Color.black : Color.red, Math.max(0, finishTimer/2));
 	}
 	
 	public void finalFinish(){
