@@ -4,7 +4,7 @@
  <tileset firstgid="501" source="objects.tsx"/>
  <layer name="Tile Layer 1" width="48" height="30">
   <data encoding="base64" compression="zlib">
-   eJzt0bsNwkAQBNA9isCSjWmBgF8TuAzTCZiUlIBPFXxaAnpgELJYWWt0yZ0JJnia03lPGmszEcmIiIjoby1g4qHwnC0i9x9A4kRyGLrPuabvUjVrfU/UXBf9ZzBvdNF3Vn/rTWrsKeROmp3ajDE3hQrnjfvmCtYq67lYO/Htv4M+HOGkcg8HlVvjbej+d3jA88e/vPuP4Ao3lWe4qIzdv4ReYMuA/YmIiIioey+6eaqq
+   eJzt0bkNwkAQBdAxRWDJBlog4GrCLgM64UhJCTiq4CjA0AvQAx/BitFoAye7JvjB01ozY+3XTi4iOREREf2tAoY1lDVny8j5O5AmIl3oJZ9vR9cyNevrp2quifxjmJgsuubL7/sn8+wp5E5sJmcJK5jDAgaYG8mvbvt2LtZO3vkr3HGFm7pzDwfYwg420FZ123fn2vMWofPf4QFP9W5nuMARTt/8fVW3fXfGzj+FVmCzgPmJiIiIqHkvbaazIA==
   </data>
  </layer>
  <objectgroup name="Object Layer 1">
