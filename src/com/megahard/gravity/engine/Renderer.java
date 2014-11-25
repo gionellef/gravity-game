@@ -231,12 +231,10 @@ public class Renderer extends Canvas {
 	private void renderMap(Graphics2D g, GameState s, int halfBufWidth,
 			int halfBufHeight, int mapHeight, int mapWidth, double cx,
 			double cy, int cxm, int cym) {
-		int yStart = (int) Math.max(0,
-				Math.floor(cy - halfBufHeight / 16) - 1);
+		int yStart = (int) Math.max(0, Math.floor(cy - halfBufHeight / 16) - 1);
 		int yEnd = (int) Math.min(mapHeight - 1,
 				Math.ceil(cy + halfBufHeight / 16));
-		int xStart = (int) Math.max(0,
-				Math.floor(cx - halfBufWidth / 16) - 1);
+		int xStart = (int) Math.max(0, Math.floor(cx - halfBufWidth / 16) - 1);
 		int xEnd = (int) Math.min(mapWidth - 1,
 				Math.ceil(cx + halfBufWidth / 16));
 
@@ -245,14 +243,14 @@ public class Renderer extends Canvas {
 			int dy = (int) (y * TILE_SIZE) - cym + halfBufHeight;
 			for (int x = xStart; x <= xEnd; x++) {
 				int dx = (int) (x * TILE_SIZE) - cxm + halfBufWidth;
-		
+
 				Tile tile = s.map.getTile(x, y);
 				int tileIndex = tile.getTileIndex();
 				int frameX = (tileIndex % tileSheetColumns) * TILE_SIZE;
 				int frameY = (tileIndex / tileSheetColumns) * TILE_SIZE;
-				g.drawImage(tileset, dx, dy, dx + TILE_SIZE,
-						dy + TILE_SIZE, frameX, frameY, frameX + TILE_SIZE,
-						frameY + TILE_SIZE, null);
+				g.drawImage(tileset, dx, dy, dx + TILE_SIZE, dy + TILE_SIZE,
+						frameX, frameY, frameX + TILE_SIZE, frameY + TILE_SIZE,
+						null);
 			}
 		}
 	}
@@ -286,9 +284,8 @@ public class Renderer extends Canvas {
 			int marginY = 5;
 			g.setColor(Color.white);
 			g.setFont(font);
-			int w = drawStringWrapped(g,
-					message.substring(0, messageChars), marginX,
-					bufferHeight - cineStripHeight + font.getSize()
+			int w = drawStringWrapped(g, message.substring(0, messageChars),
+					marginX, bufferHeight - cineStripHeight + font.getSize()
 							+ marginY, bufferWidth - 2 * marginX,
 					cineStripHeight - 2 * marginY);
 			if (w >= 0) {
@@ -314,13 +311,13 @@ public class Renderer extends Canvas {
 
 			g.setColor(new Color((int) (Math.min(
 					255,
+					Math.max(0,
+							fadeColorStart.getRed() * t + fadeColorEnd.getRed()
+									* (1 - t)))), (int) (Math.min(
+					255,
 					Math.max(
 							0,
-							fadeColorStart.getRed() * t
-									+ fadeColorEnd.getRed() * (1 - t)))),
-					(int) (Math.min(
-							255,
-							Math.max(0, fadeColorStart.getGreen() * t
+							fadeColorStart.getGreen() * t
 									+ fadeColorEnd.getGreen() * (1 - t)))),
 					(int) (Math.min(
 							255,
@@ -360,21 +357,21 @@ public class Renderer extends Canvas {
 			int borderWidth = (int) (halfBufWidth - cx * TILE_SIZE + 1);
 			g.fillRect(0, 0, borderWidth, bufferHeight);
 			for (int i = 1; i < 16; i++) {
-				g.setColor(new Color((int)(Quad.easeInOut(i, 0, 256, 16) * 255) << 24 | BORDER_COLOR.getRGB()
-						& 0xFFFFFF, true));
-				g.drawLine(borderWidth + i, 0, borderWidth + i,
-						bufferHeight);
+				g.setColor(new Color(
+						(int) (Quad.easeInOut(i, 0, 256, 16) * 255) << 24
+								| BORDER_COLOR.getRGB() & 0xFFFFFF, true));
+				g.drawLine(borderWidth + i, 0, borderWidth + i, bufferHeight);
 			}
 		}
 		if (cx * TILE_SIZE + halfBufWidth > s.map.getWidth() * TILE_SIZE) {
 			// right
 			int borderWidth = (int) (cx * TILE_SIZE + halfBufWidth
 					- s.map.getWidth() * TILE_SIZE + 1);
-			g.fillRect(bufferWidth - borderWidth, 0, borderWidth,
-					bufferHeight);
+			g.fillRect(bufferWidth - borderWidth, 0, borderWidth, bufferHeight);
 			for (int i = 1; i < 16; i++) {
-				g.setColor(new Color((int)(Quad.easeInOut(i, 0, 256, 16) * 255) << 24 | BORDER_COLOR.getRGB()
-						& 0xFFFFFF, true));
+				g.setColor(new Color(
+						(int) (Quad.easeInOut(i, 0, 256, 16) * 255) << 24
+								| BORDER_COLOR.getRGB() & 0xFFFFFF, true));
 				g.drawLine(bufferWidth - borderWidth - i, 0, bufferWidth
 						- borderWidth - i, bufferHeight);
 			}
@@ -384,10 +381,10 @@ public class Renderer extends Canvas {
 			int borderHeight = (int) (halfBufHeight - cy * TILE_SIZE + 1);
 			g.fillRect(0, 0, bufferWidth, borderHeight);
 			for (int i = 1; i < 16; i++) {
-				g.setColor(new Color((int)(Quad.easeInOut(i, 0, 256, 16) * 255) << 24 | BORDER_COLOR.getRGB()
-						& 0xFFFFFF, true));
-				g.drawLine(0, borderHeight + i, bufferWidth, borderHeight
-						+ i);
+				g.setColor(new Color(
+						(int) (Quad.easeInOut(i, 0, 256, 16) * 255) << 24
+								| BORDER_COLOR.getRGB() & 0xFFFFFF, true));
+				g.drawLine(0, borderHeight + i, bufferWidth, borderHeight + i);
 			}
 		}
 		if (cy * TILE_SIZE + halfBufHeight > s.map.getHeight() * TILE_SIZE) {
@@ -397,8 +394,9 @@ public class Renderer extends Canvas {
 			g.fillRect(0, bufferHeight - borderHeight, bufferWidth,
 					borderHeight);
 			for (int i = 1; i < 16; i++) {
-				g.setColor(new Color((int)(Quad.easeInOut(i, 0, 256, 16) * 255) << 24 | BORDER_COLOR.getRGB()
-						& 0xFFFFFF, true));
+				g.setColor(new Color(
+						(int) (Quad.easeInOut(i, 0, 256, 16) * 255) << 24
+								| BORDER_COLOR.getRGB() & 0xFFFFFF, true));
 				g.drawLine(0, bufferHeight - borderHeight - i, bufferWidth,
 						bufferHeight - borderHeight - i);
 			}
@@ -510,7 +508,9 @@ public class Renderer extends Canvas {
 
 		this.message = message;
 
-		if (image != null) {
+		if (image == null) {
+			messageImage = null;
+		} else {
 			messageImage = SpriteStore.get().loadImage(
 					"/images/" + image + ".png", false);
 		}

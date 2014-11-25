@@ -45,8 +45,8 @@ public class Vector2 {
 		return new Vector2(this.x * scaleFactor, this.y * scaleFactor);
 	}
 
-	public double dot(Vector2 v1) {
-		return this.x * v1.x + this.y * v1.y;
+	public double dot(Vector2 v) {
+		return this.x * v.x + this.y * v.y;
 	}
 
 	public Vector2 normalized() {
@@ -81,6 +81,11 @@ public class Vector2 {
 		this.y += y;
 	}
 
+	public void add(Vector2 v) {
+		this.x += v.x;
+		this.y += v.y;
+	}
+	
 	public void subtract(double x, double y) {
 		this.x -= x;
 		this.y -= y;

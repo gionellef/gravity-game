@@ -38,12 +38,12 @@ public class GravWell extends GameObject {
 				double d = diff.length();
 				if(d > 1){
 					double str = 0.1 + 0.8/time;
-					double accel = power * str / (d * d);
+					double accel = power * str / (d * d + 1);
 					if(accel > 0.005){
-						o.velocity = o.velocity.plus(diff.times(accel));
+						o.velocity.add(diff.times(accel));
 					}
 				}else{
-					o.velocity = o.velocity.plus(diff.minus(o.velocity).times(0.2f));
+					o.velocity.add(diff.minus(o.velocity).times(0.2f));
 				}
 			}
 		}
