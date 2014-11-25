@@ -272,10 +272,11 @@
                 }, 
                 {
                  "height":18,
-                 "name":"script_TestBomber",
+                 "name":"script_BombSpawn",
                  "properties":
                     {
-
+                     "delay":"10",
+                     "interval":"100"
                     },
                  "rotation":0,
                  "type":"",

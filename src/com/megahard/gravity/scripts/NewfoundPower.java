@@ -7,14 +7,14 @@ import com.megahard.gravity.engine.base.GameObject;
 import com.megahard.gravity.engine.base.Script;
 import com.megahard.gravity.objects.Player;
 
-public class NoobParadise2 extends Script {
+public class NewfoundPower extends Script {
 	
 	private boolean firstRun = true;
 	private boolean active = false;
 	private int timer = 0;
 	private int offset = 20;
 
-	public NoobParadise2(Engine game, Double region) {
+	public NewfoundPower(Engine game, Double region) {
 		super(game, region);
 	}
 
@@ -30,9 +30,12 @@ public class NoobParadise2 extends Script {
 		if (active) {
 
 			final int halfbeat = 5;
-			final String[] messages = {"You can do a double jump to jump higher by pressing 'w' or the spacebar 2 times", ""};
+			final String[] messages = {"The rock you just got is called Gravitite"
+										,"You will see the number of Gravitites you have on the top left corner of your screen"
+										,"With it, you can create a Gravity Well by pressing and holding the left mouse button"
+										,"Gravity Wells alter gravity around it. Use it wisely!",""};
 
-			final int[] durations = { 20,10};
+			final int[] durations = { 15,25,28, 28,10};
 
 			int i;
 			int d = offset;

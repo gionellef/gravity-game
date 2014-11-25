@@ -7,14 +7,14 @@ import com.megahard.gravity.engine.base.GameObject;
 import com.megahard.gravity.engine.base.Script;
 import com.megahard.gravity.objects.Player;
 
-public class NoobParadise5a extends Script {
+public class SadWorld extends Script {
 	
 	private boolean firstRun = true;
 	private boolean active = false;
 	private int timer = 0;
 	private int offset = 20;
 
-	public NoobParadise5a(Engine game, Double region) {
+	public SadWorld(Engine game, Double region) {
 		super(game, region);
 	}
 
@@ -30,9 +30,9 @@ public class NoobParadise5a extends Script {
 		if (active) {
 
 			final int halfbeat = 5;
-			final String[] messages = {"Boxes like this can be affected by your Gravity Wells", ""};
+			final String[] messages = {"You can do a double jump to jump higher by pressing 'w' or the spacebar 2 times", ""};
 
-			final int[] durations = { 15,10};
+			final int[] durations = { 20,10};
 
 			int i;
 			int d = offset;

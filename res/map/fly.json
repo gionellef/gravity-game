@@ -2793,7 +2793,7 @@
                 },
              "2":
                 {
-                 "type":"Plasma"
+                 "type":"DeadlyObj"
                 },
              "3":
                 {
@@ -2801,7 +2801,7 @@
                 },
              "4":
                 {
-                 "type":"Gravitite"
+                 "type":"PowerItem"
                 },
              "5":
                 {

@@ -1,19 +1,19 @@
 Test Bed,untitled
-1 : Gravity,Gravity
-2 : The Unknown,NoobParadise_1
-3 : Sad World,NoobParadise_2
-4 : Lurking Danger,NoobParadise_3
-5 : The Awakening,TheAwakening
-6 : Newfound Power,NoobParadise_4
-7 : Machinery,NoobParadise_5
-8 : Escape,2_Escape
-9 : The Encounter,3_TheEncounter
-10 : Pit,Pit
-11 : Bridge,Bridge
-12 : Insequirus,Insequirus
-13 : Dots,dots
-14 : Snake,snake
-15 : Boom Room,BoomRoom
+1 : Gravity,1_Gravity
+2 : The Unknown,2_TheUnknown
+3 : Sad World,3_SadWorld
+4 : Lurking Danger,4_LurkingDanger
+5 : The Awakening,5_TheAwakening
+6 : Newfound Power,6_NewfoundPower
+7 : Machinery,7_Machinery
+8 : Escape,8_Escape
+9 : The Encounter,9_TheEncounter
+10 : Pit,10_Pit
+11 : Bridge,11_Bridge
+12 : Insequirus,12_Insequirus
+13 : Dots,13_Dots
+14 : Snake,14_Snake
+15 : Boom Room,15_BoomRoom
 Luck,luck
 Hell,hell
 Fly,fly

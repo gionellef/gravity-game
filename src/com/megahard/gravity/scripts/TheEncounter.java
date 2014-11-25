@@ -10,7 +10,7 @@ import com.megahard.gravity.engine.base.GameObject;
 import com.megahard.gravity.engine.base.Script;
 import com.megahard.gravity.objects.Player;
 
-public class SGalileo extends Script {
+public class TheEncounter extends Script {
 	
 	private Player player;
 	
@@ -37,7 +37,7 @@ public class SGalileo extends Script {
 	}
 	private Queue<Msg> msgQueue;
 
-	public SGalileo(Engine game, Double region) {
+	public TheEncounter(Engine game, Double region) {
 		super(game, region);
 		// TODO Auto-generated constructor stub
 	}

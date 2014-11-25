@@ -3238,6 +3238,10 @@
              "8":
                 {
                  "type":"Galileo"
+                },
+             "9":
+                {
+                 "type":"BigGravitite"
                 }
             },
          "tilewidth":64
