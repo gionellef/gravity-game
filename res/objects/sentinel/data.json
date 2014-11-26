@@ -1,0 +1,35 @@
+{
+	sheetWidth: 6,
+	width: 64,
+	height: 64,
+	actions: [
+		{
+			name: "default",
+			x: 0,
+			y: 0,
+			frames: 6,
+			delay: 6
+		},
+		{
+			name: "default-left",
+			x: 0,
+			y: 1,
+			frames: 6,
+			delay: 6
+		},
+		{
+			name: "fly",
+			x: 0,
+			y: 2,
+			frames: 6,
+			delay: 4
+		},
+		{
+			name: "fly-left",
+			x: 0,
+			y: 3,
+			frames: 6,
+			delay: 4
+		}
+	]
+}
