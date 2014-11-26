@@ -149,8 +149,9 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 		finishEsc = esc;
 		
 		finished = true;
-		finishTimer = esc ? 5 : 10;
-		fadeScreen(null, win || esc ? Color.black : Color.red, Math.max(0, finishTimer/2));
+		finishTimer = esc ? 10 : 20;
+		Color color = win || esc ? null : new Color(1, 0, 0, 0.5f);
+		fadeScreen(color, Color.black, Math.max(0, finishTimer/2));
 	}
 	
 	public void finalFinish(){
