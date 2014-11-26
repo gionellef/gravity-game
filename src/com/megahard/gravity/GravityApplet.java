@@ -1,9 +1,12 @@
 package com.megahard.gravity;
 
 import java.awt.BorderLayout;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
+import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -18,6 +21,7 @@ import javax.swing.plaf.synth.SynthLookAndFeel;
 
 import com.megahard.gravity.engine.Engine;
 import com.megahard.gravity.engine.EngineFinishListener;
+import com.megahard.gravity.engine.SpriteStore;
 import com.megahard.gravity.menus.LevelMenu;
 import com.megahard.gravity.menus.RetryMenu;
 import com.megahard.gravity.menus.TitleScreen;
@@ -56,6 +60,14 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 	public GravityApplet() {
 		// load font
 
+		SpriteStore s = new SpriteStore();
+		
+		Toolkit toolkit = Toolkit.getDefaultToolkit();
+		Point hotSpot = new Point(0,0);
+		
+		Cursor c = toolkit.createCustomCursor(s.loadImage("/pointer.png",false), hotSpot, "pointer");
+		setCursor(c);
+		
 		String fontPath = "/gravitate.ttf";
 		try {
 			Font font = Font.createFont(Font.TRUETYPE_FONT, com.megahard.gravity.engine.Renderer.class.getResourceAsStream(fontPath));
