@@ -16,7 +16,6 @@
   <object gid="505" x="680.667" y="295.333"/>
   <object gid="505" x="248.333" y="213.667"/>
   <object gid="506" x="237" y="467.333"/>
-  <object gid="507" x="417.5" y="408"/>
   <object gid="508" x="598.5" y="451.333"/>
   <object gid="505" x="169.5" y="473"/>
   <object gid="507" x="319.909" y="472"/>
@@ -32,5 +31,6 @@
    </properties>
   </object>
   <object gid="510" x="184" y="456"/>
+  <object gid="511" x="424" y="392"/>
  </objectgroup>
 </map>

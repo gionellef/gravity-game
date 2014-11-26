@@ -137,21 +137,6 @@
                  "y":467.333
                 }, 
                 {
-                 "gid":507,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":417.5,
-                 "y":408
-                }, 
-                {
                  "gid":508,
                  "height":0,
                  "name":"",
@@ -299,6 +284,21 @@
                  "width":0,
                  "x":184,
                  "y":456
+                }, 
+                {
+                 "gid":511,
+                 "height":0,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":424,
+                 "y":392
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -2500,7 +2500,7 @@
         {
          "firstgid":501,
          "image":"..\/..\/map-src\/objects.png",
-         "imageheight":128,
+         "imageheight":192,
          "imagewidth":320,
          "margin":0,
          "name":"objects",
@@ -2519,6 +2519,10 @@
              "1":
                 {
                  "type":"GravWell"
+                },
+             "10":
+                {
+                 "type":"Switch"
                 },
              "2":
                 {

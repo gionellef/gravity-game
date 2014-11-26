@@ -4,7 +4,7 @@ import com.megahard.gravity.engine.GameContext;
 import com.megahard.gravity.engine.base.GameObject;
 import com.megahard.gravity.util.Sound;
 
-public class Button extends Switch {
+public class Button extends PowerSource {
 
 	private int pressCounter = 0;
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tileset name="objects" tilewidth="64" tileheight="64">
- <image source="objects.png" width="320" height="128"/>
+ <image source="objects.png" width="320" height="192"/>
  <tile id="0">
   <properties>
    <property name="type" value="Player"/>
@@ -49,6 +49,11 @@
  <tile id="9">
   <properties>
    <property name="type" value="BigGravitite"/>
+  </properties>
+ </tile>
+ <tile id="10">
+  <properties>
+   <property name="type" value="Switch"/>
   </properties>
  </tile>
 </tileset>
