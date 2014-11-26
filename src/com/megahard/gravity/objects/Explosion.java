@@ -61,6 +61,7 @@ public class Explosion extends GameObject {
 
 			double strength = radius * 8;
 			Vector2 delta = o.position.minus(position);
+			delta.add(Math.random() * 0.1 - 0.05, Math.random() * 0.1 - 0.05);
 			double distance = delta.length();
 			Vector2 pushForce = delta.times(strength
 					/ (distance * distance + 1));
