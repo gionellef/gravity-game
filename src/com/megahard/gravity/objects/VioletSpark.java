@@ -8,6 +8,7 @@ public class VioletSpark extends GameObject {
 	public VioletSpark(GameContext game) {
 		super(game, "violet-spark");
 		size.set(0.01, 0.01);
+		floating = true;
 		mass = 0.001;
 		restitution = 1;
 		
@@ -18,7 +19,6 @@ public class VioletSpark extends GameObject {
 	public void update() {
 		super.update();
 		velocity = velocity.times(0.9);
-		velocity.y -= GameObject.GRAVITY;
 	}
 	
 	@Override

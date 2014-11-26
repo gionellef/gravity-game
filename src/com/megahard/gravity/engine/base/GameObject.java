@@ -10,6 +10,7 @@ public class GameObject {
 	private final GameContext game;
 
 	public boolean fixed;
+	public boolean floating;
 	
 	public Vector2 position;
 	public Vector2 velocity;
@@ -32,6 +33,7 @@ public class GameObject {
 		this.game = game;
 		
 		fixed = false;
+		floating = false;
 		
 		position = new Vector2();
 		velocity = new Vector2();
@@ -64,7 +66,10 @@ public class GameObject {
 		if(!fixed){
 			GameMap map = game.getMap();
 			
-			velocity.y += GRAVITY;
+			// things that don't float fall
+			if(!floating){
+				velocity.y += GRAVITY;
+			}
 	
 			// max velocity
 			if(velocity.length() > 1) {
