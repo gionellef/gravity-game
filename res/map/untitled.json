@@ -77,51 +77,6 @@
                  "y":470.917
                 }, 
                 {
-                 "gid":505,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":462.75,
-                 "y":426
-                }, 
-                {
-                 "gid":505,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":680.667,
-                 "y":295.333
-                }, 
-                {
-                 "gid":505,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":248.333,
-                 "y":213.667
-                }, 
-                {
                  "gid":506,
                  "height":0,
                  "name":"",
@@ -152,21 +107,6 @@
                  "y":451.333
                 }, 
                 {
-                 "gid":505,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":169.5,
-                 "y":473
-                }, 
-                {
                  "gid":507,
                  "height":0,
                  "name":"",
@@ -180,21 +120,6 @@
                  "width":0,
                  "x":319.909,
                  "y":472
-                }, 
-                {
-                 "gid":506,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":512.667,
-                 "y":291.333
                 }, 
                 {
                  "gid":509,
@@ -225,21 +150,6 @@
                  "width":0,
                  "x":663.75,
                  "y":472
-                }, 
-                {
-                 "gid":506,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":711.5,
-                 "y":480
                 }, 
                 {
                  "height":50,
@@ -282,8 +192,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":184,
-                 "y":456
+                 "x":172,
+                 "y":468
                 }, 
                 {
                  "gid":511,
@@ -299,6 +209,21 @@
                  "width":0,
                  "x":424,
                  "y":392
+                }, 
+                {
+                 "gid":512,
+                 "height":0,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":264,
+                 "y":328
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -2523,6 +2448,10 @@
              "10":
                 {
                  "type":"Switch"
+                },
+             "11":
+                {
+                 "type":"Sentinel"
                 },
              "2":
                 {
