@@ -56,7 +56,7 @@ public class TogglePlasma extends GameObject {
 	public void onCollide(GameObject obj) {
 		if(online){
 			if(obj.getClass().equals(Player.class)){
-				obj.kill();
+				obj.die();
 			}
 		}
 	}

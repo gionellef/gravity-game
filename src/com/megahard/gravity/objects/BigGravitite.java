@@ -23,8 +23,8 @@ public class BigGravitite extends GameObject {
 	}
 	
 	@Override
-	public void kill() {
-		super.kill();
+	public void die() {
+		super.die();
 		
 		for(int i=0; i<3; i++){
 			Gravitite g = new Gravitite(getGame());

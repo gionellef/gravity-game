@@ -68,7 +68,7 @@ public class Explosion extends GameObject {
 			if (distance < radius*2) {
 				o.applyImpulse(pushForce);
 				if (distance < radius && dest) {
-					o.kill();
+					o.die();
 				}
 			}
 		}

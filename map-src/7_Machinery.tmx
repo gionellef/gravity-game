@@ -2533,5 +2533,6 @@
   <object gid="505" x="572" y="267"/>
   <object gid="505" x="550" y="265"/>
   <object gid="505" x="534" y="266"/>
+  <object name="script_TutorialTargetSpawn" x="352" y="336" width="16" height="16"/>
  </objectgroup>
 </map>

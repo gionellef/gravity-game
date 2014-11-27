@@ -23,8 +23,8 @@ public class Gravitite extends GameObject {
 	}
 	
 	@Override
-	public void kill() {
-		super.kill();
+	public void die() {
+		super.die();
 		castSparks(3, 0.1);
 	}
 

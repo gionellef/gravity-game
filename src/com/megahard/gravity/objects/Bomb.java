@@ -80,7 +80,7 @@ public class Bomb extends GameObject {
 	}
 	
 	@Override
-	public void kill() {
+	public void die() {
 		detonate();
 	}
 	

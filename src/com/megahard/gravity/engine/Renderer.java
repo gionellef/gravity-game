@@ -14,6 +14,7 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.Transparency;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
 import java.awt.image.VolatileImage;
 import java.io.IOException;
 import java.util.Arrays;
@@ -68,6 +69,9 @@ public class Renderer extends Canvas {
 	private Image messageImage;
 	
 	private Image gravititeIcon;
+	private Image cursorEmpty;
+	private Image cursorFull;
+	private Image cursorHold;
 
 	private int fadeTime = 0;
 	private int fadeTimer = 0;
@@ -113,8 +117,13 @@ public class Renderer extends Canvas {
 		message = null;
 		
 		gravititeIcon = SpriteStore.get().loadImage("/gravitite-icon.png", false);
+		cursorEmpty = SpriteStore.get().loadImage("/crosshair-empty.png", false);
+		cursorFull = SpriteStore.get().loadImage("/crosshair.png", false);
+		cursorHold = SpriteStore.get().loadImage("/crosshair-hold.png", false);
 
-		setBackground(Color.black);
+		setCursor(getToolkit().createCustomCursor(
+				new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB),
+				new Point(0, 0), "null"));
 	}
 
 	public void render(GameState s) {
@@ -406,12 +415,15 @@ public class Renderer extends Canvas {
 	}
 
 	private void renderHud(Graphics2D g, int bufferWidth) {
+		Image cursor = cursorEmpty;
+		Point cursorHotspot = new Point(32, 32);
+		
 		Player player = game.getPlayerObject();
 		if (player != null) {
 			g.setColor(Color.white);
 			g.setFont(font);
 			
-			int gravitites = player.getGravsLeft();
+			int gravitites = player.getGravitites();
 			
 			if (gravitites > 0) {
 				if(gravitites <= 10){
@@ -424,12 +436,27 @@ public class Renderer extends Canvas {
 					g.drawImage(gravititeIcon, 10 + 8, 10 + 4, null);
 					drawString(g, Integer.toString(gravitites), 30, 22);
 				}
+				
+				cursor = cursorFull;
+				cursorHotspot.move(32, 32);
+			}
+			
+			if(player.getGravWell() != null){
+				cursor = cursorHold;
+				cursorHotspot.move(32, 32);
 			}
 
 			String mapName = GravityApplet.lm.maps.get(LevelMenu.lastMap)[0];
 
 			FontMetrics fm = g.getFontMetrics();
 			drawString(g, mapName, bufferWidth - fm.stringWidth(mapName) - 10, 20);
+		}
+		
+		if(getMousePosition() != null){
+			g.drawImage(cursor,
+				getMousePosition().x/SCALE_FACTOR - cursorHotspot.x,
+				getMousePosition().y/SCALE_FACTOR - cursorHotspot.y,
+				null);
 		}
 	}
 

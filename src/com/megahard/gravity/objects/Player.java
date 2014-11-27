@@ -38,7 +38,7 @@ public class Player extends GameObject {
 	private GravWell well = null;
 	private boolean isRunning = true;
 	private boolean isFacingLeft = false;
-	private int gravsLeft = 0;
+	private int gravitites = 0;
 	private int jumpsLeft = 0;
 	
 	private boolean alive = true;
@@ -107,17 +107,17 @@ public class Player extends GameObject {
 			}
 			if(getGame().mouseIsUp(MouseEvent.BUTTON1)){
 				if(well != null){
-					well.kill();
+					well.die();
 					well = null;
 				}
 			}
 		}else{
 			if(well != null){
-				well.kill();
+				well.die();
 				well = null;
 			}
 			staticFriction = 0.1;
-			gravsLeft = 0;
+			gravitites = 0;
 			jumpsLeft = 0;
 			isRunning = false;
 		}
@@ -131,7 +131,7 @@ public class Player extends GameObject {
 	}
 
 	@Override
-	public void kill() {
+	public void die() {
 		alive = false;
 		// TODO die animation
 //		setSpriteAction("die");
@@ -142,11 +142,11 @@ public class Player extends GameObject {
 	public void onCollide(GameObject obj) {
 		Class<? extends GameObject> objClass = obj.getClass();
 		if(objClass.equals(Gravitite.class)){
-			gravsLeft++;
+			gravitites++;
 			getGame().removeObject(obj);
 			getGame().playSoundAtLocation(Sound.power, position, 1);
 		}else if(objClass.equals(BigGravitite.class)){
-			gravsLeft += 5;
+			gravitites += 5;
 			getGame().removeObject(obj);
 			getGame().playSoundAtLocation(Sound.power, position, 1);
 		}
@@ -167,7 +167,7 @@ public class Player extends GameObject {
 	}
 
 	private void conjureGrav(Vector2 pos) {
-		if(gravsLeft > 0){
+		if(gravitites > 0){
 			// Find a clear spot for the gravwell to appear
 			if(!isAreaClear(pos)){
 				Vector2 pro = new Vector2();
@@ -184,9 +184,9 @@ public class Player extends GameObject {
 			}
 			
 			// make it appear now
-			gravsLeft--;
+			gravitites--;
 			
-			if(well != null) well.kill();
+			if(well != null) well.die();
 			
 			well = new GravWell(getGame());
 			well.position = pos;
@@ -287,8 +287,12 @@ public class Player extends GameObject {
 		sprite.setAction(action);
 	}
 	
-	public int getGravsLeft(){
-		return gravsLeft;
+	public int getGravitites(){
+		return gravitites;
+	}
+	
+	public GravWell getGravWell(){
+		return well;
 	}
 	
 	public int getJumpsLeft(){
@@ -296,7 +300,7 @@ public class Player extends GameObject {
 	}
 
 	public void setGravs(int i) {
-		gravsLeft = i;
+		gravitites = i;
 	}
 	
 }

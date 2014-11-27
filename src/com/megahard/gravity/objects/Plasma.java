@@ -23,7 +23,7 @@ public class Plasma extends GameObject {
 	@Override
 	public void onCollide(GameObject obj) {
 		if(obj.getClass().equals(Player.class)){
-			obj.kill();
+			obj.die();
 		}
 	}
 	

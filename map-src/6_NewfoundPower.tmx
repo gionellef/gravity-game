@@ -12,11 +12,13 @@
   <object gid="505" x="325" y="593"/>
   <object gid="505" x="306" y="594"/>
   <object gid="505" x="287" y="595"/>
-  <object gid="505" x="359" y="427"/>
-  <object gid="505" x="381" y="426"/>
-  <object gid="505" x="404" y="427"/>
+  <object gid="505" x="424" y="440"/>
+  <object gid="505" x="408" y="440"/>
+  <object gid="505" x="416" y="432"/>
   <object gid="505" x="314" y="503"/>
   <object gid="501" x="200" y="606"/>
   <object name="script_NewfoundPower" x="314.5" y="583.5" width="46" height="7.5"/>
+  <object name="script_TutorialTargetSpawn" x="352" y="368" width="32" height="32"/>
+  <object name="script_TutorialTargetSpawn" x="448" y="272" width="32" height="32"/>
  </objectgroup>
 </map>

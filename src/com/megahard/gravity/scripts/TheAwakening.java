@@ -138,14 +138,14 @@ public class TheAwakening extends ScriptSequencer {
 			@Override
 			public void run() {
 				while(!wells.isEmpty()){
-					wells.remove(0).kill();
+					wells.remove(0).die();
 				}				
 			}
 		}, 30);
 		addRunnable(new Runnable() {
 			@Override
 			public void run() {
-				gw.kill();
+				gw.die();
 			}
 		}, 30);
 		

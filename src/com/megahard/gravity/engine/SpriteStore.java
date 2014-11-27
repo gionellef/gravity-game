@@ -79,7 +79,7 @@ public class SpriteStore {
 		}
 		
 		GraphicsConfiguration gc = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
-		BufferedImage bimage = gc.createCompatibleImage(sourceImage.getWidth(), sourceImage.getHeight(), Transparency.BITMASK);
+		BufferedImage bimage = gc.createCompatibleImage(sourceImage.getWidth(), sourceImage.getHeight(), Transparency.TRANSLUCENT);
 
 		Graphics2D bg = bimage.createGraphics();
 		bg.drawImage(sourceImage,0,0,null);

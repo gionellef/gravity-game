@@ -203,7 +203,7 @@ public class GameObject {
 		}
 	}
 
-	public void kill() {
+	public void die() {
 		getGame().removeObject(this);
 	}
 	

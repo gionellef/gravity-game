@@ -61,7 +61,7 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 		// load font
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
 
-		Point hotSpot = new Point(0,0);
+		Point hotSpot = new Point(0, 0);
 		Cursor c = toolkit.createCustomCursor(SpriteStore.get().loadImage("/pointer.png",false), hotSpot, "pointer");
 		setCursor(c);
 		

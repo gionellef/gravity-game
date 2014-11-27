@@ -270,6 +270,20 @@
                  "width":0,
                  "x":534,
                  "y":266
+                }, 
+                {
+                 "height":16,
+                 "name":"script_TutorialTargetSpawn",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":352,
+                 "y":336
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -2471,7 +2485,7 @@
         {
          "firstgid":501,
          "image":"..\/..\/map-src\/objects.png",
-         "imageheight":128,
+         "imageheight":192,
          "imagewidth":320,
          "margin":0,
          "name":"objects",
@@ -2490,6 +2504,14 @@
              "1":
                 {
                  "type":"GravWell"
+                },
+             "10":
+                {
+                 "type":"Switch"
+                },
+             "11":
+                {
+                 "type":"Sentinel"
                 },
              "2":
                 {

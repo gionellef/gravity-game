@@ -37,7 +37,7 @@ public class GravWell extends GameObject {
 				Vector2 diff = position.minus(o.position);
 				double d = diff.length();
 				if(d > 1){
-					double str = 0.15 + 0.75/time;
+					double str = 0.12 + 0.78/time;
 					double accel = power * str / (d * d + 1);
 					if(accel > 0.001){
 						o.velocity.add(diff.times(accel));
@@ -82,7 +82,7 @@ public class GravWell extends GameObject {
 		}
 	}
 
-	public void kill() {
+	public void die() {
 		online = false;
 	}
 	

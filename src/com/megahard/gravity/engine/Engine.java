@@ -562,6 +562,8 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 	}
 	@Override
 	public void mouseExited(MouseEvent e) {
+		mouseX = -1;
+		mouseY = -1;
 	}
 	@Override
 	public void mousePressed(MouseEvent e) {
