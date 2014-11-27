@@ -347,7 +347,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 		
 		// Messages
 		if(messageExpiry > 0 && state.time > messageExpiry){
-			renderer.removeMessage();
+			removeMessage();
 		}
 		
 		// Dead player
@@ -854,6 +854,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 
 	@Override
 	public void removeMessage() {
+		messageExpiry = 0;
 		renderer.removeMessage();
 	}
 

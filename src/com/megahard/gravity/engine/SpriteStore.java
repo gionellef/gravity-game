@@ -29,6 +29,9 @@ public class SpriteStore {
 	private HashMap<String, VolatileImage> volatileImages = new HashMap<>();
 	private HashMap<String, BufferedImage> images = new HashMap<>();
 	
+	private SpriteStore(){
+	}
+	
 	/*
 	 * returns the single instance of this class
 	 */
@@ -123,8 +126,6 @@ public class SpriteStore {
 
 		redrawVolatileImage(vimage, imagePath);
 
-		System.out.println("createVolatileImage: " + imagePath);
-		
 		return vimage;
 	}
 

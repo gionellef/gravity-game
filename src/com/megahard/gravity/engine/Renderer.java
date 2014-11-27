@@ -59,7 +59,7 @@ public class Renderer extends Canvas {
 	private Image background;
 	private Image tileset;
 
-	private Point mapCachePosition;
+	private Point mapCachePosition = new Point();
 	private VolatileImage mapCache;
 
 	private String message;
@@ -169,7 +169,7 @@ public class Renderer extends Canvas {
 
 		BufferStrategy bs = getBufferStrategy();
 		if (bs == null) {
-			createBufferStrategy(1);
+			createBufferStrategy(2);
 			requestFocus();
 			bs = getBufferStrategy();
 		}
@@ -237,8 +237,8 @@ public class Renderer extends Canvas {
 			int halfBufHeight, int mapHeight, int mapWidth, double cx,
 			double cy, int cxm, int cym) {
 
-		int cacheWidth = (bufferWidth + TILE_SIZE);
-		int cacheHeight = (bufferHeight + TILE_SIZE);
+		int cacheWidth = (bufferWidth + TILE_SIZE * 4);
+		int cacheHeight = (bufferHeight + TILE_SIZE * 4);
 
 		int cacheIntervalX = (cacheWidth - bufferWidth) / TILE_SIZE * TILE_SIZE;
 		int cacheIntervalY = (cacheHeight - bufferHeight) / TILE_SIZE * TILE_SIZE;
@@ -269,12 +269,8 @@ public class Renderer extends Canvas {
 		
 		
 		// Check if cache contents is valid
-		if(mapCachePosition == null){
+		if(mapCachePosition.x != pxCacheStart || mapCachePosition.y != pyCacheStart){
 			redraw = true;
-		}else{
-			if(mapCachePosition.x != pxCacheStart || mapCachePosition.y != pyCacheStart){
-				redraw = true;
-			}
 		}
 		if(s.map.getDirty()){
 			redraw = true;

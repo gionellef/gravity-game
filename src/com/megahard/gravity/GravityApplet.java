@@ -50,8 +50,8 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 
 	private static final int FPS = 30;
 
-	public static final int WIDTH = 800;
-	public static final int HEIGHT = 600;
+	public static final int WIDTH = 1024;
+	public static final int HEIGHT = 768;
 	
 	public static boolean debug = false;
 	
@@ -59,13 +59,10 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 
 	public GravityApplet() {
 		// load font
-
-		SpriteStore s = new SpriteStore();
-		
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
+
 		Point hotSpot = new Point(0,0);
-		
-		Cursor c = toolkit.createCustomCursor(s.loadImage("/pointer.png",false), hotSpot, "pointer");
+		Cursor c = toolkit.createCustomCursor(SpriteStore.get().loadImage("/pointer.png",false), hotSpot, "pointer");
 		setCursor(c);
 		
 		String fontPath = "/gravitate.ttf";
@@ -136,28 +133,30 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 		watching = true;
 		running = true;
 		long mspf = 1000/FPS;
-		long threshold = mspf * 10;
+		long threshold = mspf * 20;
 		long start;
 		long error = 0;
 		try {
 			while (running) {
 				start = System.currentTimeMillis();
-
+				
 				if(error > threshold) error = 0;
 				engine.update();
 				while(error > mspf){
 					error -= mspf;
 					engine.update();
 				}
-				
 				if(error <= 0){
 					engine.getRenderer().render(engine.getState());
+				}else{
+					System.out.println("NORENDER");
 				}
 				
 				Thread.sleep(1);
 
 				// delay
 				error += System.currentTimeMillis() - start - mspf;
+				System.out.println(error);
 				if(error < 0){
 					Thread.sleep(-error);
 					error = 0;
