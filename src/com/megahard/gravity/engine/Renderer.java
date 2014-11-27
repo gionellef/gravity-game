@@ -1,5 +1,6 @@
 package com.megahard.gravity.engine;
 
+import java.awt.AlphaComposite;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Font;
@@ -7,8 +8,10 @@ import java.awt.FontFormatException;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GraphicsConfiguration;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
+import java.awt.Point;
 import java.awt.image.BufferStrategy;
 import java.awt.image.VolatileImage;
 import java.io.IOException;
@@ -55,6 +58,9 @@ public class Renderer extends Canvas {
 	private VolatileImage backBuffer;
 	private Image background;
 	private Image tileset;
+
+	private Point mapCachePosition;
+	private VolatileImage mapCache;
 
 	private String message;
 	private int messageChars;
@@ -114,13 +120,13 @@ public class Renderer extends Canvas {
 	long FadeTime = 0;
 	long MsgTime = 0;
 	long BufTime = 0;
-	
+
 	long lastPrintTime = 0;
-	
+
 	public void render(GameState s) {
-		
+
 		long Time;
-		
+
 		Time = System.currentTimeMillis();
 
 		if (backBuffer != null) {
@@ -159,7 +165,7 @@ public class Renderer extends Canvas {
 		double cy = camera.y;
 		int cxm = (int) (cx * TILE_SIZE);
 		int cym = (int) (cy * TILE_SIZE);
-		
+
 		InitTime += (System.currentTimeMillis() - Time);
 
 		do {
@@ -171,7 +177,7 @@ public class Renderer extends Canvas {
 			BackTime += (System.currentTimeMillis() - Time);
 
 			Time = System.currentTimeMillis();
-			renderMap(g, s, halfBufWidth, halfBufHeight, mapHeight, mapWidth,
+			renderMap(g, s, bufferWidth, bufferHeight, halfBufWidth, halfBufHeight, mapHeight, mapWidth,
 					cx, cy, cxm, cym);
 			MapTime += (System.currentTimeMillis() - Time);
 
@@ -201,7 +207,7 @@ public class Renderer extends Canvas {
 		} while (backBuffer.contentsLost());
 
 		Time = System.currentTimeMillis();
-		
+
 		BufferStrategy bs = getBufferStrategy();
 		if (bs == null) {
 			createBufferStrategy(1);
@@ -259,8 +265,8 @@ public class Renderer extends Canvas {
 		}
 
 		bs.show();
-		
-		if(lastPrintTime + 10000 < System.currentTimeMillis()){
+
+		if (lastPrintTime + 10000 < System.currentTimeMillis()) {
 			lastPrintTime = System.currentTimeMillis();
 			System.out.println();
 			System.out.println("InitTime:\t" + InitTime);
@@ -273,7 +279,7 @@ public class Renderer extends Canvas {
 			System.out.println("MsgTime:\t" + MsgTime);
 			System.out.println("BufTime:\t" + BufTime);
 		}
-	}	
+	}
 
 	private void renderBackground(Graphics2D g, int bufferWidth,
 			int bufferHeight, int mapHeight, int mapWidth, double cx, double cy) {
@@ -284,31 +290,95 @@ public class Renderer extends Canvas {
 				null);
 	}
 
-	private void renderMap(Graphics2D g, GameState s, int halfBufWidth,
+	private void renderMap(Graphics2D g, GameState s, int bufferWidth, int bufferHeight, int halfBufWidth,
 			int halfBufHeight, int mapHeight, int mapWidth, double cx,
 			double cy, int cxm, int cym) {
-		int yStart = (int) Math.max(0, Math.floor(cy - halfBufHeight / 16) - 1);
-		int yEnd = (int) Math.min(mapHeight - 1,
-				Math.ceil(cy + halfBufHeight / 16));
-		int xStart = (int) Math.max(0, Math.floor(cx - halfBufWidth / 16) - 1);
-		int xEnd = (int) Math.min(mapWidth - 1,
-				Math.ceil(cx + halfBufWidth / 16));
 
-		int tileSheetColumns = s.map.getImgwidth() / TILE_SIZE;
-		for (int y = yStart; y <= yEnd; y++) {
-			int dy = (int) (y * TILE_SIZE) - cym + halfBufHeight;
-			for (int x = xStart; x <= xEnd; x++) {
-				int dx = (int) (x * TILE_SIZE) - cxm + halfBufWidth;
+		int cacheWidth = (bufferWidth + TILE_SIZE);
+		int cacheHeight = (bufferHeight + TILE_SIZE);
 
-				Tile tile = s.map.getTile(x, y);
-				int tileIndex = tile.getTileIndex();
-				int frameX = (tileIndex % tileSheetColumns) * TILE_SIZE;
-				int frameY = (tileIndex / tileSheetColumns) * TILE_SIZE;
-				g.drawImage(tileset, dx, dy, dx + TILE_SIZE, dy + TILE_SIZE,
-						frameX, frameY, frameX + TILE_SIZE, frameY + TILE_SIZE,
-						null);
+		int cacheIntervalX = (cacheWidth - bufferWidth) / TILE_SIZE * TILE_SIZE;
+		int cacheIntervalY = (cacheHeight - bufferHeight) / TILE_SIZE * TILE_SIZE;
+
+		// Check if cache image is valid
+		boolean redraw = false;
+		GraphicsConfiguration gc = getGraphicsConfiguration();
+		if (mapCache == null) {
+			mapCache = gc.createCompatibleVolatileImage(cacheWidth, cacheHeight, VolatileImage.BITMASK);
+			redraw = true;
+		} else {
+			int valid = mapCache.validate(gc);
+			if (valid == VolatileImage.IMAGE_INCOMPATIBLE) {
+				mapCache = gc.createCompatibleVolatileImage(cacheWidth, cacheHeight, VolatileImage.BITMASK);
+			}
+			if(valid != VolatileImage.IMAGE_OK){
+				redraw = true;
 			}
 		}
+
+		// calculate part of map to be rendered to screen
+		int pxStart = cxm - halfBufWidth;
+		int pyStart = cym - halfBufHeight;
+
+		// calculate part of map to be rendered to cache
+		int pxCacheStart = pxStart / cacheIntervalX * cacheIntervalX;
+		int pyCacheStart = pyStart / cacheIntervalY * cacheIntervalY;
+		
+		
+		// Check if cache contents is valid
+		if(mapCachePosition == null){
+			redraw = true;
+		}else{
+			if(mapCachePosition.x != pxCacheStart || mapCachePosition.y != pyCacheStart){
+				redraw = true;
+			}
+		}
+		if(s.map.getDirty()){
+			redraw = true;
+			s.map.setDirty(false);
+		}
+
+		if (redraw) {
+			Graphics2D cg = mapCache.createGraphics();
+			cg.setComposite(AlphaComposite.Src);
+
+			mapCachePosition = new Point(pxCacheStart, pyCacheStart);
+
+			int txCacheStart = pxCacheStart / TILE_SIZE;
+			int tyCacheStart = pyCacheStart / TILE_SIZE;
+
+			// draw tiles to cache
+			int tileSheetColumns = s.map.getImgwidth() / TILE_SIZE;
+			for (int y = 0; y <= cacheHeight / TILE_SIZE; y++) {
+				int py = y * TILE_SIZE;
+				int ty = y + tyCacheStart;
+				for (int x = 0; x <= cacheWidth / TILE_SIZE; x++) {
+					int px = x * TILE_SIZE;
+					int tx = x + txCacheStart;
+					
+					if(tx >= 0 && ty >= 0 && tx < mapWidth && ty < mapHeight){
+						Tile tile = s.map.getTile(tx, ty);
+						int tileIndex = tile.getTileIndex();
+						int frameX = (tileIndex % tileSheetColumns) * TILE_SIZE;
+						int frameY = (tileIndex / tileSheetColumns) * TILE_SIZE;
+						cg.drawImage(tileset, px, py, px + TILE_SIZE, py
+								+ TILE_SIZE, frameX, frameY, frameX + TILE_SIZE,
+								frameY + TILE_SIZE, null);
+					}
+				}
+			}
+
+			cg.dispose();
+		}
+
+		int xSrc = pxStart - pxCacheStart;
+		int ySrc = pyStart - pyCacheStart;
+
+		g.drawImage(mapCache,
+				0, 0, bufferWidth, bufferHeight,
+				xSrc, ySrc, xSrc + bufferWidth, ySrc + bufferHeight,
+				null
+			);
 	}
 
 	private void renderMessages(Graphics2D g, GameState s, int bufferWidth,
@@ -414,22 +484,25 @@ public class Renderer extends Canvas {
 			int borderWidth = (int) (halfBufWidth - cx * TILE_SIZE + 1);
 			g.fillRect(0, 0, borderWidth, bufferHeight);
 			for (int i = 1; i < borderThickness; i++) {
-				g.setColor(new Color(
-						(int) Quad.easeInOut(i, 256, -256, borderThickness) << 24
-								| BORDER_COLOR.getRGB() & 0xFFFFFF, true));
+				g.setColor(new Color((int) Quad.easeInOut(i, 256, -256,
+						borderThickness) << 24
+						| BORDER_COLOR.getRGB()
+						& 0xFFFFFF, true));
 				g.drawLine(borderWidth + i, 0, borderWidth + i, bufferHeight);
 			}
 		}
-		if (cx * TILE_SIZE + halfBufWidth + borderThickness > s.map.getWidth() * TILE_SIZE) {
+		if (cx * TILE_SIZE + halfBufWidth + borderThickness > s.map.getWidth()
+				* TILE_SIZE) {
 			// right
 			g.setColor(BORDER_COLOR);
 			int borderWidth = (int) (cx * TILE_SIZE + halfBufWidth
 					- s.map.getWidth() * TILE_SIZE + 1);
 			g.fillRect(bufferWidth - borderWidth, 0, borderWidth, bufferHeight);
 			for (int i = 1; i < borderThickness; i++) {
-				g.setColor(new Color(
-						(int) Quad.easeInOut(i, 256, -256, borderThickness) << 24
-								| BORDER_COLOR.getRGB() & 0xFFFFFF, true));
+				g.setColor(new Color((int) Quad.easeInOut(i, 256, -256,
+						borderThickness) << 24
+						| BORDER_COLOR.getRGB()
+						& 0xFFFFFF, true));
 				g.drawLine(bufferWidth - borderWidth - i, 0, bufferWidth
 						- borderWidth - i, bufferHeight);
 			}
@@ -440,13 +513,15 @@ public class Renderer extends Canvas {
 			int borderHeight = (int) (halfBufHeight - cy * TILE_SIZE + 1);
 			g.fillRect(0, 0, bufferWidth, borderHeight);
 			for (int i = 1; i < borderThickness; i++) {
-				g.setColor(new Color(
-						(int) Quad.easeInOut(i, 256, -256, borderThickness) << 24
-								| BORDER_COLOR.getRGB() & 0xFFFFFF, true));
+				g.setColor(new Color((int) Quad.easeInOut(i, 256, -256,
+						borderThickness) << 24
+						| BORDER_COLOR.getRGB()
+						& 0xFFFFFF, true));
 				g.drawLine(0, borderHeight + i, bufferWidth, borderHeight + i);
 			}
 		}
-		if (cy * TILE_SIZE + halfBufHeight + borderThickness > s.map.getHeight() * TILE_SIZE) {
+		if (cy * TILE_SIZE + halfBufHeight + borderThickness > s.map
+				.getHeight() * TILE_SIZE) {
 			// bottom
 			g.setColor(BORDER_COLOR);
 			int borderHeight = (int) (cy * TILE_SIZE + halfBufHeight
@@ -454,9 +529,10 @@ public class Renderer extends Canvas {
 			g.fillRect(0, bufferHeight - borderHeight, bufferWidth,
 					borderHeight);
 			for (int i = 1; i < borderThickness; i++) {
-				g.setColor(new Color(
-						(int) Quad.easeInOut(i, 256, -256, borderThickness) << 24
-								| BORDER_COLOR.getRGB() & 0xFFFFFF, true));
+				g.setColor(new Color((int) Quad.easeInOut(i, 256, -256,
+						borderThickness) << 24
+						| BORDER_COLOR.getRGB()
+						& 0xFFFFFF, true));
 				g.drawLine(0, bufferHeight - borderHeight - i, bufferWidth,
 						bufferHeight - borderHeight - i);
 			}

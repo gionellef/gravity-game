@@ -50,6 +50,7 @@ public class LevelMenu extends JPanel{
 		GridBagConstraints c = new GridBagConstraints();
 		
 		JLabel titleLabel = new JLabel(name, SwingConstants.CENTER);
+		titleLabel.setFont(titleLabel.getFont().deriveFont(40f));
 		titleLabel.setPreferredSize(new Dimension(800, 200));
 		titleLabel.setForeground(Color.white);
 		
@@ -102,7 +103,6 @@ public class LevelMenu extends JPanel{
 		c.gridy = 2;
 		c.gridwidth = 3;
 		c.weightx = 1;
-		c.ipady = 40;
 		c.fill = GridBagConstraints.BOTH;
 		innerPanel.add(playButton, c);
 		

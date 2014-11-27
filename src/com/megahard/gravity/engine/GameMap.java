@@ -36,6 +36,7 @@ public class GameMap {
 	public Layers[] layers;
 
 	private Map<Integer, Tile> tileMap;
+	private boolean dirty = true;
 
 	
 
@@ -60,6 +61,8 @@ public class GameMap {
 		
 		imgheight = tilesets[0].getImageheight();
 		imgwidth = tilesets[0].getImagewidth();
+		
+		setDirty(true);
 	}
 
 	private Tile createOrGetTileFromIndex(int tileIndex) {
@@ -102,6 +105,8 @@ public class GameMap {
 	public void setTile(int x, int y, int index) {
 		Tile tile = createOrGetTileFromIndex(index);
 		map[y * width + x] = tile;
+
+		setDirty(true);
 	}
 
 	public int getTilewidth() {
@@ -242,6 +247,14 @@ public class GameMap {
 		}
 
 
+	}
+
+	public boolean getDirty() {
+		return dirty;
+	}
+
+	public void setDirty(boolean value) {
+		dirty = value;
 	}
 
 }
