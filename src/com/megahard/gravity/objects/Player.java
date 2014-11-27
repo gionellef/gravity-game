@@ -124,7 +124,7 @@ public class Player extends GameObject {
 	}
 	
 	private void toggleSwitch() {
-		Switch sw = getGame().findObject(Switch.class, position.x - 0.05, position.y - 0.05, 0.1, 0.1, true);
+		Switch sw = getGame().findObject(Switch.class, position.x - 0.5, position.y - 0.5, 1, 1, true);
 		if(sw != null){
 			sw.setSwitch(!sw.getSwitch());
 		}

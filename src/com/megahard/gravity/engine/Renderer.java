@@ -32,7 +32,7 @@ public class Renderer extends Canvas {
 
 	private static final String BACKGROUND_PATH = "/back75.png";
 
-	private static final Color BORDER_COLOR = new Color(0x252525);
+	private static final Color BORDER_COLOR = new Color(0x242523);
 
 	private static final long serialVersionUID = 1L;
 

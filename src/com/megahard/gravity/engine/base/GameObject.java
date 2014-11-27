@@ -77,7 +77,7 @@ public class GameObject {
 			}
 	
 			// Get object bounds
-			final double E = 1e-6;
+			final double E = 1e-3;
 			double left = position.x - size.x / 2;
 			double right = position.x + size.x / 2 - E;
 			double up = position.y - size.y / 2;

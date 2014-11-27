@@ -32,14 +32,14 @@ public class GravWell extends GameObject {
 		time++;
 		
 		if(online || (sprite.getAction().equals("create") && sprite.getFrame() == 0)){
-			double radius = 12;
+			double radius = 19;
 			for(GameObject o : getGame().findObjects(position.x - radius, position.y - radius, 2*radius, 2*radius, true)){
 				Vector2 diff = position.minus(o.position);
 				double d = diff.length();
 				if(d > 1){
-					double str = 0.1 + 0.8/time;
+					double str = 0.15 + 0.75/time;
 					double accel = power * str / (d * d + 1);
-					if(accel > 0.005){
+					if(accel > 0.001){
 						o.velocity.add(diff.times(accel));
 					}
 				}else{
