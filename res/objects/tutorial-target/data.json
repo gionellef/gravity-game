@@ -1,0 +1,22 @@
+{
+	sheetWidth: 5,
+	width: 64,
+	height: 64,
+	actions: [
+		{
+			name: "default",
+			x: 0,
+			y: 1,
+			frames: 5,
+			delay: 1,
+			next: "idle"
+		},
+		{
+			name: "idle",
+			x: 0,
+			y: 0,
+			frames: 5,
+			delay: 1
+		}
+	]
+}
