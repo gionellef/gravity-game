@@ -143,22 +143,17 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 			while (running) {
 				start = System.currentTimeMillis();
 
-				// processing
 				if(error > threshold) error = 0;
 				engine.update();
 				while(error > mspf){
 					error -= mspf;
 					engine.update();
 				}
+				
 				if(error <= 0){
-					try {
-						engine.getRenderer().render(engine.getState());
-					} catch (IllegalStateException e) {
-						// no error. haha
-					}
-					
+					engine.getRenderer().render(engine.getState());
 				}
-					
+				
 				Thread.sleep(1);
 
 				// delay

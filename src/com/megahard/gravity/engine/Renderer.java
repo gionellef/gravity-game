@@ -111,24 +111,7 @@ public class Renderer extends Canvas {
 		setBackground(Color.black);
 	}
 
-	long InitTime = 0;
-	long BackTime = 0;
-	long MapTime = 0;
-	long ObjTime = 0;
-	long BorderTime = 0;
-	long HudTime = 0;
-	long FadeTime = 0;
-	long MsgTime = 0;
-	long BufTime = 0;
-
-	long lastPrintTime = 0;
-
 	public void render(GameState s) {
-
-		long Time;
-
-		Time = System.currentTimeMillis();
-
 		if (backBuffer != null) {
 			int valid = backBuffer.validate(getGraphicsConfiguration());
 			if (valid == VolatileImage.IMAGE_INCOMPATIBLE) {
@@ -166,47 +149,23 @@ public class Renderer extends Canvas {
 		int cxm = (int) (cx * TILE_SIZE);
 		int cym = (int) (cy * TILE_SIZE);
 
-		InitTime += (System.currentTimeMillis() - Time);
-
 		do {
 			Graphics2D g = backBuffer.createGraphics();
 
-			Time = System.currentTimeMillis();
 			renderBackground(g, bufferWidth, bufferHeight, mapHeight, mapWidth,
 					cx, cy);
-			BackTime += (System.currentTimeMillis() - Time);
-
-			Time = System.currentTimeMillis();
 			renderMap(g, s, bufferWidth, bufferHeight, halfBufWidth, halfBufHeight, mapHeight, mapWidth,
 					cx, cy, cxm, cym);
-			MapTime += (System.currentTimeMillis() - Time);
-
-			Time = System.currentTimeMillis();
 			renderObjects(g, s, bufferWidth, bufferHeight, halfBufWidth,
 					halfBufHeight, cxm, cym);
-			ObjTime += (System.currentTimeMillis() - Time);
-
-			Time = System.currentTimeMillis();
 			renderBorders(g, s, bufferWidth, bufferHeight, halfBufWidth,
 					halfBufHeight, cx, cy);
-			BorderTime += (System.currentTimeMillis() - Time);
-
-			Time = System.currentTimeMillis();
 			renderHUD(g);
-			HudTime += (System.currentTimeMillis() - Time);
-
-			Time = System.currentTimeMillis();
 			renderFade(g, bufferWidth, bufferHeight);
-			FadeTime += (System.currentTimeMillis() - Time);
-
-			Time = System.currentTimeMillis();
 			renderMessages(g, s, bufferWidth, bufferHeight);
-			MsgTime += (System.currentTimeMillis() - Time);
 
 			g.dispose();
 		} while (backBuffer.contentsLost());
-
-		Time = System.currentTimeMillis();
 
 		BufferStrategy bs = getBufferStrategy();
 		if (bs == null) {
@@ -218,8 +177,6 @@ public class Renderer extends Canvas {
 		Graphics bg = bs.getDrawGraphics();
 		bg.drawImage(backBuffer, 0, 0, GravityApplet.WIDTH,
 				GravityApplet.HEIGHT, 0, 0, bufferWidth, bufferHeight, null);
-
-		BufTime += (System.currentTimeMillis() - Time);
 
 		if (GravityApplet.debug) {
 			bg.setFont(font);
@@ -265,20 +222,6 @@ public class Renderer extends Canvas {
 		}
 
 		bs.show();
-
-		if (lastPrintTime + 10000 < System.currentTimeMillis()) {
-			lastPrintTime = System.currentTimeMillis();
-			System.out.println();
-			System.out.println("InitTime:\t" + InitTime);
-			System.out.println("BackTime:\t" + BackTime);
-			System.out.println("MapTime:\t" + MapTime);
-			System.out.println("ObjTime:\t" + ObjTime);
-			System.out.println("BorderTime:\t" + BorderTime);
-			System.out.println("HudTime:\t" + HudTime);
-			System.out.println("FadeTime:\t" + FadeTime);
-			System.out.println("MsgTime:\t" + MsgTime);
-			System.out.println("BufTime:\t" + BufTime);
-		}
 	}
 
 	private void renderBackground(Graphics2D g, int bufferWidth,
