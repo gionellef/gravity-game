@@ -10,10 +10,10 @@ Test Bed,untitled
 9 : The Encounter,9_TheEncounter
 10 : Pit,10_Pit
 11 : Bridge,11_Bridge
-12 : Insequirus,12_Insequirus
 13 : Dots,13_Dots
 14 : Snake,14_Snake
 15 : Boom Room,15_BoomRoom
+Insequirus,12_Insequirus
 Luck,luck
 Hell,hell
 Fly,fly

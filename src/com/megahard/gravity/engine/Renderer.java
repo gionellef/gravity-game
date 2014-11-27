@@ -105,7 +105,23 @@ public class Renderer extends Canvas {
 		setBackground(Color.black);
 	}
 
+	long InitTime = 0;
+	long BackTime = 0;
+	long MapTime = 0;
+	long ObjTime = 0;
+	long BorderTime = 0;
+	long HudTime = 0;
+	long FadeTime = 0;
+	long MsgTime = 0;
+	long BufTime = 0;
+	
+	long lastPrintTime = 0;
+	
 	public void render(GameState s) {
+		
+		long Time;
+		
+		Time = System.currentTimeMillis();
 
 		if (backBuffer != null) {
 			int valid = backBuffer.validate(getGraphicsConfiguration());
@@ -143,28 +159,52 @@ public class Renderer extends Canvas {
 		double cy = camera.y;
 		int cxm = (int) (cx * TILE_SIZE);
 		int cym = (int) (cy * TILE_SIZE);
+		
+		InitTime += (System.currentTimeMillis() - Time);
 
 		do {
-			Graphics2D g = (Graphics2D) backBuffer.getGraphics();
+			Graphics2D g = backBuffer.createGraphics();
 
+			Time = System.currentTimeMillis();
 			renderBackground(g, bufferWidth, bufferHeight, mapHeight, mapWidth,
 					cx, cy);
+			BackTime += (System.currentTimeMillis() - Time);
+
+			Time = System.currentTimeMillis();
 			renderMap(g, s, halfBufWidth, halfBufHeight, mapHeight, mapWidth,
 					cx, cy, cxm, cym);
+			MapTime += (System.currentTimeMillis() - Time);
+
+			Time = System.currentTimeMillis();
 			renderObjects(g, s, bufferWidth, bufferHeight, halfBufWidth,
 					halfBufHeight, cxm, cym);
+			ObjTime += (System.currentTimeMillis() - Time);
+
+			Time = System.currentTimeMillis();
 			renderBorders(g, s, bufferWidth, bufferHeight, halfBufWidth,
 					halfBufHeight, cx, cy);
+			BorderTime += (System.currentTimeMillis() - Time);
+
+			Time = System.currentTimeMillis();
 			renderHUD(g);
+			HudTime += (System.currentTimeMillis() - Time);
+
+			Time = System.currentTimeMillis();
 			renderFade(g, bufferWidth, bufferHeight);
+			FadeTime += (System.currentTimeMillis() - Time);
+
+			Time = System.currentTimeMillis();
 			renderMessages(g, s, bufferWidth, bufferHeight);
+			MsgTime += (System.currentTimeMillis() - Time);
 
 			g.dispose();
 		} while (backBuffer.contentsLost());
 
+		Time = System.currentTimeMillis();
+		
 		BufferStrategy bs = getBufferStrategy();
 		if (bs == null) {
-			createBufferStrategy(2);
+			createBufferStrategy(1);
 			requestFocus();
 			bs = getBufferStrategy();
 		}
@@ -172,6 +212,8 @@ public class Renderer extends Canvas {
 		Graphics bg = bs.getDrawGraphics();
 		bg.drawImage(backBuffer, 0, 0, GravityApplet.WIDTH,
 				GravityApplet.HEIGHT, 0, 0, bufferWidth, bufferHeight, null);
+
+		BufTime += (System.currentTimeMillis() - Time);
 
 		if (GravityApplet.debug) {
 			bg.setFont(font);
@@ -217,7 +259,21 @@ public class Renderer extends Canvas {
 		}
 
 		bs.show();
-	}
+		
+		if(lastPrintTime + 10000 < System.currentTimeMillis()){
+			lastPrintTime = System.currentTimeMillis();
+			System.out.println();
+			System.out.println("InitTime:\t" + InitTime);
+			System.out.println("BackTime:\t" + BackTime);
+			System.out.println("MapTime:\t" + MapTime);
+			System.out.println("ObjTime:\t" + ObjTime);
+			System.out.println("BorderTime:\t" + BorderTime);
+			System.out.println("HudTime:\t" + HudTime);
+			System.out.println("FadeTime:\t" + FadeTime);
+			System.out.println("MsgTime:\t" + MsgTime);
+			System.out.println("BufTime:\t" + BufTime);
+		}
+	}	
 
 	private void renderBackground(Graphics2D g, int bufferWidth,
 			int bufferHeight, int mapHeight, int mapWidth, double cx, double cy) {
@@ -351,54 +407,55 @@ public class Renderer extends Canvas {
 	private void renderBorders(Graphics2D g, GameState s, int bufferWidth,
 			int bufferHeight, int halfBufWidth, int halfBufHeight, double cx,
 			double cy) {
-		if (cx * TILE_SIZE - halfBufWidth < 0) {
+		int borderThickness = 32;
+		if (cx * TILE_SIZE - halfBufWidth - borderThickness < 0) {
 			// left
 			g.setColor(BORDER_COLOR);
 			int borderWidth = (int) (halfBufWidth - cx * TILE_SIZE + 1);
 			g.fillRect(0, 0, borderWidth, bufferHeight);
-			for (int i = 1; i < 16; i++) {
+			for (int i = 1; i < borderThickness; i++) {
 				g.setColor(new Color(
-						(int) (Quad.easeInOut(i, 0, 256, 16) * 255) << 24
+						(int) Quad.easeInOut(i, 256, -256, borderThickness) << 24
 								| BORDER_COLOR.getRGB() & 0xFFFFFF, true));
 				g.drawLine(borderWidth + i, 0, borderWidth + i, bufferHeight);
 			}
 		}
-		if (cx * TILE_SIZE + halfBufWidth > s.map.getWidth() * TILE_SIZE) {
+		if (cx * TILE_SIZE + halfBufWidth + borderThickness > s.map.getWidth() * TILE_SIZE) {
 			// right
 			g.setColor(BORDER_COLOR);
 			int borderWidth = (int) (cx * TILE_SIZE + halfBufWidth
 					- s.map.getWidth() * TILE_SIZE + 1);
 			g.fillRect(bufferWidth - borderWidth, 0, borderWidth, bufferHeight);
-			for (int i = 1; i < 16; i++) {
+			for (int i = 1; i < borderThickness; i++) {
 				g.setColor(new Color(
-						(int) (Quad.easeInOut(i, 0, 256, 16) * 255) << 24
+						(int) Quad.easeInOut(i, 256, -256, borderThickness) << 24
 								| BORDER_COLOR.getRGB() & 0xFFFFFF, true));
 				g.drawLine(bufferWidth - borderWidth - i, 0, bufferWidth
 						- borderWidth - i, bufferHeight);
 			}
 		}
-		if (cy * TILE_SIZE - halfBufHeight < 0) {
+		if (cy * TILE_SIZE - halfBufHeight - borderThickness < 0) {
 			// top
 			g.setColor(BORDER_COLOR);
 			int borderHeight = (int) (halfBufHeight - cy * TILE_SIZE + 1);
 			g.fillRect(0, 0, bufferWidth, borderHeight);
-			for (int i = 1; i < 16; i++) {
+			for (int i = 1; i < borderThickness; i++) {
 				g.setColor(new Color(
-						(int) (Quad.easeInOut(i, 0, 256, 16) * 255) << 24
+						(int) Quad.easeInOut(i, 256, -256, borderThickness) << 24
 								| BORDER_COLOR.getRGB() & 0xFFFFFF, true));
 				g.drawLine(0, borderHeight + i, bufferWidth, borderHeight + i);
 			}
 		}
-		if (cy * TILE_SIZE + halfBufHeight > s.map.getHeight() * TILE_SIZE) {
+		if (cy * TILE_SIZE + halfBufHeight + borderThickness > s.map.getHeight() * TILE_SIZE) {
 			// bottom
 			g.setColor(BORDER_COLOR);
 			int borderHeight = (int) (cy * TILE_SIZE + halfBufHeight
 					- s.map.getHeight() * TILE_SIZE + 1);
 			g.fillRect(0, bufferHeight - borderHeight, bufferWidth,
 					borderHeight);
-			for (int i = 1; i < 16; i++) {
+			for (int i = 1; i < borderThickness; i++) {
 				g.setColor(new Color(
-						(int) (Quad.easeInOut(i, 0, 256, 16) * 255) << 24
+						(int) Quad.easeInOut(i, 256, -256, borderThickness) << 24
 								| BORDER_COLOR.getRGB() & 0xFFFFFF, true));
 				g.drawLine(0, bufferHeight - borderHeight - i, bufferWidth,
 						bufferHeight - borderHeight - i);

@@ -94,13 +94,14 @@ public class SpriteStore {
 		if(vimage == null){
 			vimage = createVolatileImage(imagePath);
 			volatileImages.put(imagePath, vimage);
-		}
-		int valid = vimage.validate(gc);
-		if(valid == VolatileImage.IMAGE_RESTORED) {
-			redrawVolatileImage(vimage, imagePath);
-		}else if(valid != VolatileImage.IMAGE_OK){
-			vimage = createVolatileImage(imagePath);
-			volatileImages.put(imagePath, vimage);
+		}else{
+			int valid = vimage.validate(gc);
+			if(valid == VolatileImage.IMAGE_RESTORED) {
+				redrawVolatileImage(vimage, imagePath);
+			}else if(valid != VolatileImage.IMAGE_OK){
+				vimage = createVolatileImage(imagePath);
+				volatileImages.put(imagePath, vimage);
+			}
 		}
 
 		return vimage;
@@ -121,6 +122,8 @@ public class SpriteStore {
 		}
 
 		redrawVolatileImage(vimage, imagePath);
+
+		System.out.println("createVolatileImage: " + imagePath);
 		
 		return vimage;
 	}

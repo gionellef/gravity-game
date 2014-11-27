@@ -154,10 +154,13 @@ public class Player extends GameObject {
 	
 	@Override
 	public void onHitBottom() {
-		setSpriteAction("land");
 		double p = Math.min(1, velocity.y);
-		int f = (int) (Math.pow(1 - p, 0.3) * sprite.getTotalFrames());
-		sprite.setFrame(f);
+		
+		if(p > 0.5){
+			setSpriteAction("land");
+			int f = (int) (Math.pow(2 - p*2, 0.3) * sprite.getTotalFrames());
+			sprite.setFrame(f);
+		}
 
 		Clips sound = LAND_SOUNDS[RAND.nextInt(LAND_SOUNDS.length)];
 		getGame().playSoundAtLocation(sound, position, 0.3 + p * 0.4); 

@@ -1630,13 +1630,13 @@
     <property name="interval" value="250"/>
    </properties>
   </object>
-  <object name="script_BombSpawn" x="320" y="60" width="24" height="24">
+  <object name="script_BombSpawn" x="316" y="60" width="28" height="24">
    <properties>
     <property name="delay" value="326"/>
     <property name="interval" value="250"/>
    </properties>
   </object>
-  <object name="script_BombSpawn" x="308" y="56" width="32" height="32">
+  <object name="script_BombSpawn" x="308" y="56" width="36" height="32">
    <properties>
     <property name="delay" value="602"/>
     <property name="interval" value="250"/>
@@ -1646,8 +1646,8 @@
   <object gid="510" x="464" y="388"/>
   <object name="script_BombSpawn" x="304" y="48" width="48" height="48">
    <properties>
-    <property name="delay" value="1200"/>
-    <property name="interval" value="101"/>
+    <property name="delay" value="1600"/>
+    <property name="interval" value="123"/>
    </properties>
   </object>
  </objectgroup>

@@ -297,8 +297,8 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":24,
-                 "x":320,
+                 "width":28,
+                 "x":316,
                  "y":60
                 }, 
                 {
@@ -312,7 +312,7 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":32,
+                 "width":36,
                  "x":308,
                  "y":56
                 }, 
@@ -351,8 +351,8 @@
                  "name":"script_BombSpawn",
                  "properties":
                     {
-                     "delay":"1200",
-                     "interval":"101"
+                     "delay":"1600",
+                     "interval":"123"
                     },
                  "rotation":0,
                  "type":"",
@@ -2561,7 +2561,7 @@
         {
          "firstgid":501,
          "image":"..\/..\/map-src\/objects.png",
-         "imageheight":128,
+         "imageheight":192,
          "imagewidth":320,
          "margin":0,
          "name":"objects",
@@ -2580,6 +2580,14 @@
              "1":
                 {
                  "type":"GravWell"
+                },
+             "10":
+                {
+                 "type":"Switch"
+                },
+             "11":
+                {
+                 "type":"Sentinel"
                 },
              "2":
                 {
