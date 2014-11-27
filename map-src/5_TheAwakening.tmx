@@ -8,14 +8,10 @@
   </data>
  </layer>
  <objectgroup name="Object Layer 1">
-  <object gid="505" x="456" y="368"/>
-  <object gid="506" x="380.75" y="355.25"/>
-  <object gid="506" x="530.833" y="354.917"/>
-  <object gid="506" x="584" y="324"/>
-  <object gid="506" x="343.636" y="323.614"/>
+  <object gid="505" x="472" y="376"/>
   <object gid="501" x="216.5" y="281"/>
   <object gid="504" x="679.5" y="280"/>
-  <object name="script_TheAwakening" x="483.955" y="151.212" width="26" height="208.5"/>
+  <object name="script_TheAwakening" x="472" y="152" width="32" height="208"/>
   <object name="script_IsaacPre" x="337" y="176" width="79" height="72"/>
  </objectgroup>
 </map>

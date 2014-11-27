@@ -217,7 +217,7 @@ public class Player extends GameObject {
 			&& !map.getTile(sw).getCollidable();
 	}
 
-	private void run(boolean left) {
+	public void run(boolean left) {
 		double runStrength = 0.12;
 		double airStrength = 0.06;
 		double airMaxSpeed = 0.2;
@@ -235,7 +235,7 @@ public class Player extends GameObject {
 		}
 	}
 
-	private void jump() {
+	public void jump() {
 		double jumpStrength = 0.5;
 		
 		if(standing){

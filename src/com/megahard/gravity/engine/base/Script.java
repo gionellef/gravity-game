@@ -47,6 +47,6 @@ public abstract class Script {
 	}
 
 	protected Vector2 getCenter() {
-		return new Vector2((region.x * 2 + region.width) / 2, (region.y * 2 + region.height) / 2);
+		return new Vector2(region.getCenterX(), region.getCenterY());
 	}
 }

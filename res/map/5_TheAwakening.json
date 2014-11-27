@@ -28,68 +28,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":456,
-                 "y":368
-                }, 
-                {
-                 "gid":506,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":380.75,
-                 "y":355.25
-                }, 
-                {
-                 "gid":506,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":530.833,
-                 "y":354.917
-                }, 
-                {
-                 "gid":506,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":584,
-                 "y":324
-                }, 
-                {
-                 "gid":506,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":343.636,
-                 "y":323.614
+                 "x":472,
+                 "y":376
                 }, 
                 {
                  "gid":501,
@@ -122,7 +62,7 @@
                  "y":280
                 }, 
                 {
-                 "height":208.5,
+                 "height":208,
                  "name":"script_TheAwakening",
                  "properties":
                     {
@@ -131,9 +71,9 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":26,
-                 "x":483.955,
-                 "y":151.212
+                 "width":32,
+                 "x":472,
+                 "y":152
                 }, 
                 {
                  "height":72,
@@ -2349,7 +2289,7 @@
         {
          "firstgid":501,
          "image":"..\/..\/map-src\/objects.png",
-         "imageheight":128,
+         "imageheight":192,
          "imagewidth":320,
          "margin":0,
          "name":"objects",
@@ -2368,6 +2308,14 @@
              "1":
                 {
                  "type":"GravWell"
+                },
+             "10":
+                {
+                 "type":"Switch"
+                },
+             "11":
+                {
+                 "type":"Sentinel"
                 },
              "2":
                 {

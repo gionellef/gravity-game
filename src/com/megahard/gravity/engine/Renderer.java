@@ -12,6 +12,7 @@ import java.awt.GraphicsConfiguration;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.Point;
+import java.awt.Transparency;
 import java.awt.image.BufferStrategy;
 import java.awt.image.VolatileImage;
 import java.io.IOException;
@@ -59,11 +60,14 @@ public class Renderer extends Canvas {
 	private Image background;
 	private Image tileset;
 
-	private Point mapCachePosition = new Point();
+	private Point mapCachePosition;
 	private VolatileImage mapCache;
 
 	private String message;
 	private int messageChars;
+	private Image messageImage;
+	
+	private Image gravititeIcon;
 
 	private int fadeTime = 0;
 	private int fadeTimer = 0;
@@ -94,8 +98,6 @@ public class Renderer extends Canvas {
 			font = new Font(Font.SANS_SERIF, Font.PLAIN, 10);
 	}
 
-	private Image messageImage;
-
 	public Renderer(GameContext engine) {
 		game = engine;
 
@@ -105,8 +107,12 @@ public class Renderer extends Canvas {
 
 		background = SpriteStore.get().loadImage(BACKGROUND_PATH, true);
 		tileset = SpriteStore.get().loadImage(TILESET_PATH, true);
+		
+		mapCachePosition = new Point();
 
 		message = null;
+		
+		gravititeIcon = SpriteStore.get().loadImage("/gravitite-icon.png", false);
 
 		setBackground(Color.black);
 	}
@@ -160,7 +166,7 @@ public class Renderer extends Canvas {
 					halfBufHeight, cxm, cym);
 			renderBorders(g, s, bufferWidth, bufferHeight, halfBufWidth,
 					halfBufHeight, cx, cy);
-			renderHUD(g);
+			renderHud(g, bufferWidth);
 			renderFade(g, bufferWidth, bufferHeight);
 			renderMessages(g, s, bufferWidth, bufferHeight);
 
@@ -247,12 +253,12 @@ public class Renderer extends Canvas {
 		boolean redraw = false;
 		GraphicsConfiguration gc = getGraphicsConfiguration();
 		if (mapCache == null) {
-			mapCache = gc.createCompatibleVolatileImage(cacheWidth, cacheHeight, VolatileImage.BITMASK);
+			mapCache = gc.createCompatibleVolatileImage(cacheWidth, cacheHeight, Transparency.BITMASK);
 			redraw = true;
 		} else {
 			int valid = mapCache.validate(gc);
 			if (valid == VolatileImage.IMAGE_INCOMPATIBLE) {
-				mapCache = gc.createCompatibleVolatileImage(cacheWidth, cacheHeight, VolatileImage.BITMASK);
+				mapCache = gc.createCompatibleVolatileImage(cacheWidth, cacheHeight, Transparency.BITMASK);
 			}
 			if(valid != VolatileImage.IMAGE_OK){
 				redraw = true;
@@ -340,7 +346,7 @@ public class Renderer extends Canvas {
 			}
 			int n = message.length();
 			if (messageChars < n) {
-				messageChars += 3;
+				messageChars += 2;
 				if (messageChars > n) {
 					messageChars = n;
 				}
@@ -399,17 +405,31 @@ public class Renderer extends Canvas {
 		}
 	}
 
-	private void renderHUD(Graphics2D g) {
+	private void renderHud(Graphics2D g, int bufferWidth) {
 		Player player = game.getPlayerObject();
 		if (player != null) {
 			g.setColor(Color.white);
 			g.setFont(font);
-			if (player.getGravsLeft() > 0) {
-				g.drawString("Gravitites: " + player.getGravsLeft(), 5, 20);
+			
+			int gravitites = player.getGravsLeft();
+			
+			if (gravitites > 0) {
+				if(gravitites <= 10){
+					for(int i=0; i<gravitites; i++){
+						g.drawImage(gravititeIcon, 10 + i * 10, 10, null);
+					}
+				}else{
+					g.drawImage(gravititeIcon, 10 + 4, 10, null);
+					g.drawImage(gravititeIcon, 10, 10 + 4, null);
+					g.drawImage(gravititeIcon, 10 + 8, 10 + 4, null);
+					drawString(g, Integer.toString(gravitites), 30, 22);
+				}
 			}
 
 			String mapName = GravityApplet.lm.maps.get(LevelMenu.lastMap)[0];
-			g.drawString(mapName, 380 - mapName.length() * 7 / 2, 20);
+
+			FontMetrics fm = g.getFontMetrics();
+			drawString(g, mapName, bufferWidth - fm.stringWidth(mapName) - 10, 20);
 		}
 	}
 
@@ -529,13 +549,23 @@ public class Renderer extends Canvas {
 				break;
 			}
 
-			g.drawString(word, curX, curY);
+			drawString(g, word, curX, curY);
 
 			// Move over to the right for next word.
 			curX += wordWidth;
 		}
 
 		return i == words.length ? -1 : i;
+	}
+	
+	private void drawString(Graphics g, String s, int x, int y){
+		Color oldColor = g.getColor();
+		
+		g.setColor(MESSAGE_BACKGROUND);
+		g.drawString(s, x, y+1);
+		
+		g.setColor(oldColor);
+		g.drawString(s, x, y);
 	}
 
 	public Vector2 getCameraTarget() {

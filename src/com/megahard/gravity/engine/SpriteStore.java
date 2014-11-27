@@ -118,10 +118,10 @@ public class SpriteStore {
 		try {
 			vimage = gc.createCompatibleVolatileImage(bimage.getWidth(),
 					bimage.getHeight(), new ImageCapabilities(true),
-					VolatileImage.BITMASK);
+					Transparency.TRANSLUCENT);
 		} catch (AWTException e) {
 			vimage = gc.createCompatibleVolatileImage(bimage.getWidth(),
-					bimage.getHeight(), Transparency.BITMASK);
+					bimage.getHeight(), Transparency.TRANSLUCENT);
 		}
 
 		redrawVolatileImage(vimage, imagePath);

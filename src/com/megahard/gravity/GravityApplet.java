@@ -50,8 +50,8 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 
 	private static final int FPS = 30;
 
-	public static final int WIDTH = 1024;
-	public static final int HEIGHT = 768;
+	public static final int WIDTH = 800;
+	public static final int HEIGHT = 600;
 	
 	public static boolean debug = false;
 	
@@ -148,15 +148,12 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 				}
 				if(error <= 0){
 					engine.getRenderer().render(engine.getState());
-				}else{
-					System.out.println("NORENDER");
 				}
 				
 				Thread.sleep(1);
 
 				// delay
 				error += System.currentTimeMillis() - start - mspf;
-				System.out.println(error);
 				if(error < 0){
 					Thread.sleep(-error);
 					error = 0;

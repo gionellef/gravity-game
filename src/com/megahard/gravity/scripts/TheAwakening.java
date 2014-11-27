@@ -7,8 +7,8 @@ import java.util.List;
 
 import com.megahard.gravity.engine.GameContext;
 import com.megahard.gravity.engine.base.GameObject;
-import com.megahard.gravity.objects.Box;
 import com.megahard.gravity.objects.GravWell;
+import com.megahard.gravity.objects.Gravitite;
 import com.megahard.gravity.objects.Player;
 import com.megahard.gravity.objects.VioletSpark;
 
@@ -31,16 +31,28 @@ public class TheAwakening extends ScriptSequencer {
 		addMessage("isaac-pre", "What is this rock?", 100);
 		addMessage("isaac-pre", "It feels strange... I feel attracted to it somehow...", 100);
 		
+		Runnable runner = new Runnable() {
+			@Override
+			public void run() {
+				Gravitite gravitite = getGame().findObject(Gravitite.class);
+				if(gravitite != null){
+					player.run(false);
+				}
+			}
+		};
+		for(int i = 0; i<10; i++){
+			addRunnable(runner, 1);
+		}
+		
 		// Float
 		Runnable floater = new Runnable() {
 			private int timer = 0;
 			@Override
 			public void run() {
 				timer++;
-				double m = 0.1 * (double)timer/100;
-				player.velocity.y *= 0.9;
-				player.velocity.y += (((getRegion().y * 2 + getRegion().getHeight())/2 - 1 - player.position.y) - player.velocity.y) * m;
-				player.position.x += (getRegion().x - player.position.x) * m;
+				double m = 0.15 * (double)timer*timer/10000;
+				player.velocity.y += ((getRegion().getCenterY() - 1 - player.position.y) - player.velocity.y) * m;
+				player.velocity.x += ((getRegion().getCenterX() - player.position.x) - player.velocity.x) * m;
 				
 				castSparkOnPlayer(1);
 				
@@ -63,9 +75,9 @@ public class TheAwakening extends ScriptSequencer {
 				gw = new GravWell(getGame());
 				gw.power = 1.2;
 				gw.position.set(player.position.x, player.position.y);
-				getGame().addObject(gw);				
+				getGame().addObject(gw);
 			}
-		}, 50);
+		}, 20);
 		
 		// Gravity circle
 		Runnable circler = new Runnable() {
@@ -83,24 +95,12 @@ public class TheAwakening extends ScriptSequencer {
 				}
 				
 				int i = 0;
-				double r = 3 + wells.size() * 0.3;
+				double r = 3 + wells.size() * 0.3 + Math.sin((double)timer/30) * 0.5;
 				for(GravWell w : wells){
-					double a = Math.PI * 2 * (1 - (double)i / wells.size()) + timer * 0.016;
+					double a = Math.PI * 2 * (1 - (double)i / wells.size()) + timer * 0.04;
 					w.position.x += (player.position.x + Math.cos(a) * r - w.position.x) * 0.1;
 					w.position.y += (player.position.y + Math.sin(a) * r - w.position.y) * 0.1;
 					i++;
-				}
-				
-				for(Box b : getGame().findObjects(Box.class)){
-					b.velocity.x *= 0.95;
-					b.velocity.y *= 0.95;
-					double d = b.position.minus(player.position).length();
-					if(d < 2){
-						double a = Math.atan2(b.position.y - player.position.y, b.position.x - player.position.x);
-						b.velocity.x += Math.cos(a);
-						b.velocity.y += Math.sin(a);
-					}
-					b.velocity.y -= GameObject.GRAVITY;
 				}
 
 				double m = 0.1;
@@ -130,13 +130,6 @@ public class TheAwakening extends ScriptSequencer {
 				
 				// fade screen back
 				getGame().fadeScreen(Color.white, null, 40);
-				
-				// throw boxes away
-				for(Box b : getGame().findObjects(Box.class)){
-					double a = Math.atan2(b.position.y - player.position.y, b.position.x - player.position.y);
-					b.velocity.x += Math.cos(a) * 0.2;
-					b.velocity.y += Math.sin(a) * 0.2;
-				}
 			}
 		}, 30);
 		
