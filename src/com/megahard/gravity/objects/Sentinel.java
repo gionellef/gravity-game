@@ -91,9 +91,17 @@ public class Sentinel extends GameObject {
 
 	private void doSentinel() {
 		if(wandering){
+			boolean found = false;
 			double sightRadius = 8;
 			Player player = getGame().findObject(Player.class, position.x - sightRadius, position.y - sightRadius/2, sightRadius*2, sightRadius, true);
 			if(player != null){
+				found = true;
+			}else{
+				GravWell well = getGame().findObject(GravWell.class, position.x - sightRadius, position.y - sightRadius/2, sightRadius*2, sightRadius, true);
+				found = well != null;
+			}
+			
+			if(found){
 				if(!alert) setAlert(true);
 				
 				if(mySwitch != null){
