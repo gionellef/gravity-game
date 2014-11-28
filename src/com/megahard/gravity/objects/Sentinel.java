@@ -12,12 +12,13 @@ import com.megahard.gravity.util.Vector2;
 public class Sentinel extends GameObject {
 
 	private boolean isFacingLeft = false;
+
+	private Pathfinder pathfinder;
 	
 	private List<Vector2> waypoints;
 	private int waitTimer = 0;
 	
-	private Pathfinder pathfinder;
-	
+	private boolean wandering = true; 
 	private boolean alert = false;
 	private SentinelSwitch mySwitch;
 
@@ -68,8 +69,9 @@ public class Sentinel extends GameObject {
 		velocity.scale(0.9);
 
 		if (waypoints == null || waypoints.isEmpty()) {
-			Vector2 destination = findDestination();
-			waypoints = pathfinder.findPath(position, destination, size.length()/2);
+			wandering = true;
+			Vector2 destination = randomWander();
+			waypoints = pathfinder.findPath(position, destination, 1);
 		}
 		
 		doPath();
@@ -77,35 +79,41 @@ public class Sentinel extends GameObject {
 		doSentinel();
 	}
 
-	private Vector2 findDestination() {
-		if(alert && mySwitch != null && !mySwitch.getSwitch()){
-			return mySwitch.position.plus(0, -0.5);
-		}else{
-			double x, y;
-			do{
-				x = position.x + Math.random() * 20 - 10;
-				y = position.y + Math.random() * 20 - 10;
-			}while(getGame().getMap().getTile(x, y).getCollidable());
-			Vector2 destination = new Vector2(x, y);
-			return destination;
-		}
+	private Vector2 randomWander() {
+		double x, y;
+		do{
+			x = position.x + Math.random() * 20 - 10;
+			y = position.y + Math.random() * 20 - 10;
+		}while(getGame().getMap().getTile(x, y).getCollidable());
+		Vector2 destination = new Vector2(x, y);
+		return destination;
 	}
 
 	private void doSentinel() {
-		if(!alert){
+		if(wandering){
 			double sightRadius = 8;
 			Player player = getGame().findObject(Player.class, position.x - sightRadius, position.y - sightRadius/2, sightRadius*2, sightRadius, true);
 			if(player != null){
-				setAlert(true);
+				if(!alert) setAlert(true);
+				
+				if(mySwitch != null){
+					wandering = false;
+					waypoints = pathfinder.findPath(position, mySwitch.position.plus(0, -0.5), 1);
+				}
+				waitTimer = 15;
 			}
-		}else{
-			if(mySwitch != null && !mySwitch.getSwitch()){
-				if(mySwitch.position.distance(position) < 1.5){
+		}
+		
+		if(alert && mySwitch != null){
+			if(mySwitch.position.distance(position) < 1.5){
+				if(!mySwitch.getSwitch()){
 					mySwitch.setSwitch(true);
 					setSpriteAction("touch");
-					waitTimer = 50;
-					mySwitch = findMySwitch();
+					waitTimer = 100;
 				}
+
+				mySwitch = findMySwitch();
+				wandering = true;
 			}
 		}
 	}
@@ -117,7 +125,7 @@ public class Sentinel extends GameObject {
 			
 			if(delta.length() > 3 || getGame().getMap().getTile(destination).getCollidable()){
 				// lost, find new path to the final destination
-				waypoints = pathfinder.findPath(position, waypoints.get(waypoints.size() - 1), size.length()/2);
+				waypoints = pathfinder.findPath(position, waypoints.get(waypoints.size() - 1), 1);
 			}else if (delta.length() > 0.1 + velocity.length() * 6) {
 				if(waitTimer > 0){
 					waitTimer--;
@@ -138,8 +146,6 @@ public class Sentinel extends GameObject {
 			if(value){
 				setSprite("sentinel-alert");
 				setSpriteAction("shine");
-				waypoints = null;
-				waitTimer = 20;
 			}else{
 				setSprite("sentinel");
 			}
@@ -148,9 +154,10 @@ public class Sentinel extends GameObject {
 	}
 
 	public void move(Vector2 direction) {
-		isFacingLeft = direction.x < 0;
-		double thrust = alert ? 0.3 : 0.1;
-		applyImpulse(direction.normalized().times(thrust));
+		isFacingLeft = isFacingLeft ? velocity.x < 0.02 : velocity.x < -0.02;
+		double thrust = alert ? 0.4 : 0.1;
+		Vector2 force = direction.normalized().times(thrust);
+		applyImpulse(force);
 		setSpriteAction("fly", new String[] { "fly" });
 	}
 

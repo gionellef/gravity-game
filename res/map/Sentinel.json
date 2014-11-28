@@ -13,7 +13,7 @@
         }, 
         {
          "draworder":"topdown",
-         "height":30,
+         "height":0,
          "name":"Object Layer 1",
          "objects":[
                 {
@@ -103,7 +103,7 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":288,
+                 "x":280,
                  "y":504
                 }, 
                 {
@@ -178,8 +178,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":72,
-                 "y":408
+                 "x":78,
+                 "y":384
                 }, 
                 {
                  "gid":508,
@@ -193,8 +193,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":72,
-                 "y":440
+                 "x":98,
+                 "y":384
                 }, 
                 {
                  "gid":513,
@@ -242,21 +242,6 @@
                  "y":520
                 }, 
                 {
-                 "gid":510,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":292,
-                 "y":500
-                }, 
-                {
                  "gid":511,
                  "height":0,
                  "name":"",
@@ -285,11 +270,41 @@
                  "width":0,
                  "x":40,
                  "y":568
+                }, 
+                {
+                 "gid":505,
+                 "height":0,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":492,
+                 "y":504
+                }, 
+                {
+                 "gid":512,
+                 "height":0,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":264,
+                 "y":216
                 }],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
-         "width":40,
+         "width":0,
          "x":0,
          "y":0
         }],
