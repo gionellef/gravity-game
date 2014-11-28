@@ -124,6 +124,8 @@ public class Renderer extends Canvas {
 		setCursor(getToolkit().createCustomCursor(
 				new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB),
 				new Point(0, 0), "null"));
+		
+		setBackground(Color.black);
 	}
 
 	public void render(GameState s) {
