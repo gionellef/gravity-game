@@ -13,6 +13,7 @@ Test Bed,untitled
 13 : Dots,13_Dots
 14 : Snake,14_Snake
 15 : Boom Room,15_BoomRoom
+Sentinel,Sentinel
 Insequirus,12_Insequirus
 Luck,luck
 Hell,hell
