@@ -43,6 +43,7 @@ public class Sentinel extends GameObject {
 	private SentinelSwitch findMySwitch() {
 		List<SentinelSwitch> ss = getGame().findObjects(SentinelSwitch.class);
 		if(ss.isEmpty()) return null;
+		
 		ss.sort(new Comparator<SentinelSwitch>() {
 			@Override
 			public int compare(SentinelSwitch o1, SentinelSwitch o2) {
@@ -51,7 +52,13 @@ public class Sentinel extends GameObject {
 				return d1 == d2 ? 0 : d1 < d2 ? -1 : 1;
 			}
 		});
-		return ss.get(0);
+		
+		for(SentinelSwitch s : ss){
+			if(!s.getSwitch()){
+				return s;
+			}
+		}
+		return null;
 	}
 
 	@Override
@@ -72,7 +79,7 @@ public class Sentinel extends GameObject {
 
 	private Vector2 findDestination() {
 		if(alert && mySwitch != null && !mySwitch.getSwitch()){
-			return mySwitch.position.minus(0, -0.5);
+			return mySwitch.position.plus(0, -0.5);
 		}else{
 			double x, y;
 			do{
@@ -86,7 +93,7 @@ public class Sentinel extends GameObject {
 
 	private void doSentinel() {
 		if(!alert){
-			double sightRadius = 6;
+			double sightRadius = 8;
 			Player player = getGame().findObject(Player.class, position.x - sightRadius, position.y - sightRadius/2, sightRadius*2, sightRadius, true);
 			if(player != null){
 				setAlert(true);
@@ -97,6 +104,7 @@ public class Sentinel extends GameObject {
 					mySwitch.setSwitch(true);
 					setSpriteAction("touch");
 					waitTimer = 50;
+					mySwitch = findMySwitch();
 				}
 			}
 		}
