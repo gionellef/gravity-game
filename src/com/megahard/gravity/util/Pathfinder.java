@@ -47,6 +47,15 @@ public class Pathfinder {
 		public Node getNode(int x, int y){
 			return grid[y * width + x];
 		}
+		
+		public void clear(){
+			for(int i = 0; i < grid.length; i++){
+				Node n = grid[i];
+				n.parent = null;
+				n.cost = 0;
+				n.closed = false;
+			}
+		}
 	}
 	
 	public static class Node implements Comparable<Node>{
@@ -70,26 +79,27 @@ public class Pathfinder {
 	}
 	
 	private GameMap map;
+	private Grid grid;
 	
 	public Pathfinder(GameMap map) {
 		this.map = map;
+		grid = new Grid(map.getWidth(), map.getHeight());
 	}
 
 	public List<Vector2> findPath(Vector2 start, Vector2 end, double radius){
-		Grid grid = new Grid(map.getWidth(), map.getHeight());
-		
+		grid.clear();
 		Node endNode = grid.getNode((int)end.x, (int)end.y);
 		Node startNode = grid.getNode((int)start.x, (int)start.y);
 
 		PriorityQueue<Node> open = new PriorityQueue<>();
 		startNode.cost = 0;
+		startNode.closed = true;
 		open.add(startNode);
 		
 		boolean found = false;
 		
 		while(!open.isEmpty()){
 			Node current = open.remove();
-			current.closed = true;
 			
 			if(current == endNode){
 				found = true;
@@ -99,9 +109,12 @@ public class Pathfinder {
 			for(Node n : current.neighbors){
 				if(n == null) continue;
 				if(n.closed) continue;
+				n.closed = true;
 				if(!passable(n, radius)) continue;
 				
-				n.cost = current.cost + 1;
+				double d = end.distance(n.x + 0.5, n.y + 0.5);
+				
+				n.cost = current.cost + 2 + d;
 				n.parent = current;
 				open.add(n);
 			}
