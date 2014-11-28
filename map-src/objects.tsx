@@ -61,4 +61,9 @@
    <property name="type" value="Sentinel"/>
   </properties>
  </tile>
+ <tile id="12">
+  <properties>
+   <property name="type" value="SentinelSwitch"/>
+  </properties>
+ </tile>
 </tileset>
