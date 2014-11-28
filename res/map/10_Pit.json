@@ -120,66 +120,6 @@
                  "width":0,
                  "x":640,
                  "y":416
-                }, 
-                {
-                 "gid":503,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":504,
-                 "y":312
-                }, 
-                {
-                 "gid":503,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":503.75,
-                 "y":271.5
-                }, 
-                {
-                 "gid":503,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":504.25,
-                 "y":352.25
-                }, 
-                {
-                 "gid":503,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":503.5,
-                 "y":232
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -2381,7 +2321,7 @@
         {
          "firstgid":501,
          "image":"..\/..\/map-src\/objects.png",
-         "imageheight":128,
+         "imageheight":192,
          "imagewidth":320,
          "margin":0,
          "name":"objects",
@@ -2400,6 +2340,14 @@
              "1":
                 {
                  "type":"GravWell"
+                },
+             "10":
+                {
+                 "type":"Switch"
+                },
+             "11":
+                {
+                 "type":"Sentinel"
                 },
              "2":
                 {
