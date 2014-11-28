@@ -61,13 +61,19 @@ public class Sentinel extends GameObject {
 			Vector2 destination = waypoints.get(0);
 			Vector2 delta = destination.minus(position);
 			
-			if (delta.length() > 1) {
+			if(delta.length() > 3 || getGame().getMap().getTile(destination).getCollidable()){
+				// lost, find new path to the final destination
+				waypoints = pathfinder.findPath(position, waypoints.get(waypoints.size() - 1), size.length()/2);
+			}else if (delta.length() > 1) {
 				if(waitTimer > 0){
 					waitTimer--;
 				}else{
 					move(delta);
 				}
 			} else {
+				if(delta.length() > 0){
+					move(delta);
+				}
 				waypoints.remove(0);
 			}
 		}

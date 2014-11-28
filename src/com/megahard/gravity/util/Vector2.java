@@ -60,6 +60,12 @@ public class Vector2 {
 	public double distance(Vector2 other){
 		return displacement(other).length();
 	}
+
+	public double distance(double x, double y) {
+		double dx = x - this.x;
+		double dy = y - this.y;
+		return Math.sqrt(dx * dx + dy * dy);
+	}
 	
 	public Vector2 displacement(Vector2 other){
 		return other.minus(this);
