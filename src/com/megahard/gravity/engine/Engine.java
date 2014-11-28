@@ -106,12 +106,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 		state = new GameState();
 		loadMapAndObjects(mapName);
 
-		// add all objects to be added
-		for(GameObject o : addObj){
-			state.objects.add(o);
-			o.init();
-		}
-		addObj.clear();
+		commitAddObjects();
 		
 		// fade game in
 		fadeScreen(false, 6);
@@ -285,6 +280,8 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 			instance.position.set(object.getX() / Renderer.TILE_SIZE + 2,
 					object.getY() / Renderer.TILE_SIZE - 2);
 			addObject(instance);
+			
+			System.out.println(type);
 
 			if (type.equals("Player")) {
 				playerObject = (Player) instance;
@@ -389,13 +386,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 
 	private void updateObjects() {
 		// add all objects to be added
-		for(GameObject o : addObj){
-			state.objects.add(o);
-		}
-		for(GameObject o : addObj){
-			o.init();
-		}
-		addObj.clear();
+		commitAddObjects();
 
 		// update all the objects
 		for (GameObject o : state.objects) {
@@ -407,6 +398,16 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 		// remove all objects to be removed
 		state.objects.removeAll(removeObj);
 		removeObj.clear();
+	}
+
+	private void commitAddObjects() {
+		for(GameObject o : addObj){
+			state.objects.add(o);
+		}
+		for(GameObject o : addObj){
+			o.init();
+		}
+		addObj.clear();
 	}
 
 	private void updateInputEvents() {
@@ -855,9 +856,12 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 	@SuppressWarnings("unchecked")
 	@Override
 	public <T> List<T> findObjects(Class<T> type) {
+		System.out.println(type.getSimpleName());
 		List<T> list = new LinkedList<>();
 		for (GameObject o : state.objects) {
+			System.out.println(o);
 			if (o.getClass().equals(type)) {
+				System.out.println("Add");
 				list.add((T) o);
 			}
 		}
