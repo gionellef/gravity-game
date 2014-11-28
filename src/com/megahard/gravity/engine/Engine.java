@@ -281,8 +281,6 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 					object.getY() / Renderer.TILE_SIZE - 2);
 			addObject(instance);
 			
-			System.out.println(type);
-
 			if (type.equals("Player")) {
 				playerObject = (Player) instance;
 			}

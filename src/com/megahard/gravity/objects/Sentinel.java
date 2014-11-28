@@ -63,7 +63,6 @@ public class Sentinel extends GameObject {
 		if (waypoints == null || waypoints.isEmpty()) {
 			Vector2 destination = findDestination();
 			waypoints = pathfinder.findPath(position, destination, size.length()/2);
-			waitTimer = alert ? 0 : 100;
 		}
 		
 		doPath();
@@ -73,7 +72,7 @@ public class Sentinel extends GameObject {
 
 	private Vector2 findDestination() {
 		if(alert && mySwitch != null && !mySwitch.getSwitch()){
-			return mySwitch.position;
+			return mySwitch.position.minus(0, -0.5);
 		}else{
 			double x, y;
 			do{
@@ -86,16 +85,19 @@ public class Sentinel extends GameObject {
 	}
 
 	private void doSentinel() {
-		double sightRadius = 6;
-		Player player = getGame().findObject(Player.class, position.x - sightRadius, position.y - sightRadius/2, sightRadius*2, sightRadius, true);
-		if(player != null){
-			setAlert(true);
-		}
-		if(alert && mySwitch != null && !mySwitch.getSwitch()){
-			if(mySwitch.position.distance(position) < 1.5){
-				mySwitch.setSwitch(true);
-				setSpriteAction("touch");
-				waitTimer = 50;
+		if(!alert){
+			double sightRadius = 6;
+			Player player = getGame().findObject(Player.class, position.x - sightRadius, position.y - sightRadius/2, sightRadius*2, sightRadius, true);
+			if(player != null){
+				setAlert(true);
+			}
+		}else{
+			if(mySwitch != null && !mySwitch.getSwitch()){
+				if(mySwitch.position.distance(position) < 1.5){
+					mySwitch.setSwitch(true);
+					setSpriteAction("touch");
+					waitTimer = 50;
+				}
 			}
 		}
 	}
@@ -108,17 +110,17 @@ public class Sentinel extends GameObject {
 			if(delta.length() > 3 || getGame().getMap().getTile(destination).getCollidable()){
 				// lost, find new path to the final destination
 				waypoints = pathfinder.findPath(position, waypoints.get(waypoints.size() - 1), size.length()/2);
-			}else if (delta.length() > 1) {
+			}else if (delta.length() > 0.1 + velocity.length() * 6) {
 				if(waitTimer > 0){
 					waitTimer--;
 				}else{
 					move(delta);
 				}
 			} else {
-				if(delta.length() > 0){
-					move(delta);
-				}
 				waypoints.remove(0);
+				if(waypoints.isEmpty()){
+					waitTimer = alert ? 50 : 100;
+				}
 			}
 		}
 	}
@@ -129,6 +131,7 @@ public class Sentinel extends GameObject {
 				setSprite("sentinel-alert");
 				setSpriteAction("shine");
 				waypoints = null;
+				waitTimer = 20;
 			}else{
 				setSprite("sentinel");
 			}

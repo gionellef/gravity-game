@@ -41,6 +41,10 @@ public class Vector2 {
 		return new Vector2(x - v.x, y - v.y);
 	}
 
+	public Vector2 minus(double x, double y) {
+		return new Vector2(this.x - x, this.y - y);
+	}
+
 	public Vector2 times(double scaleFactor) {
 		return new Vector2(this.x * scaleFactor, this.y * scaleFactor);
 	}
