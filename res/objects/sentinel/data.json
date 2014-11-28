@@ -1,7 +1,7 @@
 {
 	sheetWidth: 6,
-	width: 64,
-	height: 64,
+	width: 48,
+	height: 48,
 	actions: [
 		{
 			name: "default",
@@ -30,6 +30,34 @@
 			y: 3,
 			frames: 6,
 			delay: 2
+		},
+		{
+			name: "touch",
+			x: 0,
+			y: 4,
+			frames: 6,
+			delay: 3
+		},
+		{
+			name: "touch-left",
+			x: 0,
+			y: 5,
+			frames: 6,
+			delay: 3
+		},
+		{
+			name: "shine",
+			x: 0,
+			y: 6,
+			frames: 6,
+			delay: 3
+		},
+		{
+			name: "shine-left",
+			x: 0,
+			y: 7,
+			frames: 6,
+			delay: 3
 		}
 	]
 }

@@ -175,7 +175,7 @@ public class Renderer extends Canvas {
 					halfBufHeight, cxm, cym);
 			renderBorders(g, s, bufferWidth, bufferHeight, halfBufWidth,
 					halfBufHeight, cx, cy);
-			renderHud(g, bufferWidth);
+			renderHud(g, s, bufferWidth);
 			renderFade(g, bufferWidth, bufferHeight);
 			renderMessages(g, s, bufferWidth, bufferHeight);
 
@@ -414,7 +414,7 @@ public class Renderer extends Canvas {
 		}
 	}
 
-	private void renderHud(Graphics2D g, int bufferWidth) {
+	private void renderHud(Graphics2D g, GameState s, int bufferWidth) {
 		Image cursor = cursorEmpty;
 		Point cursorHotspot = new Point(32, 32);
 		
@@ -452,7 +452,7 @@ public class Renderer extends Canvas {
 			drawString(g, mapName, bufferWidth - fm.stringWidth(mapName) - 10, 20);
 		}
 		
-		if(getMousePosition() != null){
+		if(!s.cinematicMode && getMousePosition() != null){
 			g.drawImage(cursor,
 				getMousePosition().x/SCALE_FACTOR - cursorHotspot.x,
 				getMousePosition().y/SCALE_FACTOR - cursorHotspot.y,
