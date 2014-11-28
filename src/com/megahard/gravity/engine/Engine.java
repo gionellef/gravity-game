@@ -856,12 +856,9 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 	@SuppressWarnings("unchecked")
 	@Override
 	public <T> List<T> findObjects(Class<T> type) {
-		System.out.println(type.getSimpleName());
 		List<T> list = new LinkedList<>();
 		for (GameObject o : state.objects) {
-			System.out.println(o);
 			if (o.getClass().equals(type)) {
-				System.out.println("Add");
 				list.add((T) o);
 			}
 		}

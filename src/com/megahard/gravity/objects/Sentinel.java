@@ -63,7 +63,7 @@ public class Sentinel extends GameObject {
 		if (waypoints == null || waypoints.isEmpty()) {
 			Vector2 destination = findDestination();
 			waypoints = pathfinder.findPath(position, destination, size.length()/2);
-			waitTimer = 100;
+			waitTimer = alert ? 0 : 100;
 		}
 		
 		doPath();
@@ -91,12 +91,11 @@ public class Sentinel extends GameObject {
 		if(player != null){
 			setAlert(true);
 		}
-		if(alert){
-			if(mySwitch != null && !mySwitch.getSwitch()){
-				if(mySwitch.position.distance(position) < 1.5){
-					mySwitch.setSwitch(true);
-					setSpriteAction("touch");
-				}
+		if(alert && mySwitch != null && !mySwitch.getSwitch()){
+			if(mySwitch.position.distance(position) < 1.5){
+				mySwitch.setSwitch(true);
+				setSpriteAction("touch");
+				waitTimer = 50;
 			}
 		}
 	}
@@ -110,7 +109,7 @@ public class Sentinel extends GameObject {
 				// lost, find new path to the final destination
 				waypoints = pathfinder.findPath(position, waypoints.get(waypoints.size() - 1), size.length()/2);
 			}else if (delta.length() > 1) {
-				if(!alert && waitTimer > 0){
+				if(waitTimer > 0){
 					waitTimer--;
 				}else{
 					move(delta);
