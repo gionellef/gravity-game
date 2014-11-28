@@ -22,42 +22,48 @@
 			x: 0,
 			y: 2,
 			frames: 6,
-			delay: 2
+			delay: 2,
+			next: "default"
 		},
 		{
 			name: "fly-left",
 			x: 0,
 			y: 3,
 			frames: 6,
-			delay: 2
+			delay: 2,
+			next: "default-left"
 		},
 		{
 			name: "touch",
 			x: 0,
 			y: 4,
 			frames: 6,
-			delay: 3
+			delay: 3,
+			next: "default"
 		},
 		{
 			name: "touch-left",
 			x: 0,
 			y: 5,
 			frames: 6,
-			delay: 3
+			delay: 3,
+			next: "default-left"
 		},
 		{
 			name: "shine",
 			x: 0,
 			y: 6,
 			frames: 6,
-			delay: 3
+			delay: 3,
+			next: "default"
 		},
 		{
 			name: "shine-left",
 			x: 0,
 			y: 7,
 			frames: 6,
-			delay: 3
+			delay: 3,
+			next: "default-left"
 		}
 	]
 }
