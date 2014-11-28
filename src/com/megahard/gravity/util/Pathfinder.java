@@ -88,6 +88,12 @@ public class Pathfinder {
 
 	public List<Vector2> findPath(Vector2 start, Vector2 end, double radius){
 		grid.clear();
+		if(start.x < 0 || start.y < 0 || start.x >= map.getWidth() || start.y >= map.getHeight()){
+			return null;
+		}
+		if(end.x < 0 || end.y < 0 || end.x >= map.getWidth() || end.y >= map.getHeight()){
+			return null;
+		}
 		Node endNode = grid.getNode((int)end.x, (int)end.y);
 		Node startNode = grid.getNode((int)start.x, (int)start.y);
 
