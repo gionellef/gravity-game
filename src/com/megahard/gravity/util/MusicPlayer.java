@@ -32,6 +32,7 @@ public class MusicPlayer implements Runnable{
 	
 	public void play(String fileName){
 	    this.fileName = fileName;
+	    new Thread(this).start();
     }
 
 	@Override

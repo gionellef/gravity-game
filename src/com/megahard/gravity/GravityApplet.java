@@ -41,7 +41,6 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 	private Thread gameThread;
 	private Engine engine;
 	private MusicPlayer music;
-	private Thread musThread = new Thread(music);
 	private boolean win;
 	private boolean esc;
 
@@ -219,18 +218,10 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 	private void startMusic(String fileName){
 		stopMusic();
 		music.play(fileName);
-		musThread = new Thread(music);
-		musThread.start();
 	}
 	
 	private void stopMusic(){
 		music.stop();
-		try {
-			musThread.join();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	@Override

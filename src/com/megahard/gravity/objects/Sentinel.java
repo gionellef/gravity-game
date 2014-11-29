@@ -94,8 +94,10 @@ public class Sentinel extends GameObject {
 		return Collections.min(blist, new Comparator<Bomb>() {
 			@Override
 			public int compare(Bomb o1, Bomb o2) {
-				double d1 = o1.position.distance(position) - o1.getTimeout() * 0.1;
-				double d2 = o2.position.distance(position) - o2.getTimeout() * 0.1;
+				double d1 = o1.position.distance(position) - o1.getTimeout()
+						* 0.1;
+				double d2 = o2.position.distance(position) - o2.getTimeout()
+						* 0.1;
 				return d1 == d2 ? 0 : d1 < d2 ? -1 : 1;
 			}
 		});
@@ -170,14 +172,14 @@ public class Sentinel extends GameObject {
 				setAlert(false);
 			} else {
 				if (mySwitch != null) {
-					if(mySwitch.getSwitch()){
+					if (mySwitch.getSwitch()) {
 						mySwitch = null;
-					}else{
+					} else {
 						if (mySwitch.position.distance(position.plus(0, 1)) < 1.5) {
 							mySwitch.setSwitch(true);
 							setSpriteAction("touch");
 							waitTimer = 50;
-	
+
 							mySwitch = null;
 						}
 					}
@@ -195,7 +197,8 @@ public class Sentinel extends GameObject {
 								// throw the bomb to the player
 								myBomb.applyImpulse(position
 										.displacement(player.position)
-										.normalized().times(0.01).plus(0, -0.03));
+										.normalized().times(0.01)
+										.plus(0, -0.03));
 								myBomb.setTimeout(30);
 								myBomb = null;
 

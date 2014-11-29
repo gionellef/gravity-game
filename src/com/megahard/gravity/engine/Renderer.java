@@ -145,9 +145,15 @@ public class Renderer extends Canvas {
 			background = SpriteStore.get().getVolatileImage(BACKGROUND_PATH);
 			tileset = SpriteStore.get().getVolatileImage(TILESET_PATH);
 		}
-
-		int bufferWidth = backBuffer.getWidth();
-		int bufferHeight = backBuffer.getHeight();
+		
+		int bufferHeight = 0;
+		int bufferWidth = 0;
+		if (backBuffer!=null){
+			
+			bufferWidth = backBuffer.getWidth();
+			
+			bufferHeight = backBuffer.getHeight();
+		}
 		int halfBufWidth = bufferWidth / 2;
 		int halfBufHeight = bufferHeight / 2;
 
