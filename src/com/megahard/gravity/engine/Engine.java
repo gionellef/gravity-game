@@ -101,17 +101,12 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 		finishListener = null;
 	}
 
-	public void initialize(String levelData) {
+	public void initialize(String mapName) {
 		// populate the game state using level data
 		state = new GameState();
-		state.map = loadMapAndObjects(levelData);
+		loadMapAndObjects(mapName);
 
-		// add all objects to be added
-		for(GameObject o : addObj){
-			state.objects.add(o);
-			o.init();
-		}
-		addObj.clear();
+		commitAddObjects();
 		
 		// fade game in
 		fadeScreen(false, 6);
@@ -204,11 +199,12 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 		return state.map;
 	}
 	
-	public GameMap loadMapAndObjects(String mapName) {
+	public void loadMapAndObjects(String mapName) {
 		InputStream in = getClass().getResourceAsStream("/map/" + mapName + ".json");
 		BufferedReader input = new BufferedReader(new InputStreamReader(in));
 		GameMap map = J.gson.fromJson(input, GameMap.class);
 		map.initializeMap();
+		state.map = map;
 		
 		Layers[] layer = map.getLayers();
 		GameObjects[] objects = layer[1].getObjects();
@@ -225,7 +221,8 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 
 			}
 		}
-		return map;
+		
+		sortObjects(state.objects);
 	}
 
 	private void loadScript(GameObjects object) {
@@ -283,7 +280,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 			instance.position.set(object.getX() / Renderer.TILE_SIZE + 2,
 					object.getY() / Renderer.TILE_SIZE - 2);
 			addObject(instance);
-
+			
 			if (type.equals("Player")) {
 				playerObject = (Player) instance;
 			}
@@ -387,11 +384,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 
 	private void updateObjects() {
 		// add all objects to be added
-		for(GameObject o : addObj){
-			o.init();
-			state.objects.add(o);
-		}
-		addObj.clear();
+		commitAddObjects();
 
 		// update all the objects
 		for (GameObject o : state.objects) {
@@ -403,6 +396,16 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 		// remove all objects to be removed
 		state.objects.removeAll(removeObj);
 		removeObj.clear();
+	}
+
+	private void commitAddObjects() {
+		for(GameObject o : addObj){
+			state.objects.add(o);
+		}
+		for(GameObject o : addObj){
+			o.init();
+		}
+		addObj.clear();
 	}
 
 	private void updateInputEvents() {
@@ -467,15 +470,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 		if(n < 2) return;
 		
 		// insertion sort objects
-		for(int i = 1; i < n; i++){
-			GameObject current = objects.get(i);
-			int j = i - 1;
-			while(j >= 0 && current.position.x - current.size.x/2 < objects.get(j).position.x - current.size.x/2){
-				objects.set(j + 1, objects.get(j));
-				j--;
-			}
-			objects.set(j + 1, current);
-		}
+		sortObjects(objects);
 
 		double[][] spans = new double[n][4]; // {xmin, xmax, ymin, ymax}
 		for(int i = 0; i < n; i++){
@@ -500,6 +495,20 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener, 
 				current.onCollide(other);
 				other.onCollide(current);
 			}
+		}
+	}
+
+	private void sortObjects(ArrayList<GameObject> objects) {
+		int n = objects.size();
+		if(n < 2) return;
+		for(int i = 1; i < n; i++){
+			GameObject current = objects.get(i);
+			int j = i - 1;
+			while(j >= 0 && current.position.x - current.size.x/2 < objects.get(j).position.x - current.size.x/2){
+				objects.set(j + 1, objects.get(j));
+				j--;
+			}
+			objects.set(j + 1, current);
 		}
 	}
 

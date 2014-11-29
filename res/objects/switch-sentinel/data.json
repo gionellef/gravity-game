@@ -1,0 +1,21 @@
+{
+	sheetWidth: 3,
+	width: 12,
+	height: 20,
+	actions: [
+		{
+			name: "default",
+			x: 0,
+			y: 1,
+			frames: 3,
+			delay: 6
+		},
+		{
+			name: "on",
+			x: 0,
+			y: 0,
+			frames: 3,
+			delay: 4
+		}
+	]
+}

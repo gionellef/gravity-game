@@ -4,7 +4,7 @@
  <tileset firstgid="501" source="objects.tsx"/>
  <layer name="Tile Layer 1" width="90" height="40">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <objectgroup name="Object Layer 1">
@@ -26,6 +26,8 @@
   </object>
   <object gid="510" x="172" y="468"/>
   <object gid="511" x="424" y="392"/>
-  <object gid="512" x="264" y="328"/>
+  <object gid="512" x="616" y="376"/>
+  <object gid="513" x="544" y="264"/>
+  <object gid="508" x="472" y="312"/>
  </objectgroup>
 </map>

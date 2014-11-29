@@ -136,6 +136,7 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 		long start;
 		long error = 0;
 		try {
+			engine.initialize(lm.maps.get(LevelMenu.lastMap)[1]);
 			while (running) {
 				start = System.currentTimeMillis();
 				
@@ -198,7 +199,6 @@ public class GravityApplet extends JApplet implements Runnable, ActionListener, 
 	
 	private void renderGameScreen() {
 		engine = new Engine();
-		engine.initialize(lm.maps.get(LevelMenu.lastMap)[1]);
 		engine.getRenderer().addKeyListener(engine);
 		engine.getRenderer().addMouseListener(engine);
 		engine.getRenderer().addMouseMotionListener(engine);

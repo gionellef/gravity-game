@@ -124,6 +124,8 @@ public class Renderer extends Canvas {
 		setCursor(getToolkit().createCustomCursor(
 				new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB),
 				new Point(0, 0), "null"));
+		
+		setBackground(Color.black);
 	}
 
 	public void render(GameState s) {
@@ -432,7 +434,7 @@ public class Renderer extends Canvas {
 			int gravitites = player.getGravitites();
 			
 			if (gravitites > 0) {
-				if(gravitites <= 10){
+				if(gravitites <= 6){
 					for(int i=0; i<gravitites; i++){
 						g.drawImage(gravititeIcon, 10 + i * 10, 10, null);
 					}
@@ -458,10 +460,11 @@ public class Renderer extends Canvas {
 			drawString(g, mapName, bufferWidth - fm.stringWidth(mapName) - 10, 20);
 		}
 		
-		if(!s.cinematicMode && getMousePosition() != null){
+		Point mousePosition = getMousePosition();
+		if(!s.cinematicMode && mousePosition != null){
 			g.drawImage(cursor,
-				getMousePosition().x/SCALE_FACTOR - cursorHotspot.x,
-				getMousePosition().y/SCALE_FACTOR - cursorHotspot.y,
+				mousePosition.x/SCALE_FACTOR - cursorHotspot.x,
+				mousePosition.y/SCALE_FACTOR - cursorHotspot.y,
 				null);
 		}
 	}

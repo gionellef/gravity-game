@@ -41,6 +41,10 @@ public class Vector2 {
 		return new Vector2(x - v.x, y - v.y);
 	}
 
+	public Vector2 minus(double x, double y) {
+		return new Vector2(this.x - x, this.y - y);
+	}
+
 	public Vector2 times(double scaleFactor) {
 		return new Vector2(this.x * scaleFactor, this.y * scaleFactor);
 	}
@@ -59,6 +63,12 @@ public class Vector2 {
 	
 	public double distance(Vector2 other){
 		return displacement(other).length();
+	}
+
+	public double distance(double x, double y) {
+		double dx = x - this.x;
+		double dy = y - this.y;
+		return Math.sqrt(dx * dx + dy * dy);
 	}
 	
 	public Vector2 displacement(Vector2 other){

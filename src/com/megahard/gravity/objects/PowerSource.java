@@ -63,7 +63,7 @@ public abstract class PowerSource extends GameObject {
 		findSource();
 	}
 
-	public void setActivated(boolean value) {
+	protected void setActivated(boolean value) {
 		activated = value;
 		
 		if(outputX != -1 && outputY != -1){
@@ -72,7 +72,7 @@ public abstract class PowerSource extends GameObject {
 			
 	}
 	
-	public boolean isActivated(){
+	protected boolean isActivated(){
 		return activated;
 	}
 
