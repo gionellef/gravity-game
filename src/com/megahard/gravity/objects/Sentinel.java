@@ -297,15 +297,6 @@ public class Sentinel extends GameObject {
 	}
 
 	private void doPath() {
-		if (waypoints != null) {
-			for (Vector2 p : waypoints) {
-				VioletSpark spark = new VioletSpark(getGame());
-				spark.position.set(p);
-				spark.sprite.setFrame(4);
-				getGame().addObject(spark);
-			}
-		}
-
 		if (waitTimer > 0) {
 			waitTimer--;
 		} else {
