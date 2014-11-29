@@ -37,7 +37,7 @@ public class Sentinel extends GameObject {
 	@Override
 	public void init() {
 		waypoints = new LinkedList<>();
-		pathfinder = new Pathfinder(getGame().getMap());
+		pathfinder = new Pathfinder(getGame().getMap(), size);
 		mySwitch = findMySwitch();
 	}
 
@@ -71,7 +71,7 @@ public class Sentinel extends GameObject {
 		if (waypoints == null || waypoints.isEmpty()) {
 			wandering = true;
 			Vector2 destination = randomWander();
-			waypoints = pathfinder.findPath(position, destination, 1);
+			waypoints = pathfinder.findPath(position, destination);
 		}
 		
 		doPath();
@@ -106,18 +106,18 @@ public class Sentinel extends GameObject {
 				
 				if(mySwitch != null){
 					wandering = false;
-					waypoints = pathfinder.findPath(position, mySwitch.position.plus(0, -0.5), 1);
+					waypoints = pathfinder.findPath(position, mySwitch.position.plus(0, -1));
 				}
 				waitTimer = 15;
 			}
 		}
 		
 		if(alert && mySwitch != null){
-			if(mySwitch.position.distance(position) < 1.5){
+			if(mySwitch.position.distance(position.plus(0, 0.5)) < 1){
 				if(!mySwitch.getSwitch()){
 					mySwitch.setSwitch(true);
 					setSpriteAction("touch");
-					waitTimer = 100;
+					waitTimer = 50;
 				}
 
 				mySwitch = findMySwitch();
@@ -129,12 +129,13 @@ public class Sentinel extends GameObject {
 	private void doPath() {
 		if (waypoints != null && !waypoints.isEmpty()) {
 			Vector2 destination = waypoints.get(0);
+			
 			Vector2 delta = destination.minus(position);
 			
-			if(delta.length() > 3 || getGame().getMap().getTile(destination).getCollidable()){
+			if(delta.length() > 3 || getGame().getMap().getTile(position.plus(delta.normalized())).getCollidable()){
 				// lost, find new path to the final destination
-				waypoints = pathfinder.findPath(position, waypoints.get(waypoints.size() - 1), 1);
-			}else if (delta.length() > 0.1 + velocity.length() * 6) {
+				waypoints = pathfinder.findPath(position, waypoints.get(waypoints.size() - 1));
+			}else if (delta.length() > 0.5 + velocity.length() * 3) {
 				if(waitTimer > 0){
 					waitTimer--;
 				}else{

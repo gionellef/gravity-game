@@ -25,11 +25,11 @@ public class Pathfinder {
 				grid[i] = node;
 				if(y > 0){
 					if(x > 0){
-						(node.neighbors[0] = grid[i - 1 - w]).neighbors[7] = node;
+//						(node.neighbors[0] = grid[i - 1 - w]).neighbors[7] = node;
 					}
 					(node.neighbors[1] = grid[i - w]).neighbors[6] = node;
 					if(x < w - 1){
-						(node.neighbors[2] = grid[i + 1 - w]).neighbors[5] = node;
+//						(node.neighbors[2] = grid[i + 1 - w]).neighbors[5] = node;
 					}
 				}
 				if(x > 0){
@@ -79,15 +79,20 @@ public class Pathfinder {
 	}
 	
 	private GameMap map;
+	private Vector2 size;
+	
 	private Grid grid;
 	
-	public Pathfinder(GameMap map) {
+	public Pathfinder(GameMap map, Vector2 size) {
 		this.map = map;
+		this.size = size;
 		grid = new Grid(map.getWidth(), map.getHeight());
 	}
 
-	public List<Vector2> findPath(Vector2 start, Vector2 end, double radius){
+	public List<Vector2> findPath(Vector2 start, Vector2 end){
 		grid.clear();
+		start = start.plus(0.5, 0.5);
+		end = end.plus(0.5, 0.5);
 		if(start.x < 0 || start.y < 0 || start.x >= map.getWidth() || start.y >= map.getHeight()){
 			return null;
 		}
@@ -116,9 +121,9 @@ public class Pathfinder {
 				if(n == null) continue;
 				if(n.closed) continue;
 				n.closed = true;
-				if(!passable(n, radius)) continue;
+				if(!passable(n)) continue;
 				
-				double d = end.distance(n.x + 0.5, n.y + 0.5);
+				double d = end.distance(n.x, n.y);
 				
 				n.cost = current.cost + 2 + d;
 				n.parent = current;
@@ -128,25 +133,29 @@ public class Pathfinder {
 
 		if(found){
 			List<Vector2> points = new LinkedList<>();
-			Node n = endNode;
-			do{
-				points.add(0, new Vector2(n.x + 0.5, n.y + 0.5));
+			points.add(end);
+			Node n = endNode.parent;
+			while(n != null){
+				Vector2 vec = new Vector2(n.x, n.y);
+				points.add(0, vec);
 				n = n.parent;
-			}while(n != null);
+			}
 			return points;
 		}else{
 			return null;
 		}
 	}
 
-	private boolean passable(Node n, double radius) {
-		int r = (int) Math.ceil(radius);
-		for(int i=-r; i<=r; i++){
-			for(int j=-r; j<=r; j++){
-				if(map.getTile(n.x + i, n.y + j).getCollidable()) return false;		
+	private boolean passable(Node n) {
+		double xmin = n.x - size.x/2;
+		double xmax = n.x + size.x/2;
+		double ymin = n.y - size.y/2;
+		double ymax = n.y + size.y/2;
+		for(double i = xmin; i <= xmax; i++){
+			for(double j = ymin; j <= ymax; j++){
+				if(map.getTile(i, j).getCollidable()) return false;		
 			}	
 		}
 		return true;
 	}
-	
 }
