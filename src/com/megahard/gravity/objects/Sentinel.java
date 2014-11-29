@@ -133,23 +133,7 @@ public class Sentinel extends GameObject {
 
 	private void doSentinel() {
 		if (wandering) {
-			boolean found = false;
-			double sightRadius = 12;
-			Player player = getGame().findObject(Player.class,
-					position.x + (isFacingLeft ? -sightRadius : 0),
-					position.y - sightRadius / 2, sightRadius, sightRadius,
-					true);
-			if (player != null) {
-				if (hasLineOfSight(player.position)) {
-					found = true;
-				}
-			} else {
-				GravWell well = getGame().findObject(GravWell.class,
-						position.x + (isFacingLeft ? -sightRadius : 0),
-						position.y - sightRadius / 2, sightRadius, sightRadius,
-						true);
-				found = well != null && hasLineOfSight(well.position);
-			}
+			boolean found = search();
 
 			if (found) {
 				if (!alert) {
@@ -235,6 +219,29 @@ public class Sentinel extends GameObject {
 				}
 			}
 		}
+	}
+
+	private boolean search() {
+		double sightRadius = 12;
+		Player player = getGame().findObject(Player.class,
+				position.x + (isFacingLeft ? -sightRadius : 0),
+				position.y - sightRadius / 2, sightRadius, sightRadius, true);
+		if (player != null) {
+
+			double dx = player.position.x - position.x;
+			double dy = player.position.y - position.y;
+			if (Math.abs(dx * 2) > Math.abs(dy)
+					&& hasLineOfSight(player.position)) {
+				return true;
+			}
+
+		}
+
+		double senseRadius = 15;
+		GravWell well = getGame().findObject(GravWell.class,
+				position.x - senseRadius, position.y - senseRadius,
+				senseRadius * 2, senseRadius * 2, true);
+		return well != null && well.position.distance(position) < senseRadius;
 	}
 
 	private boolean hasLineOfSight(Vector2 point) {

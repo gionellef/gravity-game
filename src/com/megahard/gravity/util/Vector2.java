@@ -57,6 +57,10 @@ public class Vector2 {
 		return times(1/length());
 	}
 	
+	/**
+	 * range: -pi to pi
+	 * @return angle of the vector
+	 */
 	public double angle(){
 		return Math.atan2(y, x);
 	}
