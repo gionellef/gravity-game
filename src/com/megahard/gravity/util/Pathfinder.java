@@ -125,7 +125,7 @@ public class Pathfinder {
 				
 				double d = end.distance(n.x, n.y);
 				
-				n.cost = current.cost + 2 + d;
+				n.cost = current.cost + 10 + d;
 				n.parent = current;
 				open.add(n);
 			}
