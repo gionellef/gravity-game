@@ -45,15 +45,15 @@ public class Sentinel extends GameObject {
 		List<SentinelSwitch> ss = getGame().findObjects(SentinelSwitch.class);
 		if(ss.isEmpty()) return null;
 		
-		ss.sort(new Comparator<SentinelSwitch>() {
-			@Override
-			public int compare(SentinelSwitch o1, SentinelSwitch o2) {
-				double d1 = o1.position.distance(position);
-				double d2 = o2.position.distance(position);
-				return d1 == d2 ? 0 : d1 < d2 ? -1 : 1;
-			}
-		});
-		
+//		ss.sort(new Comparator<SentinelSwitch>() {
+//			@Override
+//			public int compare(SentinelSwitch o1, SentinelSwitch o2) {
+//				double d1 = o1.position.distance(position);
+//				double d2 = o2.position.distance(position);
+//				return d1 == d2 ? 0 : d1 < d2 ? -1 : 1;
+//			}
+//		});
+//		
 		for(SentinelSwitch s : ss){
 			if(!s.getSwitch()){
 				return s;

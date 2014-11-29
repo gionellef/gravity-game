@@ -66,4 +66,9 @@
    <property name="type" value="SentinelSwitch"/>
   </properties>
  </tile>
+ <tile id="13">
+  <properties>
+   <property name="type" value="Anti-Gravitite"/>
+  </properties>
+ </tile>
 </tileset>
