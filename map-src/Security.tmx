@@ -1007,7 +1007,7 @@
    <tile gid="89"/>
    <tile gid="42"/>
    <tile gid="42"/>
-   <tile gid="43"/>
+   <tile gid="88"/>
    <tile gid="28"/>
    <tile gid="279"/>
    <tile gid="279"/>
@@ -1067,7 +1067,7 @@
    <tile gid="66"/>
    <tile gid="27"/>
    <tile gid="27"/>
-   <tile gid="27"/>
+   <tile gid="66"/>
    <tile gid="28"/>
    <tile gid="279"/>
    <tile gid="279"/>
@@ -1127,7 +1127,7 @@
    <tile gid="66"/>
    <tile gid="27"/>
    <tile gid="27"/>
-   <tile gid="27"/>
+   <tile gid="66"/>
    <tile gid="28"/>
    <tile gid="279"/>
    <tile gid="279"/>
@@ -1187,7 +1187,7 @@
    <tile gid="66"/>
    <tile gid="27"/>
    <tile gid="27"/>
-   <tile gid="27"/>
+   <tile gid="66"/>
    <tile gid="28"/>
    <tile gid="279"/>
    <tile gid="279"/>
@@ -1247,7 +1247,7 @@
    <tile gid="142"/>
    <tile gid="27"/>
    <tile gid="27"/>
-   <tile gid="27"/>
+   <tile gid="141"/>
    <tile gid="28"/>
    <tile gid="279"/>
    <tile gid="279"/>
@@ -2414,7 +2414,7 @@
   <object gid="508" x="712" y="456"/>
   <object gid="510" x="112" y="116"/>
   <object gid="511" x="440" y="200"/>
-  <object gid="513" x="712" y="296"/>
+  <object gid="513" x="664" y="408"/>
   <object gid="513" x="568" y="456"/>
   <object gid="513" x="320" y="456"/>
   <object gid="512" x="440" y="280"/>
@@ -2429,10 +2429,12 @@
   </object>
   <object gid="513" x="520" y="600"/>
   <object gid="503" x="672" y="200"/>
-  <object gid="503" x="568" y="280"/>
+  <object gid="503" x="800" y="368"/>
   <object gid="508" x="488" y="504"/>
   <object gid="511" x="368" y="360"/>
   <object gid="511" x="512" y="360"/>
   <object gid="504" x="856" y="104"/>
+  <object gid="512" x="264" y="232"/>
+  <object gid="512" x="180" y="408"/>
  </objectgroup>
 </map>

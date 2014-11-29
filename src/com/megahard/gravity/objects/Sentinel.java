@@ -16,7 +16,7 @@ public class Sentinel extends GameObject {
 
 	private boolean isFacingLeft = false;
 
-	static private Pathfinder pathfinder;
+	private Pathfinder pathfinder;
 
 	private List<Vector2> waypoints;
 	private int waitTimer = 0;
@@ -49,14 +49,6 @@ public class Sentinel extends GameObject {
 		List<SentinelSwitch> slist = getGame()
 				.findObjects(SentinelSwitch.class);
 
-		final Vector2 p;
-		Player player = getGame().getPlayerObject();
-		if (player == null) {
-			p = position;
-		} else {
-			p = player.position;
-		}
-
 		ListIterator<SentinelSwitch> iter = slist.listIterator();
 		while (iter.hasNext()) {
 			SentinelSwitch s = iter.next();
@@ -71,8 +63,8 @@ public class Sentinel extends GameObject {
 		return Collections.min(slist, new Comparator<SentinelSwitch>() {
 			@Override
 			public int compare(SentinelSwitch o1, SentinelSwitch o2) {
-				double d1 = o1.position.distance(p);
-				double d2 = o2.position.distance(p);
+				double d1 = o1.position.distance(position);
+				double d2 = o2.position.distance(position);
 				return d1 == d2 ? 0 : d1 < d2 ? -1 : 1;
 			}
 		});
@@ -112,8 +104,9 @@ public class Sentinel extends GameObject {
 
 		if (waypoints == null || waypoints.isEmpty()) {
 			wandering = true;
-			Vector2 destination = randomWander();
-			waypoints = pathfinder.findPath(position, destination);
+			if (velocity.length() < 0.1)
+				findWaypoints(randomWander());
+			waitTimer = alert ? 50 : 100;
 		}
 
 		doPath();
@@ -121,14 +114,37 @@ public class Sentinel extends GameObject {
 		doSentinel();
 	}
 
+	private void findWaypoints(Vector2 destination) {
+		waypoints = pathfinder.findPath(position, destination);
+		if (waypoints != null) {
+			// Remove the first waypoint
+			waypoints.remove(0);
+
+			// Nudge waypoints away from walls
+			if (waypoints.size() > 3) {
+				GameMap map = getGame().getMap();
+				for (Vector2 p : waypoints.subList(1, waypoints.size() - 1)) {
+					Vector2 a = new Vector2();
+					for (double t = 0; t < 2 * Math.PI; t += Math.PI / 8) {
+						if (map.getTile(
+								p.plus(Math.cos(t) * 1.2, Math.sin(t) * 1.2))
+								.getCollidable()) {
+							a.add(-Math.cos(t) * 0.5, -Math.sin(t) * 0.5);
+						}
+					}
+					p.add(a);
+				}
+			}
+		}
+	}
+
 	private Vector2 randomWander() {
 		double x, y;
 		do {
 			x = position.x + Math.random() * 20 - 10;
 			y = position.y + Math.random() * 20 - 10;
-		} while (getGame().getMap().getTile(x, y).getCollidable());
-		Vector2 destination = new Vector2(x, y);
-		return destination;
+		} while (!pathfinder.passable(x, y));
+		return new Vector2(x, y);
 	}
 
 	private void doSentinel() {
@@ -149,8 +165,7 @@ public class Sentinel extends GameObject {
 					myBomb = findMyBomb();
 				} else {
 					wandering = false;
-					waypoints = pathfinder.findPath(position,
-							mySwitch.position.plus(0, -1));
+					findWaypoints(mySwitch.position);
 				}
 			}
 		}
@@ -164,7 +179,7 @@ public class Sentinel extends GameObject {
 					if (mySwitch.getSwitch()) {
 						mySwitch = null;
 					} else {
-						if (mySwitch.position.distance(position.plus(0, 1)) < 1.5) {
+						if (mySwitch.position.distance(position) < 1.5) {
 							mySwitch.setSwitch(true);
 							setSpriteAction("touch");
 							waitTimer = 50;
@@ -173,33 +188,33 @@ public class Sentinel extends GameObject {
 						}
 					}
 				} else if (myBomb != null) {
-					if (myBomb.getTimeout() > 50) {
+					if (myBomb.getTimeout() > 50 && myBomb.active) {
 						if (myBomb.position.distance(position.plus(0, 1)) < 1) {
-							// carry the bomb
-							myBomb.applyImpulse(velocity
-									.plus(position.plus(0, 1).minus(
-											myBomb.position))
-									.minus(myBomb.velocity).times(0.04));
-							myBomb.setTimeout(100);
-
-							if (position.distance(player.position) < 4) {
+							Vector2 playerDelta = position
+									.displacement(player.position);
+							double playerDistance = playerDelta.length();
+							if (playerDistance < 8
+									&& hasLineOfSight(player.position)) {
 								// throw the bomb to the player
-								myBomb.applyImpulse(position
-										.displacement(player.position)
-										.normalized().times(0.01)
-										.plus(0, -0.03));
+								myBomb.applyImpulse(playerDelta
+										.normalized()
+										.times(Math.sqrt(playerDistance) * 0.01)
+										.plus(0,
+												-Math.sqrt(playerDistance) * 0.02));
 								myBomb.setTimeout(30);
 								myBomb = null;
-
-								waypoints = pathfinder.findPath(position,
-										position.plus(0, -1));
-								waitTimer = 0;
 							} else if (wandering || waypoints == null) {
 								// go to the player
 								wandering = false;
-								waypoints = pathfinder.findPath(position,
-										player.position.plus(0, -0.5));
+								findWaypoints(player.position.plus(0, -1));
 								waitTimer = 0;
+							} else {
+								// carry the bomb
+								myBomb.applyImpulse(velocity
+										.plus(position.plus(0, 1).minus(
+												myBomb.position))
+										.minus(myBomb.velocity).times(0.04));
+								myBomb.setTimeout(100);
 							}
 						} else if (wandering
 								|| waypoints == null
@@ -208,8 +223,7 @@ public class Sentinel extends GameObject {
 										.distance(myBomb.position) > 3) {
 							// go to the bomb
 							wandering = false;
-							waypoints = pathfinder.findPath(position,
-									myBomb.position.plus(0, -2));
+							findWaypoints(myBomb.position.plus(0, -2));
 							waitTimer = 15;
 						}
 					} else {
@@ -283,28 +297,29 @@ public class Sentinel extends GameObject {
 	}
 
 	private void doPath() {
-		if (waypoints != null && !waypoints.isEmpty()) {
-			Vector2 destination = waypoints.get(0);
+		if (waypoints != null) {
+			for (Vector2 p : waypoints) {
+				VioletSpark spark = new VioletSpark(getGame());
+				spark.position.set(p);
+				spark.sprite.setFrame(4);
+				getGame().addObject(spark);
+			}
+		}
 
-			Vector2 delta = destination.minus(position);
+		if (waitTimer > 0) {
+			waitTimer--;
+		} else {
+			if (waypoints != null && !waypoints.isEmpty()) {
+				Vector2 destination = waypoints.get(0);
+				Vector2 delta = destination.minus(position);
 
-			if (delta.length() > 3
-					|| getGame().getMap()
-							.getTile(position.plus(delta.normalized()))
-							.getCollidable()) {
-				// lost, find new path to the final destination
-				waypoints = pathfinder.findPath(position,
-						waypoints.get(waypoints.size() - 1));
-			} else if (delta.length() > 1) {
-				if (waitTimer > 0) {
-					waitTimer--;
-				} else {
+				if (!hasLineOfSight(destination)) {
+					// path blocked, find new path
+					findWaypoints(waypoints.get(waypoints.size() - 1));
+				} else if (delta.length() > 1) {
 					move(delta);
-				}
-			} else {
-				waypoints.remove(0);
-				if (waypoints.isEmpty()) {
-					waitTimer = alert ? 50 : 100;
+				} else {
+					waypoints.remove(0);
 				}
 			}
 		}
@@ -333,7 +348,7 @@ public class Sentinel extends GameObject {
 			}
 		}
 
-		double thrust = alert ? 0.4 : 0.1;
+		double thrust = alert ? 0.7 : 0.1;
 		Vector2 force = direction.normalized().times(thrust);
 		applyImpulse(force);
 		setSpriteAction("fly", new String[] { "fly" });

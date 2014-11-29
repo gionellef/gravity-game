@@ -119,13 +119,9 @@ public class Pathfinder {
 
 		boolean found = false;
 
-		System.out.println(start + "->" + end);
-
 		do {
 			Node current = open.remove();
 			current.closed = true;
-
-			System.out.println(current.x + "," + current.y);
 
 			if (current == endNode) {
 				found = true;

@@ -8,21 +8,21 @@
 			x: 0,
 			y: 0,
 			frames: 6,
-			delay: 3
+			delay: 1
 		},
 		{
 			name: "default-left",
 			x: 0,
 			y: 1,
 			frames: 6,
-			delay: 3
+			delay: 1
 		},
 		{
 			name: "fly",
 			x: 0,
 			y: 2,
 			frames: 6,
-			delay: 2,
+			delay: 1,
 			next: "default"
 		},
 		{
@@ -30,7 +30,7 @@
 			x: 0,
 			y: 3,
 			frames: 6,
-			delay: 2,
+			delay: 1,
 			next: "default-left"
 		},
 		{
@@ -38,7 +38,7 @@
 			x: 0,
 			y: 4,
 			frames: 6,
-			delay: 3,
+			delay: 1,
 			next: "default"
 		},
 		{
@@ -46,7 +46,7 @@
 			x: 0,
 			y: 5,
 			frames: 6,
-			delay: 3,
+			delay: 1,
 			next: "default-left"
 		},
 		{
@@ -54,7 +54,7 @@
 			x: 0,
 			y: 6,
 			frames: 6,
-			delay: 3,
+			delay: 1,
 			next: "default"
 		},
 		{
@@ -62,7 +62,7 @@
 			x: 0,
 			y: 7,
 			frames: 6,
-			delay: 3,
+			delay: 1,
 			next: "default-left"
 		}
 	]
