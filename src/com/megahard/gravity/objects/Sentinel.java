@@ -134,7 +134,7 @@ public class Sentinel extends GameObject {
 	private void doSentinel() {
 		if (wandering) {
 			boolean found = false;
-			double sightRadius = 10;
+			double sightRadius = 12;
 			Player player = getGame().findObject(Player.class,
 					position.x + (isFacingLeft ? -sightRadius : 0),
 					position.y - sightRadius / 2, sightRadius, sightRadius,
