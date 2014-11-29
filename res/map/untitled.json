@@ -2487,6 +2487,10 @@
                 {
                  "type":"SentinelSwitch"
                 },
+             "13":
+                {
+                 "type":"Anti-Gravitite"
+                },
              "2":
                 {
                  "type":"Plasma"
