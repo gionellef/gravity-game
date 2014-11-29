@@ -1,21 +1,22 @@
 Test Bed,untitled
-1 : Gravity,1_Gravity
-2 : The Unknown,2_TheUnknown
-3 : Sad World,3_SadWorld
-4 : Lurking Danger,4_LurkingDanger
-5 : The Awakening,5_TheAwakening
-6 : Newfound Power,6_NewfoundPower
-7 : Machinery,7_Machinery
-8 : Escape,8_Escape
-9 : The Encounter,9_TheEncounter
-10 : Pit,10_Pit
-11 : Bridge,11_Bridge
-13 : Dots,13_Dots
-14 : Snake,14_Snake
-15 : Boom Room,15_BoomRoom
+1 : Gravity,Gravity
+2 : The Unknown,TheUnknown
+3 : Sad World,SadWorld
+4 : Lurking Danger,LurkingDanger
+5 : The Awakening,TheAwakening
+6 : Newfound Power,NewfoundPower
+7 : Machinery,Machinery
+8 : Escape,Escape
+9 : The Encounter,TheEncounter
+10 : Pit,Pit
+11 : Bridge,Bridge
+12 : Vanilla,Vanilla
+13 : Dots,Dots
+14 : Snake,Snake
+15 : Boom Room,BoomRoom
 Sentinel,Sentinel
 Security,Security
-Insequirus,12_Insequirus
+Insequirus,Insequirus
 Luck,luck
 Hell,hell
 Fly,fly

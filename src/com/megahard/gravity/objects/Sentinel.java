@@ -125,11 +125,11 @@ public class Sentinel extends GameObject {
 				GameMap map = getGame().getMap();
 				for (Vector2 p : waypoints.subList(1, waypoints.size() - 1)) {
 					Vector2 a = new Vector2();
-					for (double t = 0; t < 2 * Math.PI; t += Math.PI / 8) {
+					for (double t = 0; t < 2 * Math.PI; t += Math.PI / 4) {
 						if (map.getTile(
 								p.plus(Math.cos(t) * 1.2, Math.sin(t) * 1.2))
 								.getCollidable()) {
-							a.add(-Math.cos(t) * 0.5, -Math.sin(t) * 0.5);
+							a.add(-Math.cos(t) * 0.6, -Math.sin(t) * 0.6);
 						}
 					}
 					p.add(a);
@@ -339,7 +339,9 @@ public class Sentinel extends GameObject {
 			}
 		}
 
-		double thrust = alert ? 0.7 : 0.1;
+		double bombDistance = myBomb == null ? Double.POSITIVE_INFINITY
+				: myBomb.position.distance(position);
+		double thrust = alert ? (bombDistance < 2 ? 0.2 : 0.7) : 0.1;
 		Vector2 force = direction.normalized().times(thrust);
 		applyImpulse(force);
 		setSpriteAction("fly", new String[] { "fly" });
