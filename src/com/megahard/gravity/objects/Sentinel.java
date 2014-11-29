@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 import com.megahard.gravity.engine.GameContext;
+import com.megahard.gravity.engine.GameMap;
 import com.megahard.gravity.engine.base.GameObject;
 import com.megahard.gravity.util.Pathfinder;
 import com.megahard.gravity.util.Vector2;
@@ -15,7 +16,7 @@ public class Sentinel extends GameObject {
 
 	private boolean isFacingLeft = false;
 
-	private Pathfinder pathfinder;
+	static private Pathfinder pathfinder;
 
 	private List<Vector2> waypoints;
 	private int waitTimer = 0;
@@ -133,17 +134,21 @@ public class Sentinel extends GameObject {
 	private void doSentinel() {
 		if (wandering) {
 			boolean found = false;
-			double sightRadius = 8;
+			double sightRadius = 10;
 			Player player = getGame().findObject(Player.class,
-					position.x - sightRadius, position.y - sightRadius / 2,
-					sightRadius * 2, sightRadius, true);
+					position.x + (isFacingLeft ? -sightRadius : 0),
+					position.y - sightRadius / 2, sightRadius, sightRadius,
+					true);
 			if (player != null) {
-				found = true;
+				if (hasLineOfSight(player.position)) {
+					found = true;
+				}
 			} else {
 				GravWell well = getGame().findObject(GravWell.class,
-						position.x - sightRadius, position.y - sightRadius / 2,
-						sightRadius * 2, sightRadius, true);
-				found = well != null;
+						position.x + (isFacingLeft ? -sightRadius : 0),
+						position.y - sightRadius / 2, sightRadius, sightRadius,
+						true);
+				found = well != null && hasLineOfSight(well.position);
 			}
 
 			if (found) {
@@ -209,7 +214,7 @@ public class Sentinel extends GameObject {
 								// go to the player
 								wandering = false;
 								waypoints = pathfinder.findPath(position,
-										player.position);
+										player.position.plus(0, -0.5));
 								waitTimer = 0;
 							}
 						} else if (wandering
@@ -230,6 +235,44 @@ public class Sentinel extends GameObject {
 				}
 			}
 		}
+	}
+
+	private boolean hasLineOfSight(Vector2 point) {
+		// Bresenham algorithm
+		GameMap map = getGame().getMap();
+		int x0 = (int) position.x;
+		int y0 = (int) position.y;
+		int x1 = (int) point.x;
+		int y1 = (int) point.y;
+
+		int dx = Math.abs(x1 - x0);
+		int dy = Math.abs(y1 - y0);
+		int sx = x0 < x1 ? 1 : -1;
+		int sy = y0 < y1 ? 1 : -1;
+		int err = dx - dy;
+		int e2;
+		int currentX = x0;
+		int currentY = y0;
+		while (true) {
+			if (map.getTile(currentX, currentY).getCollidable()) {
+				return false;
+			}
+
+			if (currentX == x1 && currentY == y1) {
+				break;
+			}
+			e2 = 2 * err;
+			if (e2 > -1 * dy) {
+				err = err - dy;
+				currentX = currentX + sx;
+			}
+			if (e2 < dx) {
+				err = err + dx;
+				currentY = currentY + sy;
+			}
+		}
+
+		return true;
 	}
 
 	private void doPath() {
