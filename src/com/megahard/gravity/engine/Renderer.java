@@ -67,7 +67,7 @@ public class Renderer extends Canvas {
 	private String message;
 	private int messageChars;
 	private Image messageImage;
-	
+
 	private Image gravititeIcon;
 	private Image cursorEmpty;
 	private Image cursorFull;
@@ -105,26 +105,28 @@ public class Renderer extends Canvas {
 	public Renderer(GameContext engine) {
 		game = engine;
 
-		camera = new Vector2();
+		camera = null;
 		cameraTarget = new Vector2();
 		cameraSmoothing = 1;
 
 		background = SpriteStore.get().loadImage(BACKGROUND_PATH, true);
 		tileset = SpriteStore.get().loadImage(TILESET_PATH, true);
-		
+
 		mapCachePosition = new Point();
 
 		message = null;
-		
-		gravititeIcon = SpriteStore.get().loadImage("/gravitite-icon.png", false);
-		cursorEmpty = SpriteStore.get().loadImage("/crosshair-empty.png", false);
+
+		gravititeIcon = SpriteStore.get().loadImage("/gravitite-icon.png",
+				false);
+		cursorEmpty = SpriteStore.get()
+				.loadImage("/crosshair-empty.png", false);
 		cursorFull = SpriteStore.get().loadImage("/crosshair.png", false);
 		cursorHold = SpriteStore.get().loadImage("/crosshair-hold.png", false);
 
 		setCursor(getToolkit().createCustomCursor(
 				new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB),
 				new Point(0, 0), "null"));
-		
+
 		setBackground(Color.black);
 	}
 
@@ -145,13 +147,13 @@ public class Renderer extends Canvas {
 			background = SpriteStore.get().getVolatileImage(BACKGROUND_PATH);
 			tileset = SpriteStore.get().getVolatileImage(TILESET_PATH);
 		}
-		
+
 		int bufferHeight = 0;
 		int bufferWidth = 0;
-		if (backBuffer!=null){
-			
+		if (backBuffer != null) {
+
 			bufferWidth = backBuffer.getWidth();
-			
+
 			bufferHeight = backBuffer.getHeight();
 		}
 		int halfBufWidth = bufferWidth / 2;
@@ -177,8 +179,8 @@ public class Renderer extends Canvas {
 
 			renderBackground(g, bufferWidth, bufferHeight, mapHeight, mapWidth,
 					cx, cy);
-			renderMap(g, s, bufferWidth, bufferHeight, halfBufWidth, halfBufHeight, mapHeight, mapWidth,
-					cx, cy, cxm, cym);
+			renderMap(g, s, bufferWidth, bufferHeight, halfBufWidth,
+					halfBufHeight, mapHeight, mapWidth, cx, cy, cxm, cym);
 			renderObjects(g, s, bufferWidth, bufferHeight, halfBufWidth,
 					halfBufHeight, cxm, cym);
 			renderBorders(g, s, bufferWidth, bufferHeight, halfBufWidth,
@@ -256,28 +258,31 @@ public class Renderer extends Canvas {
 				null);
 	}
 
-	private void renderMap(Graphics2D g, GameState s, int bufferWidth, int bufferHeight, int halfBufWidth,
-			int halfBufHeight, int mapHeight, int mapWidth, double cx,
-			double cy, int cxm, int cym) {
+	private void renderMap(Graphics2D g, GameState s, int bufferWidth,
+			int bufferHeight, int halfBufWidth, int halfBufHeight,
+			int mapHeight, int mapWidth, double cx, double cy, int cxm, int cym) {
 
 		int cacheWidth = (bufferWidth + TILE_SIZE * 4);
 		int cacheHeight = (bufferHeight + TILE_SIZE * 4);
 
 		int cacheIntervalX = (cacheWidth - bufferWidth) / TILE_SIZE * TILE_SIZE;
-		int cacheIntervalY = (cacheHeight - bufferHeight) / TILE_SIZE * TILE_SIZE;
+		int cacheIntervalY = (cacheHeight - bufferHeight) / TILE_SIZE
+				* TILE_SIZE;
 
 		// Check if cache image is valid
 		boolean redraw = false;
 		GraphicsConfiguration gc = getGraphicsConfiguration();
 		if (mapCache == null) {
-			mapCache = gc.createCompatibleVolatileImage(cacheWidth, cacheHeight, Transparency.BITMASK);
+			mapCache = gc.createCompatibleVolatileImage(cacheWidth,
+					cacheHeight, Transparency.BITMASK);
 			redraw = true;
 		} else {
 			int valid = mapCache.validate(gc);
 			if (valid == VolatileImage.IMAGE_INCOMPATIBLE) {
-				mapCache = gc.createCompatibleVolatileImage(cacheWidth, cacheHeight, Transparency.BITMASK);
+				mapCache = gc.createCompatibleVolatileImage(cacheWidth,
+						cacheHeight, Transparency.BITMASK);
 			}
-			if(valid != VolatileImage.IMAGE_OK){
+			if (valid != VolatileImage.IMAGE_OK) {
 				redraw = true;
 			}
 		}
@@ -289,13 +294,13 @@ public class Renderer extends Canvas {
 		// calculate part of map to be rendered to cache
 		int pxCacheStart = pxStart / cacheIntervalX * cacheIntervalX;
 		int pyCacheStart = pyStart / cacheIntervalY * cacheIntervalY;
-		
-		
+
 		// Check if cache contents is valid
-		if(mapCachePosition.x != pxCacheStart || mapCachePosition.y != pyCacheStart){
+		if (mapCachePosition.x != pxCacheStart
+				|| mapCachePosition.y != pyCacheStart) {
 			redraw = true;
 		}
-		if(s.map.getDirty()){
+		if (s.map.getDirty()) {
 			redraw = true;
 			s.map.setDirty(false);
 		}
@@ -317,15 +322,15 @@ public class Renderer extends Canvas {
 				for (int x = 0; x <= cacheWidth / TILE_SIZE; x++) {
 					int px = x * TILE_SIZE;
 					int tx = x + txCacheStart;
-					
-					if(tx >= 0 && ty >= 0 && tx < mapWidth && ty < mapHeight){
+
+					if (tx >= 0 && ty >= 0 && tx < mapWidth && ty < mapHeight) {
 						Tile tile = s.map.getTile(tx, ty);
 						int tileIndex = tile.getTileIndex();
 						int frameX = (tileIndex % tileSheetColumns) * TILE_SIZE;
 						int frameY = (tileIndex / tileSheetColumns) * TILE_SIZE;
 						cg.drawImage(tileset, px, py, px + TILE_SIZE, py
-								+ TILE_SIZE, frameX, frameY, frameX + TILE_SIZE,
-								frameY + TILE_SIZE, null);
+								+ TILE_SIZE, frameX, frameY,
+								frameX + TILE_SIZE, frameY + TILE_SIZE, null);
 					}
 				}
 			}
@@ -336,11 +341,8 @@ public class Renderer extends Canvas {
 		int xSrc = pxStart - pxCacheStart;
 		int ySrc = pyStart - pyCacheStart;
 
-		g.drawImage(mapCache,
-				0, 0, bufferWidth, bufferHeight,
-				xSrc, ySrc, xSrc + bufferWidth, ySrc + bufferHeight,
-				null
-			);
+		g.drawImage(mapCache, 0, 0, bufferWidth, bufferHeight, xSrc, ySrc, xSrc
+				+ bufferWidth, ySrc + bufferHeight, null);
 	}
 
 	private void renderMessages(Graphics2D g, GameState s, int bufferWidth,
@@ -425,31 +427,31 @@ public class Renderer extends Canvas {
 	private void renderHud(Graphics2D g, GameState s, int bufferWidth) {
 		Image cursor = cursorEmpty;
 		Point cursorHotspot = new Point(32, 32);
-		
+
 		Player player = game.getPlayerObject();
 		if (player != null) {
 			g.setColor(Color.white);
 			g.setFont(font);
-			
+
 			int gravitites = player.getGravitites();
-			
+
 			if (gravitites > 0) {
-				if(gravitites <= 6){
-					for(int i=0; i<gravitites; i++){
+				if (gravitites <= 6) {
+					for (int i = 0; i < gravitites; i++) {
 						g.drawImage(gravititeIcon, 10 + i * 10, 10, null);
 					}
-				}else{
+				} else {
 					g.drawImage(gravititeIcon, 10 + 4, 10, null);
 					g.drawImage(gravititeIcon, 10, 10 + 4, null);
 					g.drawImage(gravititeIcon, 10 + 8, 10 + 4, null);
 					drawString(g, Integer.toString(gravitites), 30, 22);
 				}
-				
+
 				cursor = cursorFull;
 				cursorHotspot.move(32, 32);
 			}
-			
-			if(player.getGravWell() != null){
+
+			if (player.getGravWell() != null) {
 				cursor = cursorHold;
 				cursorHotspot.move(32, 32);
 			}
@@ -457,15 +459,15 @@ public class Renderer extends Canvas {
 			String mapName = GravityApplet.lm.maps.get(LevelMenu.lastMap)[0];
 
 			FontMetrics fm = g.getFontMetrics();
-			drawString(g, mapName, bufferWidth - fm.stringWidth(mapName) - 10, 20);
+			drawString(g, mapName, bufferWidth - fm.stringWidth(mapName) - 10,
+					20);
 		}
-		
+
 		Point mousePosition = getMousePosition();
-		if(!s.cinematicMode && mousePosition != null){
-			g.drawImage(cursor,
-				mousePosition.x/SCALE_FACTOR - cursorHotspot.x,
-				mousePosition.y/SCALE_FACTOR - cursorHotspot.y,
-				null);
+		if (!s.cinematicMode && mousePosition != null) {
+			g.drawImage(cursor, mousePosition.x / SCALE_FACTOR
+					- cursorHotspot.x, mousePosition.y / SCALE_FACTOR
+					- cursorHotspot.y, null);
 		}
 	}
 
@@ -593,13 +595,13 @@ public class Renderer extends Canvas {
 
 		return i == words.length ? -1 : i;
 	}
-	
-	private void drawString(Graphics g, String s, int x, int y){
+
+	private void drawString(Graphics g, String s, int x, int y) {
 		Color oldColor = g.getColor();
-		
+
 		g.setColor(MESSAGE_BACKGROUND);
-		g.drawString(s, x, y+1);
-		
+		g.drawString(s, x, y + 1);
+
 		g.setColor(oldColor);
 		g.drawString(s, x, y);
 	}
