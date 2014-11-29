@@ -9,7 +9,7 @@ public class Bomb extends GameObject {
 	private int timeout = 200;
 	
 	private double rotate = 1;
-	
+
 	public Bomb(GameContext game) {
 		super(game, "bomb");
 		size.set(0.3, 0.3);
@@ -95,5 +95,9 @@ public class Bomb extends GameObject {
 	
 	public void setTimeout(int value){
 		timeout = value;
+	}
+	
+	public int getTimeout(){
+		return timeout;
 	}
 }

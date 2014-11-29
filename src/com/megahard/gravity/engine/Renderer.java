@@ -105,7 +105,7 @@ public class Renderer extends Canvas {
 	public Renderer(GameContext engine) {
 		game = engine;
 
-		camera = null;
+		camera = new Vector2();
 		cameraTarget = new Vector2();
 		cameraSmoothing = 1;
 

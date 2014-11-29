@@ -25,11 +25,11 @@ public class Pathfinder {
 				grid[i] = node;
 				if(y > 0){
 					if(x > 0){
-//						(node.neighbors[0] = grid[i - 1 - w]).neighbors[7] = node;
+						(node.neighbors[0] = grid[i - 1 - w]).neighbors[7] = node;
 					}
 					(node.neighbors[1] = grid[i - w]).neighbors[6] = node;
 					if(x < w - 1){
-//						(node.neighbors[2] = grid[i + 1 - w]).neighbors[5] = node;
+						(node.neighbors[2] = grid[i + 1 - w]).neighbors[5] = node;
 					}
 				}
 				if(x > 0){
