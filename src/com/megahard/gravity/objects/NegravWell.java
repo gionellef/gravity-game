@@ -51,13 +51,12 @@ public class NegravWell extends GameObject {
 
 	private void spark() {
 		double a = Math.random() * Math.PI * 2;
-		double r = 1 + Math.random() * 2;
+		double r = Math.random() * 2;
 		double x = position.x + Math.cos(a) * r;
 		double y = position.y + Math.sin(a) * r;
 		if(!getGame().getMap().getTile(x, y).getCollidable()){
-			VioletSpark s = new VioletSpark(getGame());
+			OrangeSpark s = new OrangeSpark(getGame());
 			s.position.set(x, y);
-			s.velocity.set(Math.cos(a - Math.PI/3) * -1/r, Math.sin(a - Math.PI/3) * -1/r);
 			getGame().addObject(s);
 		}
 	}
