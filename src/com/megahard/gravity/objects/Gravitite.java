@@ -17,9 +17,6 @@ public class Gravitite extends GameObject {
 
 	@Override
 	public void onCollide(GameObject obj) {
-//		if(obj.getClass().equals(getClass())){
-//			velocity = velocity.plus(position.minus(obj.position).normalized().times(0.01f));
-//		}
 	}
 	
 	@Override

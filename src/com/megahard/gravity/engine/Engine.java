@@ -941,7 +941,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener,
 	}
 
 	@SuppressWarnings("unchecked")
-	public <T> List<T> findObjects(Class<T> type, int x, int y, int w, int h,
+	public <T> List<T> findObjects(Class<T> type, double x, double y, double w, double h,
 			boolean inclusive) {
 		List<GameObject> objects = findObjects(x, y, w, h, inclusive);
 		List<T> list = new LinkedList<T>();

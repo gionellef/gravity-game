@@ -17,9 +17,11 @@ public class Negravitite extends GameObject {
 
 	@Override
 	public void onCollide(GameObject obj) {
-//		if(obj.getClass().equals(getClass())){
-//			velocity = velocity.plus(position.minus(obj.position).normalized().times(0.01f));
-//		}
+		// Neutralize
+		if(obj.getClass().equals(Gravitite.class) || obj.getClass().equals(BigGravitite.class)){
+			obj.die();
+			die();
+		}
 	}
 	
 	@Override
