@@ -23,7 +23,7 @@ public class InfiniteGravitites extends Script {
 	public void onUpdate() {
 		Player player = getGame().getPlayerObject();
 		if(player != null){
-			player.setGravs(99);
+			player.setGravitites(99);
 		}
 	}
 

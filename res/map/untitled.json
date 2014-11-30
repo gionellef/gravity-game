@@ -254,6 +254,36 @@
                  "width":0,
                  "x":472,
                  "y":312
+                }, 
+                {
+                 "gid":514,
+                 "height":0,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":372,
+                 "y":472
+                }, 
+                {
+                 "gid":514,
+                 "height":0,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":428,
+                 "y":251
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -2489,7 +2519,7 @@
                 },
              "13":
                 {
-                 "type":"Anti-Gravitite"
+                 "type":"Negravitite"
                 },
              "2":
                 {

@@ -71,7 +71,7 @@ public class TheAwakening extends ScriptSequencer {
 			public void run() {
 				getGame().showMessage("isaac-pre", "AAAAAARRGH!!!", 150);
 				
-				player.setGravs(0);
+				player.setGravitites(0);
 				gw = new GravWell(getGame());
 				gw.power = 1.2;
 				gw.position.set(player.position.x, player.position.y);
