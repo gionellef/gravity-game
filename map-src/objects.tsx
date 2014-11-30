@@ -68,7 +68,7 @@
  </tile>
  <tile id="13">
   <properties>
-   <property name="type" value="Anti-Gravitite"/>
+   <property name="type" value="Negravitite"/>
   </properties>
  </tile>
 </tileset>
