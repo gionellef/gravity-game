@@ -29,7 +29,7 @@ public class Sentinel extends GameObject {
 
 	public Sentinel(GameContext game) {
 		super(game, "sentinel");
-		size.set(1.1, 1.1);
+		size.set(0.9, 1.1);
 		floating = true;
 		mass = 15;
 		restitution = 1;
@@ -121,15 +121,14 @@ public class Sentinel extends GameObject {
 			waypoints.remove(0);
 
 			// Nudge waypoints away from walls
-			if (waypoints.size() > 3) {
+			if (waypoints.size() > 2) {
 				GameMap map = getGame().getMap();
-				for (Vector2 p : waypoints.subList(1, waypoints.size() - 1)) {
+				for (Vector2 p : waypoints.subList(0, waypoints.size() - 1)) {
 					Vector2 a = new Vector2();
-					for (double t = 0; t < 2 * Math.PI; t += Math.PI / 4) {
-						if (map.getTile(
-								p.plus(Math.cos(t) * 1.2, Math.sin(t) * 1.2))
-								.getCollidable()) {
-							a.add(-Math.cos(t) * 0.6, -Math.sin(t) * 0.6);
+					for (double t = 0; t < 2 * Math.PI; t += Math.PI / 16) {
+						if (map.getTile(p.x + Math.cos(t) * 1.5,
+								p.y + Math.sin(t) * 1.5).getCollidable()) {
+							a.add(-Math.cos(t) * 0.2, -Math.sin(t) * 0.2);
 						}
 					}
 					p.add(a);
@@ -203,6 +202,9 @@ public class Sentinel extends GameObject {
 												-Math.sqrt(playerDistance) * 0.02));
 								myBomb.setTimeout(30);
 								myBomb = null;
+
+								waypoints = null;
+								waitTimer = 30;
 							} else if (wandering || waypoints == null) {
 								// go to the player
 								wandering = false;
@@ -297,6 +299,15 @@ public class Sentinel extends GameObject {
 	}
 
 	private void doPath() {
+		if (waypoints != null) {
+			for (Vector2 p : waypoints) {
+				VioletSpark s = new VioletSpark(getGame());
+				s.position.set(p);
+				s.sprite.setFrame(4);
+				getGame().addObject(s);
+			}
+		}
+
 		if (waitTimer > 0) {
 			waitTimer--;
 		} else {
