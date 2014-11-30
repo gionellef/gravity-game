@@ -77,8 +77,8 @@ public class Sprite {
 	}
 	
 	public void setAction(SpriteAction action){
+		currentAction = action;
 		if(action != null){
-			currentAction = action;
 			setIndex(currentAction.x, currentAction.y);
 			currentFrame = 0;
 			delayCount = 0;

@@ -12,6 +12,8 @@ public class Gunner extends GameObject {
 	private boolean goingLeft = false;
 	private int waitTimer = 0;
 
+	private GunnerGun gun;
+
 	public Gunner(GameContext game) {
 		super(game, "gunner");
 		size.set(0.9, 1.45);
@@ -24,18 +26,29 @@ public class Gunner extends GameObject {
 	}
 
 	@Override
+	public void init() {
+		gun = new GunnerGun(getGame());
+		gun.position.set(position);
+		getGame().addObject(gun);
+	}
+
+	@Override
 	public void update() {
 		super.update();
 
 		// Animations
 		if (standing) {
 			if (!isWalking) {
-				setSpriteAction("default", new String[] { "default" });
+				if (gun.isFiring()) {
+					setSpriteAction("fire", new String[] { "fire" });
+				} else {
+					setSpriteAction("default", new String[] { "default" });
+				}
 			}
 		} else {
-			// if(!sprite.getAction().startsWith("fall")){
-			// setSpriteAction("fall");
-			// }
+			if (!sprite.getAction().startsWith("walk")) {
+				setSpriteAction("walk");
+			}
 		}
 
 		// State tracking
@@ -47,10 +60,15 @@ public class Gunner extends GameObject {
 		isWalking = false;
 
 		// AI
-		doGunner();
+		if (gun.isFiring()) {
+			waitTimer = 100;
+		}
+		doWalk();
+
+		gun.position.set(position.plus(isFacingLeft ? 0.1 : -0.1, -0.06));
 	}
 
-	private void doGunner() {
+	private void doWalk() {
 		if (waitTimer > 0) {
 			waitTimer--;
 		} else {
@@ -74,16 +92,6 @@ public class Gunner extends GameObject {
 					goingLeft = !goingLeft;
 				}
 			}
-			
-			double sightRadius = 7;
-			Player player = getGame().findObject(Player.class, position.x + (isFacingLeft ? -sightRadius : sightRadius), position.y - sightRadius, sightRadius, 2 * sightRadius, true);
-			if(player != null){
-				// TEMPORARY, throw bombs
-				Bomb b = new Bomb(getGame());
-				b.position.set(position);
-				b.applyImpulse(player.position.minus(position));
-				getGame().addObject(b);
-			}
 		}
 	}
 
@@ -101,8 +109,10 @@ public class Gunner extends GameObject {
 	public void walk(boolean left) {
 		double runStrength = 0.05;
 		double sign = left ? -1 : 1;
-		isFacingLeft = left;
 		if (standing) {
+			isFacingLeft = left;
+			gun.setFacing(left);
+
 			isWalking = true;
 			velocity.x += runStrength * sign / friction;
 			staticFriction = runStrength;

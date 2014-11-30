@@ -285,13 +285,14 @@ public class Sentinel extends GameObject {
 		int currentX = x0;
 		int currentY = y0;
 		while (true) {
+			if (currentX == x1 && currentY == y1) {
+				break;
+			}
+			
 			if (map.getTile(currentX, currentY).getCollidable()) {
 				return false;
 			}
 
-			if (currentX == x1 && currentY == y1) {
-				break;
-			}
 			e2 = 2 * err;
 			if (e2 > -1 * dy) {
 				err = err - dy;
