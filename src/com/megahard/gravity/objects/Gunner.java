@@ -46,6 +46,7 @@ public class Gunner extends GameObject {
 				}
 			}
 		} else {
+			// falling
 			if (!sprite.getAction().startsWith("walk")) {
 				setSpriteAction("walk");
 			}
@@ -61,10 +62,19 @@ public class Gunner extends GameObject {
 
 		// AI
 		if (gun.isFiring()) {
-			waitTimer = 100;
+			waitTimer = 50;
+		} else {
+			Player player = getGame().getPlayerObject();
+			if (player != null && position.distance(player.position) < 3) {
+				if (goingLeft != player.position.x < position.x) {
+					goingLeft = player.position.x < position.x;
+					waitTimer = 1;
+				}
+			}
 		}
 		doWalk();
 
+		gun.setFacing(isFacingLeft);
 		gun.position.set(position.plus(isFacingLeft ? 0.1 : -0.1, -0.06));
 	}
 
@@ -75,7 +85,7 @@ public class Gunner extends GameObject {
 			double nextX = position.x + (goingLeft ? -1 : 1);
 			if (findBoundary(position.x, nextX)) {
 				goingLeft = !goingLeft;
-				waitTimer = 50;
+				waitTimer = 100;
 				if (getGame().getMap().getTile(nextX, position.y)
 						.getCollidable()) {
 					walk(goingLeft);
@@ -111,7 +121,6 @@ public class Gunner extends GameObject {
 		double sign = left ? -1 : 1;
 		if (standing) {
 			isFacingLeft = left;
-			gun.setFacing(left);
 
 			isWalking = true;
 			velocity.x += runStrength * sign / friction;

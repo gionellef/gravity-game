@@ -107,7 +107,7 @@ public class GunnerGun extends GameObject {
 				boolean hit = Math.random() < chanceToHit;
 
 				if (hit) {
-					double str = 21;
+					double str = 16;
 					obj.applyImpulse(delta.normalized().times(str));
 
 					if (targetHits > 0) {
