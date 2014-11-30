@@ -307,14 +307,14 @@ public class Sentinel extends GameObject {
 	}
 
 	private void doPath() {
-		if (waypoints != null) {
-			for (Vector2 p : waypoints) {
-				VioletSpark s = new VioletSpark(getGame());
-				s.position.set(p);
-				s.sprite.setFrame(4);
-				getGame().addObject(s);
-			}
-		}
+//		if (waypoints != null) {
+//			for (Vector2 p : waypoints) {
+//				VioletSpark s = new VioletSpark(getGame());
+//				s.position.set(p);
+//				s.sprite.setFrame(4);
+//				getGame().addObject(s);
+//			}
+//		}
 
 		// Get away from bombs!
 		Vector2 escapeVector = new Vector2();
