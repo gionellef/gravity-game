@@ -71,4 +71,9 @@
    <property name="type" value="Negravitite"/>
   </properties>
  </tile>
+ <tile id="14">
+  <properties>
+   <property name="type" value="Gunner"/>
+  </properties>
+ </tile>
 </tileset>

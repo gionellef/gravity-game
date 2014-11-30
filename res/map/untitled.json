@@ -28,8 +28,8 @@
                  "type":"Player",
                  "visible":true,
                  "width":0,
-                 "x":267.25,
-                 "y":461
+                 "x":276,
+                 "y":464
                 }, 
                 {
                  "gid":504,
@@ -88,8 +88,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":237,
-                 "y":467.333
+                 "x":240,
+                 "y":468
                 }, 
                 {
                  "gid":508,
@@ -271,7 +271,7 @@
                  "y":472
                 }, 
                 {
-                 "gid":514,
+                 "gid":515,
                  "height":0,
                  "name":"",
                  "properties":
@@ -282,8 +282,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":428,
-                 "y":251
+                 "x":576,
+                 "y":468
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -2520,6 +2520,10 @@
              "13":
                 {
                  "type":"Negravitite"
+                },
+             "14":
+                {
+                 "type":"Gunner"
                 },
              "2":
                 {
