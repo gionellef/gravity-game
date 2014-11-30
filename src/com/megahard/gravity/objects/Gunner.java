@@ -97,7 +97,7 @@ public class Gunner extends GameObject {
 
 	private boolean findBoundary(double x0, double x1) {
 		GameMap map = getGame().getMap();
-		for (int y = -4; y <= 1; y++) {
+		for (int y = -2; y <= 1; y++) {
 			if (map.getTile(x0, position.y + y).getCollidable() != map.getTile(
 					x1, position.y + y).getCollidable()) {
 				return true;

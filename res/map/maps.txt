@@ -15,6 +15,7 @@ Test Bed,untitled
 14 : Snake,Snake
 15 : Boom Room,BoomRoom
 Sentinel,Sentinel
+Bugs,Bugs
 Security,Security
 Insequirus,Insequirus
 Luck,luck
