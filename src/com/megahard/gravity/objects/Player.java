@@ -123,10 +123,6 @@ public class Player extends GameObject {
 			}
 			
 		}else{
-			if(well != null){
-				well.die();
-				well = null;
-			}
 			staticFriction = 0.1;
 			gravitites = 0;
 			jumpsLeft = 0;
@@ -147,6 +143,15 @@ public class Player extends GameObject {
 		// TODO die animation
 //		setSpriteAction("die");
 		getGame().removeObject(this);
+		
+		if(well != null){
+			well.die();
+			well = null;
+		}
+		if(negwell != null){
+			negwell.die();
+			negwell = null;
+		}
 	}
 	
 	@Override
