@@ -327,7 +327,7 @@ public class Player extends GameObject {
 		return jumpsLeft;
 	}
 
-	public void setGravs(int i) {
+	public void setGravitites(int i) {
 		gravitites = i;
 	}
 	
