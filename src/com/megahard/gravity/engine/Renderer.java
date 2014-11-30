@@ -451,7 +451,7 @@ public class Renderer extends Canvas {
 				cursorHotspot.move(32, 32);
 			}
 
-			if (player.getGravWell() != null) {
+			if (player.getGravWell() != null || player.getNegravWell() != null) {
 				cursor = cursorHold;
 				cursorHotspot.move(32, 32);
 			}

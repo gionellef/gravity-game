@@ -36,6 +36,7 @@ public class Player extends GameObject {
 	private static final Random RAND = new Random();
 	
 	private GravWell well = null;
+	private NegravWell negwell = null;
 	private boolean isRunning = true;
 	private boolean isFacingLeft = false;
 	private int gravitites = 0;
@@ -103,7 +104,7 @@ public class Player extends GameObject {
 				toggleSwitch();
 			}
 			if(getGame().mouseIsJustPressed(MouseEvent.BUTTON1)){
-				conjureGrav(getGame().getMouseGamePosition());
+				conjureGrav(getGame().getMouseGamePosition(), false);
 			}
 			if(getGame().mouseIsUp(MouseEvent.BUTTON1)){
 				if(well != null){
@@ -111,6 +112,16 @@ public class Player extends GameObject {
 					well = null;
 				}
 			}
+			if(getGame().mouseIsJustPressed(MouseEvent.BUTTON3)){
+				conjureGrav(getGame().getMouseGamePosition(), true);
+			}
+			if(getGame().mouseIsUp(MouseEvent.BUTTON3)){
+				if(negwell != null){
+					negwell.die();
+					negwell = null;
+				}
+			}
+			
 		}else{
 			if(well != null){
 				well.die();
@@ -166,7 +177,7 @@ public class Player extends GameObject {
 		getGame().playSoundAtLocation(sound, position, 0.3 + p * 0.4); 
 	}
 
-	private void conjureGrav(Vector2 pos) {
+	private void conjureGrav(Vector2 pos, boolean anti) {
 		if(gravitites > 0){
 			// Find a clear spot for the gravwell to appear
 			if(!isAreaClear(pos)){
@@ -185,12 +196,20 @@ public class Player extends GameObject {
 			
 			// make it appear now
 			gravitites--;
-			
-			if(well != null) well.die();
-			
-			well = new GravWell(getGame());
-			well.position = pos;
-			getGame().addObject(well);
+			if (anti) {
+				if(negwell != null) negwell.die();
+				
+				negwell = new NegravWell(getGame());
+				negwell.position = pos;
+				getGame().addObject(negwell);
+			}
+			else {
+				if(well != null) well.die();
+				
+				well = new GravWell(getGame());
+				well.position = pos;
+				getGame().addObject(well);
+			}
 			
 			if(sprite.getAction().startsWith("default")){
 				setSpriteAction("conjure");
@@ -293,6 +312,10 @@ public class Player extends GameObject {
 	
 	public GravWell getGravWell(){
 		return well;
+	}
+	
+	public NegravWell getNegravWell(){
+		return negwell;
 	}
 	
 	public int getJumpsLeft(){
