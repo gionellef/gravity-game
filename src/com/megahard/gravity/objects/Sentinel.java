@@ -125,7 +125,7 @@ public class Sentinel extends GameObject {
 				GameMap map = getGame().getMap();
 				for (Vector2 p : waypoints.subList(0, waypoints.size() - 1)) {
 					Vector2 a = new Vector2();
-					for (double t = 0; t < 2 * Math.PI; t += Math.PI / 16) {
+					for (double t = 0; t < 2 * Math.PI; t += Math.PI / 4) {
 						if (map.getTile(p.x + Math.cos(t) * 1.5,
 								p.y + Math.sin(t) * 1.5).getCollidable()) {
 							a.add(-Math.cos(t) * 0.2, -Math.sin(t) * 0.2);
