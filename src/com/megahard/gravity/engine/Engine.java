@@ -432,13 +432,12 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener,
 	}
 
 	private void commitAddObjects() {
-		for (GameObject o : addObj) {
-			state.objects.add(o);
-		}
-		for (GameObject o : addObj) {
+		state.objects.addAll(addObj);
+		ArrayList<GameObject> copy = new ArrayList<>(addObj);
+		addObj.clear();
+		for (GameObject o : copy) {
 			o.init();
 		}
-		addObj.clear();
 	}
 
 	private void updateInputEvents() {
@@ -941,8 +940,8 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener,
 	}
 
 	@SuppressWarnings("unchecked")
-	public <T> List<T> findObjects(Class<T> type, double x, double y, double w, double h,
-			boolean inclusive) {
+	public <T> List<T> findObjects(Class<T> type, double x, double y, double w,
+			double h, boolean inclusive) {
 		List<GameObject> objects = findObjects(x, y, w, h, inclusive);
 		List<T> list = new LinkedList<T>();
 		for (GameObject o : objects) {
