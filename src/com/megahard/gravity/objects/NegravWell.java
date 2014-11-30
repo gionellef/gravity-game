@@ -38,7 +38,7 @@ public class NegravWell extends GameObject {
 				double d = diff.length();
 				double str = 0.12 + 0.78/time;
 				double accel = -power * str / (d * d + 1);
-				if(accel > 0.001){
+				if(accel < -0.001){
 					o.velocity.add(diff.times(accel));
 				}
 			}
