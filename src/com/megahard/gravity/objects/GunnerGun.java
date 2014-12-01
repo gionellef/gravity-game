@@ -38,8 +38,8 @@ public class GunnerGun extends GameObject {
 		super.update();
 
 		// calculate target angle
-		double targetAngle = (isFacingLeft ? Math.PI : 0) + Math.sin(t) * 0.5;
-		t += 0.04;
+		double targetAngle = (isFacingLeft ? Math.PI : 0) + Math.sin(t) * 0.6;
+		t += Math.random() * 0.03;
 
 		Player player = findPlayer();
 		if (player != null) {
@@ -120,7 +120,18 @@ public class GunnerGun extends GameObject {
 				}
 
 				// graphical effects
-				drawTrail(distance, hit, hit ? delta.angle() : angle);
+				Vector2 p = position.displacement(target.position);
+				if (hit) {
+					p.add(Math.random() * target.size.x / 2 - target.size.x / 4,
+							Math.random() * target.size.y / 2 - target.size.y
+									/ 4);
+					p.normalize();
+					p.scale(distance);
+				} else {
+					p.add((Math.random() * 2 - 1) * distance / 4,
+							(Math.random() * 2 - 1) * distance / 4);
+				}
+				drawTrail(p, hit);
 			}
 		} else {
 			target = obj;
@@ -128,40 +139,28 @@ public class GunnerGun extends GameObject {
 		}
 	}
 
-	private void drawTrail(double distance, boolean hit, double angle) {
-		double x, y;
+	private void drawTrail(Vector2 dir, boolean hit) {
+		double cx, cy;
 		double t = 0.6;
-		double a = (angle + (Math.random() * 2 - 1) * (hit ? 0 : 0.2));
+		double a = dir.angle();
+		double distance = dir.length();
 		while (t < 30) {
-			x = position.x + Math.cos(a) * t;
-			y = position.y + Math.sin(a) * t;
+			cx = position.x + Math.cos(a) * t;
+			cy = position.y + Math.sin(a) * t;
 			if (hit) {
 				if (t >= distance) {
-					// spark at target
-					castTrailSpark(x, y);
 					break;
 				}
 			} else {
-				if (getGame().getMap().getTile(x, y).getCollidable()) {
+				if (getGame().getMap().getTile(cx, cy).getCollidable()) {
 					break;
 				}
 			}
-			t += 0.06 + (hit ? 0 : t * 0.01);
+			t += 0.18;
 
 			GunTrail gt = new GunTrail(getGame());
-			gt.position.set(x, y - 0.1);
-			gt.velocity.set(Math.cos(a) * 0.06 + Math.random() * 0.002 - 0.001,
-					Math.sin(a) * 0.06 + Math.random() * 0.002 - 0.001);
-			getGame().addObject(gt);
-		}
-	}
-
-	private void castTrailSpark(double x, double y) {
-		for (int i = 0; i < 10; i++) {
-			GunTrail gt = new GunTrail(getGame());
-			gt.position.set(x, y);
-			gt.velocity.set(Math.random() * 0.08 - 0.04,
-					Math.random() * 0.08 - 0.04);
+			gt.position.set(cx, cy);
+			gt.sprite.setFrame(Math.random() < 0.5 ? 0 : 1);
 			getGame().addObject(gt);
 		}
 	}

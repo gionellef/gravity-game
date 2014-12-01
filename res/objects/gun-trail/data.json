@@ -1,13 +1,13 @@
 {
-	sheetWidth: 4,
-	width: 1,
-	height: 1,
+	sheetWidth: 8,
+	width: 3,
+	height: 3,
 	actions: [
 		{
 			name: "default",
 			x: 0,
 			y: 0,
-			frames: 4,
+			frames: 8,
 			delay: 1
 		}
 	]

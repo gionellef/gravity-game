@@ -12,6 +12,12 @@ public class GunTrail extends GameObject {
 		zIndex = 1300;
 	}
 
+	@Override
+	public void update() {
+		super.update();
+		
+		zIndex--;
+	}
 
 	@Override
 	public void onEndAction(String action) {
