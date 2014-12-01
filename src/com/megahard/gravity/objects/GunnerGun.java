@@ -149,7 +149,7 @@ public class GunnerGun extends GameObject {
 			t += 0.06 + (hit ? 0 : t * 0.01);
 
 			GunTrail gt = new GunTrail(getGame());
-			gt.position.set(x, y);
+			gt.position.set(x, y - 0.1);
 			gt.velocity.set(Math.cos(a) * 0.06 + Math.random() * 0.002 - 0.001,
 					Math.sin(a) * 0.06 + Math.random() * 0.002 - 0.001);
 			getGame().addObject(gt);
