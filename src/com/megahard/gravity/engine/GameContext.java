@@ -3,6 +3,7 @@ package com.megahard.gravity.engine;
 import java.awt.Color;
 import java.util.List;
 
+import com.megahard.gravity.engine.GameState.GameFlags;
 import com.megahard.gravity.engine.base.GameObject;
 import com.megahard.gravity.objects.Player;
 import com.megahard.gravity.util.Sound.Clips;
@@ -71,9 +72,11 @@ public interface GameContext {
 	public abstract void fadeScreen(Color colorStart, Color colorEnd,
 			int duration);
 
-	public abstract <T> List<T> findObjects(Class<T> type, double x, double y, double w,
-			double h, boolean inclusive);
+	public abstract <T> List<T> findObjects(Class<T> type, double x, double y,
+			double w, double h, boolean inclusive);
 
 	public abstract <T> List<T> findObjects(Class<T> type);
+
+	GameFlags getFlags();
 
 }

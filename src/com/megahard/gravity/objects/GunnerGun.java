@@ -1,7 +1,6 @@
 package com.megahard.gravity.objects;
 
 import com.megahard.gravity.engine.GameContext;
-import com.megahard.gravity.engine.GameMap;
 import com.megahard.gravity.engine.Sprite.SpriteAction;
 import com.megahard.gravity.engine.base.GameObject;
 import com.megahard.gravity.util.Vector2;
@@ -18,6 +17,8 @@ public class GunnerGun extends GameObject {
 	private int targetHits = 0;
 	private int maxHits = 3;
 	private boolean isFiring = false;
+
+	private double t = 0;
 
 	public GunnerGun(GameContext game) {
 		super(game, "gunner-gun");
@@ -37,7 +38,9 @@ public class GunnerGun extends GameObject {
 		super.update();
 
 		// calculate target angle
-		double targetAngle = isFacingLeft ? Math.PI : 0;
+		double targetAngle = (isFacingLeft ? Math.PI : 0) + Math.sin(t) * 0.5;
+		t += 0.04;
+
 		Player player = findPlayer();
 		if (player != null) {
 			targetAngle = position.displacement(player.position).angle();
@@ -50,8 +53,7 @@ public class GunnerGun extends GameObject {
 		} else if (deltaAngle > Math.PI) {
 			deltaAngle -= 2 * Math.PI;
 		}
-		angle += Math.abs(deltaAngle) < 0.1 ? deltaAngle : 0.1 * deltaAngle
-				/ Math.abs(deltaAngle);
+		angle += deltaAngle * 0.2;
 
 		// set sprite index based on angle
 		if (isFacingLeft) {
@@ -118,7 +120,7 @@ public class GunnerGun extends GameObject {
 				}
 
 				// graphical effects
-				drawTrail(distance, hit);
+				drawTrail(distance, hit, hit ? delta.angle() : angle);
 			}
 		} else {
 			target = obj;
@@ -126,10 +128,10 @@ public class GunnerGun extends GameObject {
 		}
 	}
 
-	private void drawTrail(double distance, boolean hit) {
+	private void drawTrail(double distance, boolean hit, double angle) {
 		double x, y;
 		double t = 0.6;
-		double a = (angle + (Math.random() * 2 - 1) * (hit ? 0.1 : 0.2));
+		double a = (angle + (Math.random() * 2 - 1) * (hit ? 0 : 0.2));
 		while (t < 30) {
 			x = position.x + Math.cos(a) * t;
 			y = position.y + Math.sin(a) * t;
@@ -139,9 +141,10 @@ public class GunnerGun extends GameObject {
 					castTrailSpark(x, y);
 					break;
 				}
-			}
-			if (getGame().getMap().getTile(x, y).getCollidable()) {
-				break;
+			} else {
+				if (getGame().getMap().getTile(x, y).getCollidable()) {
+					break;
+				}
 			}
 			t += 0.06 + (hit ? 0 : t * 0.01);
 
@@ -164,7 +167,7 @@ public class GunnerGun extends GameObject {
 	}
 
 	private Player findPlayer() {
-		double sightRadius = 10;
+		double sightRadius = 15;
 		Player player = getGame().findObject(Player.class,
 				position.x + (isFacingLeft ? -sightRadius : 0),
 				position.y - sightRadius, sightRadius, 2 * sightRadius, true);
@@ -173,42 +176,7 @@ public class GunnerGun extends GameObject {
 	}
 
 	private boolean hasLineOfSight(Vector2 point) {
-		// Bresenham algorithm
-		GameMap map = getGame().getMap();
-		int x0 = (int) position.x;
-		int y0 = (int) position.y;
-		int x1 = (int) point.x;
-		int y1 = (int) point.y;
-
-		int dx = Math.abs(x1 - x0);
-		int dy = Math.abs(y1 - y0);
-		int sx = x0 < x1 ? 1 : -1;
-		int sy = y0 < y1 ? 1 : -1;
-		int err = dx - dy;
-		int e2;
-		int currentX = x0;
-		int currentY = y0;
-		while (true) {
-			if (currentX == x1 && currentY == y1) {
-				break;
-			}
-
-			if (map.getTile(currentX, currentY).getCollidable()) {
-				return false;
-			}
-
-			e2 = 2 * err;
-			if (e2 > -1 * dy) {
-				err = err - dy;
-				currentX = currentX + sx;
-			}
-			if (e2 < dx) {
-				err = err + dx;
-				currentY = currentY + sy;
-			}
-		}
-
-		return true;
+		return getGame().getMap().hasLineOfSight(position, point);
 	}
 
 	public void setFacing(boolean left) {

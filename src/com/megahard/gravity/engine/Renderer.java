@@ -203,7 +203,7 @@ public class Renderer extends Canvas {
 		bg.drawImage(backBuffer, 0, 0, GravityApplet.WIDTH,
 				GravityApplet.HEIGHT, 0, 0, bufferWidth, bufferHeight, null);
 
-		if (GravityApplet.debug) {
+		if (s.flags.debug) {
 			bg.setFont(font);
 
 			{
@@ -348,7 +348,7 @@ public class Renderer extends Canvas {
 	private void renderMessages(Graphics2D g, GameState s, int bufferWidth,
 			int bufferHeight) {
 		int cineStripHeight = 60;
-		if (s.cinematicMode) {
+		if (s.flags.cinematic) {
 			g.setColor(Color.black);
 			g.fillRect(0, 0, bufferWidth, cineStripHeight);
 			g.fillRect(0, bufferHeight - cineStripHeight, bufferWidth,
@@ -357,7 +357,7 @@ public class Renderer extends Canvas {
 
 		// Draw messages
 		if (message != null) {
-			if (!s.cinematicMode) {
+			if (!s.flags.cinematic) {
 				// draw message background for readability
 				g.setColor(MESSAGE_BACKGROUND);
 				g.fillRect(0, bufferHeight - cineStripHeight, bufferWidth,
@@ -464,7 +464,7 @@ public class Renderer extends Canvas {
 		}
 
 		Point mousePosition = getMousePosition();
-		if (!s.cinematicMode && mousePosition != null) {
+		if (!s.flags.cinematic && mousePosition != null) {
 			g.drawImage(cursor, mousePosition.x / SCALE_FACTOR
 					- cursorHotspot.x, mousePosition.y / SCALE_FACTOR
 					- cursorHotspot.y, null);

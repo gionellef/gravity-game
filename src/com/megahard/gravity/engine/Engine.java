@@ -20,9 +20,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-import com.megahard.gravity.GravityApplet;
 import com.megahard.gravity.engine.GameMap.Layers;
 import com.megahard.gravity.engine.GameMap.Layers.GameObjects;
+import com.megahard.gravity.engine.GameState.GameFlags;
 import com.megahard.gravity.engine.base.GameObject;
 import com.megahard.gravity.engine.base.Script;
 import com.megahard.gravity.objects.Player;
@@ -329,9 +329,16 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener,
 			updateInputEvents();
 		}
 
-		// Toggle debug rendering
+		// Game flags
 		if (keyIsJustReleased(KeyEvent.VK_F8)) {
-			GravityApplet.debug = !GravityApplet.debug;
+			// debug
+			state.flags.debug = !state.flags.debug;
+			showMessage("Debug mode:" + (state.flags.debug ? "on" : "off"), 50);
+		}
+		if (keyIsJustReleased(KeyEvent.VK_F7)) {
+			// god mode
+			state.flags.god = !state.flags.god;
+			showMessage("God mode:" + (state.flags.god ? "on" : "off"), 50);
 		}
 
 		// Give up
@@ -352,7 +359,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener,
 		updateKeyStates();
 
 		// Set camera
-		if (state.cinematicMode) {
+		if (state.flags.cinematic) {
 			renderer.setCameraSmoothing(0.2);
 			renderer.getCameraTarget().set(playerObject.position);
 		} else if (mouseX >= 0 && mouseY >= 0) {
@@ -877,7 +884,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener,
 	 */
 	@Override
 	public boolean isCinematicMode() {
-		return state.cinematicMode;
+		return state.flags.cinematic;
 	}
 
 	/*
@@ -887,7 +894,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener,
 	 */
 	@Override
 	public void setCinematicMode(boolean cinematicMode) {
-		state.cinematicMode = cinematicMode;
+		state.flags.cinematic = cinematicMode;
 		clearInputs();
 	}
 
@@ -970,4 +977,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener,
 		renderer.removeMessage();
 	}
 
+	public GameFlags getFlags() {
+		return state.flags;
+	}
 }

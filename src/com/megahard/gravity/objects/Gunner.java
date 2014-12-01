@@ -12,6 +12,7 @@ public class Gunner extends GameObject {
 	private boolean goingLeft = false;
 	private int waitTimer = 0;
 
+	private double t = 0;
 	private GunnerGun gun;
 
 	public Gunner(GameContext game) {
@@ -62,20 +63,14 @@ public class Gunner extends GameObject {
 
 		// AI
 		if (gun.isFiring()) {
-			waitTimer = 50;
-		} else {
-			Player player = getGame().getPlayerObject();
-			if (player != null && position.distance(player.position) < 3) {
-				if (goingLeft != player.position.x < position.x) {
-					goingLeft = player.position.x < position.x;
-					waitTimer = 1;
-				}
-			}
+			waitTimer = 5;
 		}
 		doWalk();
 
 		gun.setFacing(isFacingLeft);
-		gun.position.set(position.plus(isFacingLeft ? 0.1 : -0.1, -0.06));
+		gun.position.set(position.plus(Math.cos(t * 0.5) * 0.1
+				+ (isFacingLeft ? 0.2 : -0.2), Math.sin(t) * 0.05 + 0.2));
+		t += Math.random() * 0.06;
 	}
 
 	private void doWalk() {

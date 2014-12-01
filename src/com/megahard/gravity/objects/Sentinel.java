@@ -269,42 +269,7 @@ public class Sentinel extends GameObject {
 	}
 
 	private boolean hasLineOfSight(Vector2 point) {
-		// Bresenham algorithm
-		GameMap map = getGame().getMap();
-		int x0 = (int) position.x;
-		int y0 = (int) position.y;
-		int x1 = (int) point.x;
-		int y1 = (int) point.y;
-
-		int dx = Math.abs(x1 - x0);
-		int dy = Math.abs(y1 - y0);
-		int sx = x0 < x1 ? 1 : -1;
-		int sy = y0 < y1 ? 1 : -1;
-		int err = dx - dy;
-		int e2;
-		int currentX = x0;
-		int currentY = y0;
-		while (true) {
-			if (currentX == x1 && currentY == y1) {
-				break;
-			}
-			
-			if (map.getTile(currentX, currentY).getCollidable()) {
-				return false;
-			}
-
-			e2 = 2 * err;
-			if (e2 > -1 * dy) {
-				err = err - dy;
-				currentX = currentX + sx;
-			}
-			if (e2 < dx) {
-				err = err + dx;
-				currentY = currentY + sy;
-			}
-		}
-
-		return true;
+		return getGame().getMap().hasLineOfSight(position, point);
 	}
 
 	private void doPath() {
