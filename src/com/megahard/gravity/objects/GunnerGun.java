@@ -159,8 +159,9 @@ public class GunnerGun extends GameObject {
 			t += 0.18;
 
 			GunTrail gt = new GunTrail(getGame());
-			gt.position.set(cx, cy);
 			gt.sprite.setFrame(Math.random() < 0.5 ? 0 : 1);
+			gt.position.set(cx, cy);
+			gt.velocity.set(target.velocity.times(t / distance));
 			getGame().addObject(gt);
 		}
 	}

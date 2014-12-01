@@ -8,6 +8,7 @@ public class GunTrail extends GameObject {
 	public GunTrail(GameContext game) {
 		super(game, "gun-trail");
 		floating = true;
+		restitution = 0.5;
 		
 		zIndex = 1300;
 	}
