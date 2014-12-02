@@ -66,7 +66,7 @@ public class Vector2 {
 	}
 	
 	public double distance(Vector2 other){
-		return displacement(other).length();
+		return to(other).length();
 	}
 
 	public double distance(double x, double y) {
@@ -75,7 +75,7 @@ public class Vector2 {
 		return Math.sqrt(dx * dx + dy * dy);
 	}
 	
-	public Vector2 displacement(Vector2 other){
+	public Vector2 to(Vector2 other){
 		return other.minus(this);
 	}
 
