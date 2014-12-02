@@ -132,6 +132,12 @@ public class Gunner extends GameObject {
 			}
 		}
 	}
+	
+	@Override
+	public void die() {
+		super.die();
+		gun.die();
+	}
 
 	private void setSpriteAction(String action) {
 		setSpriteAction(action, null);
