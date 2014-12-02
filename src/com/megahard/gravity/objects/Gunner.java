@@ -1,8 +1,11 @@
 package com.megahard.gravity.objects;
 
+import java.util.List;
+
 import com.megahard.gravity.engine.GameContext;
 import com.megahard.gravity.engine.GameMap;
 import com.megahard.gravity.engine.base.GameObject;
+import com.megahard.gravity.util.Vector2;
 
 public class Gunner extends GameObject {
 
@@ -41,9 +44,13 @@ public class Gunner extends GameObject {
 		if (standing) {
 			if (!isWalking) {
 				if (gun.isFiring()) {
-					setSpriteAction("fire", new String[] { "fire" });
+					setSpriteAction("fire", new String[] {
+						"fire"
+					});
 				} else {
-					setSpriteAction("default", new String[] { "default" });
+					setSpriteAction("default", new String[] {
+						"default"
+					});
 				}
 			}
 		} else {
@@ -69,32 +76,68 @@ public class Gunner extends GameObject {
 
 		gun.setFacing(isFacingLeft);
 		gun.position.set(position.plus(Math.cos(t * 0.5) * 0.1
-				+ (isFacingLeft ? 0.2 : -0.2), Math.sin(t) * 0.05 + 0.2));
+			+ (isFacingLeft ? 0.2 : -0.2), Math.sin(t) * 0.05 + 0.2));
 		t += Math.random() * 0.06;
 	}
 
 	private void doWalk() {
-		if (waitTimer > 0) {
-			waitTimer--;
-		} else {
-			double nextX = position.x + (goingLeft ? -1 : 1);
-			if (findBoundary(position.x, nextX)) {
-				goingLeft = !goingLeft;
-				waitTimer = 100;
-				if (getGame().getMap().getTile(nextX, position.y)
-						.getCollidable()) {
-					walk(goingLeft);
-				} else {
-					walk(!goingLeft);
-				}
-			} else {
-				walk(goingLeft);
-			}
+		// Get away from bombs!
+		Vector2 escapeVector = new Vector2();
+		List<Bomb> bombs = getGame().findObjects(Bomb.class,
+			position.x + (goingLeft ? -3 : -2),
+			position.y - 2, 5, 4, true);
+		Bomb critBomb = null;
+		for (Bomb b : bombs) {
+			if (b.getTimeout() < 60) {
+				escapeVector.add(position.minus(b.position).times(
+					1.0 / (b.getTimeout() + 1)));
 
-			if (Math.random() < 0.01) {
-				waitTimer = 50 + (int) (Math.random() * 100);
-				if (Math.random() < 0.1) {
+				if (critBomb == null
+					|| b.getTimeout() < critBomb.getTimeout()) {
+					critBomb = b;
+				}
+
+				if (b.position.x < position.x == goingLeft) {
+					waitTimer = Math.max(waitTimer, b.getTimeout());
+				}
+			}
+		}
+
+		if (escapeVector.length() > 0) {
+
+			// Run [walk] away from bombs!
+			Vector2 critBombDir = position.to(critBomb.position);
+			double pathX = critBomb.position.x + escapeVector.normalized().x
+				* 2;
+			boolean blockedPath = getGame().getMap()
+				.getTile(pathX, position.y)
+				.getCollidable();
+			walk(blockedPath ? position.x > pathX : escapeVector.x < 0);
+		} else {
+
+			// normal patrolling
+			if (waitTimer > 0) {
+				waitTimer--;
+			} else {
+				double nextX = position.x + (goingLeft ? -1 : 1);
+				if (findBoundary(position.x, nextX)) {
 					goingLeft = !goingLeft;
+					waitTimer = 100;
+					if (getGame().getMap().getTile(nextX, position.y)
+						.getCollidable()) {
+						walk(goingLeft);
+					} else {
+						walk(!goingLeft);
+					}
+				} else {
+					walk(goingLeft);
+				}
+
+				if (Math.random() < 0.01) {
+					waitTimer = 50 + (int) (Math.random() * 100);
+					if (Math.random() < 0.1) {
+						goingLeft = !goingLeft;
+					}
 				}
 			}
 		}
@@ -104,7 +147,7 @@ public class Gunner extends GameObject {
 		GameMap map = getGame().getMap();
 		for (int y = -2; y <= 1; y++) {
 			if (map.getTile(x0, position.y + y).getCollidable() != map.getTile(
-					x1, position.y + y).getCollidable()) {
+				x1, position.y + y).getCollidable()) {
 				return true;
 			}
 		}
@@ -120,7 +163,9 @@ public class Gunner extends GameObject {
 			isWalking = true;
 			velocity.x += runStrength * sign / friction;
 			staticFriction = runStrength;
-			setSpriteAction("walk", new String[] { "walk" });
+			setSpriteAction("walk", new String[] {
+				"walk"
+			});
 		}
 	}
 
@@ -132,7 +177,7 @@ public class Gunner extends GameObject {
 			}
 		}
 	}
-	
+
 	@Override
 	public void die() {
 		super.die();

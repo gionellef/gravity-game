@@ -43,7 +43,7 @@ public class GunnerGun extends GameObject {
 
 		Player player = findPlayer();
 		if (player != null) {
-			targetAngle = position.displacement(player.position).angle();
+			targetAngle = position.to(player.position).angle();
 		}
 
 		// move the angle
@@ -102,7 +102,7 @@ public class GunnerGun extends GameObject {
 			if (reloadTimer <= 0) {
 				reloadTimer = reloadTime;
 
-				Vector2 delta = position.displacement(obj.position);
+				Vector2 delta = position.to(obj.position);
 				double distance = delta.length();
 				double deltaAngle = delta.angle() - angle;
 				deltaAngle += deltaAngle < -Math.PI ? 2 * Math.PI
@@ -123,7 +123,7 @@ public class GunnerGun extends GameObject {
 				}
 
 				// graphical effects
-				Vector2 p = position.displacement(target.position);
+				Vector2 p = position.to(target.position);
 				if (hit) {
 					p.add(
 						Math.random() * target.size.x / 2 - target.size.x / 4,

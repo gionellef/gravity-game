@@ -188,7 +188,7 @@ public class Sentinel extends GameObject {
 
 			if (myBomb.position.distance(position.plus(0, 1)) < 1) {
 				// Carrying the bomb
-				Vector2 playerDelta = position.displacement(player.position);
+				Vector2 playerDelta = position.to(player.position);
 				double playerDistance = playerDelta.length();
 
 				if (playerDistance < 8 && hasLineOfSight(player.position)) {
