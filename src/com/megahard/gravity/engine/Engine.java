@@ -514,6 +514,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener,
 		// insertion sort objects
 		sortObjects(objects);
 
+		// get object vertical & horizontal spans
 		double[][] spans = new double[n][4]; // {xmin, xmax, ymin, ymax}
 		for (int i = 0; i < n; i++) {
 			GameObject obj = objects.get(i);
@@ -523,13 +524,19 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener,
 			spans[i][3] = obj.position.y + obj.size.y / 2;
 		}
 
+		// check overlapping spans
 		for (int i = 0; i < n; i++) {
 			GameObject current = objects.get(i);
 			for (int j = i + 1; j < n; j++) {
 				GameObject other = objects.get(j);
 
+				// break the loop once the x-span doesn't overlap
+				// because the array is sorted in x, if this object does not
+				// overlap in x, the rest doesn't
 				if (spans[j][0] > spans[i][1])
 					break;
+
+				// skip if y-spans don't overlap
 				if (spans[i][2] > spans[j][3] || spans[i][3] < spans[j][2])
 					continue;
 
@@ -546,10 +553,13 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener,
 		for (int i = 1; i < n; i++) {
 			GameObject current = objects.get(i);
 			int j = i - 1;
-			while (j >= 0
-					&& current.position.x - current.size.x / 2 < objects.get(j).position.x
-							- current.size.x / 2) {
-				objects.set(j + 1, objects.get(j));
+			while (j >= 0) {
+				GameObject other = objects.get(j);
+				objects.set(j + 1, other);
+				if (current.position.x - current.size.x / 2 >= other.position.x
+						- other.size.x / 2) {
+					break;
+				}
 				j--;
 			}
 			objects.set(j + 1, current);
@@ -769,8 +779,10 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener,
 		int s = 0;
 		while (l < r) {
 			s = (l + r) / 2;
-			double ox = state.objects.get(s).position.x;
-			double nx = state.objects.get(s + 1).position.x;
+			GameObject o = state.objects.get(s);
+			GameObject n = state.objects.get(s + 1);
+			double ox = o.position.x + o.size.x / 2;
+			double nx = n.position.x + n.size.x / 2;
 			if (nx < x) {
 				l = s + 1;
 			} else if (ox > x) {
@@ -827,8 +839,10 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener,
 		int s = 0;
 		while (l < r) {
 			s = (l + r) / 2;
-			double ox = state.objects.get(s).position.x;
-			double nx = state.objects.get(s + 1).position.x;
+			GameObject o = state.objects.get(s);
+			GameObject n = state.objects.get(s + 1);
+			double ox = o.position.x + o.size.x / 2;
+			double nx = n.position.x + n.size.x / 2;
 			if (nx < x) {
 				l = s + 1;
 			} else if (ox > x) {
