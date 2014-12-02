@@ -43,7 +43,7 @@ public class Button extends PowerSource {
 
 	@Override
 	public void onCollide(GameObject obj) {
-		if (!obj.fixed) {
+		if (!obj.fixed && !obj.floating) {
 			if (obj.mass > 30) {
 				pressCounter = 2;
 			}

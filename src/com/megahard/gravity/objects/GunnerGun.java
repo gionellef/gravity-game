@@ -156,12 +156,12 @@ public class GunnerGun extends GameObject {
 					break;
 				}
 			}
-			t += 0.18;
+			t += 0.09;
 
 			GunTrail gt = new GunTrail(getGame());
 			gt.sprite.setFrame(Math.random() < 0.5 ? 0 : 1);
 			gt.position.set(cx, cy);
-			gt.velocity.set(target.velocity.times(t / distance));
+			gt.setTarget(target, t / distance);
 			getGame().addObject(gt);
 		}
 	}
