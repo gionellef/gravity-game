@@ -104,8 +104,11 @@ public class GunnerGun extends GameObject {
 
 				Vector2 delta = position.displacement(obj.position);
 				double distance = delta.length();
+				double deltaAngle = delta.angle() - angle;
+				deltaAngle += deltaAngle < -Math.PI ? 2 * Math.PI
+					: deltaAngle > Math.PI ? -2 * Math.PI : 0;
 				double chanceToHit = 40 * obj.size.length()
-						/ (distance * Math.abs(delta.angle() - angle) * 2 + 1);
+					/ (distance * Math.abs(deltaAngle) * 2 + 1);
 				boolean hit = Math.random() < chanceToHit;
 
 				if (hit) {
@@ -122,14 +125,15 @@ public class GunnerGun extends GameObject {
 				// graphical effects
 				Vector2 p = position.displacement(target.position);
 				if (hit) {
-					p.add(Math.random() * target.size.x / 2 - target.size.x / 4,
-							Math.random() * target.size.y / 2 - target.size.y
-									/ 4);
+					p.add(
+						Math.random() * target.size.x / 2 - target.size.x / 4,
+						Math.random() * target.size.y / 2 - target.size.y
+							/ 4);
 					p.normalize();
 					p.scale(distance);
 				} else {
 					p.add((Math.random() * 2 - 1) * distance / 4,
-							(Math.random() * 2 - 1) * distance / 4);
+						(Math.random() * 2 - 1) * distance / 4);
 				}
 				drawTrail(p, hit);
 			}
@@ -169,10 +173,10 @@ public class GunnerGun extends GameObject {
 	private Player findPlayer() {
 		double sightRadius = 15;
 		Player player = getGame().findObject(Player.class,
-				position.x + (isFacingLeft ? -sightRadius : 0),
-				position.y - sightRadius, sightRadius, 2 * sightRadius, true);
+			position.x + (isFacingLeft ? -sightRadius : 0),
+			position.y - sightRadius, sightRadius, 2 * sightRadius, true);
 		return player != null && hasLineOfSight(player.position) ? player
-				: null;
+			: null;
 	}
 
 	private boolean hasLineOfSight(Vector2 point) {
