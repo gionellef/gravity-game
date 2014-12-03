@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tileset name="objects" tilewidth="64" tileheight="64">
- <image source="objects.png" width="320" height="192"/>
+ <image source="objects.png" width="320" height="256"/>
  <tile id="0">
   <properties>
    <property name="type" value="Player"/>
@@ -74,6 +74,11 @@
  <tile id="14">
   <properties>
    <property name="type" value="Gunner"/>
+  </properties>
+ </tile>
+ <tile id="15">
+  <properties>
+   <property name="type" value="Screen"/>
   </properties>
  </tile>
 </tileset>
