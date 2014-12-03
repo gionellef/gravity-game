@@ -123,7 +123,7 @@ public class TheEncounter extends ScriptSequencer {
 
 		addMessage(
 				"galileo",
-				"You need to escape from here. You must go to the communications tower in the eastern edge this outpost. Send a message to Gravitonia. Our royal guards will come and help.",
+				"You need to escape from here. You must go to the control center in the eastern tower this outpost. Send a message to Gravitonia. Our royal guards will come and help.",
 				250
 			);
 	}
@@ -146,7 +146,7 @@ public class TheEncounter extends ScriptSequencer {
 	protected void onSkip() {
 		getGame().showMessage(
 			"galileo",
-			"You must go to the communications tower in the eastern edge this outpost to send a message to Gravitonia.",
+			"You must go to the control center in the eastern tower this outpost to send a message to Gravitonia.",
 			200
 		);
 	}

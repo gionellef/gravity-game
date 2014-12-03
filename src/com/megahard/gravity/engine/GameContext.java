@@ -77,6 +77,8 @@ public interface GameContext {
 
 	public abstract <T> List<T> findObjects(Class<T> type);
 
-	GameFlags getFlags();
+	public GameFlags getFlags();
+
+	public abstract void setCameraTarget(Vector2 center);
 
 }

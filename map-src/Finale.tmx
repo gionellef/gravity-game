@@ -2023,6 +2023,7 @@
   <object gid="516" x="512" y="288"/>
   <object gid="510" x="52" y="468"/>
   <object gid="505" x="40" y="472"/>
-  <object gid="514" x="56" y="472"/>
+  <object gid="514" x="144" y="472"/>
+  <object name="script_Finale" x="392" y="44" width="16" height="344"/>
  </objectgroup>
 </map>

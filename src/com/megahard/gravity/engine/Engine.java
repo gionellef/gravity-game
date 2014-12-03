@@ -359,24 +359,23 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener,
 		updateKeyStates();
 
 		// Set camera
-		if (state.flags.cinematic) {
-			renderer.setCameraSmoothing(0.2);
-			renderer.getCameraTarget().set(playerObject.position);
-		} else if (mouseX >= 0 && mouseY >= 0) {
-			renderer.setCameraSmoothing(renderer.getCameraSmoothing()
-					+ (1 - renderer.getCameraSmoothing()) * 0.05);
-			renderer.getCameraTarget()
-					.set(playerObject.position.x
-							+ ((double) (mouseX - renderer.getWidth() / 2)
-									/ Renderer.SCALE_FACTOR / Renderer.TILE_SIZE)
-							* 0.5,
-							playerObject.position.y
-									+ ((double) (mouseY - renderer.getHeight() / 2)
-											/ Renderer.SCALE_FACTOR / Renderer.TILE_SIZE)
-									* 0.5);
-		} else {
-			renderer.setCameraSmoothing(0.5);
-			renderer.getCameraTarget().set(playerObject.position);
+		if (!state.flags.cinematic) {
+			if (mouseX >= 0 && mouseY >= 0) {
+				renderer.setCameraSmoothing(renderer.getCameraSmoothing()
+						+ (1 - renderer.getCameraSmoothing()) * 0.05);
+				renderer.getCameraTarget()
+						.set(playerObject.position.x
+								+ ((double) (mouseX - renderer.getWidth() / 2)
+										/ Renderer.SCALE_FACTOR / Renderer.TILE_SIZE)
+								* 0.5,
+								playerObject.position.y
+										+ ((double) (mouseY - renderer.getHeight() / 2)
+												/ Renderer.SCALE_FACTOR / Renderer.TILE_SIZE)
+										* 0.5);
+			} else {
+				renderer.setCameraSmoothing(0.5);
+				renderer.getCameraTarget().set(playerObject.position);
+			}
 		}
 
 		// Messages
@@ -910,6 +909,11 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener,
 	public void setCinematicMode(boolean cinematicMode) {
 		state.flags.cinematic = cinematicMode;
 		clearInputs();
+		
+		if(cinematicMode){
+			renderer.setCameraSmoothing(0.2);
+			renderer.getCameraTarget().set(playerObject.position);
+		}
 	}
 
 	private void clearInputs() {
@@ -993,5 +997,10 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener,
 
 	public GameFlags getFlags() {
 		return state.flags;
+	}
+
+	@Override
+	public void setCameraTarget(Vector2 position) {
+		renderer.setCameraTarget(position);
 	}
 }

@@ -268,8 +268,22 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":56,
+                 "x":144,
                  "y":472
+                }, 
+                {
+                 "height":344,
+                 "name":"script_Finale",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":392,
+                 "y":44
                 }],
          "opacity":1,
          "type":"objectgroup",
