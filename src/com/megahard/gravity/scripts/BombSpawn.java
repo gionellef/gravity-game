@@ -13,6 +13,7 @@ public class BombSpawn extends Script {
 	private int timer = 0;
 	private int interval = 200;
 	private int delay = 100;
+	private int timeout = 200;
 	
 	public BombSpawn(GameContext game, Double region, Map<String, String> properties) {
 		super(game, region, properties);
@@ -20,8 +21,12 @@ public class BombSpawn extends Script {
 
 	@Override
 	public void onStart() {
-		interval = Integer.parseInt(getProperty("interval"));
-		delay = Integer.parseInt(getProperty("delay"));
+		if(getProperty("interval") != null)
+			interval = Integer.parseInt(getProperty("interval"));
+		if(getProperty("delay") != null)
+			delay = Integer.parseInt(getProperty("delay"));
+		if(getProperty("timeout") != null)
+			timeout = Integer.parseInt(getProperty("timeout"));
 		
 		timer = delay;
 	}
@@ -34,6 +39,7 @@ public class BombSpawn extends Script {
 
 			Bomb b = new Bomb(getGame());
 			b.position.set(getCenter());
+			b.setTimeout(timeout);
 			getGame().addObject(b);
 		}
 	}
