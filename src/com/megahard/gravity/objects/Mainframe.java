@@ -5,7 +5,7 @@ import com.megahard.gravity.engine.base.GameObject;
 
 public class Mainframe extends GameObject {
 
-	public Mainframe(GameContext game, String spriteName) {
+	public Mainframe(GameContext game) {
 		super(game, "mainframe");
 		fixed = true;
 		
