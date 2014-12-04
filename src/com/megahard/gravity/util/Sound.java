@@ -97,7 +97,7 @@ public class Sound {
 	public static Clips door_close = load("door-close.wav", 2);
 	public static Clips door_open = load("door-open.wav", 2);
 	public static Clips explosion = load("explosion.wav", 8);
-	public static Clips gravwell = load("gravwell.wav", 8);
+	public static Clips gravwell = load("gravwell.wav", 4);
 	public static Clips gravwell_start = load("gravwell-start.wav", 4);
 	public static Clips jump1 = load("jump1.wav", 2);
 	public static Clips jump2 = load("jump2.wav", 2);
@@ -107,6 +107,8 @@ public class Sound {
 	public static Clips land2 = load("land2.wav", 2);
 	public static Clips land3 = load("land3.wav", 2);
 	public static Clips land4 = load("land4.wav", 2);
+	public static Clips negravwell = load("negravwell.wav", 4);
+	public static Clips negravwell_start = load("negravwell-start.wav", 4);
 	public static Clips plasma = load("plasma.wav", 8);
 	public static Clips power = load("power.wav", 2);
 	public static Clips spark = load("spark.wav", 16);
@@ -117,6 +119,8 @@ public class Sound {
 	public static Clips step5 = load("step5.wav", 2);
 	public static Clips step6 = load("step6.wav", 2);
 	public static Clips step7 = load("step7.wav", 2);
+	public static Clips switchSound = load("switch.wav", 2);
+	public static Clips switch_sentinel = load("switch-sentinel.wav", 2);
 
 	private static Clips load(String name, int count) {
 		try {
