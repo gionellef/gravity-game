@@ -48,6 +48,7 @@ public class MusicPlayer implements Runnable{
 
         		int num = new Random().nextInt(mFiles.size());
         		fileName = mFiles.get(num)[1];
+        		pl.close();
         	}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
