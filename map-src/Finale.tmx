@@ -2008,7 +2008,6 @@
  </layer>
  <objectgroup name="Object Layer 1">
   <object gid="501" x="28" y="464"/>
-  <object gid="516" x="368" y="360"/>
   <object gid="516" x="368" y="312"/>
   <object gid="516" x="416" y="336"/>
   <object gid="516" x="320" y="336"/>
@@ -2025,5 +2024,6 @@
   <object gid="505" x="40" y="472"/>
   <object gid="514" x="144" y="472"/>
   <object name="script_Finale" x="392" y="44" width="16" height="344"/>
+  <object gid="517" x="368" y="384"/>
  </objectgroup>
 </map>

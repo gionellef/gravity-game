@@ -44,21 +44,6 @@
                  "visible":true,
                  "width":0,
                  "x":368,
-                 "y":360
-                }, 
-                {
-                 "gid":516,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":368,
                  "y":312
                 }, 
                 {
@@ -284,6 +269,21 @@
                  "width":16,
                  "x":392,
                  "y":44
+                }, 
+                {
+                 "gid":517,
+                 "height":0,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":368,
+                 "y":384
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -2528,6 +2528,10 @@
              "15":
                 {
                  "type":"Screen"
+                },
+             "16":
+                {
+                 "type":"Mainframe"
                 },
              "2":
                 {

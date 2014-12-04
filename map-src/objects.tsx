@@ -81,4 +81,9 @@
    <property name="type" value="Screen"/>
   </properties>
  </tile>
+ <tile id="16">
+  <properties>
+   <property name="type" value="Mainframe"/>
+  </properties>
+ </tile>
 </tileset>

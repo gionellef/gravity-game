@@ -8,6 +8,8 @@ public class Screen extends GameObject {
 	public Screen(GameContext game) {
 		super(game, "screen");
 		fixed = true;
+		
+		zIndex = 130;
 	}
 
 	@Override
