@@ -22,7 +22,7 @@ public class NegravWell extends GameObject {
 	
 	public void init(){
 		sprite.setAction("create");
-		getGame().playSoundAtLocation(Sound.gravwell_start, position, 0.8);
+		getGame().playSoundAtLocation(Sound.negravwell_start, position, 0.8);
 	}
 
 	@Override
@@ -63,7 +63,7 @@ public class NegravWell extends GameObject {
 	
 	@Override
 	public void onStartAction(String action) {
-		getGame().playSoundAtLocation(Sound.gravwell, position, 0.5);
+		getGame().playSoundAtLocation(Sound.negravwell, position, 0.5);
 	}
 	
 	@Override
