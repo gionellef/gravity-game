@@ -14,6 +14,7 @@ public class MusicPlayer implements Runnable{
 	private String fileName;
 	public static ArrayList<String[]> mFiles;
 	private boolean playing;
+	private Thread thread;
 	
 	public MusicPlayer(){
 		mFiles = new ArrayList<String[]>();
@@ -31,8 +32,15 @@ public class MusicPlayer implements Runnable{
 	}
 	
 	public void play(String fileName){
+		stop();
+		try {
+			thread.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	    this.fileName = fileName;
-	    new Thread(this).start();
+	    thread = new Thread(this);
+		thread.start();
     }
 
 	@Override
@@ -58,6 +66,7 @@ public class MusicPlayer implements Runnable{
 	
 	public void stop() {
 		playing = false;
+		pl.stop();
 		try {
 			pl.close();
 		} catch (Exception e) {
