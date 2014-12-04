@@ -40,7 +40,7 @@ public class Finale extends ScriptSequencer {
 			}
 		}, 100);
 		
-		addMessage("PlanetGravitonia", "", 100);
+		addMessage("PlanetGravitonia", "", 60);
 		
 		// soldier
 		addMessage("gravitonian-soldier", "General Maxwell, a message came from x300, y125, h123, t2467 coordinates. It seems to be an Ytivargs' base. The message has Galileo's signiture in it.", 200);
