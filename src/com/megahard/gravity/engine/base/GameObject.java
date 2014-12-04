@@ -192,10 +192,10 @@ public class GameObject {
 			double bottom = down + GRAVITY + 2 * E;
 			standing = map.getTile(left, bottom).getCollidable()
 					|| map.getTile(right, bottom).getCollidable(); 
-			
-			if(position.y > getGame().getMap().getHeight()){
-				getGame().removeObject(this);
-			}
+		}
+
+		if(position.y - size.y/2 - 4 > getGame().getMap().getHeight()){
+			getGame().removeObject(this);
 		}
 
 		if(sprite != null){
