@@ -33,14 +33,6 @@ public class MusicPlayer implements Runnable{
 	
 	public void play(String fileName){
 		stop();
-		if(thread != null){
-			try {
-				thread.join();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-		
 	    this.fileName = fileName;
 	    thread = new Thread(this);
 		thread.start();
@@ -48,6 +40,7 @@ public class MusicPlayer implements Runnable{
 
 	@Override
 	public void run() {
+		while(playing); // wait for other player to stop
 		playing = true;
         try {
         	while (playing) {
@@ -62,20 +55,14 @@ public class MusicPlayer implements Runnable{
         		pl.close();
         	}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			
 		}
 	}
 	
 	public void stop() {
 		playing = false;
-		if(pl != null){
-			try {
-				pl.stop();
-				pl.close();
-			} catch (Exception e) {
-				
-			}
+		try {
+			pl.close();
+		} catch (Exception e) {
 		}
 	}
 	
