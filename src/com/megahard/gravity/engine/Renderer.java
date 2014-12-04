@@ -69,6 +69,7 @@ public class Renderer extends Canvas {
 	private Image messageImage;
 
 	private Image gravititeIcon;
+	private Image negravititeIcon;
 	private Image cursorEmpty;
 	private Image cursorGrav;
 	private Image cursorGravActive;;
@@ -120,6 +121,8 @@ public class Renderer extends Canvas {
 
 		gravititeIcon = SpriteStore.get().loadImage("/gravitite-icon.png",
 				false);
+		negravititeIcon = SpriteStore.get().loadImage("/negravitite-icon.png",
+			false);
 		cursorEmpty = SpriteStore.get()
 				.loadImage("/crosshair.png", false);
 		cursorGrav = SpriteStore.get().loadImage("/crosshair-grav.png", false);
@@ -438,9 +441,10 @@ public class Renderer extends Canvas {
 			g.setFont(font);
 
 			int gravitites = player.getGravitites();
+			int negravitites = player.getNegravitites();
 
 			if (gravitites > 0) {
-				if (gravitites <= 6) {
+				if (gravitites <= 5) {
 					for (int i = 0; i < gravitites; i++) {
 						g.drawImage(gravititeIcon, 10 + i * 10, 10, null);
 					}
@@ -452,6 +456,21 @@ public class Renderer extends Canvas {
 				}
 
 				cursor = cursorGrav;
+				cursorHotspot.move(32, 32);
+			}
+			if (negravitites > 0) {
+				if (negravitites <= 5) {
+					for (int i = 0; i < negravitites; i++) {
+						g.drawImage(negravititeIcon, 10 + i * 10, 10 + 15, null);
+					}
+				} else {
+					g.drawImage(negravititeIcon, 10 + 4, 10 + 15, null);
+					g.drawImage(negravititeIcon, 10, 10 + 4 + 15, null);
+					g.drawImage(negravititeIcon, 10 + 8, 10 + 4 + 15, null);
+					drawString(g, Integer.toString(negravitites), 30, 22 + 15);
+				}
+
+				cursor = cursorNeg;
 				cursorHotspot.move(32, 32);
 			}
 

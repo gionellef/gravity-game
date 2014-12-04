@@ -21,11 +21,15 @@ public class Player extends GameObject {
 			Sound.land2, Sound.land3, Sound.land4, };
 	private static final Random RAND = new Random();
 
-	private GravWell well = null;
-	private NegravWell negwell = null;
 	private boolean isRunning = true;
 	private boolean isFacingLeft = false;
+	
+	private GravWell well = null;
+	private NegravWell negwell = null;
+	
 	private int gravitites = 0;
+	private int negravitites = 0;
+	
 	private int jumpsLeft = 0;
 
 	private boolean alive = true;
@@ -157,6 +161,10 @@ public class Player extends GameObject {
 			gravitites += 5;
 			getGame().removeObject(obj);
 			getGame().playSoundAtLocation(Sound.power, position, 1);
+		} else if(objClass.equals(Negravitite.class)){
+			negravitites++;
+			getGame().removeObject(obj);
+			getGame().playSoundAtLocation(Sound.power, position, 1);
 		}
 	}
 
@@ -175,7 +183,7 @@ public class Player extends GameObject {
 	}
 
 	private void conjureGrav(Vector2 pos, boolean anti) {
-		if (gravitites > 0) {
+		if (anti ? negravitites > 0 : gravitites > 0) {
 			// Find a clear spot for the gravwell to appear
 			if (!isAreaClear(pos)) {
 				Vector2 pro = new Vector2();
@@ -194,8 +202,8 @@ public class Player extends GameObject {
 			}
 
 			// make it appear now
-			gravitites--;
 			if (anti) {
+				negravitites--;
 				if (negwell != null)
 					negwell.die();
 
@@ -203,6 +211,7 @@ public class Player extends GameObject {
 				negwell.position = pos;
 				getGame().addObject(negwell);
 			} else {
+				gravitites--;
 				if (well != null)
 					well.die();
 
@@ -312,6 +321,10 @@ public class Player extends GameObject {
 		return gravitites;
 	}
 
+	public int getNegravitites() {
+		return negravitites;
+	}
+
 	public GravWell getGravWell() {
 		return well;
 	}
@@ -326,6 +339,10 @@ public class Player extends GameObject {
 
 	public void setGravitites(int i) {
 		gravitites = i;
+	}
+
+	public void setNegravitites(int i) {
+		negravitites = i;
 	}
 
 }
