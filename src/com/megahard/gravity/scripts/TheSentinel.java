@@ -25,7 +25,6 @@ public class TheSentinel extends ScriptSequencer {
 	@Override
 	protected void onEnd() {
 		sentinel.setPassive(false);
-		sentinel.goTo(new Vector2(19, 11));
 		getGame().showMessage(null, "SPECIMEN MUST NOT ESCAPE!", 60);
 	}
 
