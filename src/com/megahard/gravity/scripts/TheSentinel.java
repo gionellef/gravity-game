@@ -25,6 +25,7 @@ public class TheSentinel extends ScriptSequencer {
 	@Override
 	protected void onEnd() {
 		sentinel.setPassive(false);
+		sentinel.goTo(new Vector2(19, 11));
 		getGame().showMessage(null, "SPECIMEN MUST NOT ESCAPE!", 60);
 	}
 
@@ -33,29 +34,35 @@ public class TheSentinel extends ScriptSequencer {
 		sentinel = getGame().findObject(Sentinel.class);
 		sentinel.setPassive(true);
 		sentinel.goTo(new Vector2(20, 11));
-		
+
 		addMessage(null, "UNIDENTIFIABLE OBJECT DETECTED", 80);
-		
+
 		addMessage("isaac", "Huh? What's that?", 80);
 
-		addMessage(null, "...", 80);
-		addMessage(null, "!!!", 60);
-		addMessage(null, "OBJECT IDENTIFIED!", 80);
-		
-		addMessage(null, "OBJECT IS NOT AUTHORIZED TO PROCEED", 80);
-		
+		addMessage(null, "...", 40);
+		addMessage(null, "!!!", 30);
+		addMessage(null, "OBJECT IDENTIFIED! OBJECT IS SPECIMEN #91562", 80);
+		addMessage(null, "SPECIMEN IS NOT AUTHORIZED TO PROCEED", 70);
+
+		addRunnable(new Runnable() {
+			@Override
+			public void run() {
+				sentinel.setAlert(true);
+			}
+		}, 0);
+		addMessage(null, "ALERT! ALERT! ALERT!", 70);
+
 		addRunnable(new Runnable() {
 			@Override
 			public void run() {
 				sentinel.setPassive(false);
 			}
 		}, 0);
-		addMessage(null, "ALERT! ALERT! ALERT!", 60);
 	}
 
 	@Override
 	public void onEnter(GameObject object) {
-		if(object.getClass().equals(Player.class)){
+		if (object.getClass().equals(Player.class)) {
 			beginSequence(true, true, true);
 		}
 	}
