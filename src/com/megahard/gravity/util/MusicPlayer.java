@@ -40,7 +40,6 @@ public class MusicPlayer implements Runnable{
 
 	@Override
 	public void run() {
-		while(playing); // wait for other player to stop
 		playing = true;
         try {
         	while (playing) {

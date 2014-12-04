@@ -15,7 +15,7 @@ public class Switch extends PowerSource {
 		sprite.setAction(on ? "on" : "default");
 		setActivated(on);
 		
-		getGame().playSoundAtLocation(Sound.switchSound, position, 1);
+		getGame().playSoundAtLocation(Sound.switchSound, position, 0.7);
 	}
 
 	public boolean getSwitch() {
