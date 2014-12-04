@@ -11,6 +11,7 @@ public class GameState {
 		
 		public boolean debug = false;
 		public boolean god = false;
+		public boolean unli = false;
 	}
 
 	public GameMap map;

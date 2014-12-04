@@ -33,6 +33,7 @@ public class CustomButton extends JButton implements MouseListener {
 	  
 	public void mouseEntered(MouseEvent e) { 
 		if(e.getSource()==this) { opaquize(true);}
+		repaint();
 	}
 
 	public void mouseExited(MouseEvent e) { 
