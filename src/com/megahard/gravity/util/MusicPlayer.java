@@ -36,7 +36,7 @@ public class MusicPlayer extends PlaybackListener implements Runnable {
 	public void play(String fileName) {
 		stop();
 		try {
-			if(thread != null)
+			if (thread != null)
 				thread.join();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
@@ -49,6 +49,7 @@ public class MusicPlayer extends PlaybackListener implements Runnable {
 	@Override
 	public void run() {
 		final AdvancedPlayer pl = createPlayer(fileName);
+		pl.setPlayBackListener(this);
 
 		new Thread() {
 			public void run() {
@@ -61,9 +62,11 @@ public class MusicPlayer extends PlaybackListener implements Runnable {
 		}.start();
 
 		playing = true;
-		while (playing){
+		while (playing) {
 			Thread.yield();
 		}
+		// pl.stop(); // bugged ata yung library :( Dapat yung library na
+		// maintained yung ginamit. Eh 2008 pa pala yung last update nito eh.
 		pl.close();
 	}
 
@@ -84,9 +87,11 @@ public class MusicPlayer extends PlaybackListener implements Runnable {
 
 	@Override
 	public void playbackFinished(PlaybackEvent e) {
+		System.out.println("HELLO?");
+		System.out.println(playing);
 		if (playing) {
-			int i = new Random().nextInt(mFiles.size());
-//			play(mFiles.get(i)[1]);
+			int num = new Random().nextInt(mFiles.size());
+			play(mFiles.get(num)[1]);
 		}
 	}
 }
