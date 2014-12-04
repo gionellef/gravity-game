@@ -31,6 +31,8 @@ import com.megahard.gravity.util.Vector2;
 
 public class Renderer extends Canvas {
 
+	private static final String FILTER_PATH = "/filter.png";
+
 	private static final Color MESSAGE_BACKGROUND = new Color(0, 0, 0, 0.5f);
 
 	private static final String TILESET_PATH = "/tileset.png";
@@ -75,6 +77,8 @@ public class Renderer extends Canvas {
 	private Image cursorGravActive;;
 	private Image cursorNeg;
 	private Image cursorNegActive;
+	
+	private Image filter;
 
 	private int fadeTime = 0;
 	private int fadeTimer = 0;
@@ -135,6 +139,8 @@ public class Renderer extends Canvas {
 				new Point(0, 0), "null"));
 
 		setBackground(Color.black);
+		
+		filter = SpriteStore.get().loadImage(FILTER_PATH, true);
 	}
 
 	public void render(GameState s) {
@@ -153,6 +159,7 @@ public class Renderer extends Canvas {
 		if (GravityApplet.useGPU) {
 			background = SpriteStore.get().getVolatileImage(BACKGROUND_PATH);
 			tileset = SpriteStore.get().getVolatileImage(TILESET_PATH);
+			filter = SpriteStore.get().getVolatileImage(FILTER_PATH);
 		}
 
 		int bufferHeight = 0;
@@ -192,6 +199,9 @@ public class Renderer extends Canvas {
 					halfBufHeight, cxm, cym);
 			renderBorders(g, s, bufferWidth, bufferHeight, halfBufWidth,
 					halfBufHeight, cx, cy);
+			
+			g.drawImage(filter, 0, 0, null);
+			
 			renderHud(g, s, bufferWidth);
 			renderFade(g, bufferWidth, bufferHeight);
 			renderMessages(g, s, bufferWidth, bufferHeight);

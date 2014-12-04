@@ -21,14 +21,8 @@ public class Gravity1 extends ScriptSequencer {
 			}
 		}, 50);
 		addMessage("isaac-pre", "Where am I?", 100);
-		addRunnable(new Runnable(){
-			@Override
-			public void run() {
-				getGame().fadeScreen(Color.black, null, 100);	
-			}
-		}, 50);
 		
-		beginSequence(true, true, false);
+		beginSequence(true, true, true);
 	}
 
 	@Override
@@ -46,7 +40,8 @@ public class Gravity1 extends ScriptSequencer {
 
 	@Override
 	protected void onEnd() {
-		getGame().showMessage("Use 'A' and 'D' to move, and 'W' or 'Space' to jump.", 200);
+		getGame().fadeScreen(Color.black, null, 100);
+		getGame().showMessage("Use 'A' and 'D' to move, and 'W' or 'Space' to jump.", 200);	
 	}
 
 }
