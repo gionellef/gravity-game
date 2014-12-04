@@ -33,11 +33,14 @@ public class MusicPlayer implements Runnable{
 	
 	public void play(String fileName){
 		stop();
-		try {
-			thread.join();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+		if(thread != null){
+			try {
+				thread.join();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
+		
 	    this.fileName = fileName;
 	    thread = new Thread(this);
 		thread.start();
