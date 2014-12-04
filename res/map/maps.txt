@@ -14,10 +14,11 @@ Test Bed,untitled
 13 : Dots,Dots
 14 : Snake,Snake
 15 : Boom Room,BoomRoom
-16 : Sentinel,Sentinel
-17 : Bugs,Bugs
-19 : The Night's Watch,Eyes
-20 : Finale,Finale
+16 : The Sentinel,TheSentinel
+17 : Bypass,Bypass
+18 : Bugs,Bugs
+29 : The Night's Watch,Eyes
+30 : Finale,Finale
 Security,Security
 Vanilla,Vanilla
 Insequirus,Insequirus

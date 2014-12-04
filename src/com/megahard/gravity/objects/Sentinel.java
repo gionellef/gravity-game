@@ -21,6 +21,7 @@ public class Sentinel extends GameObject {
 	private List<Vector2> waypoints;
 	private int waitTimer = 0;
 
+	private boolean passive = false;
 	private boolean wandering = true;
 	private boolean alert = false;
 
@@ -105,7 +106,7 @@ public class Sentinel extends GameObject {
 		if (waypoints == null || waypoints.isEmpty()) {
 			wandering = true;
 			if (velocity.length() < 0.1)
-				findWaypoints(randomWander());
+				goTo(randomWander());
 			waitTimer = alert ? 50 : 100;
 		}
 
@@ -114,7 +115,7 @@ public class Sentinel extends GameObject {
 		doSentinel();
 	}
 
-	private void findWaypoints(Vector2 destination) {
+	public void goTo(Vector2 destination) {
 		waypoints = pathfinder.findPath(position, destination);
 		if (waypoints != null) {
 			// Remove the first waypoint
@@ -164,7 +165,7 @@ public class Sentinel extends GameObject {
 					myBomb = findMyBomb();
 				} else {
 					wandering = false;
-					findWaypoints(mySwitch.position);
+					goTo(mySwitch.position);
 				}
 			}
 		}
@@ -204,7 +205,7 @@ public class Sentinel extends GameObject {
 				} else if (wandering || waypoints == null) {
 					// go to the player
 					wandering = false;
-					findWaypoints(player.position.plus(0, -1));
+					goTo(player.position.plus(0, -1));
 					waitTimer = 0;
 				} else {
 					// carry the bomb
@@ -221,7 +222,7 @@ public class Sentinel extends GameObject {
 							myBomb.position) > 3) {
 				// go to the bomb
 				wandering = false;
-				findWaypoints(myBomb.position.plus(0, -2));
+				goTo(myBomb.position.plus(0, -2));
 				waitTimer = 15;
 			}
 		} else {
@@ -307,7 +308,7 @@ public class Sentinel extends GameObject {
 
 					if (!hasLineOfSight(destination)) {
 						// path blocked, find new path
-						findWaypoints(waypoints.get(waypoints.size() - 1));
+						goTo(waypoints.get(waypoints.size() - 1));
 					} else if (delta.length() > 1) {
 						move(delta);
 					} else {
@@ -386,6 +387,14 @@ public class Sentinel extends GameObject {
 			action += "-left";
 		}
 		sprite.setAction(action);
+	}
+
+	public boolean isPassive() {
+		return passive;
+	}
+
+	public void setPassive(boolean passive) {
+		this.passive = passive;
 	}
 
 }
