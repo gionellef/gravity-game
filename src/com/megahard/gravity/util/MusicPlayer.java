@@ -66,13 +66,14 @@ public class MusicPlayer implements Runnable{
 	
 	public void stop() {
 		playing = false;
-		pl.stop();
-		try {
-			pl.close();
-		} catch (Exception e) {
-			
+		if(pl != null){
+			pl.stop();
+			try {
+				pl.close();
+			} catch (Exception e) {
+				
+			}
 		}
-		
 	}
 	
 }
