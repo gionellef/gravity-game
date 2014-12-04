@@ -183,7 +183,7 @@ public class Player extends GameObject {
 	}
 
 	private void conjureGrav(Vector2 pos, boolean anti) {
-		if (anti ? negravitites > 0 : gravitites > 0) {
+		if ((anti ? negravitites > 0 : gravitites > 0) || getGame().getFlags().unli) {
 			// Find a clear spot for the gravwell to appear
 			if (!isAreaClear(pos)) {
 				Vector2 pro = new Vector2();

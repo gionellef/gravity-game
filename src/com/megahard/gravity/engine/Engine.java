@@ -342,6 +342,11 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener,
 			state.flags.god = !state.flags.god;
 			showMessage("God mode:" + (state.flags.god ? "on" : "off"), 50);
 		}
+		if (keyIsJustReleased(KeyEvent.VK_F6)) {
+			// unlie mode
+			state.flags.unli = !state.flags.unli;
+			showMessage("Unli mode:" + (state.flags.unli ? "on" : "off"), 50);
+		}
 
 		// Give up
 		if (keyIsJustReleased(KeyEvent.VK_ESCAPE)) {
