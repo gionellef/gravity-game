@@ -1625,14 +1625,14 @@
    <tile gid="274"/>
    <tile gid="275"/>
    <tile gid="279"/>
-   <tile gid="233"/>
    <tile gid="279"/>
    <tile gid="279"/>
    <tile gid="279"/>
    <tile gid="279"/>
    <tile gid="279"/>
    <tile gid="279"/>
-   <tile gid="233"/>
+   <tile gid="279"/>
+   <tile gid="279"/>
    <tile gid="279"/>
    <tile gid="273"/>
    <tile gid="274"/>
@@ -1818,7 +1818,7 @@
    <tile gid="279"/>
    <tile gid="279"/>
    <tile gid="279"/>
-   <tile gid="233"/>
+   <tile gid="279"/>
    <tile gid="279"/>
    <tile gid="279"/>
    <tile gid="273"/>
@@ -1839,7 +1839,7 @@
    <tile gid="275"/>
    <tile gid="279"/>
    <tile gid="279"/>
-   <tile gid="233"/>
+   <tile gid="279"/>
    <tile gid="279"/>
    <tile gid="279"/>
    <tile gid="279"/>
@@ -2027,10 +2027,10 @@
    <tile gid="279"/>
    <tile gid="279"/>
    <tile gid="279"/>
+   <tile gid="233"/>
    <tile gid="279"/>
    <tile gid="279"/>
-   <tile gid="279"/>
-   <tile gid="279"/>
+   <tile gid="233"/>
    <tile gid="279"/>
    <tile gid="279"/>
    <tile gid="279"/>
@@ -2070,7 +2070,7 @@
    <tile gid="274"/>
    <tile gid="274"/>
    <tile gid="275"/>
-   <tile gid="279"/>
+   <tile gid="233"/>
    <tile gid="273"/>
    <tile gid="274"/>
    <tile gid="275"/>
@@ -2087,7 +2087,7 @@
    <tile gid="273"/>
    <tile gid="274"/>
    <tile gid="275"/>
-   <tile gid="279"/>
+   <tile gid="233"/>
    <tile gid="273"/>
    <tile gid="274"/>
    <tile gid="274"/>
@@ -2363,7 +2363,7 @@
    <tile gid="279"/>
    <tile gid="279"/>
    <tile gid="279"/>
-   <tile gid="233"/>
+   <tile gid="279"/>
    <tile gid="279"/>
    <tile gid="273"/>
    <tile gid="274"/>
@@ -2394,7 +2394,7 @@
    <tile gid="274"/>
    <tile gid="275"/>
    <tile gid="279"/>
-   <tile gid="233"/>
+   <tile gid="279"/>
    <tile gid="279"/>
    <tile gid="279"/>
    <tile gid="279"/>
@@ -3019,5 +3019,9 @@
   <object gid="511" x="652" y="637"/>
   <object gid="511" x="85" y="636"/>
   <object gid="504" x="371" y="312"/>
+  <object name="script_BombSpawn" x="376" y="648"/>
+  <object name="script_BombSpawn" x="424" y="648"/>
+  <object name="script_BombSpawn" x="536" y="662"/>
+  <object name="script_BombSpawn" x="263" y="663"/>
  </objectgroup>
 </map>
