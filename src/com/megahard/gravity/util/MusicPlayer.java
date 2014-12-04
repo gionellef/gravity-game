@@ -70,8 +70,8 @@ public class MusicPlayer implements Runnable{
 	public void stop() {
 		playing = false;
 		if(pl != null){
-			pl.stop();
 			try {
+				pl.stop();
 				pl.close();
 			} catch (Exception e) {
 				
