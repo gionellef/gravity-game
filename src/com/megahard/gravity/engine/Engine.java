@@ -192,10 +192,14 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener,
 	@Override
 	public void playSoundAtLocation(Clips sound, Vector2 position, double volume) {
 		double distance = playerObject.position.minus(position).length();
-		float v = (float) ((volume * 34) / (34 + distance));
+		
+		// compute volume based on distance
+		float v = (float) ((volume * 30) / (30 + distance));
 
 		Vector2 cam = renderer.getCamera();
 		if (cam != null) {
+			
+			// lower volume if outside screen
 			double halfWidth = (double) renderer.getWidth() / 2
 					/ Renderer.TILE_SIZE / Renderer.SCALE_FACTOR;
 			double halfHeight = (double) renderer.getHeight() / 2
@@ -206,7 +210,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener,
 			double bottomEdge = cam.y + halfHeight;
 			if (position.x < leftEdge || position.y < topEdge
 					|| position.x >= rightEdge || position.y > bottomEdge) {
-				v *= 0.6;
+				v *= 0.8;
 			}
 		}
 
