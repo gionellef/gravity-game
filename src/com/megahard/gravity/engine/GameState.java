@@ -19,7 +19,7 @@ public class GameState {
 	public ArrayList<Script> scripts;
 	public GameFlags flags;
 	public int time;
-
+	
 	public GameState() {
 		map = null;
 		objects = new ArrayList<>();

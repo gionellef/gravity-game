@@ -106,7 +106,6 @@ public class Gunner extends GameObject {
 		if (escapeVector.length() > 0) {
 
 			// Run [walk] away from bombs!
-			Vector2 critBombDir = position.to(critBomb.position);
 			double pathX = critBomb.position.x + escapeVector.normalized().x
 				* 2;
 			boolean blockedPath = getGame().getMap()

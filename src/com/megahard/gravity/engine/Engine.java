@@ -74,7 +74,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener,
 
 	private List<GameObject> addObj;
 	private List<GameObject> removeObj;
-
+	
 	private EngineFinishListener finishListener;
 	private boolean finished = false;
 	private int finishTimer;
@@ -102,10 +102,12 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener,
 		finishListener = null;
 	}
 
-	public void initialize(String mapName) {
+	public void initialize(String mapName, String mapFile) {
 		// populate the game state using level data
 		state = new GameState();
-		loadMapAndObjects(mapName);
+		loadMapAndObjects(mapFile);
+		
+		state.map.setMapName(mapName);
 
 		commitAddObjects();
 
@@ -224,9 +226,9 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener,
 		return state.map;
 	}
 
-	public void loadMapAndObjects(String mapName) {
+	public void loadMapAndObjects(String mapFile) {
 		InputStream in = getClass().getResourceAsStream(
-				"/map/" + mapName + ".json");
+				"/map/" + mapFile + ".json");
 		BufferedReader input = new BufferedReader(new InputStreamReader(in));
 		GameMap map = J.gson.fromJson(input, GameMap.class);
 		map.initializeMap();

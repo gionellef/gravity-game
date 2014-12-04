@@ -24,7 +24,6 @@ import com.megahard.gravity.GravityApplet;
 import com.megahard.gravity.engine.GameMap.Tile;
 import com.megahard.gravity.engine.base.GameObject;
 import com.megahard.gravity.engine.base.Script;
-import com.megahard.gravity.menus.LevelMenu;
 import com.megahard.gravity.objects.Player;
 import com.megahard.gravity.util.Quad;
 import com.megahard.gravity.util.Vector2;
@@ -493,7 +492,7 @@ public class Renderer extends Canvas {
 				cursorHotspot.move(32, 32);	
 			}
 
-			String mapName = GravityApplet.lm.maps.get(LevelMenu.lastMap)[0];
+			String mapName = s.map.getMapName();
 
 			FontMetrics fm = g.getFontMetrics();
 			drawString(g, mapName, bufferWidth - fm.stringWidth(mapName) - 10,
@@ -522,7 +521,7 @@ public class Renderer extends Canvas {
 						borderThickness) << 24
 						| BORDER_COLOR.getRGB()
 						& 0xFFFFFF, true));
-				g.drawLine(borderWidth + i - 1, 0, borderWidth + i, bufferHeight);
+				g.drawLine(borderWidth + i - 2, 0, borderWidth + i, bufferHeight);
 			}
 		}
 		if (cx * TILE_SIZE + halfBufWidth + borderThickness > s.map.getWidth()
@@ -551,7 +550,7 @@ public class Renderer extends Canvas {
 						borderThickness) << 24
 						| BORDER_COLOR.getRGB()
 						& 0xFFFFFF, true));
-				g.drawLine(0, borderHeight + i - 1, bufferWidth, borderHeight + i);
+				g.drawLine(0, borderHeight + i - 2, bufferWidth, borderHeight + i);
 			}
 		}
 		if (cy * TILE_SIZE + halfBufHeight + borderThickness > s.map

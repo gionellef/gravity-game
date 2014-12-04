@@ -34,6 +34,8 @@ public class GameMap {
 	public Tile[] map;
 	private Tilesets[] tilesets;
 	public Layers[] layers;
+	
+	private String mapName = "";
 
 	private Map<Integer, Tile> tileMap;
 	private boolean dirty = true;
@@ -306,6 +308,14 @@ public class GameMap {
 
 	public void setDirty(boolean value) {
 		dirty = value;
+	}
+
+	public String getMapName() {
+		return mapName;
+	}
+
+	public void setMapName(String mapName) {
+		this.mapName = mapName;
 	}
 
 }
