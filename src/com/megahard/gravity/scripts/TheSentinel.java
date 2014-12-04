@@ -46,17 +46,10 @@ public class TheSentinel extends ScriptSequencer {
 		addRunnable(new Runnable() {
 			@Override
 			public void run() {
-				sentinel.setAlert(true);
-			}
-		}, 0);
-		addMessage(null, "ALERT! ALERT! ALERT!", 70);
-
-		addRunnable(new Runnable() {
-			@Override
-			public void run() {
 				sentinel.setPassive(false);
 			}
 		}, 0);
+		addMessage(null, "ALERT!", 35);
 	}
 
 	@Override
