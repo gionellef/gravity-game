@@ -2510,7 +2510,7 @@
   </tile>
  </tileset>
  <tileset firstgid="501" name="objects" tilewidth="64" tileheight="64">
-  <image source="objects.png" width="320" height="128"/>
+  <image source="objects.png" width="320" height="256"/>
   <tile id="0">
    <properties>
     <property name="type" value="Player"/>
@@ -2554,7 +2554,7 @@
  </tileset>
  <layer name="Tile Layer 1" width="73" height="44">
   <data encoding="base64" compression="zlib">
-   eJztmD1PFFEUhmfYYEMQkADJLmJJghoK0KUFE0PD/gC1sRBs/ar8bCB+tCjQYNBaURsJlBb+Ajv/gImtoFS+hjnx5OTOzLmzO3PvspPwhM3J3svk5Txn791aEAQ1JaNgJNRxHzwAD8EaWAcboq7dS0MVz9ajoKFEm0kzGa2Cl+AV+AA+gk+i3ukZ8X55BB6DJzn30c0UfMuI9wt3Lc8+Snp2ysmnjN6B92BbuMbrRWZE+JSRC9faLSPfXPMxo9K10rWiXJsFc+BSh2akce0KuAquRWu2sP8bi7/R7hlpXLsD7oJ70Zpd7L93DDLqDnWkuYafoCuiYrFvHJRRNzjhOKOvoY4016oZ942D9hsDZ9rUta3gaNZQfQqvpyMugN/gj5LD6Dm+GFyrgxkHGT23zIjy4K7RrJFnyO/R7wFwSsmgWOvDPHprmRHlYXOGzJKRrzPblMmP4AjbzzXuS5aMTK65mtlprpFbvKa9r7XaNVczO80107nG9r7WKtdczew017KeIfNwzdU8kq6Z3JK4cs1VRtI1zZ3BlWs+nLNb7RoxAc4qOZeQkauZzV2TdwDyTtY1rjV7/zDdRVzNbO7aTwF5J+sa1+SaZnA9j7hrjTAe6qmG0rWkvWxxnRF3bSmMh3pqSela0l628DtyHAs5ZmR7X+Png7TPtdNgTKzNUjvPnm0+5pmqBbmmzYh6Ku1z7SKoi7VZanEZ/UJ9HxwE+WZk+92IPENST5nOkMtgha0bBkMZ+JcRvb4e7dULToI+0J9zH5FrN4L/369KKiI/7hT1lMm1TfCarZtU/g8kvI8om/GIIl2z8ZA7FbIcpWufwQ5bFzdLNBnJbHzLKKnHFhXvaZbLivcsOs6oKPrBgIE5xdoXnmT0FDzLsXYLTBi43UYZ+UwrMvrWAWTJSLum0ygzssuopKSkxBf+AsRN5Cc=
+   eJztmD1PFUEUhnch0BAVJGJyQSxJUEOBCq2YEBruD1AbC8HWrwoVGogfLR/aSMAaURsJlhb+Ajt/gq2CVrzGPfHkZHb3zN7dnVnuJjzh5uTOsHk5z7kzdzAIgkElQ+BsqGMBPAZPwAZ4BV6LunYvDQ08W4+CphJtJq1ktArWwDp4Dz6Aj6Le7hnxfnkKFsFSwX10NwXfMuL9wl0rso+Snp1y8imjHfAO7ArXeL3MjAifMnLhWtUy8s01HzOqXatdK8u1a2AKXG/TjDSu3QA3wa1ozRb237b4G1XPSOPaA/AQPIrW7GP/z8cgo65QR5pr+Ak6Ijot9o2DMuoC3Y4z+hrqSHOtkXHfOGi/YXC+oq5tBf9mDdXH8fpyxBVwCH4r+RM9xxeDaxNg0kFGLywzojy4azRr5Bnye/S7D5xW0i/W+jCP3lpmRHnYnCGzZOTrzM7zc437kiUjk2uuZnaaa+QWr2nva3m75mpmp7lmOtfY3tfycs3VzK6Sa67mkXTN5JbElWuuMpKuae4Mrlzz4Zydt2vEKLig5GJCRq5mNndN3gHIO1nXuNbq/cN0F3E1s7lrPwTknaxrXJNrWsH1POKuNcN4qKeaSteS9rLFdUbctfkwHuqpeaVrSXvZwu/IccwWmJHtfY2fD9I+186BYbE2S+0Se7aZmGdqlOSaNiPqqbTPtatgQqzNUovL6Cfqv8BBUGxGtt+NyDMk9ZTpDLkMVti6AXAmA38zote3o71OgJPgFOgtuI/ItTvB/+9XJZ0iP+4U9ZTJtTdgk60bU/4PJLyPKJuRiDJds/GQOxWyHKVrn8AeWxc3SzQZyWx8yyipx+YU72mVacV75hxnVBa9oM/AlGLtS08yegaeF1i7B0YN3K9QRj6TR0bf2oAsGWnXtBt1RnYZ1dTU1PjCEeqR4oU=
   </data>
  </layer>
  <objectgroup name="Object Layer 1">
