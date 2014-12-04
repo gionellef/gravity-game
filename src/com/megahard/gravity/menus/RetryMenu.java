@@ -25,13 +25,13 @@ public class RetryMenu extends JPanel{
 
 	private CustomButton retryButton;
 	private CustomButton menuButton;
-
+	JPanel innerPanel = new JPanel();
 	private Image background;
 	
 	public RetryMenu(GravityApplet app) {
 		setLayout(new BorderLayout());
 		
-		JPanel innerPanel = new JPanel();
+		
 		innerPanel.setOpaque(false);
 		innerPanel.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
@@ -41,11 +41,11 @@ public class RetryMenu extends JPanel{
 		titleLabel.setPreferredSize(new Dimension(800, 200));
 		titleLabel.setForeground(Color.white);
 		
-		retryButton = new CustomButton("Retry");
+		retryButton = new CustomButton("Retry", innerPanel);
 		retryButton.setPreferredSize(new Dimension(200,75));
 		retryButton.addActionListener(app);
 		
-		menuButton = new CustomButton("Quit");
+		menuButton = new CustomButton("Quit", innerPanel);
 		menuButton.setPreferredSize(new Dimension(200,75));
 		menuButton.addActionListener(app);
 		

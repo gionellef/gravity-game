@@ -54,7 +54,7 @@ public class LevelMenu extends JPanel{
 		titleLabel.setPreferredSize(new Dimension(800, 200));
 		titleLabel.setForeground(Color.white);
 		
-		playButton = new CustomButton("Play");
+		playButton = new CustomButton("Play", innerPanel);
 		playButton.setPreferredSize(new Dimension(200,75));
 		playButton.addActionListener(app);
 

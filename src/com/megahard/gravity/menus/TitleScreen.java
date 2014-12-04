@@ -27,14 +27,15 @@ public class TitleScreen extends JPanel{
 	
 	private CustomButton startButton;
 	private CustomButton exitButton;
-	public static JPanel innerPanel = new JPanel();
+	
 
 	private Image background;
 	
 	public TitleScreen(GravityApplet app) {
 		setLayout(new BorderLayout());
 		
-
+		
+		JPanel innerPanel = new JPanel();
 		innerPanel.setOpaque(false);
 		innerPanel.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
@@ -44,11 +45,11 @@ public class TitleScreen extends JPanel{
 		titleLabel.setPreferredSize(new Dimension(800, 200));
 		titleLabel.setForeground(Color.white);
 		
-		startButton = new CustomButton("Play");
+		startButton = new CustomButton("Play", innerPanel);
 		startButton.setPreferredSize(new Dimension(200,75));
 		startButton.addActionListener(app);
 		
-		exitButton = new CustomButton("Exit");
+		exitButton = new CustomButton("Exit", innerPanel);
 		exitButton.setPreferredSize(new Dimension(200,75));
 		exitButton.addActionListener(app);
 		

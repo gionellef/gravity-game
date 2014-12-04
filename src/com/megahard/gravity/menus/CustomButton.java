@@ -5,24 +5,27 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
+import javax.swing.JPanel;
  
  
 public class CustomButton extends JButton implements MouseListener { 
 	 
 	private static final long serialVersionUID = 1L;
 	private static final Color DEFAULT_COLOR = new Color(1, 1, 1, 0.4f);
-	 
-	public CustomButton(String text){
-		this(text, DEFAULT_COLOR);
+	private JPanel innerPanel = new JPanel(); 
+	
+	public CustomButton(String text, JPanel innerPanel){
+		this(text, DEFAULT_COLOR, innerPanel);
 	}
 	
-	public CustomButton(String text, Color mouseOverColor) { 
+	public CustomButton(String text, Color mouseOverColor, JPanel i) { 
 		super(text);
 		
 		opaquize (false);
 		
 		setBackground(mouseOverColor);
 		addMouseListener(this);
+		this.innerPanel = i;
 	}
 
 	public void mouseClicked(MouseEvent e) { }
@@ -44,7 +47,7 @@ public class CustomButton extends JButton implements MouseListener {
 		this.setOpaque(o);
 		this.setContentAreaFilled(o);
 		this.setBorderPainted(o);
-		TitleScreen.innerPanel.repaint();
+		innerPanel.repaint();
 	}
 
 }
