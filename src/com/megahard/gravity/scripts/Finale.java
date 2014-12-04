@@ -35,8 +35,10 @@ public class Finale extends ScriptSequencer {
 				getGame().setCameraTarget(getCenter().plus(0, 7));
 			}
 		}, 0);
-		
-		addMessage("isaac", "...", 70);
+
+		addMessage("isaac", ".....", 25);
+		addMessage("isaac", "....", 25);
+		addMessage("isaac", "...", 25);
 		addMessage("isaac", "Done, I hope they got my message.", 90);
 
 		// fade to black
@@ -93,12 +95,22 @@ public class Finale extends ScriptSequencer {
 				getGame().fadeScreen(Color.black, null, 50);
 			}
 		}, 50);
+
+		// win
+		addRunnable(new Runnable() {
+			@Override
+			public void run() {
+				getGame().finish(true, false);
+			}
+		}, 0);
+		
 	}
 
 	@Override
 	public void onEnter(GameObject object) {
 		if (object.getClass().equals(Player.class)) {
 			beginSequence(true, true, false);
+			object.velocity.x = 0;
 		}
 	}
 
