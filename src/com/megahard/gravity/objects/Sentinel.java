@@ -103,7 +103,7 @@ public class Sentinel extends GameObject {
 
 		velocity.scale(0.9);
 
-		if (waypoints == null || waypoints.isEmpty()) {
+		if (!passive && (waypoints == null || waypoints.isEmpty())) {
 			wandering = true;
 			if (velocity.length() < 0.1)
 				goTo(randomWander());
@@ -148,7 +148,7 @@ public class Sentinel extends GameObject {
 	}
 
 	private void doSentinel() {
-		if (wandering) {
+		if (!passive && wandering) {
 			boolean found = search();
 
 			if (found) {
