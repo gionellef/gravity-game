@@ -28,12 +28,12 @@ public class CustomButton extends JButton implements MouseListener {
 	public void mouseClicked(MouseEvent e) { }
 	public void mousePressed(MouseEvent e) { }
 	public void mouseReleased(MouseEvent e) {
-		if(e.getSource()==this) { opaquize(false);}
+		if(e.getSource()==this) { opaquize(false);
+		repaint();}
 	}
 	  
 	public void mouseEntered(MouseEvent e) { 
 		if(e.getSource()==this) { opaquize(true);}
-		repaint();
 	}
 
 	public void mouseExited(MouseEvent e) { 
@@ -44,6 +44,7 @@ public class CustomButton extends JButton implements MouseListener {
 		this.setOpaque(o);
 		this.setContentAreaFilled(o);
 		this.setBorderPainted(o);
+		TitleScreen.innerPanel.repaint();
 	}
 
 }
