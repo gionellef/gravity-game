@@ -609,7 +609,7 @@
  <objectgroup name="Object Layer 1">
   <object gid="504" x="376" y="216"/>
   <object gid="501" x="40" y="112"/>
-  <object gid="512" x="296" y="200">
+  <object gid="512" x="336" y="200">
    <properties>
     <property name="passive" value="true"/>
    </properties>
