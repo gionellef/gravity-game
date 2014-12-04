@@ -698,4 +698,8 @@ public class Renderer extends Canvas {
 		return camera;
 	}
 
+	public void setCameraTarget(double x, double y) {
+		setCameraTarget(new Vector2(x, y));
+	}
+
 }

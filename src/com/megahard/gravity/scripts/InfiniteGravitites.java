@@ -22,8 +22,9 @@ public class InfiniteGravitites extends Script {
 	@Override
 	public void onUpdate() {
 		Player player = getGame().getPlayerObject();
-		if(player != null){
+		if (player != null) {
 			player.setGravitites(99);
+			player.setNegravitites(99);
 		}
 	}
 

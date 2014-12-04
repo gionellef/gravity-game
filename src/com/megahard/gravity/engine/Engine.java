@@ -363,8 +363,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener,
 			if (mouseX >= 0 && mouseY >= 0) {
 				renderer.setCameraSmoothing(renderer.getCameraSmoothing()
 						+ (1 - renderer.getCameraSmoothing()) * 0.05);
-				renderer.getCameraTarget()
-						.set(playerObject.position.x
+				renderer.setCameraTarget(playerObject.position.x
 								+ ((double) (mouseX - renderer.getWidth() / 2)
 										/ Renderer.SCALE_FACTOR / Renderer.TILE_SIZE)
 								* 0.5,
@@ -374,7 +373,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener,
 										* 0.5);
 			} else {
 				renderer.setCameraSmoothing(0.5);
-				renderer.getCameraTarget().set(playerObject.position);
+				renderer.setCameraTarget(playerObject.position);
 			}
 		}
 
@@ -912,7 +911,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener,
 		
 		if(cinematicMode){
 			renderer.setCameraSmoothing(0.2);
-			renderer.getCameraTarget().set(playerObject.position);
+			setCameraTarget(playerObject.position);
 		}
 	}
 
