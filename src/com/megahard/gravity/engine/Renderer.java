@@ -512,7 +512,7 @@ public class Renderer extends Canvas {
 						borderThickness) << 24
 						| BORDER_COLOR.getRGB()
 						& 0xFFFFFF, true));
-				g.drawLine(borderWidth + i, 0, borderWidth + i, bufferHeight);
+				g.drawLine(borderWidth + i - 1, 0, borderWidth + i, bufferHeight);
 			}
 		}
 		if (cx * TILE_SIZE + halfBufWidth + borderThickness > s.map.getWidth()
@@ -541,7 +541,7 @@ public class Renderer extends Canvas {
 						borderThickness) << 24
 						| BORDER_COLOR.getRGB()
 						& 0xFFFFFF, true));
-				g.drawLine(0, borderHeight + i, bufferWidth, borderHeight + i);
+				g.drawLine(0, borderHeight + i - 1, bufferWidth, borderHeight + i);
 			}
 		}
 		if (cy * TILE_SIZE + halfBufHeight + borderThickness > s.map
