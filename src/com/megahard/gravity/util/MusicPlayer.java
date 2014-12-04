@@ -6,63 +6,87 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
+import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.advanced.AdvancedPlayer;
+import javazoom.jl.player.advanced.PlaybackEvent;
+import javazoom.jl.player.advanced.PlaybackListener;
 
-public class MusicPlayer implements Runnable{
+public class MusicPlayer extends PlaybackListener implements Runnable {
 
-	private AdvancedPlayer pl;
 	private String fileName;
 	public static ArrayList<String[]> mFiles;
 	private boolean playing;
 	private Thread thread;
-	
-	public MusicPlayer(){
+
+	public MusicPlayer() {
 		mFiles = new ArrayList<String[]>();
 		InputStream in = getClass().getResourceAsStream("/music/music.txt");
 		Scanner scanner = new Scanner(in);
-		
-		while(scanner.hasNextLine()){
+
+		while (scanner.hasNextLine()) {
 			String[] values = scanner.nextLine().split(",");
-			//String mapName = values[0];
-			//String fileName = values[1];
+			// String mapName = values[0];
+			// String fileName = values[1];
 			mFiles.add(values);
 		}
-		
+
 		scanner.close();
 	}
-	
-	public void play(String fileName){
+
+	public void play(String fileName) {
 		stop();
-	    this.fileName = fileName;
-	    thread = new Thread(this);
+		try {
+			if(thread != null)
+				thread.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		this.fileName = fileName;
+		thread = new Thread(this);
 		thread.start();
-    }
+	}
 
 	@Override
 	public void run() {
-		playing = true;
-        try {
-        	while (playing) {
-        		DataInputStream dis = new DataInputStream(
-        				Sound.class.getResourceAsStream("/music/" + fileName));
-        		pl = new AdvancedPlayer(dis);
-    			pl.getPlayBackListener();
-    			pl.play();
+		final AdvancedPlayer pl = createPlayer(fileName);
 
-        		int num = new Random().nextInt(mFiles.size());
-        		fileName = mFiles.get(num)[1];
-        		pl.close();
-        	}
-		} catch (Exception e) {
+		new Thread() {
+			public void run() {
+				try {
+					pl.play();
+				} catch (JavaLayerException e) {
+					e.printStackTrace();
+				}
+			};
+		}.start();
+
+		playing = true;
+		while (playing){
+			Thread.yield();
 		}
+		pl.close();
 	}
-	
+
+	private AdvancedPlayer createPlayer(String file) {
+		DataInputStream dis = new DataInputStream(
+			getClass().getResourceAsStream("/music/" + file));
+		try {
+			return new AdvancedPlayer(dis);
+		} catch (JavaLayerException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 	public void stop() {
 		playing = false;
-		try {
-			pl.close();
-		} catch (Exception e) {
+	}
+
+	@Override
+	public void playbackFinished(PlaybackEvent e) {
+		if (playing) {
+			int i = new Random().nextInt(mFiles.size());
+//			play(mFiles.get(i)[1]);
 		}
 	}
-	
 }
