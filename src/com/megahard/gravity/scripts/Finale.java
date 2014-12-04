@@ -43,11 +43,11 @@ public class Finale extends ScriptSequencer {
 		addMessage("PlanetGravitonia", "", 100);
 		
 		// soldier
-		addMessage("soldier", "General Maxwell, a message came from x300, y125, h123, t2467 coordinates. It seems to be an Ytivargs' base. The message has Galileo's signiture in it.", 200);
+		addMessage("gravitonian-soldier", "General Maxwell, a message came from x300, y125, h123, t2467 coordinates. It seems to be an Ytivargs' base. The message has Galileo's signiture in it.", 200);
 		// Commander Maxwell
 		addMessage("maxwell", "Tell me the its contents quickly!", 100);
 		// soldier
-		addMessage("soldier", "It seems like the last survivor of the royal family has been found and he needs our help ASAP.", 180);
+		addMessage("gravitonian-soldier", "It seems like the last survivor of the royal family has been found and he needs our help ASAP.", 180);
 		// Commander Maxwell
 		addMessage("maxwell", "We need to protect him. He is our only hope...", 120);
 		// Commander Maxwell
