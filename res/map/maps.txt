@@ -14,6 +14,7 @@ Test Bed,untitled
 13 : Dots,Dots
 14 : Snake,Snake
 15 : Boom Room,BoomRoom
+19 : The Night's Watch,Eyes
 20 : Finale,Finale
 Sentinel,Sentinel
 Bugs,Bugs
