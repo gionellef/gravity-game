@@ -35,7 +35,7 @@ public class Finale extends ScriptSequencer {
 		addRunnable(new Runnable() {
 			@Override
 			public void run() {
-				getGame().setCameraTarget(getCenter());
+				getGame().setCameraTarget(getCenter().plus(0, 7));
 				getGame().fadeScreen(null, Color.black, 100);
 			}
 		}, 100);
@@ -56,7 +56,7 @@ public class Finale extends ScriptSequencer {
 		//addMessage("Ytivargland", "", 100);
 		
 		// Ytivarg soldier
-		addMessage("ytivarg", "Commander Swaggernaut, some dipsh*t sent an unauthorized message from the Arkthuri Base 316, Zumtalan Gamma Outpost, Mk'tharon Base.", 190);
+		addMessage("ytivarg", "Commander Swaggernaut, some dipsh*t sent an unauthorized message from the Arkthuri System. In the Zumtalan Gamma cluster, Mk'tharon outpost 316.", 190);
 		// Commander Swaggernaut
 		addMessage("swaggernaut", "Aight, what does it say mah homie dawg nig*a?", 100);
 		// Ytivarg soldier
@@ -68,10 +68,18 @@ public class Finale extends ScriptSequencer {
 		// Commander Swaggernaut
 		addMessage("swaggernaut", "Stop chillin' mah brotahs. Those Gravitonian bastards got the message by now. Prepare mah nig*as. We are sending the Swag War Fleet. They ain't got no match for us!", 220);
 		// Ytivarg soldier
-		addMessage("ytivarg", "they gonna get rekt!", 100);
+		addMessage("ytivarg", "They gonna get #rekt!", 100);
 		
 		// Ending text
 		addMessage(null, "The real war is just about to begin", 200);
+		
+		// fade back the game
+		addRunnable(new Runnable() {
+			@Override
+			public void run() {
+				getGame().fadeScreen(Color.black, null, 50);
+			}
+		}, 50);
 	}
 
 	@Override
