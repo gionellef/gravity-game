@@ -70,8 +70,10 @@ public class Renderer extends Canvas {
 
 	private Image gravititeIcon;
 	private Image cursorEmpty;
-	private Image cursorFull;
-	private Image cursorHold;
+	private Image cursorGrav;
+	private Image cursorGravActive;;
+	private Image cursorNeg;
+	private Image cursorNegActive;
 
 	private int fadeTime = 0;
 	private int fadeTimer = 0;
@@ -119,9 +121,11 @@ public class Renderer extends Canvas {
 		gravititeIcon = SpriteStore.get().loadImage("/gravitite-icon.png",
 				false);
 		cursorEmpty = SpriteStore.get()
-				.loadImage("/crosshair-empty.png", false);
-		cursorFull = SpriteStore.get().loadImage("/crosshair.png", false);
-		cursorHold = SpriteStore.get().loadImage("/crosshair-hold.png", false);
+				.loadImage("/crosshair.png", false);
+		cursorGrav = SpriteStore.get().loadImage("/crosshair-grav.png", false);
+		cursorGravActive = SpriteStore.get().loadImage("/crosshair-grav-active.png", false);
+		cursorNeg = SpriteStore.get().loadImage("/crosshair-neg.png", false);
+		cursorNegActive = SpriteStore.get().loadImage("/crosshair-neg-active.png", false);
 
 		setCursor(getToolkit().createCustomCursor(
 				new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB),
@@ -447,13 +451,17 @@ public class Renderer extends Canvas {
 					drawString(g, Integer.toString(gravitites), 30, 22);
 				}
 
-				cursor = cursorFull;
+				cursor = cursorGrav;
 				cursorHotspot.move(32, 32);
 			}
 
-			if (player.getGravWell() != null || player.getNegravWell() != null) {
-				cursor = cursorHold;
+			if (player.getGravWell() != null){
+				cursor = cursorGravActive;
 				cursorHotspot.move(32, 32);
+			}
+			if(player.getNegravWell() != null) {
+				cursor = cursorNegActive;
+				cursorHotspot.move(32, 32);	
 			}
 
 			String mapName = GravityApplet.lm.maps.get(LevelMenu.lastMap)[0];
