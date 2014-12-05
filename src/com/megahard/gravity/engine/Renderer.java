@@ -204,6 +204,12 @@ public class Renderer extends Canvas {
 			renderHud(g, s, bufferWidth);
 			renderFade(g, bufferWidth, bufferHeight);
 			renderMessages(g, s, bufferWidth, bufferHeight);
+			
+			if(s.flags.paused){
+				FontMetrics fm = g.getFontMetrics();
+				String pausedString = "PAUSED";
+				drawString(g, pausedString, halfBufWidth - fm.stringWidth(pausedString)/2, halfBufHeight - fm.getHeight()/2);
+			}
 
 			g.dispose();
 		} while (backBuffer.contentsLost());

@@ -352,9 +352,7 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener,
 			showMessage("Unli mode:" + (state.flags.unli ? "on" : "off"), 50);
 		}
 		if (keyIsJustReleased(KeyEvent.VK_P)) {
-			
 			state.flags.paused = !state.flags.paused;
-			showMessage((state.flags.paused ? "paused" : "unpaused"), 50);
 		}
 
 		// Give up
