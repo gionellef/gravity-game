@@ -20,6 +20,7 @@
 20 : Bugs,Bugs
 29 : The Night's Watch,Eyes
 30 : Finale,Finale
+Credits,Credits
 Security,Security
 Vanilla,Vanilla
 Insequirus,Insequirus
