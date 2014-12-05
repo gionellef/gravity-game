@@ -206,6 +206,8 @@ public class Renderer extends Canvas {
 			renderMessages(g, s, bufferWidth, bufferHeight);
 			
 			if(s.flags.paused){
+				g.setColor(new Color(0, 0, 0, 0.5));
+				g.fillRect(0, 0, bufferWidth, bufferHeight);
 				FontMetrics fm = g.getFontMetrics();
 				String pausedString = "PAUSED";
 				drawString(g, pausedString, halfBufWidth - fm.stringWidth(pausedString)/2, halfBufHeight - fm.getHeight()/2);
