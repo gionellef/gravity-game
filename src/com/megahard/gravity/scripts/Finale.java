@@ -54,9 +54,9 @@ public class Finale extends ScriptSequencer {
 		addMessage("PlanetGravitonia", "On Gravitonia...", 90);
 		
 		// soldier
-		addMessage("gravitonian-soldier", "General Maxwell, a message came from x300, y125, h123, t2467 coordinates. It seems to be an Ytivargs' base. The message has Galileo's signiture in it.", 250);
+		addMessage("gravitonian-soldier", "General Maxwell, a message came from (x300, y125, h123, t2467) coordinates. It seems to be an Ytivargs' base. The message has Galileo's signature in it.", 250);
 		// Commander Maxwell
-		addMessage("maxwell", "Tell me the its contents quickly!", 100);
+		addMessage("maxwell", "Tell me its contents quickly!", 100);
 		// soldier
 		addMessage("gravitonian-soldier", "It seems like the last survivor of the royal family has been found and he needs our help ASAP.", 180);
 		// Commander Maxwell
@@ -66,14 +66,14 @@ public class Finale extends ScriptSequencer {
 
 		addDelay(20);
 		
-		addMessage("PlanetYtivarg", "Meanwhile, on planet Ytivarngis, home of the Ytivargs...", 120);
+		addMessage("PlanetYtivarg", "Meanwhile, on planet Ytivarlandia, home of the Ytivargs...", 120);
 		
 		// Ytivarg soldier
 		addMessage("ytivarg", "Commander Swaggernaut, some dipsh*t sent an unauthorized message from Mk'tharon outpost #316 in the Arkthuri System.", 200);
 		// Commander Swaggernaut
-		addMessage("swaggernaut", "Aight, what does it say mah homie dawg nig*a?", 120);
+		addMessage("swaggernaut", "A'ight, what does it say mah homie dawg nig*a?", 120);
 		// Ytivarg soldier
-		addMessage("ytivarg", "The Earthling punk we ubducted sent a message to Gravitonia. He's asking for some help.", 120);
+		addMessage("ytivarg", "The Earthling punk we abducted sent a message to Gravitonia. He's asking for some help.", 120);
 		// Commander Swaggernaut
 		addMessage("swaggernaut", "What the f***! You ain't no kidding right mah nig*a? ", 110);
 		// Ytivarg soldier
@@ -81,7 +81,7 @@ public class Finale extends ScriptSequencer {
 		// Commander Swaggernaut
 		addMessage("swaggernaut", "Stop chillin' mah brotahs. Those Gravitonian bastards got the message by now. Prepare mah nig*as. We are sending the Swag War Fleet. They ain't got no match for us!", 220);
 		// Ytivarg soldier
-		addMessage("ytivarg", "They gonna get #rekt!", 100);
+		addMessage("ytivarg", "They gonna get #REKT!", 100);
 
 		addDelay(50);
 

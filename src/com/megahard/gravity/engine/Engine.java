@@ -351,24 +351,32 @@ public class Engine implements KeyListener, MouseListener, MouseMotionListener,
 			state.flags.unli = !state.flags.unli;
 			showMessage("Unli mode:" + (state.flags.unli ? "on" : "off"), 50);
 		}
+		if (keyIsJustReleased(KeyEvent.VK_P)) {
+			
+			state.flags.paused = !state.flags.paused;
+			showMessage((state.flags.paused ? "paused" : "unpaused"), 50);
+		}
 
 		// Give up
 		if (keyIsJustReleased(KeyEvent.VK_ESCAPE)) {
 			finish(false, true);
 		}
 
-		updateScripts();
+		if(!state.flags.paused) {
+			updateScripts();
 
-		// No control in cinematic mode
-		if (isCinematicMode()) {
-			clearInputs();
+			// No control in cinematic mode
+			if (isCinematicMode()) {
+				clearInputs();
+			}
+
+			updateObjects();
 		}
-
-		updateObjects();
+		
 
 		// update key states
 		updateKeyStates();
-
+		
 		// Set camera
 		if (!state.flags.cinematic) {
 			if (mouseX >= 0 && mouseY >= 0) {

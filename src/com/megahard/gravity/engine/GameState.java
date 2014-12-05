@@ -12,6 +12,7 @@ public class GameState {
 		public boolean debug = false;
 		public boolean god = false;
 		public boolean unli = false;
+		public boolean paused = false;
 	}
 
 	public GameMap map;
