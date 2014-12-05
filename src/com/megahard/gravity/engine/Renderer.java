@@ -210,6 +210,7 @@ public class Renderer extends Canvas {
 				g.fillRect(0, 0, bufferWidth, bufferHeight);
 				FontMetrics fm = g.getFontMetrics();
 				String pausedString = "PAUSED";
+				g.setColor(Color.white);
 				drawString(g, pausedString, halfBufWidth - fm.stringWidth(pausedString)/2, halfBufHeight - fm.getHeight()/2);
 			}
 
