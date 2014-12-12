@@ -6,29 +6,91 @@ import com.megahard.gravity.engine.SpriteStore;
 import com.megahard.gravity.util.Vector2;
 
 
+/**
+ * Base class for all objects in the game. This class handles common procedures
+ * for all objects, such as physics, collision with the map, and callbacks.
+ */
 public class GameObject {
 	private final GameContext game;
 
+	/**
+	 * Whether the object moves.
+	 */
 	public boolean fixed;
+	/**
+	 * Whether the object is affected by regular downward gravity.
+	 */
 	public boolean floating;
 	
+	/**
+	 * Position of the object relative to the map, in tile units
+	 */
 	public Vector2 position;
+	/**
+	 * Velocity of the object, in tile units
+	 */
 	public Vector2 velocity;
+	/**
+	 * Size of the object, in tile units
+	 */
 	public Vector2 size;
 	
+	/**
+	 * Mass of the object, in kilograms
+	 */
 	public double mass;
+	/**
+	 * How much the object bounces when colliding with walls.
+	 * A value from 0 to 1.
+	 *  0 = no bounce
+	 *  1 = full bounce (preserves speed)
+	 */
 	public double restitution;
+	/**
+	 * How much the object slides on a surface.
+	 * A value from 0 to 1.
+	 *  0 = no sliding
+	 *  1 = no friction, object won't slow down when sliding
+	 */
 	public double friction;
+	/**
+	 * Minimum speed needed to overcome static friction. An object sliding on
+	 * a surface will immediately stop if its speed is less than its
+	 * staticFriction.
+	 * Value >= 0.
+	 */
 	public double staticFriction;
 	
+	/**
+	 * Read-only! This should be private, with a getter.
+	 * Whether the object is standing on something.
+	 */
 	public boolean standing;
+	/**
+	 * Whether the object is in the game.
+	 */
 	public boolean active;
 	
+	/**
+	 * The sprite of the object, for rendering.
+	 */
 	public com.megahard.gravity.engine.Sprite sprite;
+	/**
+	 * Z-index of the object, for rendering.
+	 */
 	public int zIndex;
 
+	/**
+	 * Acceleration by regular downward gravity.
+	 */
 	public static final double GRAVITY = 0.05;
 
+	/**
+	 * Creates a new object
+	 * 
+	 * @param game The game where the object is to be placed.
+	 * @param spriteName Name of the sprite of the object.
+	 */
 	public GameObject(GameContext game, String spriteName) {
 		this.game = game;
 		
@@ -54,10 +116,18 @@ public class GameObject {
 		zIndex = 0;
 	}
 
+	/**
+	 * Sets a new sprite for the object.
+	 * @param spriteName Name of the sprite.
+	 */
 	public void setSprite(String spriteName) {
 		this.sprite = SpriteStore.get().getSprite(spriteName);
 	}
 	
+	/**
+	 * Updates the object's state. Subclasses can override this but must call
+	 * super.update().
+	 */
 	public void update() {
 		if(!active){
 			return;
@@ -203,32 +273,68 @@ public class GameObject {
 		}
 	}
 
+	/**
+	 * Make this object die. The default action on death is removal of the
+	 * object. Subclasses can override this.
+	 */
 	public void die() {
 		getGame().removeObject(this);
 	}
 	
+	/**
+	 * Applies a force to the object, accelerating it according to Newton's
+	 * formula: force = mass * acceleration.
+	 * @param force The force to apply
+	 */
 	public void applyImpulse(Vector2 force){
 		velocity = velocity.plus(force.times(1/mass));
 	}
 	
+	/**
+	 * Gets the GameContext for the object
+	 * @return the GameContext for the object
+	 */
 	protected GameContext getGame(){
 		return game;
 	}
 
 	// Overiddables
 	
+	/**
+	 * Overridable. Called after the object is added to the game.
+	 */
 	public void init(){
 	}
 	
+	/**
+	 * Overridable. Called when the object's bottom collides with the map.
+	 */
 	public void onHitBottom(){
 	}
 
+	/**
+	 * Overridable. Called when this object overlaps (collides) another object.
+	 * 
+	 * @param obj the other object
+	 */
 	public void onCollide(GameObject obj) {
 	}
 
+	/**
+	 * Overridable. Called when the sprite of the object begins
+	 * a sequence (or action).
+	 * 
+	 * @param action the name of the action that began
+	 */
 	public void onStartAction(String action) {
 	}
 
+	/**
+	 * Overridable. Called when the sprite of the object ends
+	 * a sequence (or action).
+	 * 
+	 * @param action the name of the action that ended
+	 */
 	public void onEndAction(String action) {
 	}
 }
